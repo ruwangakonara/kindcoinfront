@@ -84,6 +84,7 @@ import DonorHome from './Pages/Donor/home'
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
 import DonationList from "./Pages/Donor/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
+import CompletedDonations from "./Pages/Donor/completedDonations";
 
 function App() {
 
@@ -109,6 +110,7 @@ function App() {
             <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
             <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
             <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
+            <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
 
         </Routes>
 

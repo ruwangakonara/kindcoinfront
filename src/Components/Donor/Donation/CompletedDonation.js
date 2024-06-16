@@ -1,8 +1,8 @@
 import React from 'react';
-import { Card, Image, Icon, Label, Grid, Button } from 'semantic-ui-react';
+import { Card, Image, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
 
-const Donation = ({ donorImage, recipientImage, amount, type, tokens, recipientName }) => {
+const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, recipientName, tokenImage }) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -16,18 +16,17 @@ const Donation = ({ donorImage, recipientImage, amount, type, tokens, recipientN
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                     </Grid.Column>
-                    <Grid.Column width={2} textAlign="right">
+                    <Grid.Column width={2} textAlign="right" className="right-column">
                         <Button size='tiny' className='view-button'>View Donation</Button>
-                        <Grid.Row>
-                            <h2>Transferred {tokens}</h2>
-                            <Image src= "" circular className="donor-image" style={{ width: '10%' }} />
-                        </Grid.Row>
+                        <div className="token-info">
+                            <h2>{tokens}</h2>
+                            <Image src="../../../../public/token.png" circular className="token-image" />
+                        </div>
                     </Grid.Column>
                 </Grid>
-
             </Card.Content>
         </Card>
     );
 }
 
-export default Donation;
+export default CompletedDonation;

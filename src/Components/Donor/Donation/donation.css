@@ -23,7 +23,7 @@
 }
 
 .recipient-name {
-    margin-top:30px;
+    margin-top: 30px;
     font-size: 1.4rem;
     font-weight: bold;
     margin-bottom: 5px;
@@ -49,4 +49,30 @@
     border-radius: 50px;
 }
 
+.right-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
 
+.view-button {
+    margin-bottom: 10px;
+}
+
+.token-info {
+    display: flex;
+    align-items: center;
+}
+
+.token-info h2 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+.token-image {
+    width: 30px; /* Ensure the image is not too small */
+    height: 30px; /* Ensure the image is not too small */
+    margin-left: 10px;
+    border-radius: 50%;
+}

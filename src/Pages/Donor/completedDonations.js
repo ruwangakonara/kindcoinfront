@@ -3,6 +3,7 @@ import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar2 from "../../Components/Donor/Sidebar/Sidebar2";
 import PendingRewardDonation from "../../Components/Donor/Donation/PendingRewardDonation";
+import CompletedDonation from "../../Components/Donor/Donation/CompletedDonation";
 
 const donations = [
     {
@@ -23,7 +24,7 @@ const donations = [
     },
 ];
 
-const PendingRewards = () => (
+const CompletedDonations = () => (
 
         <div style={{display: 'flex', width: '100%'}}>
             <Sidebar2/>
@@ -33,7 +34,7 @@ const PendingRewards = () => (
                     <Grid>
                         {donations.map((donation, index) => (
                             <Grid.Column key={index} width={16}>
-                                <PendingRewardDonation
+                                <CompletedDonation
                                     donorImage={donation.donorImage}
                                     recipientImage={donation.recipientImage}
                                     amount={donation.amount}
@@ -50,4 +51,4 @@ const PendingRewards = () => (
     )
 ;
 
-export default PendingRewards;
+export default CompletedDonations;

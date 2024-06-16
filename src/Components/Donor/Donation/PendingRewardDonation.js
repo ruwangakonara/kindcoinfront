@@ -18,7 +18,6 @@ const Donation = ({ donorImage, recipientImage, amount, type, tokens, recipientN
                     </Grid.Column>
                     <Grid.Column width={2} textAlign="right">
                         <Button size='tiny' className='view-button'>View Donation</Button>
-                        <h2>{tokens} Tokens</h2>
                     </Grid.Column>
                 </Grid>
 
