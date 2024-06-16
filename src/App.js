@@ -80,6 +80,12 @@ import Signup from './Components/Home/Signup/Signup'
 import Forgot from './Components/Home/Forgot/Forgot'
 import Main from './Pages/Home/Main'
 
+import DonorHome from './Pages/Donor/home'
+import BeneficiaryList from "./Pages/Donor/beneficiaries";
+import DonationList from "./Pages/Donor/onGoingDonations";
+import PendingRewards from "./Pages/Donor/pendingRewards";
+import CompletedDonations from "./Pages/Donor/completedDonations";
+
 function App() {
 
     return (
@@ -96,7 +102,18 @@ function App() {
             </Route>
             <Route path="forgot" element={<Forgot form={useform()} validate={validate}/>}></Route>
             <Route path="main" element={<Main/>}/>
+
+
+            {/*Donor Routes*/}
+
+            <Route path="/donor/home" element={<DonorHome/>}/>
+            <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
+            <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
+            <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
+            <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
+
         </Routes>
+
 
 
     );
