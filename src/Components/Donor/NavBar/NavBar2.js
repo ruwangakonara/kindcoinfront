@@ -33,14 +33,16 @@ export default function Navbar2() {
 
     return (
         <header className="top">
-            <div id="brand" className="brand">
-                <img src="../../../../public/charitylogo.png" alt="charity" />
-            </div>
+            <a href="/donor/home">
+                <div id="brand" className="brand">
+                    <img src="/charitylogo.png" alt="charity"/>
+                </div>
+            </a>
 
             {
                 location.pathname === "/" ?
                     (<div className="temp">
-                        <nav className="navbar" id="navbar" ref={navbar}>
+                    <nav className="navbar" id="navbar" ref={navbar}>
                             <a href="#home" onClick={click}>Home</a>
                             <a href="#about" onClick={click}>About</a>
                             <Dropdown text='More' pointing className='link item'>
@@ -69,7 +71,7 @@ export default function Navbar2() {
                                 </Dropdown>
                             </nav>
                             <div className="brandlogin">
-                                <Icon name="user" />
+                                <a href= "/donor/account"><Icon name="user" /></a>
                             </div>
                         </div>
                     )

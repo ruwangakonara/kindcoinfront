@@ -85,6 +85,17 @@ import BeneficiaryList from "./Pages/Donor/beneficiaries";
 import DonationList from "./Pages/Donor/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
 import CompletedDonations from "./Pages/Donor/completedDonations";
+import DonorList from "./Pages/Donor/donors";
+import Account from "./Pages/Donor/account";
+import UpdateAccount from "./Pages/Donor/updateAccount";
+import DonorAccount from "./Pages/Donor/donorAccount";
+import BeneficiaryAccount from "./Pages/Donor/beneficiartyAccount";
+import OpenRequestList from "./Pages/Donor/openRequests";
+import OpenRequestPage from "./Pages/Donor/openRequestPage";
+import ClosedRequestList from "./Pages/Donor/closedRequests";
+import ClosedRequestPage from "./Pages/Donor/closedRequestPage";
+import MyListingsList from "./Pages/Donor/myListings";
+import AnnouncementList from "./Pages/Donor/announcementsPage";
 
 function App() {
 
@@ -108,9 +119,27 @@ function App() {
 
             <Route path="/donor/home" element={<DonorHome/>}/>
             <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
+            <Route path = "/donor/beneficiaries/:beneficiary_id" element={<BeneficiaryAccount/>}/>
+
             <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
             <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
             <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
+            <Route path = "/donor/donors" element={<DonorList/>}/>
+            <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>
+            <Route path = "/donor/account" element={<Account/>}/>
+            <Route path = "/donor/update-account" element={<UpdateAccount/>}/>
+
+            <Route path = "/donor/open-requests" element={<OpenRequestList/>}/>
+            <Route path = "/donor/open-requests/:request_id" element={<OpenRequestPage/>}/>
+
+            <Route path = "/donor/closed-requests" element={<ClosedRequestList/>}/>
+            <Route path = "/donor/closed-requests/:request_id" element={<ClosedRequestPage/>}/>
+
+            <Route path = "/donor/my-listings" element={<MyListingsList/>}/>
+
+            <Route path = "/donor/announcements" element={<AnnouncementList/>}/>
+
+
 
         </Routes>
 

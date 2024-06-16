@@ -1,0 +1,26 @@
+.donor-account-container {
+    padding: 20px;
+    margin-top: 70px;
+}
+
+.donor-account-container h1, .donor-account-container h2 {
+    margin-bottom: 20px;
+}
+
+.donor-account-container .ui.segment {
+    margin-bottom: 20px;
+}
+
+.ui.list .header {
+    margin-bottom: 5px;
+}
+
+.ui.list .item {
+    margin-bottom: 10px;
+}
+
+.profile-picture {
+    width: 100%;
+    max-width: 150px;
+    height: auto;
+}

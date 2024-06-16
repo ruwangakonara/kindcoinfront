@@ -1,10 +1,11 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
-import Sidebar2 from "../../Components/Donor/Sidebar/Sidebar2";
+import Sidebar3 from "../../Components/Donor/Sidebar/Sidebar3";
 import Donation from '../../Components/Donor/Donation/Donation';
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
 import Beneficiary from "../../Components/Donor/Beneficiary/Beneficiary";
+import MyListing from "../../Components/Donor/Donation/MyListing";
 
 const donations = [
     {
@@ -29,22 +30,21 @@ const donations = [
     },
 ];
 
-const DonationList = () => (
+const MyListingsList = () => (
 
 <div style={{display: 'flex', width: '100%'}}>
-    <Sidebar2/>
+    <Sidebar3/>
     <div style={{flex: '1'}}>
         <Navbar2/>
         <Container style={{padding: '20px', top: "100px", position: 'relative'}}>
             <Grid>
                 {donations.map((donation, index) => (
                     <Grid.Column key={index} width={16}>
-                        <Donation
+                        <MyListing
                             donorImage={donation.donorImage}
                             recipientImage={donation.recipientImage}
                             amount={donation.amount}
                             type={donation.type}
-                            verified={donation.verified}
                             recipientName={donation.recipientName}
                             requestTitle={donation.requestTitle}
                             donationTitle={donation.donationTitle}
@@ -59,4 +59,4 @@ const DonationList = () => (
 )
 ;
 
-export default DonationList;
+export default MyListingsList;

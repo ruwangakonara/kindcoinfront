@@ -20,7 +20,7 @@ export default function Sidebar() {
                 <Menu
                     vertical
                     tabular
-                    style={{ fontSize: "1.5rem", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#fff", height: "100%" }}
+                    style={{ fontSize: "20px", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#fff", height: "100%" }}
                     className={visible ? "visibles" : "hiddens"}
                     direction="left"
                 >
@@ -63,6 +63,26 @@ export default function Sidebar() {
                     >
                         <Icon name='trophy' />
                         Leaderboard
+                    </Menu.Item>
+                    <Menu.Item
+                        name='Donors'
+                        active={activeItem === 'Donors'}
+                        onClick={handleItemClick}
+                        as={Link}
+                        to="/donor/donors"
+                    >
+                        <Icon name='chess king' />
+                        Donors
+                    </Menu.Item>
+                    <Menu.Item
+                        name='Requests'
+                        active={activeItem === 'Requests'}
+                        onClick={handleItemClick}
+                        as={Link}
+                        to="/donor/open-requests"
+                    >
+                        <Icon name='dollar sign' />
+                        Requests
                     </Menu.Item>
                     <Menu.Item
                         name='Logout'
