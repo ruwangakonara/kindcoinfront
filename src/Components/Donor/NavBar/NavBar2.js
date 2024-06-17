@@ -43,12 +43,12 @@ export default function Navbar2() {
                 location.pathname === "/" ?
                     (<div className="temp">
                     <nav className="navbar" id="navbar" ref={navbar}>
-                            <a href="#home" onClick={click}>Home</a>
+                            <a href="/donor/announcements" onClick={click}>Announcements</a>
                             <a href="#about" onClick={click}>About</a>
                             <Dropdown text='More' pointing className='link item'>
                                 <Dropdown.Menu>
                                     <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>
-                                    <Dropdown.Item as='a' href="#announcement" onClick={click}>Announcement</Dropdown.Item>
+                                    <Dropdown.Item as='a' href="announcements" onClick={click}>Announcements</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                             <a href="#projects" onClick={click}>Projects</a>
@@ -61,7 +61,7 @@ export default function Navbar2() {
                     </div>) : (
                         <div className="temp">
                             <nav className="navbar" id="navbar" ref={navbar}>
-                                <a href="#home" onClick={click}>Home</a>
+                                <a style={{ width: "fit-content"}} href="/donor/announcements" onClick={click}>Announcements</a>
                                 <a href="#about" onClick={click}>About</a>
                                 <Dropdown  text='More' pointing className='link item'>
                                     <Dropdown.Menu>

@@ -80,7 +80,7 @@ import Signup from './Components/Home/Signup/Signup'
 import Forgot from './Components/Home/Forgot/Forgot'
 import Main from './Pages/Home/Main'
 
-import DonorHome from './Pages/Donor/home'
+import DonorHome from './Pages/Donor/home/home'
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
 import DonationList from "./Pages/Donor/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
@@ -94,8 +94,10 @@ import OpenRequestList from "./Pages/Donor/openRequests";
 import OpenRequestPage from "./Pages/Donor/openRequestPage";
 import ClosedRequestList from "./Pages/Donor/closedRequests";
 import ClosedRequestPage from "./Pages/Donor/closedRequestPage";
-import MyListingsList from "./Pages/Donor/myListings";
+import MyListingsList from "./Pages/Donor/donations/myListings";
 import AnnouncementList from "./Pages/Donor/announcementsPage";
+import MyListingPage from "./Pages/Donor/donations/myListingpage";
+
 
 function App() {
 
@@ -136,6 +138,7 @@ function App() {
             <Route path = "/donor/closed-requests/:request_id" element={<ClosedRequestPage/>}/>
 
             <Route path = "/donor/my-listings" element={<MyListingsList/>}/>
+            <Route path = "/donor/my-listings/:donation_id" element={<MyListingPage/>}/>
 
             <Route path = "/donor/announcements" element={<AnnouncementList/>}/>
 

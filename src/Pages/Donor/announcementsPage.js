@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
+import {Container, Header} from 'semantic-ui-react';
 import './announcementsPage.css';
 import Announcement from "../../Components/Donor/Announcement/Annnouncement";
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
@@ -25,7 +25,10 @@ const announcements = [
 const AnnouncementList = () => (
     <div>
         <Navbar2/>
+
+
         <Container style = {{top: "150px", position: "relative"}} className="announcement-list-container">
+
             {announcements.map((announcement, index) => (
                 <Announcement key={index} announcement={announcement} />
             ))}
