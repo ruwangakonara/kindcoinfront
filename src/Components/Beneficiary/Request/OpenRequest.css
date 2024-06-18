@@ -1,0 +1,14 @@
+.request-card {
+    position: relative;
+}
+
+.request-status-label {
+    position: absolute;
+    top: -14px;
+    right: -14px;
+}
+
+.request-image {
+    height: 150px;
+    object-fit: cover;
+}

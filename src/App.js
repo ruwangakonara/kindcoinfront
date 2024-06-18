@@ -97,6 +97,11 @@ import ClosedRequestPage from "./Pages/Donor/closedRequestPage";
 import MyListingsList from "./Pages/Donor/donations/myListings";
 import AnnouncementList from "./Pages/Donor/announcementsPage";
 import MyListingPage from "./Pages/Donor/donations/myListingpage";
+import BeneficiaryDashboard from "./Pages/Beneficiary/home/home";
+import BeneficiaryOwnOpenRequestList from "./Pages/Beneficiary/requests/openRequests";
+import BeneficiaryOwnClosedRequestPage from "./Pages/Beneficiary/requests/closedRequestPage";
+import BeneficiaryOwnOpenRequestPage from "./Pages/Beneficiary/requests/openRequestPage";
+import BeneficiaryOwnClosedRequestList from "./Pages/Beneficiary/requests/closedRequests";
 
 
 function App() {
@@ -143,6 +148,15 @@ function App() {
             <Route path = "/donor/announcements" element={<AnnouncementList/>}/>
 
 
+
+            {/*Beneficiary Routes*/}
+            <Route path="/beneficiary/home" element={<BeneficiaryDashboard/>}/>
+
+            <Route path = "/beneficiary/open-requests" element={<BeneficiaryOwnOpenRequestList/>}/>
+            <Route path = "/beneficiary/open-requests/:request_id" element={<BeneficiaryOwnOpenRequestPage/>}/>
+
+            <Route path = "/beneficiary/closed-requests" element={<BeneficiaryOwnClosedRequestList/>}/>
+            <Route path = "/beneficiary/closed-requests/:request_id" element={<BeneficiaryOwnClosedRequestPage/>}/>
 
         </Routes>
 

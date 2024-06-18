@@ -1,0 +1,39 @@
+.lefts {
+    left: 230px !important;
+}
+
+.lefticons {
+    position: fixed;
+    display: flex !important;
+    font-size: 2.5rem !important;
+    top: 50vh;
+    left: 15px;
+    height: 40px !important;
+    width: 40px !important;
+    color: white;
+    z-index: 100;
+    background-color: rgb(118, 116, 116);
+    border-radius: 50%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    transition: 0.5s;
+}
+
+.lefticons:hover {
+    background-color: black;
+}
+
+.visibles {
+    left: 0;
+}
+
+.hiddens {
+    left: -300px; /* Adjusted to hide the sidebar completely */
+}
+
+.logout {
+    position: absolute !important;
+    bottom: 10%;
+    width: 100%;
+}
