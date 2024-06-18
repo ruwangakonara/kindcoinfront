@@ -11,16 +11,17 @@ const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, r
                         <Image src={donorImage} circular className="donor-image" />
                         <Image src={recipientImage} circular className="recipient-image" />
                     </Grid.Column>
-                    <Grid.Column width={8}>
+                    <Grid.Column width={6}>
                         <Card.Header className="recipient-name">{recipientName}</Card.Header>
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                     </Grid.Column>
-                    <Grid.Column width={2} textAlign="right" className="right-column">
+                    <Grid.Column width={3} textAlign="right" className="right-column">
                         <Button size='tiny' className='view-button'>View Donation</Button>
                         <div className="token-info">
                             <h2>{tokens}</h2>
-                            <Image src="../../../../public/token.png" circular className="token-image" />
+                            <Image src="/token.png" circular className="token-image" />
+
                         </div>
                     </Grid.Column>
                 </Grid>

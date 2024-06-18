@@ -3,7 +3,7 @@ import React, { useRef } from "react";
 import "./NavBar.css";
 import { useLocation } from 'react-router-dom';
 
-export default function Navbar2() {
+export default function Navbar() {
     const navbar = useRef(null);
     const sidebar = useRef(null);
     let i = 0, f = 0;
@@ -33,7 +33,7 @@ export default function Navbar2() {
 
     return (
         <header className="top">
-            <a href="/donor/home">
+            <a href="/beneficiary/home">
                 <div id="brand" className="brand">
                     <img src="/charitylogo.png" alt="charity"/>
                 </div>
@@ -44,7 +44,7 @@ export default function Navbar2() {
                     (<div className="temp">
                     <nav className="navbar" id="navbar" ref={navbar}>
                             <a href="/donor/announcements" onClick={click}>Announcements</a>
-                            <a href="#about" onClick={click}>About</a>
+                            <a href="/brnrficiary/tickets" onClick={click}>Tickets</a>
                             <Dropdown text='More' pointing className='link item'>
                                 <Dropdown.Menu>
                                     <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>
@@ -61,17 +61,17 @@ export default function Navbar2() {
                     </div>) : (
                         <div className="temp">
                             <nav className="navbar" id="navbar" ref={navbar}>
-                                <a style={{ width: "fit-content"}} href="/donor/announcements" onClick={click}>Announcements</a>
-                                <a href="#about" onClick={click}>About</a>
-                                <Dropdown  text='More' pointing className='link item'>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>
-                                        <Dropdown.Item as='a' href="#announcement" onClick={click}>Announcement</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <a style={{ width: "fit-content"}} href="/beneficiary/announcements" onClick={click}>Announcements</a>
+                                <a style={{ width: "fit-content"}} href="/benetificiary/tickets" onClick={click}>Tickets</a>
+                                {/*<Dropdown  text='More' pointing className='link item'>*/}
+                                {/*    <Dropdown.Menu>*/}
+                                {/*        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>*/}
+                                {/*        <Dropdown.Item as='a' href="#announcement" onClick={click}>Announcement</Dropdown.Item>*/}
+                                {/*    </Dropdown.Menu>*/}
+                                {/*</Dropdown>*/}
                             </nav>
                             <div className="brandlogin">
-                                <a href= "/donor/account"><Icon name="user" /></a>
+                                <a href= "/beneficiary/account"><Icon name="user" /></a>
                             </div>
                         </div>
                     )

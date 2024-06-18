@@ -1,41 +1,41 @@
 import React from 'react';
-import Beneficiary from '../../Components/Donor/Beneficiary/Beneficiary';
 import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
+import Donor from "../../Components/Donor/Donor/Donor";
 
 const beneficiaries = [
     {
         name: 'John Doe',
         type: 'Individual',
         image: 'https://via.placeholder.com/150',
-        verified: true,
-        id: 'hgvjknj',
+        rank: 4,
+        id: 'dadvadv',
     },
     {
         name: 'Charity Org',
         type: 'Organization',
         image: 'https://via.placeholder.com/150',
-        verified: false,
-        id: 'oijj',
+        rank: 2,
+        id: 'dadadadvdv',
     },
     {
         name: 'Jane Smith',
         type: 'Individual',
         image: 'https://via.placeholder.com/150',
-        verified: true,
-        id: 'iljjjijj',
+        rank: 1,
+        id: 'afafaadvv',
     },
     {
         name: 'Community Center',
         type: 'Organization',
         image: 'https://via.placeholder.com/150',
-        verified: true,
-        id: 'kjbjbbbhbbb',
+        rank: 3,
+        id: 'acdvsvv',
     },
 ];
 
-const BeneficiaryList = () => (
+const DonorList = () => (
     <div style={{ display: 'flex', width: '100%' }}>
         <Sidebar />
         <div style={{ flex: '1' }}>
@@ -44,11 +44,11 @@ const BeneficiaryList = () => (
                 <Grid columns={3} stackable>
                     {beneficiaries.map((beneficiary, index) => (
                         <Grid.Column key={index} style={{ marginBottom: '20px' }}>
-                            <Beneficiary
+                            <Donor
                                 name={beneficiary.name}
                                 type={beneficiary.type}
                                 image={beneficiary.image}
-                                verified={beneficiary.verified}
+                                rank={beneficiary.rank}
                                 id={beneficiary.id}
                             />
                         </Grid.Column>
@@ -59,4 +59,4 @@ const BeneficiaryList = () => (
     </div>
 );
 
-export default BeneficiaryList;
+export default DonorList;

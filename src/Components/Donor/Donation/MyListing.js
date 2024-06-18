@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Image, Icon, Label, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
+import {Link} from "react-router-dom";
 
-const Donation = ({ donorImage, recipientImage, amount, type, verified, recipientName, requestTitle, donationTitle }) => {
+const MyListing = ({ donorImage, recipientImage, amount, type, recipientName, requestTitle, donationTitle, accepted, id }) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -17,23 +18,17 @@ const Donation = ({ donorImage, recipientImage, amount, type, verified, recipien
                         <Card.Header className="recipient-name">{donationTitle}</Card.Header>
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
+                        {!accepted && (
+                            <Label style = {{marginTop: '10px'}} color='red' className='not-accepted-label'>Not Accepted</Label>
+                        )}
                     </Grid.Column>
                     <Grid.Column width={2} textAlign="right">
-                        <Button size='tiny' className='view-button'>View Donation</Button>
+                        <Button as={Link} to={`${id}`} size='tiny' className='view-button'>View Donation</Button>
                     </Grid.Column>
                 </Grid>
-                {verified ? (
-                    <Label color='green' ribbon className="verified-label">
-                        <Icon name="check circle" /> Verified
-                    </Label>
-                ) : (
-                    <Label color='red' ribbon className="verified-label">
-                        <Icon name="check circle" /> Not Verified
-                    </Label>
-                )}
             </Card.Content>
         </Card>
     );
 }
 
-export default Donation;
+export default MyListing;

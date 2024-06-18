@@ -1,0 +1,34 @@
+.donation-page-container {
+    margin-top: 70px; /* Adjust for navbar height */
+    padding: 20px;
+}
+
+.page-header {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.image-label {
+    margin-top: 10px;
+}
+
+.donation-details {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.not-accepted-label {
+    margin-top: 20px;
+    font-size: 1.2em;
+    display: block;
+}
+
+.edit-donation-modal {
+    padding: 20px !important;
+}

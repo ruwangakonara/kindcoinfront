@@ -29,27 +29,27 @@ export default function Sidebar() {
                         active={activeItem === 'Home'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/home"
+                        to="/beneficiary/home"
                     >
                         <Icon name='home' />
                         Home
                     </Menu.Item>
                     <Menu.Item
-                        name='My Donations'
-                        active={activeItem === 'My Donations'}
+                        name='My Requests'
+                        active={activeItem === 'My Requests'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/ongoing-donations"
+                        to="/beneficiary/open-requests"
                     >
                         <Icon name='gift' />
-                        My Donations
+                        My Requests
                     </Menu.Item>
                     <Menu.Item
                         name='Beneficiaries'
                         active={activeItem === 'Beneficiaries'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/beneficiaries"
+                        to="/beneficiary/beneficiaries"
                     >
                         <Icon name='users' />
                         Beneficiaries
@@ -59,7 +59,7 @@ export default function Sidebar() {
                         active={activeItem === 'Leaderboard'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/leaderboard"
+                        to="/beneficiary/leaderboard"
                     >
                         <Icon name='trophy' />
                         Leaderboard
@@ -69,7 +69,7 @@ export default function Sidebar() {
                         active={activeItem === 'Donors'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/donors"
+                        to="/beneficiary/donors"
                     >
                         <Icon name='chess king' />
                         Donors
@@ -79,7 +79,7 @@ export default function Sidebar() {
                         active={activeItem === 'Requests'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/open-requests"
+                        to="/beneficiary/others-requests"
                     >
                         <Icon name='dollar sign' />
                         Requests

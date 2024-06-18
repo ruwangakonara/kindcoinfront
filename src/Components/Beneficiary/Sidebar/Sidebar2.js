@@ -15,12 +15,12 @@ export default function Sidebar() {
     }
 
     return (
-        <Grid style={{ height: "100vh", top: "70px", width: "fit-content" }}>
-            <Grid.Column width={5} style={{ height: "100vh" }}>
+        <Grid style={{ height: "100vh", top: "70px" }}>
+            <Grid.Column style={{ height: "100vh", width: "fit-content" }}>
                 <Menu
                     vertical
                     tabular
-                    style={{ fontSize: "20px", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#fff", height: "100%" }}
+                    style={{ fontSize: "17px", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#fff", height: "100%", width: "fit-content" , background: "lightgrey"}}
                     className={visible ? "visibles" : "hiddens"}
                     direction="left"
                 >
@@ -35,54 +35,34 @@ export default function Sidebar() {
                         Home
                     </Menu.Item>
                     <Menu.Item
-                        name='My Donations'
-                        active={activeItem === 'My Donations'}
+                        name='Ongoing Donations'
+                        active={activeItem === 'Ongoing Donations'}
                         onClick={handleItemClick}
                         as={Link}
                         to="/donor/ongoing-donations"
                     >
-                        <Icon name='gift' />
-                        My Donations
+                        <Icon name='hourglass half' />
+                        Ongoing Donations
                     </Menu.Item>
                     <Menu.Item
-                        name='Beneficiaries'
-                        active={activeItem === 'Beneficiaries'}
+                        name='Pending Rewards'
+                        active={activeItem === 'Pending Rewards'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/beneficiaries"
+                        to="/donor/pending-rewards"
                     >
-                        <Icon name='users' />
-                        Beneficiaries
+                        <Icon name='wait' />
+                        Pending Rewards
                     </Menu.Item>
                     <Menu.Item
-                        name='Leaderboard'
-                        active={activeItem === 'Leaderboard'}
+                        name='Completed Donations'
+                        active={activeItem === 'Completed Donations'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/leaderboard"
+                        to="/donor/completed-donations"
                     >
-                        <Icon name='trophy' />
-                        Leaderboard
-                    </Menu.Item>
-                    <Menu.Item
-                        name='Donors'
-                        active={activeItem === 'Donors'}
-                        onClick={handleItemClick}
-                        as={Link}
-                        to="/donor/donors"
-                    >
-                        <Icon name='chess king' />
-                        Donors
-                    </Menu.Item>
-                    <Menu.Item
-                        name='Requests'
-                        active={activeItem === 'Requests'}
-                        onClick={handleItemClick}
-                        as={Link}
-                        to="/donor/open-requests"
-                    >
-                        <Icon name='dollar sign' />
-                        Requests
+                        <Icon name='check' />
+                        Completed Donations
                     </Menu.Item>
                     <Menu.Item
                         name='Logout'
