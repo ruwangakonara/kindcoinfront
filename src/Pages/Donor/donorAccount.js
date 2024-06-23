@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import {useParams} from "react-router-dom";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const DonorAccount = () => {
     const history = useNavigate();
@@ -90,6 +91,7 @@ const DonorAccount = () => {
                     </Grid>
                 </Segment>
             </Container>
+            <Donatenow/>
         </div>
 
     );

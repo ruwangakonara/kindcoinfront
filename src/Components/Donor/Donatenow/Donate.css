@@ -1,0 +1,20 @@
+.donate{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width:100px !important;
+    margin: 40px 40px;
+}
+
+.donatebutton{
+    right: 0;
+    font-size: 15px !important;
+    font-family: Verdana, Tahoma, sans-serif;
+    background-color: #9ACD32 !important;
+    color: black;
+}
+
+.donatebutton:hover{
+    transform: scale(1.2);
+}

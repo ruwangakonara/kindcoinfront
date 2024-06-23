@@ -4,7 +4,8 @@ import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar from '../../../Components/Beneficiary/Sidebar/Sidebar';
 import './Dashboard.css'; // Importing CSS file for styling
 import { useParams } from 'react-router-dom';
-import { AiOutlineFundProjectionScreen, AiOutlineUnorderedList, AiOutlineCheckCircle } from 'react-icons/ai'; // Importing icons from React Icons library
+import { AiOutlineFundProjectionScreen, AiOutlineUnorderedList, AiOutlineCheckCircle } from 'react-icons/ai';
+import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow"; // Importing icons from React Icons library
 
 const BeneficiaryDashboard = () => {
     // Dummy data for the dashboard
@@ -116,6 +117,7 @@ const BeneficiaryDashboard = () => {
                     </Container>
                 </Grid.Column>
             </Grid>
+            <Requestnow/>
         </div>
     );
 };

@@ -3,6 +3,7 @@ import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } fr
 import { useParams } from 'react-router-dom';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import './account.css';
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const BeneficiaryAccount = () => {
     const { beneficiary_id } = useParams();
@@ -123,6 +124,7 @@ const BeneficiaryAccount = () => {
                     <Button onClick={() => setOpen(false)}>Close</Button>
                 </Modal.Actions>
             </Modal>
+            <Donatenow/>
         </div>
     );
 }

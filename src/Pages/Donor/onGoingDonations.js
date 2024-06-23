@@ -5,6 +5,7 @@ import Sidebar2 from "../../Components/Donor/Sidebar/Sidebar2";
 import Donation from '../../Components/Donor/Donation/Donation';
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
 import Beneficiary from "../../Components/Donor/Beneficiary/Beneficiary";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const donations = [
     {
@@ -54,6 +55,7 @@ const DonationList = () => (
                 ))}
             </Grid>
         </Container>
+        <Donatenow/>
     </div>
 </div>
 )

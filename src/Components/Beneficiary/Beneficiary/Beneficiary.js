@@ -26,7 +26,7 @@ const Beneficiary = ({ name, type, image, verified, id }) => (
         </Card.Content>
         <Card.Content extra>
             <div className='ui two buttons'>
-                <Link to={`/donor/beneficiaries/${id}`} className='ui basic green button'>
+                <Link to={`/beneficiary/beneficiaries/${id}`} className='ui basic green button'>
                     View Account
                 </Link>
             </div>

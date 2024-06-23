@@ -3,6 +3,7 @@ import {Container, Header} from 'semantic-ui-react';
 import './announcementsPage.css';
 import Announcement from "../../Components/Donor/Announcement/Annnouncement";
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const announcements = [
     {
@@ -33,6 +34,7 @@ const AnnouncementList = () => (
                 <Announcement key={index} announcement={announcement} />
             ))}
         </Container>
+        <Donatenow/>
     </div>
 
 );

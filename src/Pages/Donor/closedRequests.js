@@ -4,6 +4,7 @@ import Navbar2 from '../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../Components/Donor/Sidebar/Sidebar3';
 import OpenRequest from "../../Components/Donor/Request/OpenRequest";
 import ClosedRequest from "../../Components/Donor/Request/ClosedRequest.js";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const requests = [
     {
@@ -51,6 +52,7 @@ const ClosedRequestList = () => (
                 </Grid>
             </Container>
         </div>
+        <Donatenow/>
     </div>
 );
 

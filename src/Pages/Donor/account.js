@@ -3,6 +3,7 @@ import { Container, Header, Grid, List, Button, Segment, Image } from 'semantic-
 import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const Account = () => {
     const history = useNavigate();
@@ -86,6 +87,7 @@ const Account = () => {
                     </Grid>
                 </Segment>
             </Container>
+            <Donatenow/>
         </div>
 
     );

@@ -1,0 +1,33 @@
+.donate{
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width:100px !important;
+    margin: 40px 40px;
+}
+
+.donatebutton{
+    right: 0;
+    font-size: 15px !important;
+    font-family: Verdana, Tahoma, sans-serif;
+    background-color: lightcyan !important;
+    color: black;
+}
+
+.donatebutton:hover{
+    transform: scale(1.2);
+}
+
+.request-modal .header {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.request-modal .actions .button {
+    border-radius: 5px;
+}
+
+.request-modal .content .field {
+    margin-bottom: 20px;
+}

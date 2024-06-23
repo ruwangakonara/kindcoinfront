@@ -6,6 +6,7 @@ import Donation from '../../../Components/Donor/Donation/Donation';
 import Sidebar from "../../../Components/Donor/Sidebar/Sidebar";
 import Beneficiary from "../../../Components/Donor/Beneficiary/Beneficiary";
 import MyListing from "../../../Components/Donor/Donation/MyListing";
+import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 
 const donations = [
     {
@@ -58,6 +59,7 @@ const MyListingsList = () => (
             </Grid>
         </Container>
     </div>
+    <Donatenow/>
 </div>
 )
 ;

@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&family=Ubuntu:ital,wght@0,300;1,500&display=swap');
+
+.font{
+    font-family: 'Dongle',sans-serif ;
+}
+
+.abts{
+
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    color: black;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.captionstyle {
+    font-size: 2em;
+    font-weight: 'normal';
+    line-height: '0.9';
+    display: 'flex ';
+    background-color: 'black';
+    width: '80vw';
+    height: '80vh';
+    align-items: 'center';
+    justify-content: 'center';
+    opacity: 0.6;
+    position: 'relative';
+    top: '-85vh';
+    left: '8.8vw';
+    max-width: "80vw";
+    max-height: "80vh";
+    
+  }
+
+  @media screen and (min-width: 300px) {
+    .captionstyle{
+        left: 5px !important;
+        height: 60vh !important;
+        max-height: 40vh !important;
+    }
+
+  }

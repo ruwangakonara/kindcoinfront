@@ -7,6 +7,7 @@ import Donate from "./Components/Home/Donatenow/Donatenow";
 import Navbar from "./Components/Home/NavBar/NavBar";
 import App from './App';
 import axios  from "axios";
+import {UserProvider} from "./Components/Home/UserConext/UserContext";
 
 axios.defaults.baseURL = "http://localhost:9013"
 
@@ -14,8 +15,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
     <BrowserRouter>
-        <App />
-        <Donate/>
+        <UserProvider>
+            <App />
+        </UserProvider>
     </BrowserRouter>
 );
 
