@@ -1,0 +1,33 @@
+.announcement-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-bottom: 20px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    padding: 20px;
+}
+
+.announcement-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.announcement-title {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.announcement-meta {
+    font-size: 1.2em;
+    color: #888;
+    margin-bottom: 15px;
+}
+
+.announcement-body {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #555;
+}

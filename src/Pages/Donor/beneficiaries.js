@@ -3,6 +3,7 @@ import Beneficiary from '../../Components/Donor/Beneficiary/Beneficiary';
 import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const beneficiaries = [
     {
@@ -56,6 +57,7 @@ const BeneficiaryList = () => (
                 </Grid>
             </Container>
         </div>
+        <Donatenow/>
     </div>
 );
 

@@ -1,119 +1,150 @@
-import React,{useState,useEffect} from 'react'
-import { Button, Form, Grid, Header, Segment,Modal,Icon,Message } from 'semantic-ui-react'
-import './Login.css'
-import { useNavigate} from "react-router-dom";
+import React, { useState, useContext } from 'react';
+import { Button, Form, Grid, Header, Segment, Modal, Icon, Message } from 'semantic-ui-react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import { UserContext } from '../UserConext/UserContext'; // Adjust the import path if necessary
 
-const Login = ({form :{form, handleChange,saveAndContinue,formError,open,
-  setreset,errMessage,message,forgot,modOpen,fetchData,setModopen,setCurrent
-}}) =>{
+const axiosInstance = axios.create({
+  baseURL: 'http://localhost:9013',
+  withCredentials: true, // This enables sending credentials (cookies) with the request
+});
 
-  setCurrent('login');
-
-  const [passwordType, setPasswordType] = useState("password");
-  const [icon,setIcon] = useState("eye");
-
-  const handleopen = () =>{
-    setreset();
-    console.log(" user completed"); 
-    setModopen(false);
-    navigate("/main");
-  }
-
-
-  useEffect(()=>{
-    if(open){
-      let data = {
-        email: form.email,
-        password: form.password,
-        userType: 'Individual'
-      }
-      fetchData("http://localhost:3000/login",data,"login","POST");
-    }
-
-  },[open]);
-
-
-  const togglePassword = () =>{
-    if(passwordType === "password"){
-      setPasswordType("text");
-      setIcon("low vision");
-    }else{
-      setPasswordType("password");
-      setIcon("eye");
-    }
-  }
-
-  
-
+const Login = () => {
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext); // Import setUser from UserContext
+  const [passwordType, setPasswordType] = useState('password');
+  const [icon, setIcon] = useState('eye');
+  const [loginError, setLoginError] = useState(null);
+  const [modOpen, setModOpen] = useState(false); // State for modal open/close
+
+  const togglePassword = () => {
+    setPasswordType(prevType => prevType === 'password' ? 'text' : 'password');
+    setIcon(prevIcon => prevIcon === 'eye' ? 'low vision' : 'eye');
+  };
+
+  const handleOpen = () => {
+    setModOpen(false);
+    navigate('/main');
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+    const form = event.target.elements;
+
+    const data = {
+      username: form.username.value,
+      password: form.password.value,
+    };
+
+    try {
+      const response = await axiosInstance.post('/signin', data);
+
+      if (response.status === 200) {
+        const user = response.data.user;
+        setUser(user); // Save user in global state
+
+        switch (user.status) {
+          case 'admin':
+            navigate('/admin/home');
+            break;
+          case 'donor':
+            navigate('/donor/home');
+            break;
+          case 'beneficiary':
+            navigate('/beneficiary/home');
+            break;
+          case 'crew_member':
+            navigate('/crew_member/home');
+            break;
+          default:
+            navigate('/'); // Navigate to default home if status is unknown
+        }
+      } else {
+        setLoginError('An unknown error occurred');
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.status === 420) {
+          setLoginError('Incorrect username');
+        } else if (error.response.status === 409) {
+          setLoginError('Incorrect password');
+        } else {
+          setLoginError('An unknown error occurred');
+        }
+      }
+        // else {
+      //   setLoginError('Unable to connect to the server');
+      // }
+    }
+  };
 
   return (
-    <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
+      <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
-        {modOpen && 
-      <Modal open={modOpen}>
-      
-      <Modal.Content>
-        <Modal.Description>
-          Hurrah! Your credentials are matched.
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button onClick={handleopen}>OK</Button>
-      </Modal.Actions>
-    </Modal>
-    }
+          {modOpen && (
+              <Modal open={modOpen}>
+                <Modal.Content>
+                  <Modal.Description>
+                    Hurrah! Your credentials are matched.
+                  </Modal.Description>
+                </Modal.Content>
+                <Modal.Actions>
+                  <Button onClick={handleOpen}>OK</Button>
+                </Modal.Actions>
+              </Modal>
+          )}
           <Header as='h2' color='teal' textAlign='center'>
-            {/* {<Image src='/logo.png' />}  */}
             Log-in to your account
           </Header>
-          {
-            errMessage && 
-            <Message negative>
-            <p>{message}</p>
-            </Message>
-          }
-
-          
-          <Form size='large' onSubmit={saveAndContinue}>
+          {loginError && (
+              <Message negative>
+                <p>{loginError}</p>
+              </Message>
+          )}
+          <Form size='large' onSubmit={handleSubmit}>
             <Segment stacked>
-              <Form.Input fluid 
-                icon='user' 
-                iconPosition='left'
-                name="email"
-                
-                value={form.email||""} 
-                placeholder='E-mail address' 
-                onChange={handleChange}
-                type='email'
-                error={(formError.emailError? true: false)?{content: formError.emailError} : false}
-              />
-              <Form.Field style={{ position: 'relative' }}>
               <Form.Input
-                fluid
-                width="14"
-                icon='lock'
-                iconPosition='left'
-                placeholder='Password'
-                type={passwordType}
-                name="password"
-                value={form.password||""} 
-                onChange={handleChange}
-                error={(formError.passwordError? true: false)?{content: formError.passwordError} : false}
+                  fluid
+                  icon='user'
+                  iconPosition='left'
+                  name='username'
+                  placeholder='E-mail address'
+                  type='email'
               />
-              <Icon name={icon} link onClick={togglePassword} className="showicon"/>
-              </Form.Field>
-            <a onClick={()=>navigate("/forgot")} link style={{cursor:"pointer"}}>Forgot Password?</a>
-              <Button color='teal' fluid size='large'  type="submit">
+              <Form.Input
+                  fluid
+                  icon='lock'
+                  iconPosition='left'
+                  placeholder='Password'
+                  type={passwordType}
+                  name='password'
+              />
+              <Icon
+                  name={icon}
+                  link
+                  onClick={togglePassword}
+                  className='showicon'
+                  style={{
+                    position: 'absolute',
+                    top: '103px',
+                    left: '354px',
+                    marginBottom: '10px',
+                  }}
+              />
+              <a onClick={() => navigate('/forgot')} style={{ cursor: 'pointer' }}>
+                Forgot Password?
+              </a>
+              <Button color='teal' fluid size='large' type='submit'>
                 Login
               </Button>
             </Segment>
           </Form>
-          <Button color='teal' fluid size='large' onClick={()=>navigate("/people/signup")}>
-           New to us? Sign UP</Button>
+          <Button color='teal' fluid size='large' onClick={() => navigate('/people/signup')}>
+            New to us? Sign UP
+          </Button>
         </Grid.Column>
       </Grid>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

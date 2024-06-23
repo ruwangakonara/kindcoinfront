@@ -43,8 +43,8 @@ function Banner() {
                 </h1>
                 <p> Login/Signup as</p>
             <div className="banner__buttons">
-                <button style={{ fontSize : 30}} className="banner__button" onClick={()=>navigate("/org")}>I am Looking to Provide Help</button>
-                <button style={{ fontSize : 30}} className="banner__button"  onClick={()=>navigate("/people")}>I am Looking For Help</button>
+                <button style={{ fontSize : 30}} className="banner__button" onClick={()=>navigate("/beneficiary_registration")}>Register To Ask For Help</button>
+                <button style={{ fontSize : 30}} className="banner__button"  onClick={()=>navigate("/login")}>Sign In</button>
             </div>
             <h1 className="banner__description">
             Welcome to Our Donation App

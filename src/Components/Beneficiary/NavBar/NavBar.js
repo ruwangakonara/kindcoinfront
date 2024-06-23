@@ -62,7 +62,7 @@ export default function Navbar() {
                         <div className="temp">
                             <nav className="navbar" id="navbar" ref={navbar}>
                                 <a style={{ width: "fit-content"}} href="/beneficiary/announcements" onClick={click}>Announcements</a>
-                                <a style={{ width: "fit-content"}} href="/benetificiary/tickets" onClick={click}>Tickets</a>
+                                <a style={{ width: "fit-content"}} href="/beneficiary/tickets" onClick={click}>Tickets</a>
                                 {/*<Dropdown  text='More' pointing className='link item'>*/}
                                 {/*    <Dropdown.Menu>*/}
                                 {/*        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>*/}

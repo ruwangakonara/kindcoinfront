@@ -3,6 +3,7 @@ import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from '../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../Components/Donor/Sidebar/Sidebar3';
 import OpenRequest from "../../Components/Donor/Request/OpenRequest";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const requests = [
     {
@@ -50,6 +51,7 @@ const OpenRequestList = () => (
                 </Grid>
             </Container>
         </div>
+        <Donatenow/>
     </div>
 );
 

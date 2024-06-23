@@ -1,8 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
 import Donor from "../../Components/Donor/Donor/Donor";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
+import { UserContext } from '../../Components/Home/UserConext/UserContext'; // Adjust the import path if necessary
+
+
 
 const beneficiaries = [
     {
@@ -35,28 +39,36 @@ const beneficiaries = [
     },
 ];
 
-const DonorList = () => (
-    <div style={{ display: 'flex', width: '100%' }}>
-        <Sidebar />
-        <div style={{ flex: '1' }}>
-            <Navbar2/>
-            <Container style={{ padding: '20px', top:"100px", position: 'relative' }}>
-                <Grid columns={3} stackable>
-                    {beneficiaries.map((beneficiary, index) => (
-                        <Grid.Column key={index} style={{ marginBottom: '20px' }}>
-                            <Donor
-                                name={beneficiary.name}
-                                type={beneficiary.type}
-                                image={beneficiary.image}
-                                rank={beneficiary.rank}
-                                id={beneficiary.id}
-                            />
-                        </Grid.Column>
-                    ))}
-                </Grid>
-            </Container>
+function DonorList()
+{
+    const { user } = useContext(UserContext); // Access user from context
+
+    console.log(user)
+    return (
+        <div style={{display: 'flex', width: '100%'}}>
+            <Sidebar/>
+            <div style={{flex: '1'}}>
+                <Navbar2/>
+                <Container style={{padding: '20px', top: "100px", position: 'relative'}}>
+                    <Grid columns={3} stackable>
+                        {beneficiaries.map((beneficiary, index) => (
+                            <Grid.Column key={index} style={{marginBottom: '20px'}}>
+                                <Donor
+                                    name={beneficiary.name}
+                                    type={beneficiary.type}
+                                    image={beneficiary.image}
+                                    rank={beneficiary.rank}
+                                    id={beneficiary.id}
+                                />
+                            </Grid.Column>
+                        ))}
+                    </Grid>
+                </Container>
+            </div>
+            <Donatenow/>
         </div>
-    </div>
-);
+    )
+
+};
 
 export default DonorList;

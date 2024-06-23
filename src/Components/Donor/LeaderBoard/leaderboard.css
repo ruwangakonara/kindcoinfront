@@ -1,0 +1,65 @@
+.leaderboard-card {
+    width: 100% !important;
+    max-width: 500px !important;
+    margin: auto;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.leaderboard-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    position: relative;
+}
+
+.profile-image {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 5px solid #f4f4f4;
+}
+
+.card-content {
+    padding: 20px !important;
+}
+
+.card-header {
+    font-size: 1.5em !important;
+    color: #4a4a4a !important;
+}
+
+.card-meta {
+    font-size: 1.2em !important;
+    color: #7a7a7a !important;
+    margin-top: 5px !important;
+}
+
+.card-description {
+    margin-top: 15px !important;
+}
+
+.rank {
+    font-size: 1.4em !important;
+    font-style: italic;
+    color: #333;
+}
+
+.card-extra {
+    padding: 20px !important;
+}
+
+.ui.two.buttons .button {
+    width: 100%;
+}

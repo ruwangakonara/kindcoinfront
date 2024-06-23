@@ -4,6 +4,7 @@ import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar2 from "../../Components/Donor/Sidebar/Sidebar2";
 import PendingRewardDonation from "../../Components/Donor/Donation/PendingRewardDonation";
 import CompletedDonation from "../../Components/Donor/Donation/CompletedDonation";
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const donations = [
     {
@@ -47,6 +48,7 @@ const CompletedDonations = () => (
                     </Grid>
                 </Container>
             </div>
+            <Donatenow/>
         </div>
     )
 ;

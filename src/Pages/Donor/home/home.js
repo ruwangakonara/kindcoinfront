@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Container, Grid, Header, Segment, Image } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
 import './Dashboard.css'; // Importing CSS file for styling
-import { useParams } from 'react-router-dom';
-import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai'; // Importing icons from React Icons library
+import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
+import Donatenow from "../../../Components/Donor/Donatenow/Donatenow"; // Importing icons from React Icons library
+import { UserContext } from '../../../Components/Home/UserConext/UserContext'; // Adjust the import path if necessary
 
 const Dashboard = () => {
+    const { user } = useContext(UserContext); // Access user from context
+
     // Dummy data for the dashboard
     const dashboardData = {
         listings: 10,
@@ -46,6 +49,8 @@ const Dashboard = () => {
             }
         ]
     };
+
+    console.log('User Context:', user); // Log the user context to verify
 
     return (
         <div>
@@ -122,6 +127,7 @@ const Dashboard = () => {
                     </Container>
                 </Grid.Column>
             </Grid>
+            <Donatenow/>
         </div>
     );
 };

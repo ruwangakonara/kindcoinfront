@@ -45,12 +45,12 @@ export default function Navbar2() {
                     <nav className="navbar" id="navbar" ref={navbar}>
                             <a href="/donor/announcements" onClick={click}>Announcements</a>
                             <a href="#about" onClick={click}>About</a>
-                            <Dropdown text='More' pointing className='link item'>
-                                <Dropdown.Menu>
-                                    <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>
-                                    <Dropdown.Item as='a' href="announcements" onClick={click}>Announcements</Dropdown.Item>
-                                </Dropdown.Menu>
-                            </Dropdown>
+                            {/*<Dropdown text='More' pointing className='link item'>*/}
+                            {/*    <Dropdown.Menu>*/}
+                            {/*        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>*/}
+                            {/*        <Dropdown.Item as='a' href="announcements" onClick={click}>Announcements</Dropdown.Item>*/}
+                            {/*    </Dropdown.Menu>*/}
+                            {/*</Dropdown>*/}
                             <a href="#projects" onClick={click}>Projects</a>
                             <a href="#skills" onClick={click}>Skills</a>
                             <a href="#contact" onClick={click}>Contact</a>
@@ -62,13 +62,13 @@ export default function Navbar2() {
                         <div className="temp">
                             <nav className="navbar" id="navbar" ref={navbar}>
                                 <a style={{ width: "fit-content"}} href="/donor/announcements" onClick={click}>Announcements</a>
-                                <a href="#about" onClick={click}>About</a>
-                                <Dropdown  text='More' pointing className='link item'>
-                                    <Dropdown.Menu>
-                                        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>
-                                        <Dropdown.Item as='a' href="#announcement" onClick={click}>Announcement</Dropdown.Item>
-                                    </Dropdown.Menu>
-                                </Dropdown>
+                                <a href="/donor/tickets" onClick={click}>Tickets</a>
+                                {/*<Dropdown  text='More' pointing className='link item'>*/}
+                                {/*    <Dropdown.Menu>*/}
+                                {/*        <Dropdown.Item as='a' href="#tickets" onClick={click}>Tickets</Dropdown.Item>*/}
+                                {/*        <Dropdown.Item as='a' href="#announcement" onClick={click}>Announcement</Dropdown.Item>*/}
+                                {/*    </Dropdown.Menu>*/}
+                                {/*</Dropdown>*/}
                             </nav>
                             <div className="brandlogin">
                                 <a href= "/donor/account"><Icon name="user" /></a>

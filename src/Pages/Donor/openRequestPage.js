@@ -3,6 +3,7 @@ import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } fr
 import { useParams } from 'react-router-dom';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import './account.css';
+import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 
 const OpenRequestPage = () => {
     const { request_id } = useParams();
@@ -132,6 +133,7 @@ const OpenRequestPage = () => {
                     <Button onClick={() => setOpen(false)}>Close</Button>
                 </Modal.Actions>
             </Modal>
+            <Donatenow/>
         </div>
     );
 }
