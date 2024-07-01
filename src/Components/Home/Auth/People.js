@@ -8,9 +8,9 @@ const People = () => {
       <div style={{marginTop:"70px"}}>
         <ul>
           <li><Link to="login">login user</Link></li>
-          <li><Link to="signup">signup user</Link></li>
+          <li><Link to="signup">Sign up as a Donor</Link></li>
         </ul>
-        <Button color="teal" onClick={()=>navigate("/org")} >Login As Organisation</Button>
+        <Button color="teal" onClick={()=>navigate("/beneficiary_registration")} >Register as a Beneficiary</Button>
         <Outlet/>
       </div>
 

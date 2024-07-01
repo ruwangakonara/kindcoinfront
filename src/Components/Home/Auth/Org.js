@@ -10,10 +10,10 @@ const Org = () => {
     return(
       <div style={{marginTop:"70px"}}>
         <ul>
-          <li><Link to="login">login org </Link></li>
-          <li><Link to="signup">signup org</Link></li>
+          {/*<li><Link to="login">login org </Link></li>*/}
+          {/*<li><Link to="signup">signup org</Link></li>*/}
         </ul>
-        <Button color="teal" onClick={()=>navigate("/people")} >Login As people</Button>
+        <Button color="teal" onClick={()=>navigate("/login/login")} >Sign In</Button>
         <Outlet/>
       </div>
 
