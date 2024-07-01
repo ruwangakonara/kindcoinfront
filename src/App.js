@@ -80,7 +80,6 @@ import Signup from './Components/Home/Signup/Signup'
 import Forgot from './Components/Home/Forgot/Forgot'
 import Main from './Pages/Home/Main'
 
-import {UserProvider} from "./Components/Home/UserConext/UserContext";
 
 import DonorHome from './Pages/Donor/home/home'
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
@@ -126,9 +125,9 @@ function App() {
         // <UserProvider>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="org" element={<Org/>}>
-                    {/*<Route path="login" element={<Olog form={useform()} validate={validate}/>} />*/}
-                    <Route path="signup" element={<OSignup  form={useform()} validate={validate}/>} />
+                <Route path="beneficiary_registration" element={<Org/>}>
+                    {/*    <Route path="login" element={<Olog form={useform()} validate={validate}/>} />*/}
+                    <Route path="" element={<OSignup  form={useform()} validate={validate}/>} />
                 </Route>
                 <Route path="login" element={<People/>}>
                     <Route path="login" element={<Login/>} />

@@ -2,22 +2,29 @@ import React,{useState,useEffect} from 'react'
 import { Button, Form, Grid, Header, Segment, Dropdown,Modal,Icon,Message } from 'semantic-ui-react'
 import "../Login/Login.css"
 import { useNavigate} from "react-router-dom";
+import axios from 'axios';
 
-const Signup =  ({form :{form, handleChange,saveAndContinue,formError,countryOptions,open,errMessage,message,modOpen,
+
+const Signup =  ({form :{form, handleChange,saveAndContinue,formError,countryOptions,typeOptions, open,errMessage,message,modOpen,
   setreset,fetchData,setCurrent,setModopen}}) => {
 
-  setCurrent('user');
+  setCurrent('donor');
   
 const [passwordType, setPasswordType] = useState("password");
 const [confirm,setConfirm] = useState("password");
 const [icon,setIcon] = useState("eye");
 const [confirmicon,setConfirmIcon] = useState("eye");
 
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+  });
+
 
   const handleopen = () =>{
     setModopen(false);
     console.log(" user completed"); 
-    navigate("/people/login");
+    navigate("/login/login");
     setreset();
   }
 
@@ -25,16 +32,17 @@ const [confirmicon,setConfirmIcon] = useState("eye");
   useEffect(()=>{
     if(open){
       let data = {
-        email: form.email,
+        username: form.username,
         password: form.password,
         phoneNo: form.phoneNo,
-        state: form.state,
-        userType: "Individual",
+        district: form.district,
+        type: form.type,
         name: form.name,
         lastName: form.lastName,
-        date: form.date,
+        date_of_birth: form.date_of_birth,
+        status: "donor"
       }
-      fetchData('http://localhost:3000/signup',data,"signup","POST");
+      fetchData('http://localhost:9013/signup',data,"signup","POST");
     }
 
   },[open]);
@@ -58,11 +66,12 @@ else
 const navigate = useNavigate();
 
 
+
   return (
     <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
     <Grid.Column style={{ maxWidth: 450 }}>
     <Header textAlign='center'>
-      <h1>Enter User Details</h1>
+      <h1>Enter Donor Details</h1>
     </Header>
     {modOpen && 
       <Modal open={modOpen}>
@@ -87,48 +96,63 @@ const navigate = useNavigate();
     <Form onSubmit={saveAndContinue} >
       <Segment>
         <Form.Input
-            label='First Name'
+            label='Name'
             name="name"
-            placeholder='First Name'
+            placeholder='Name'
             value={form.name||""}
             onChange={handleChange}
             error={(formError.nameError? true: false)?{content: formError.nameError} : false}
           />
 
-        <Form.Input
-            label='Last Name'
-            name="lastName"
-            value={form.lastName||""}
-            placeholder='Last Name'
-            onChange={handleChange}
-            error={(formError.lastNameError? true: false)?{content: formError.lastNameError} : false}
-          />
+        {/*<Form.Input*/}
+        {/*    label='Last Name'*/}
+        {/*    name="lastName"*/}
+        {/*    value={form.lastName||""}*/}
+        {/*    placeholder='Last Name'*/}
+        {/*    onChange={handleChange}*/}
+        {/*    error={(formError.lastNameError? true: false)?{content: formError.lastNameError} : false}*/}
+        {/*  />*/}
 
         <Form.Input
             fluid
-            label='Date of Birth'
-            name="date"
-            value={form.date||""}
+            label='Date of Birth/Organization Start Date'
+            name="date_of_birth"
+            value={form.date_of_birth||""}
             icon="calendar"
             iconPosition="left"
             type='date'
-            placeholder='Date of Birth'
+            placeholder='Date of Birth/Organization Start Date'
             onChange={handleChange}
             error= {(formError.dateError? true: false)?{content: formError.dateError} : false}
           />
           <Dropdown
             fluid
-            label='State'
-            name="state"
-            value={form.state||""}
+            label='District'
+            name="district"
+            value={form.district||""}
             type="dropdown"
-            placeholder='Select State'
+            placeholder='Select District'
             onChange={handleChange}
             error={(formError.stateError? true: false)?{content: formError.stateError} : false}
             search
             selection
             options={countryOptions}
           />
+
+        <Dropdown
+            style = {{marginTop: "15px"}}
+            fluid
+            label='Type'
+            name="type"
+            value={form.type||""}
+            type="dropdown"
+            placeholder='Select Type'
+            onChange={handleChange}
+            error={(formError.typeError? true: false)?{content: formError.stateError} : false}
+            search
+            selection
+            options={typeOptions}
+        />
 
           <Form.Input
             fluid
@@ -145,10 +169,10 @@ const navigate = useNavigate();
 
         <Form.Input
             fluid
-            label='Email'
+            label='Email (Username)'
             icon="user"
-            name="email"
-            value={form.email||""}
+            name="username"
+            value={form.username||""}
             iconPosition="left"
             type='email'
             placeholder='Email Address'
@@ -221,4 +245,4 @@ export default Signup;
 //     setCount(0);
     
 //   }
-// },[count]);
+// },[count]); x

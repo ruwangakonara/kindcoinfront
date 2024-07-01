@@ -1,18 +1,38 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import { Grid, Menu, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import './Sidebar.css';
+import axios from 'axios';
+import { UserContext } from '../../Home/UserConext/UserContext'; // Adjust the import path if necessary
 
 export default function Sidebar3() {
     const [activeItem, setActiveItem] = useState('Open Requests');
     const [visible, setVisible] = useState(false);
     const [icon, setIcon] = useState('angle right');
+    const { setUser } = useContext(UserContext);
+    const navigate = useNavigate();
+
+    const axiosInstance = axios.create({
+        baseURL: 'http://localhost:9013',
+        withCredentials: true,
+    });
 
     const handleItemClick = (e, { name }) => setActiveItem(name);
     const handleIconClick = () => {
         setVisible(!visible);
         setIcon(icon === 'angle right' ? 'angle left' : 'angle right');
     }
+
+    const handleLogout = async () => {
+        try {
+            await axiosInstance.get('/signout');
+            setUser(null);
+            localStorage.removeItem('user');
+            navigate('/');
+        } catch (error) {
+            console.error('Error logging out:', error);
+        }
+    };
 
     return (
         <Grid style={{ height: "100vh", top: "70px" }}>
@@ -57,9 +77,7 @@ export default function Sidebar3() {
                     <Menu.Item
                         name='Logout'
                         active={activeItem === 'Logout'}
-                        onClick={handleItemClick}
-                        as={Link}
-                        to="/logout"
+                        onClick={handleLogout}
                         className="logout"
                     >
                         <Icon name='sign-out' />
