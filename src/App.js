@@ -117,6 +117,16 @@ import DonorLeaderboards from "./Pages/Donor/leaderboard/leaderboards";
 import DonorOtherLeaderboardPage from "./Pages/Donor/leaderboard/leaderboard";
 import MyLeaderboardPage from "./Pages/Donor/leaderboard/myleaderboard";
 
+import AdminDashBoard from './Pages/Admin/home/AdminDashBoard';
+import AdminDonorList from './Pages/Admin/DonorListView/AdminDonorList';
+import AdminDonor from "./Components/Admin/DonorDetails/AdminDonor";
+import AdminBeneficiaryList from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryList";
+import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiary";
+import OverallStatistics from './Pages/Admin/Statistics/OverallStatistics';
+import RegisterCrewMemberPage from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPage';
+// import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
+import ViewCrewMemberTransactionList from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionList';
+import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
 
 function App() {
 
@@ -197,10 +207,24 @@ function App() {
                 <Route path = "/beneficiary/update-account" element={<BeneficiaryUpdateAccount/>}/>
 
                 {/* Crew Member Routes */}
-                {/* <Route path="/crew-member/home" element={<CrewMemberHome/>}/> */}
+                {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}
+
+
+
 
                 {/* Admin Routes */}
-                {/* <Route path="/admin/home" element={<AdminHome/>}/> */}
+                <Route path="/admin/home" element={<AdminDashBoard/>}/>
+                <Route path="/admin/Donor_List/Donors" element={<AdminDonorList/>}/>
+                <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>
+                <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryList/>}/>
+                <Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>
+                <Route path='/admin/overall_stats' element={<OverallStatistics/>}/>
+                <Route path="/admin/register/crew_member" element={<RegisterCrewMemberPage/>}/>
+                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+                <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionList/>}/>
+                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+                <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
             </Routes>
         // </UserProvider>
 
