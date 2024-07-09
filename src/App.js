@@ -196,6 +196,12 @@ function App() {
 
                 <Route path = "/beneficiary/account" element={<BeneficiaryOwnAccount/>}/>
                 <Route path = "/beneficiary/update-account" element={<BeneficiaryUpdateAccount/>}/>
+
+                {/* Crew Member Routes */}
+                {/* <Route path="/crew-member/home" element={<CrewMemberHome/>}/> */}
+
+                {/* Admin Routes */}
+                {/* <Route path="/admin/home" element={<AdminHome/>}/> */}
             </Routes>
         // </UserProvider>
 
