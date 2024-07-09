@@ -20,6 +20,7 @@ import {useState,useEffect} from 'react';
       const saveAndContinue = (e) => {
         e.preventDefault();
         setIsSubmitting(true);
+        console.log(current)
         setFormError(validate(form,current));
       }
 
@@ -34,21 +35,22 @@ import {useState,useEffect} from 'react';
         ...dt
       })
     });
-    const data = await response.json();
-    console.log(data);
-    if(data.msg.includes("Sucess")){
+    // const data = await response.json();
+    // console.log(data);
+    // if(data.msg.includes("Sucess")){
+      if(response.status === 200){
       setModopen(true);
 
-      if(type==="Login"){
-        localStorage.setItem("token",data.token);
-      }
+      // if(type==="Login"){
+      //   localStorage.setItem("token",data.token);
+      // }
       
       setErrMessage(false);
       setMessage("");
     }else{
       setOpen(false);
       setErrMessage(true);
-      setMessage(data.msg);
+      // setMessage(data.msg);
     }
   }
      
@@ -63,42 +65,38 @@ import {useState,useEffect} from 'react';
             }, [formError,isSubmitting]);
 
       const countryOptions = [
-        { key: 'a', value: 'Andaman and Nicobar Islands', text: 'Andaman and Nicobar Islands' },
-        { key: 'b', value: 'Andhra Pradesh', text: 'Andhra Pradesh' },
-        { key: 'c', value: 'Arunachal Pradesh', text: 'Arunachal Pradesh' },
-        { key: 'd', value: 'Assam', text: 'Assam' },
-        { key: 'e', value: 'Bihar', text: 'Bihar' },
-        { key: 'f', value: 'Chandigarh', text: 'Chandigarh' },
-        { key: 'g', value: 'Chhattisgarh', text: 'Chhattisgarh' },
-        { key: 'h', value: 'Dadra & Nagar Haveli', text: 'Dadra & Nagar Haveli' },
-        { key: 'i', value: 'Delhi', text: 'Delhi' },
-        { key: 'j', value: 'Goa', text: 'Goa' },
-        { key: 'k', value: 'Gujrat', text: 'Gujrat' },
-        { key: 'l', value: 'Haryana', text: 'Haryana' },
-        { key: 'm', value: 'Himachal Pradesh', text: 'Himachal Pradesh' },
-        { key: 'n', value: 'Jammu and Kashmir', text: 'Jammu and Kashmir' },
-        { key: 'o', value: 'Jammu and Kashmir', text: 'Jharkhand' },
-        { key: 'p', value: 'Karnataka', text: 'Karnataka' },
-        { key: 'q', value: 'Kerala', text: 'Kerala' },
-        { key: 'r', value: 'Lakshadweep', text: 'Lakshadweep' },
-        { key: 's', value: 'Madhya Pradesh', text: 'Madhya Pradesh' },
-        { key: 't', value: 'Maharashtra', text: 'Maharashtra' },
-        { key: 'u', value: 'Manipur', text: 'Manipur' },
-        { key: 'v', value: 'Meghalaya', text: 'Meghalaya' },
-        { key: 'w', value: 'Mizoram', text: 'Mizoram' },
-        { key: 'x', value: 'Nagaland', text: 'Nagaland' },
-        { key: 'y', value: 'Odisha', text: 'Odisha' },
-        { key: 'z', value: 'Punjab', text: 'Punjab' },
-        { key: 'aa', value: 'Puducherry', text: 'Puducherry' },
-        { key: 'ab', value: 'Sikkim', text: 'Sikkim' },
-        { key: 'ac', value: 'Tamil Nadu', text: 'Tamil Nadu' },
-        { key: 'ad', value: 'Telangana', text: 'Telangana' },
-        { key: 'ae', value: 'Tripura', text: 'Tripura' },
-        { key: 'af', value: 'Uttar Pradesh', text: 'Uttar Pradesh' },
-        { key: 'ag', value: 'Uttarakhand', text: 'Uttarakhand' },
-        { key: 'ah', value: 'West Bengal', text: 'West Bengal' },
+        { key: 'a', value: 'Colombo', text: 'Colombo' },
+        { key: 'b', value: 'Kandy', text: 'Kandy' },
+        { key: 'c', value: 'Gampaha', text: 'Gampaha' },
+        { key: 'd', value: 'Matale', text: 'Matale' },
+        { key: 'e', value: 'Kalutara', text: 'Kalutara' },
+        { key: 'f', value: 'Nuwara Eliya', text: 'Nuware Eliya' },
+        { key: 'g', value: 'Kurunegala', text: 'Kurunegala' },
+        { key: 'h', value: 'Monaragala', text: 'Monaragalai' },
+        { key: 'i', value: 'Badulla', text: 'Badulla' },
+        { key: 'j', value: 'Puttalama', text: 'Puttalama' },
+        { key: 'k', value: 'Polonnaruwa', text: 'Polonnaruwa' },
+        { key: 'l', value: 'Anuradhapura', text: 'Anuradhapura' },
+        { key: 'm', value: 'Ampara', text: 'Ampara' },
+        { key: 'n', value: 'Batticaloa', text: 'Batticaloa' },
+        { key: 'o', value: 'Vavuniya', text: 'Vavuniya' },
+        { key: 'p', value: 'Kilinochchi', text: 'Kilinochchi' },
+        { key: 'q', value: 'Mullativu', text: 'Mullativu' },
+        { key: 'r', value: 'Mannar', text: 'Mannar' },
+        { key: 's', value: 'Jaffna', text: 'jaffna' },
+        { key: 't', value: 'Galle', text: 'Galle' },
+        { key: 'u', value: 'Matara', text: 'Matara' },
+        { key: 'v', value: 'Hambantota', text: 'Hambantota' },
+        { key: 'w', value: 'Ratnapura', text: 'Ratnapura' },
+        { key: 'x', value: 'Kegalle', text: 'Kegalle' },
+        { key: 'y', value: 'Trincomalee', text: 'Trincomalee' }
       ]
 
+      const typeOptions = [
+        {key: 'a', value: 'organization', text: 'Organization' },
+        {key: 'b', value: 'individual', text: 'Individual' },
+
+      ]
       const setreset = () =>{
         setForm({});
         setFormError({});
@@ -108,41 +106,40 @@ import {useState,useEffect} from 'react';
 
 
       return {form, handleChange,saveAndContinue,formError,errMessage,message,forgot,setForgot,
-        countryOptions,open,setOpen,setForm,setIsSubmitting,setreset,setCurrent,setModopen,modOpen,fetchData};
+        countryOptions, typeOptions, open,setOpen,setForm,setIsSubmitting,setreset,setCurrent,setModopen,modOpen,fetchData};
 
   }
   
   const  validate = (val,type) =>{
     const errors = {};
    
-    if(type === 'user')
+    if(type === 'donor' || type === "beneficiary")
     {
-      if (!val.lastName || val.lastName.length < 3) 
+      if (!val.name || val.name.length < 3)
       {
-        if(!val.lastName)
-        errors.lastNameError = ' First Name Required';
+        if(!val.name)
+        errors.nameError = 'Name Required';
         else
-        errors.lastNameError = ' First Name must be at least 3 characters';
+        errors.nameError = 'Name must be at least 3 characters';
       }
     }
     
-    if(type === 'user' || type === 'org')
+    if(type === 'donor' || type === 'beneficiary')
     {
 
-      if(!val.name || val.name.length < 4)
-      {
-        if(!val.name)
-        errors.nameError = ' Name Required';
-        else
-        errors.nameError = ' Name must be at least 4 characters';
 
-      }
-      
-      if (!val.state ) {
-        if(!val.state)
-        errors.stateError = ' State Required';
+      if (!val.district ) {
+        if(!val.district)
+        errors.stateError = ' District Required';
         else
-        errors.stateError = ' State not found';
+        errors.stateError = ' District not found';
+      }
+
+      if (!val.type ) {
+        if(!val.type)
+          errors.typeError = ' Type Required';
+        else
+          errors.typeError = ' Type not found';
       }
 
       if(!val.phoneNo || val.phoneNo.length < 10){
@@ -152,14 +149,14 @@ import {useState,useEffect} from 'react';
         errors.phoneNoError = ' Phone No. must be at least 10 characters';
       }
 
-      if(!val.date)
+      if(!val.date_of_birth)
       {
         errors.dateError = ' Date Required';
       }
 
     }
 
-    if(type === 'org' || type === 'user' || type === "forgot")
+    if(type === 'donor' || type === 'beneficiary' || type === "forgot")
     {
       if (!val?.confirmPassword || val?.confirmPassword !== val.password || val.confirmPassword.length < 8) {
         if(!val?.confirmPassword)
@@ -178,23 +175,23 @@ import {useState,useEffect} from 'react';
 
     }
         
-    if (!val.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val?.email)) {
-      if(!val.email)
+    if (!val.username || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val?.username)) {
+      if(!val.username)
       errors.emailError = ' Email Required';
       else
       errors.emailError = 'Invalid Email';
     }
 
-    if(type === 'login')
-    {
-      if (!val.password || val.password.length < 8) {
-        if(!val?.password)
-        errors.passwordError = ' Password Required';
-        else
-        errors.passwordError = ' Password must be at least 8 characters';
-      }
-
-    }
+    // if(type === 'login')
+    // {
+    //   if (!val.password || val.password.length < 8) {
+    //     if(!val?.password)
+    //     errors.passwordError = ' Password Required';
+    //     else
+    //     errors.passwordError = ' Password must be at least 8 characters';
+    //   }
+    //
+    // }
 
     if(type === 'forgot'){
       if(!val.OTP)
