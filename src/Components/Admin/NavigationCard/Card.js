@@ -1,14 +1,14 @@
-import "./Card.css"
-import { Link } from "react-router-dom"
+import React from 'react';
+import './Card.css';
 
-export default function Card(props) {
-    return (
-        <div className="card">
-            <div className="card-body">
-                <h5 className="card-title">{props.title}</h5>
-                <p className="card-text">{props.text}</p>
-                <Link to={props.link} className="btn btn-primary">Go somewhere</Link>
-            </div>
-        </div>
-    )
-}
+const Card = ({ title }) => {
+  return (
+    <div className="card">
+      <div className="card-title">{title}</div>
+      <div className="card-content">Some text</div>
+      <button className="card-button">Button</button>
+    </div>
+  );
+};
+
+export default Card;

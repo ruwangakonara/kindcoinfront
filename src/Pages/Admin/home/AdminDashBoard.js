@@ -1,16 +1,42 @@
-// import React from "react";
-import NavBar_Admin from "../../../Components/Admin/Navbar/NavBar_Admin";
-import Sidebar_Admin from "../../../Components/Admin/Sidebar/Sidebar_Admin";
+import { useState } from "react";
+import Header from "../../../Components/Admin/Header/Header";
+import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin";
 import Card from "../../../Components/Admin/NavigationCard/Card"
 import "./AdminDashBoard.css"
 
 const AdminDashBoard = () => {
+    const [sidebarVisible, setSidebarVisible] = useState(false);
+
+    const toggleSidebar = () => {
+        setSidebarVisible(!sidebarVisible);
+    };
+
+
     return ( 
-        <div>
-            <NavBar_Admin/>
-            <h1>AdminDashBoard</h1>
+        <>
+            <button className="toggle-button" onClick={toggleSidebar}>
+                <span className="toggle-icon">☰</span>
+            </button>
+            <SidebarAdmin visible={sidebarVisible} />
+            <div className={`main-content ${sidebarVisible ? 'shifted' : ''}`}>
+            <Header />
+            {/* <Switch>
+                <Route path="/" exact component={Dashboard} />
+            </Switch> */}
+            </div>
+            <Header/>
+            {/* <h1>AdminDashBoard</h1> */}
+            {/* <SidebarAdmin/> */}
             {/* <Card/> */}
-        </div>
+
+            <div className="dashboard">
+                <Card title="Donor" />
+                <Card title="Donee" />
+                <Card title="Statistics" />
+                <Card title="Register" />
+                <Card title="Complaints" />
+            </div>
+        </>
      );
 }
  
