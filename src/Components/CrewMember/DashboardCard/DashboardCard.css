@@ -1,0 +1,28 @@
+.dashboard-card {
+    border: 1px solid #bdc3c7;
+    padding: 20px;
+    margin: 10px;
+    text-align: center;
+    width: 200px;
+  }
+  
+  .dashboard-card h3 {
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-card p {
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-card button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #2980b9;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .dashboard-card button:hover {
+    background-color: #3498db;
+  }
+  

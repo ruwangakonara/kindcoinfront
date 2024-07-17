@@ -1,0 +1,21 @@
+.crew-member-dashboard {
+    display: flex;
+  }
+  
+  .dashboard-content {
+    margin-left: 200px;
+    padding: 20px;
+    width: 100%;
+  }
+  
+  .dashboard-content h1 {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    justify-items: center;
+  }
