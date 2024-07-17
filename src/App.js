@@ -128,6 +128,8 @@ import RegisterCrewMemberPage from './Pages/Admin/RegisterCrewMember/RegisterCre
 import ViewCrewMemberTransactionList from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionList';
 import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
 
+import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
+
 function App() {
 
     return (
@@ -225,6 +227,10 @@ function App() {
                 <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionList/>}/>
                 {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
                 <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
+
+                {/* Crew Member Routes */}
+                <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
+
             </Routes>
         // </UserProvider>
 
