@@ -19,7 +19,6 @@ const AdminDashBoard = () => {
             </button>
             <SidebarAdmin visible={sidebarVisible} />
             <div className={`main-content ${sidebarVisible ? 'shifted' : ''}`}>
-            <Header />
             {/* <Switch>
                 <Route path="/" exact component={Dashboard} />
             </Switch> */}
