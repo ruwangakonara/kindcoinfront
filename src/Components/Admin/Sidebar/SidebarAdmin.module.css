@@ -26,18 +26,29 @@
 
 .litags{
     font-size: 30px;
-}
+    /* padding: 10px;
+    list-style: none; */
+  }
 
-ul{
+  /* .litags:active {
+    background-color: lightgray;
+    color: black;
+  } */
+
+  ul{
     display: flex;
     flex-direction: column;
     gap: 70px;
     align-items: center;
     justify-content: center;
-}
-
-h3{
+  }
+  
+  h3{
     align-items: center;
     justify-content: center;
     width: 100%;
-}
+  }
+
+  /* .textVal:hover{
+    color: black;
+  } */
