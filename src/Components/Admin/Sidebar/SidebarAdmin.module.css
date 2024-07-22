@@ -5,39 +5,39 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    position:absolute;  
+    position:absolute;
     /* top: 0; */
     left: 0;
     /* left: -200px; */
     transition: left 0.3s ease-in-out;
     padding: 1rem;
     box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  }
-  
-  .sidebarItem {
+}
+
+.sidebarItem {
     /* margin: 15px 0; */
     color: white;
     background-color: rgb(107, 47, 171);
-  }
+}
 
-  .sidebar.visible {
+.sidebar.visible {
     visibility:visible;
-  }
+}
 
-  .litags{
+.litags{
     font-size: 30px;
-  }
+}
 
-  ul{
+ul{
     display: flex;
     flex-direction: column;
     gap: 70px;
     align-items: center;
     justify-content: center;
-  }
-  
-  h3{
+}
+
+h3{
     align-items: center;
     justify-content: center;
     width: 100%;
-  }
+}
