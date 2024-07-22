@@ -1,15 +1,15 @@
-// import classes from "./AdminBeneficiaryList.module.css";
+// import classes from "./Settings.module.css"
+
 import Header from "../../../Components/Admin/Header/Header";
 import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin";
 
-const AdminBeneficiaryList = () => {
+const Settings = () => {
     return (
         <div>
-            <Header />
+            <Header/>
             <SidebarAdmin/>
-            {/* <h1>Admin Beneficiary List</h1> */}
         </div>
     );
 }
-
-export default AdminBeneficiaryList
+ 
+export default Settings;

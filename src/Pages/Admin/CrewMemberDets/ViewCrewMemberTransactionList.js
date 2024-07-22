@@ -1,9 +1,16 @@
-import "./ViewCrewMemberTransactionList.css"
+// import classes from "./ViewCrewMemberTransactionList.module.css"
 
-export default function TransactionList() {
+import Header from "../../../Components/Admin/Header/Header"
+import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin"
+
+const TransactionList = () => {
     return (
-        <div className="TransactionList">
-            Transaction List
+        <div>
+            {/* Transaction List */}
+            <Header/>
+            <SidebarAdmin/>
         </div>
     )
 }
+
+export default TransactionList

@@ -1,9 +1,16 @@
-import "./RegisterCrewMember.css"
+// import classes from "./RegisterCrewMember.module.css"
 
-export default function RegisterCrewMemberPage() {
+import Header from "../../../Components/Admin/Header/Header"
+import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin"
+
+const RegisterCrewMemberPage = () => {
     return (
         <div>
-            <h1>Register Crew Member</h1>
+            {/* <h1>Register Crew Member</h1> */}
+            <Header/>
+            <SidebarAdmin/>
         </div>
     )
 }
+
+export default RegisterCrewMemberPage
