@@ -1,4 +1,4 @@
-import "./AdminDonor.css";
+import classes from "./AdminDonor.module.css";
 
 const AdminDonor = () => {
     return (
