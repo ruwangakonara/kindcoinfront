@@ -1,54 +1,98 @@
-import React, { useState } from 'react';
-import {Container, Form, Button, Image, Header} from 'semantic-ui-react';
+import React, { useContext, useState } from 'react';
+import { Container, Form, Button, Image, Header, Icon } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './updateAccount.css';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
+import { UserContext } from '../../Components/Home/UserConext/UserContext';
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
 const UpdateAccount = () => {
-    const history = useNavigate();
-    const [formData, setFormData] = useState({
-        name: 'John Doe',
-        address: '123 Charity Lane, Kindness City, CA',
-        description: 'Generous donor helping various causes.',
-        email: 'john.doe@example.com',
-        commonDonationItems: ['Clothes', 'Books', 'Toys', 'Food'],
-        donatedAmount: '$2000',
-        tokens: 150,
-        profilePicture: 'https://via.placeholder.com/150'
-    });
+    const { user, userDetails } = useContext(UserContext);
+    const donor = userDetails;
+    const navigate = useNavigate();
+
+    const initialFormData = {
+        name: donor.name,
+        address: donor.address || '', // Handle null values gracefully
+        description: donor.description || '', // Handle null values gracefully
+        username: donor.username,
+        usual_donations: donor.usual_donations || [],
+        profile_image: donor.profile_image || '',
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [selectedFile, setSelectedFile] = useState(null);
 
     const handleChange = (e, { name, value }) => {
         setFormData({ ...formData, [name]: value });
-    }
+    };
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            setFormData({ ...formData, profilePicture: reader.result });
-        };
-        if (file) {
-            reader.readAsDataURL(file);
-        }
-    }
+        setSelectedFile(file);
+        setFormData({ ...formData, profile_image: URL.createObjectURL(file) });
+    };
 
-    const handleSubmit = () => {
-        // Handle form submission
-        console.log('Form submitted:', formData);
-        history('/donor/account');
-    }
+    const handleAddDonation = () => {
+        const updatedDonations = [...formData.usual_donations, ''];
+        setFormData({ ...formData, usual_donations: updatedDonations });
+    };
+
+    const handleRemoveDonation = (index) => {
+        const updatedDonations = [...formData.usual_donations];
+        updatedDonations.splice(index, 1);
+        setFormData({ ...formData, usual_donations: updatedDonations });
+    };
+
+    const handleDonationChange = (index, value) => {
+        const updatedDonations = [...formData.usual_donations];
+        updatedDonations[index] = value;
+        setFormData({ ...formData, usual_donations: updatedDonations });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const data = new FormData();
+        if (selectedFile) {
+            data.append('profileImage', selectedFile);
+        }
+        data.append('user_id', user.id);
+        data.append('donor_id', donor._id);
+
+        Object.keys(formData).forEach(key => {
+            if (key !== 'profile_image') {
+                data.append(key, formData[key]);
+            }
+        });
+
+        try {
+            await axiosInstance.put('/donor/update_account', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+            navigate('/donor/account');
+        } catch (error) {
+            console.error('Error updating the account:', error);
+        }
+    };
 
     return (
         <div>
-            <Navbar2/>
-
+            <Navbar2 />
             <Container className="update-form-container">
                 <Header as="h1">Update Account</Header>
-
                 <Form onSubmit={handleSubmit}>
                     <Form.Field>
                         <label>Profile Picture</label>
-                        <Image src={formData.profilePicture} circular size='small' />
+                        {formData.profile_image && (
+                            <Image src={formData.profile_image} circular size='small' />
+                        )}
                         <input type="file" accept="image/*" onChange={handleFileChange} />
                     </Form.Field>
                     <Form.Input
@@ -69,24 +113,32 @@ const UpdateAccount = () => {
                         value={formData.description}
                         onChange={handleChange}
                     />
-                    <Form.Input
-                        label="Email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                    />
-                    <Form.Input
-                        label="Common Donation Items"
-                        name="commonDonationItems"
-                        value={formData.commonDonationItems.join(', ')}
-                        onChange={(e, { value }) => setFormData({ ...formData, commonDonationItems: value.split(', ') })}
-                    />
+                    <Button type="button" onClick={handleAddDonation}>
+                        Add Donation Item
+                    </Button>
+                    {formData.usual_donations.map((donation, index) => (
+                        <Form.Group key={index}>
+                            <Form.Input
+                                width={12}
+                                placeholder={`Donation Item ${index + 1}`}
+                                value={donation}
+                                onChange={(e, { value }) => handleDonationChange(index, value)}
+                            />
+                            <Button
+                                type="button"
+                                icon
+                                color='red'
+                                onClick={() => handleRemoveDonation(index)}
+                            >
+                                <Icon name='trash' />
+                            </Button>
+                        </Form.Group>
+                    ))}
                     <Button primary type="submit">Save</Button>
                 </Form>
             </Container>
         </div>
-
     );
-}
+};
 
 export default UpdateAccount;

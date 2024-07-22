@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
-import Sidebar2 from "../../Components/Donor/Sidebar/Sidebar2";
-import Donation from '../../Components/Donor/Donation/Donation';
-import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
-import Beneficiary from "../../Components/Donor/Beneficiary/Beneficiary";
-import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
+import Navbar2 from "../../../Components/Donor/NavBar/NavBar2";
+import Sidebar2 from "../../../Components/Donor/Sidebar/Sidebar2";
+import Donation from '../../../Components/Donor/Donation/Donation';
+import Sidebar from "../../../Components/Donor/Sidebar/Sidebar";
+import Beneficiary from "../../../Components/Donor/Beneficiary/Beneficiary";
+import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 
 const donations = [
     {
@@ -16,7 +16,8 @@ const donations = [
         verified: true,
         recipientName: 'Charity Org',
         requestTitle: "fsdfsdf",
-        donationTitle: "adfsdfsdf"
+        donationTitle: "adfsdfsdf",
+        id: "afafa"
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -26,7 +27,8 @@ const donations = [
         verified: false,
         recipientName: 'John Doe',
         requestTitle: "fsdfsdf",
-        donationTitle: "adfsdfsdf"
+        donationTitle: "adfsdfsdf",
+        id: "afafa"
     },
 ];
 
@@ -49,6 +51,7 @@ const DonationList = () => (
                             recipientName={donation.recipientName}
                             requestTitle={donation.requestTitle}
                             donationTitle={donation.donationTitle}
+                            id = {donation.id}
 
                         />
                     </Grid.Column>

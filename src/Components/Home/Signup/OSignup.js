@@ -8,7 +8,7 @@ import axios from 'axios';
 const Signup =  ({form :{form, handleChange,saveAndContinue,formError,countryOptions,typeOptions, open,errMessage,message,modOpen,
   setreset,fetchData,setCurrent,setModopen}}) => {
 
-  setCurrent('donor');
+  setCurrent('beneficiary');
 
   const [passwordType, setPasswordType] = useState("password");
   const [confirm,setConfirm] = useState("password");

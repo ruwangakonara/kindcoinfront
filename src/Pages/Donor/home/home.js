@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
-import { Container, Grid, Header, Segment, Image } from 'semantic-ui-react';
+import { Container, Grid, Card, CardContent, Typography, Avatar, Box } from '@mui/material';
+import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
-import './Dashboard.css'; // Importing CSS file for styling
-import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
-import Donatenow from "../../../Components/Donor/Donatenow/Donatenow"; // Importing icons from React Icons library
-import { UserContext } from '../../../Components/Home/UserConext/UserContext'; // Adjust the import path if necessary
+import Donatenow from '../../../Components/Donor/Donatenow/Donatenow';
+import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBanner'; // Import the banner component
+import './Dashboard.css';
 
 const Dashboard = () => {
-    const { user } = useContext(UserContext); // Access user from context
+    const { user } = useContext(UserContext);
 
-    // Dummy data for the dashboard
     const dashboardData = {
         listings: 10,
         completedDonations: 5,
@@ -50,85 +50,106 @@ const Dashboard = () => {
         ]
     };
 
-    console.log('User Context:', user); // Log the user context to verify
+    console.log('User Context:', user);
 
     return (
-        <div>
-            <Navbar2 />
-            <Grid>
-                <Grid.Column width={2}>
-                    <Sidebar />
-                </Grid.Column>
-                <Grid.Column width={13}>
-                    <Container className="dashboard-container">
-                        <Header as="h1" className="dashboard-header">Dashboard</Header>
-
-                        {/* Dashboard Cards */}
-                        <Segment.Group horizontal className="dashboard-cards">
-                            <Segment className="dashboard-card">
-                                <AiOutlineFundProjectionScreen size={40} color="#FF6347" />
-                                <Header as='h3'>Number of Listings</Header>
-                                <Header as='h2'>{dashboardData.listings}</Header>
-                            </Segment>
-                            <Segment className="dashboard-card">
-                                <AiOutlineCheckCircle size={40} color="#FFA500" />
-                                <Header as='h3'>Number of Completed Donations</Header>
-                                <Header as='h2'>{dashboardData.completedDonations}</Header>
-                            </Segment>
-                            <Segment className="dashboard-card">
-                                <AiOutlineDollarCircle size={40} color="#1E90FF" />
-                                <Header as='h3'>Amount Donated</Header>
-                                <Header as='h2'>${dashboardData.amountDonated}</Header>
-                            </Segment>
-                            <Segment className="dashboard-card">
-                                <AiOutlineTrophy size={40} color="#FF1493" />
-                                <Header as='h3'>Amount of Tokens Received</Header>
-                                <Header as='h2'>{dashboardData.tokensReceived} Tokens</Header>
-                            </Segment>
-                        </Segment.Group>
-
-                        {/* Recently Posted Requests */}
-                        <Segment.Group className="recent-requests">
-                            <Header style={{ marginTop: "15px", color: "#2185d0" }} as='h2'>Recently Posted Requests</Header>
-                            {dashboardData.recentRequests.map(request => (
-                                <Segment key={request.id} className="request-item">
-                                    <Grid columns={2}>
-                                        <Grid.Column width={3}>
-                                            <Image src={request.donorProfilePic} circular className="request-profile-pic" />
-                                        </Grid.Column>
-                                        <Grid.Column width={13}>
-                                            <Header as='h3'>{request.requestTitle}</Header>
-                                            <p>{request.requestDescription}</p>
-                                            <p>Posted by: {request.donorName}</p>
-                                        </Grid.Column>
+        <Box sx={{ display: 'flex' }}>
+            <Sidebar />
+            <Box sx={{ flexGrow: 1, p: 2 }}>
+                <Navbar2 />
+                <Container sx={{ mt: 4 }}>
+                    <Typography variant="h4" align="center" gutterBottom>Dashboard</Typography>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Card className="dashboard-card">
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <AiOutlineFundProjectionScreen size={40} color="#FF6347" />
+                                    <Typography variant="h6">Number of Listings</Typography>
+                                    <Typography variant="h4">{dashboardData.listings}</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Card className="dashboard-card">
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <AiOutlineCheckCircle size={40} color="#FFA500" />
+                                    <Typography variant="h6">Completed Donations</Typography>
+                                    <Typography variant="h4">{dashboardData.completedDonations}</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Card className="dashboard-card">
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <AiOutlineDollarCircle size={40} color="#1E90FF" />
+                                    <Typography variant="h6">Amount Donated</Typography>
+                                    <Typography variant="h4">${dashboardData.amountDonated}</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Card className="dashboard-card">
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <AiOutlineTrophy size={40} color="#FF1493" />
+                                    <Typography variant="h6">Tokens Received</Typography>
+                                    <Typography variant="h4">{dashboardData.tokensReceived}</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} md={9}>
+                            <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="primary">Recently Posted Requests</Typography>
+                            <Grid container spacing={3}>
+                                {dashboardData.recentRequests.map(request => (
+                                    <Grid item xs={12} key={request.id}>
+                                        <Card className="request-item">
+                                            <CardContent>
+                                                <Grid container spacing={2}>
+                                                    <Grid item>
+                                                        <Avatar src={request.donorProfilePic} alt={request.donorName} sx={{ width: 56, height: 56 }} />
+                                                    </Grid>
+                                                    <Grid item xs>
+                                                        <Typography variant="h6">{request.requestTitle}</Typography>
+                                                        <Typography>{request.requestDescription}</Typography>
+                                                        <Typography variant="caption">Posted by: {request.donorName}</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card>
                                     </Grid>
-                                </Segment>
-                            ))}
-                        </Segment.Group>
-
-                        {/* Top Donors Leaderboard */}
-                        <Segment.Group className="top-donors">
-                            <Header style={{ marginTop: "15px", color: "#db2828" }} as='h2'>Leaderboard - Top Donors</Header>
-                            {dashboardData.topDonors.map(donor => (
-                                <Segment key={donor.id} className="donor-item">
-                                    <Grid columns={2}>
-                                        <Grid.Column width={3}>
-                                            <Image src={donor.donorProfilePic} circular className="donor-profile-pic" />
-                                        </Grid.Column>
-                                        <Grid.Column width={13}>
-                                            <Header as='h3'>{donor.donorName}</Header>
-                                            <p>${donor.amountDonated} Donated</p>
-                                            <p>{donor.tokensReceived} Tokens Received</p>
-                                        </Grid.Column>
+                                ))}
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} md={3}>
+                            <RotatingBanner />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="secondary">Top Donors</Typography>
+                            <Grid container spacing={3}>
+                                {dashboardData.topDonors.map(donor => (
+                                    <Grid item xs={12} key={donor.id}>
+                                        <Card className="donor-item">
+                                            <CardContent>
+                                                <Grid container spacing={2}>
+                                                    <Grid item>
+                                                        <Avatar src={donor.donorProfilePic} alt={donor.donorName} sx={{ width: 56, height: 56 }} />
+                                                    </Grid>
+                                                    <Grid item xs>
+                                                        <Typography variant="h6">{donor.donorName}</Typography>
+                                                        <Typography>${donor.amountDonated} Donated</Typography>
+                                                        <Typography variant="caption">{donor.tokensReceived} Tokens Received</Typography>
+                                                    </Grid>
+                                                </Grid>
+                                            </CardContent>
+                                        </Card>
                                     </Grid>
-                                </Segment>
-                            ))}
-                        </Segment.Group>
-                    </Container>
-                </Grid.Column>
-            </Grid>
-            <Donatenow/>
-        </div>
+                                ))}
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </Container>
+                <Donatenow />
+            </Box>
+        </Box>
     );
 };
 

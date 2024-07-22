@@ -32,3 +32,15 @@
 .edit-donation-modal {
     padding: 20px !important;
 }
+
+.image-modal .content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: none !important;
+}
+.image-modal .content > .image {
+    max-width: 100% !important;
+    max-height: 80vh !important;
+}
+

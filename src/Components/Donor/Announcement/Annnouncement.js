@@ -8,7 +8,7 @@ const Announcement = ({ announcement }) => {
             <Card.Content>
                 <Card.Header className="announcement-title">{announcement.title}</Card.Header>
                 <Card.Meta className="announcement-meta">
-                    <Icon name="calendar" /> {announcement.postedDateTime}
+                    <Icon name="calendar" /> {announcement.created}
                 </Card.Meta>
                 <Card.Description className="announcement-body">
                     {announcement.body}

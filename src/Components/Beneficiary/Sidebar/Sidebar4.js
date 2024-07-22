@@ -7,7 +7,7 @@ import './Sidebar.css';
 import axios from "axios";
 
 
-export default function Sidebar3() {
+export default function Sidebar4() {
     const [activeItem, setActiveItem] = useState('Open Requests');
     const [visible, setVisible] = useState(false);
     const [icon, setIcon] = useState('angle right');
@@ -42,26 +42,26 @@ export default function Sidebar3() {
                 <Menu
                     vertical
                     tabular
-                    style={{ fontSize: "17px", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#fff", height: "100%", width: "fit-content", background: "lightgrey" }}
+                    style={{ fontSize: "17px", top: "70px", position: "fixed", zIndex: "1", backgroundColor: "#878787", height: "100%", width: "fit-content", background: "lightgrey" }}
                     className={visible ? "visibles" : "hiddens"}
                     direction="left"
                 >
                     <Menu.Item
-                        name='My Open Requests'
-                        active={activeItem === 'My Open Requests'}
+                        name='Open Requests'
+                        active={activeItem === 'Open Requests'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/beneficiary/open-requests"
+                        to="/beneficiary/other-open-requests"
                     >
                         <Icon name='folder open' />
                         Open Requests
                     </Menu.Item>
                     <Menu.Item
-                        name='My Closed Requests'
-                        active={activeItem === 'My Closed Requests'}
+                        name='Closed Requests'
+                        active={activeItem === 'Closed Requests'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/beneficiary/closed-requests"
+                        to="/beneficiary/other-closed-requests"
                     >
                         <Icon name='folder' />
                         Closed Requests
