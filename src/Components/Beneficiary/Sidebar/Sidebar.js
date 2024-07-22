@@ -79,7 +79,7 @@ export default function Sidebar() {
                         active={activeItem === 'Leaderboard'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/beneficiary/leaderboard"
+                        to="/beneficiary/leaderboards"
                     >
                         <Icon name='trophy' />
                         Leaderboard
@@ -99,7 +99,7 @@ export default function Sidebar() {
                         active={activeItem === 'Requests'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/beneficiary/others-requests"
+                        to="/beneficiary/other-open-requests"
                     >
                         <Icon name='dollar sign' />
                         Requests

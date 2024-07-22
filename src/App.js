@@ -83,7 +83,7 @@ import Main from './Pages/Home/Main'
 
 import DonorHome from './Pages/Donor/home/home'
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
-import DonationList from "./Pages/Donor/onGoingDonations";
+import DonationList from "./Pages/Donor/donations/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
 import CompletedDonations from "./Pages/Donor/completedDonations";
 import DonorList from "./Pages/Donor/donors";
@@ -99,10 +99,10 @@ import MyListingsList from "./Pages/Donor/donations/myListings";
 import AnnouncementList from "./Pages/Donor/announcementsPage";
 import MyListingPage from "./Pages/Donor/donations/myListingpage";
 import BeneficiaryDashboard from "./Pages/Beneficiary/home/home";
-import BeneficiaryOwnOpenRequestList from "./Pages/Beneficiary/requests/openRequests";
-import BeneficiaryOwnClosedRequestPage from "./Pages/Beneficiary/requests/closedRequestPage";
-import BeneficiaryOwnOpenRequestPage from "./Pages/Beneficiary/requests/openRequestPage";
-import BeneficiaryOwnClosedRequestList from "./Pages/Beneficiary/requests/closedRequests";
+import BeneficiaryOwnOpenRequestList from "./Pages/Beneficiary/my-requests/openRequests";
+import BeneficiaryOwnClosedRequestPage from "./Pages/Beneficiary/my-requests/closedRequestPage";
+import BeneficiaryOwnOpenRequestPage from "./Pages/Beneficiary/my-requests/openRequestPage";
+import BeneficiaryOwnClosedRequestList from "./Pages/Beneficiary/my-requests/closedRequests";
 import TicketsPage from "./Pages/Beneficiary/tickets/tickets";
 import BeneficiaryDonorList from "./Pages/Beneficiary/donors/donors";
 import BeneficiaryDonorAccount from "./Pages/Beneficiary/donors/donorAccount";
@@ -116,6 +116,16 @@ import Leaderboards from "./Pages/Home/leaderboard/leaderboards";
 import DonorLeaderboards from "./Pages/Donor/leaderboard/leaderboards";
 import DonorOtherLeaderboardPage from "./Pages/Donor/leaderboard/leaderboard";
 import MyLeaderboardPage from "./Pages/Donor/leaderboard/myleaderboard";
+import OnGoingDonationPage from "./Pages/Donor/donations/onGoingDonationPage";
+import Maintenance from "./Pages/Donor/maintenance/Maintenance";
+import BeneficiaryOtherOpenRequestList from "./Pages/Beneficiary/other-requests/otherOpenRequests";
+import BeneficiaryOtherOpenRequestPage from "./Pages/Beneficiary/other-requests/otherOpenRequestPage";
+import BeneficiaryOtherClosedRequestList from "./Pages/Beneficiary/other-requests/otherClosedRequests";
+import BeneficiaryOtherClosedRequestPage from "./Pages/Beneficiary/other-requests/otherClosedRequestPage";
+import PendingRewardsPage from "./Pages/Donor/donations/pendingRewardsPage";
+import CompletedDonationPage from "./Pages/Donor/donations/completedDonationPage";
+import BeneficiaryDonorLeaderboards from "./Pages/Beneficiary/leaderboard/leaderboards";
+import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/leaderboard";
 
 import AdminDashBoard from './Pages/Admin/home/AdminDashBoard';
 import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
@@ -157,13 +167,18 @@ function App() {
                 {/*Donor Routes*/}
 
                 <Route path="/donor/home" element={<DonorHome/>}/>
+                <Route path="/donor/maintenance" element={<Maintenance/>}/>
                 {/*<Route path="/donor/leaderboard" element={<DonorHome/>}/>*/}
                 <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
                 <Route path = "/donor/beneficiaries/:beneficiary_id" element={<BeneficiaryAccount/>}/>
 
                 <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
+                <Route path = "/donor/ongoing-donations/:donation_id" element={<OnGoingDonationPage/>}/>
                 <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
+                <Route path = "/donor/pending-rewards/:donation_id" element={<PendingRewardsPage/>}/>
                 <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
+                <Route path = "/donor/completed-donations/:donations_id" element={<CompletedDonationPage/>}/>
+
                 <Route path = "/donor/donors" element={<DonorList/>}/>
                 <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>
                 <Route path = "/donor/account" element={<Account/>}/>
@@ -208,6 +223,16 @@ function App() {
 
                 <Route path = "/beneficiary/account" element={<BeneficiaryOwnAccount/>}/>
                 <Route path = "/beneficiary/update-account" element={<BeneficiaryUpdateAccount/>}/>
+
+                <Route path = "/beneficiary/other-open-requests" element={<BeneficiaryOtherOpenRequestList/>}/>
+                <Route path = "/beneficiary/other-open-requests/:request_id" element={<BeneficiaryOtherOpenRequestPage/>}/>
+
+                <Route path = "/beneficiary/other-closed-requests" element={<BeneficiaryOtherClosedRequestList/>}/>
+                <Route path = "/beneficiary/other-closed-requests/:request_id" element={<BeneficiaryOtherClosedRequestPage/>}/>
+
+                <Route path = "/beneficiary/leaderboards" element = {<BeneficiaryDonorLeaderboards/>}/>
+                <Route path = "/beneficiary/leaderboard/:id" element = {<BeneficiaryDonorLeaderboardPage/>}/>
+
 
                 {/* Crew Member Routes */}
                 {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}

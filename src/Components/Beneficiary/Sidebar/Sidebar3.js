@@ -47,8 +47,8 @@ export default function Sidebar3() {
                     direction="left"
                 >
                     <Menu.Item
-                        name='Open Requests'
-                        active={activeItem === 'Open Requests'}
+                        name='My Open Requests'
+                        active={activeItem === 'My Open Requests'}
                         onClick={handleItemClick}
                         as={Link}
                         to="/beneficiary/open-requests"
@@ -57,8 +57,8 @@ export default function Sidebar3() {
                         Open Requests
                     </Menu.Item>
                     <Menu.Item
-                        name='Closed Requests'
-                        active={activeItem === 'Closed Requests'}
+                        name='My Closed Requests'
+                        active={activeItem === 'My Closed Requests'}
                         onClick={handleItemClick}
                         as={Link}
                         to="/beneficiary/closed-requests"

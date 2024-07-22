@@ -12,43 +12,43 @@ const AdminDonorList = () => {
   ];
 
   return (
-    <div className="donor-list">
-      {/* <div className="search-bar">
+      <div className="donor-list">
+        {/* <div className="search-bar">
         <InputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
         <IconButton type="submit" aria-label="search">
           <Search />
         </IconButton>
       </div> */}
-      <Paper>
-        <TableContainer>
-          <Table>
-            <TableHead>
-              <TableRow style={{ backgroundColor: '#f5f5f5' }}>
-                <TableCell><h3>Name</h3></TableCell>
-                <TableCell><h3>Age</h3></TableCell>
-                <TableCell><h3>Nickname</h3></TableCell>
-                <TableCell><h3>Employee</h3></TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell component="th" scope="row">
-                    {row.name}<br /><small>{row.jobTitle}</small>
-                  </TableCell>
-                  <TableCell>{row.age}</TableCell>
-                  <TableCell>{row.nickname}</TableCell>
-                  <TableCell>
-                    {/* <Checkbox checked={row.employee} /> */}
-                    <button style={{padding: '5px',backgroundColor: '#f5f5f5'}}>View</button>
-                  </TableCell>
+        <Paper>
+          <TableContainer>
+            <Table>
+              <TableHead>
+                <TableRow style={{ backgroundColor: '#f5f5f5' }}>
+                  <TableCell><h3>Name</h3></TableCell>
+                  <TableCell><h3>Age</h3></TableCell>
+                  <TableCell><h3>Nickname</h3></TableCell>
+                  <TableCell><h3>Employee</h3></TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Paper>
-    </div>
+              </TableHead>
+              <TableBody>
+                {rows.map((row) => (
+                    <TableRow key={row.name}>
+                      <TableCell component="th" scope="row">
+                        {row.name}<br /><small>{row.jobTitle}</small>
+                      </TableCell>
+                      <TableCell>{row.age}</TableCell>
+                      <TableCell>{row.nickname}</TableCell>
+                      <TableCell>
+                        {/* <Checkbox checked={row.employee} /> */}
+                        <button style={{padding: '5px',backgroundColor: '#f5f5f5'}}>View</button>
+                      </TableCell>
+                    </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Paper>
+      </div>
   );
 };
 

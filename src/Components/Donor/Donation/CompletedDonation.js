@@ -1,8 +1,9 @@
 import React from 'react';
 import { Card, Image, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
+import{Link} from 'react-router-dom';
 
-const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, recipientName, tokenImage }) => {
+const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, recipientName, id }) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -17,7 +18,7 @@ const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, r
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                     </Grid.Column>
                     <Grid.Column width={3} textAlign="right" className="right-column">
-                        <Button size='tiny' className='view-button'>View Donation</Button>
+                        <Button as={Link} to={`${id}`} size='tiny' className='view-button'>View Donation</Button>
                         <div className="token-info">
                             <h2>{tokens}</h2>
                             <Image src="/token.png" circular className="token-image" />
