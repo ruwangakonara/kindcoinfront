@@ -1,4 +1,5 @@
 // import classes from "./AdminBeneficiaryList.module.css";
+import DefaultDash from "../../../Components/Admin/DashboardComp/DefaultDash";
 import Header from "../../../Components/Admin/Header/Header";
 import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin";
 
@@ -7,7 +8,7 @@ const AdminBeneficiaryList = () => {
         <div>
             <Header />
             <SidebarAdmin/>
-            {/* <h1>Admin Beneficiary List</h1> */}
+            <DefaultDash/>
         </div>
     );
 }

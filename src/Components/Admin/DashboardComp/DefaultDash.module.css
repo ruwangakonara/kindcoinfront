@@ -1,0 +1,23 @@
+.dashboard {
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr); */
+    gap: 60px;
+    margin-left: 40px;
+    justify-content: right;
+    align-items: normal;
+}
+  
+.mainContent{
+    max-width: 80%;
+    height: 100%;
+    flex: 1;
+    padding: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.mainContainer{
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: flex-end;
+    height: 100%;
+}

@@ -26,18 +26,29 @@
 
   .litags{
     font-size: 30px;
+    padding: 10px;
+    list-style: none;
+  }
+
+  .litags:active {
+    background-color: lightgray; /* Background color when active */
+    color: black;
   }
 
   ul{
     display: flex;
     flex-direction: column;
     gap: 70px;
-    align-items: center;
-    justify-content: center;
+    align-items:flex-start;
+    justify-content:flex-start;
   }
   
   h3{
     align-items: center;
     justify-content: center;
     width: 100%;
+  }
+
+  .textVal:hover{
+    color: black;
   }
