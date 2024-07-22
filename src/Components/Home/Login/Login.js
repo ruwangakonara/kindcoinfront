@@ -11,7 +11,7 @@ const axiosInstance = axios.create({
 
 const Login = () => {
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext); // Import setUser from UserContext
+  const { setUser, setUserDetails } = useContext(UserContext); // Import setUser and setUserDetails from UserContext
   const [passwordType, setPasswordType] = useState('password');
   const [icon, setIcon] = useState('eye');
   const [loginError, setLoginError] = useState(null);
@@ -40,8 +40,16 @@ const Login = () => {
       const response = await axiosInstance.post('/signin', data);
 
       if (response.status === 200) {
-        const user = response.data.user;
+        const { user, donor, beneficiary } = response.data;
         setUser(user); // Save user in global state
+
+        if (donor) {
+          setUserDetails(donor); // Save donor details in global state
+        } else if (beneficiary) {
+          setUserDetails(beneficiary); // Save beneficiary details in global state
+        } else {
+          setUserDetails(null);
+        }
 
         switch (user.status) {
           case 'admin':
@@ -72,9 +80,6 @@ const Login = () => {
           setLoginError('An unknown error occurred');
         }
       }
-        // else {
-      //   setLoginError('Unable to connect to the server');
-      // }
     }
   };
 

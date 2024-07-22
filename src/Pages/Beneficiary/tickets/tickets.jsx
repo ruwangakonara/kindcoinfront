@@ -1,22 +1,41 @@
-import React, { useState } from 'react';
-import { Container, Table, Label, Header, Grid, Button, Modal, Form, Icon } from 'semantic-ui-react';
-import Navbar2 from "../../../Components/Donor/NavBar/NavBar2"
-import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container, Table, Label, Header, Grid, Button, Modal, Form } from 'semantic-ui-react';
+import Navbar from "../../../Components/Beneficiary/NavBar/NavBar"
+import Sidebar from '../../../Components/Beneficiary/Sidebar/Sidebar';
 import './tickets.css';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import axios from "axios";
 
-const initialTickets = [
-    { id: 1, title: 'Issue with Donation', description: 'There is an issue with the recent donation made.', archived: true },
-    { id: 2, title: 'Request for Information', description: 'Need more information about the donation process.', archived: false },
-    { id: 3, title: 'Volunteer Inquiry', description: 'Interested in volunteering for upcoming events.', archived: false },
-    { id: 4, title: 'Update Account Details', description: 'Request to update account details.', archived: true }
-];
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
-const DonorTicketsPage = () => {
-    const [tickets, setTickets] = useState(initialTickets);
+function TicketsPage() {
+    const [tickets, setTickets] = useState([]);
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
     const [openEditModal, setOpenEditModal] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState(null);
     const [editedTitle, setEditedTitle] = useState('');
     const [editedDescription, setEditedDescription] = useState('');
+    const [openNewModal, setOpenNewModal] = useState(false);
+    const [newTitle, setNewTitle] = useState('');
+    const [newDescription, setNewDescription] = useState('');
+
+    useEffect(() => {
+        get_tickets();
+    }, []);
+
+    const get_tickets = async () => {
+        try{
+            const response = await axiosInstance.get('/beneficiary/get_tickets');
+            setTickets(response.data.tickets);
+        } catch (error){
+            console.log(error);
+        }
+
+    };
 
     const handleEdit = (ticket) => {
         setSelectedTicket(ticket);
@@ -25,19 +44,58 @@ const DonorTicketsPage = () => {
         setOpenEditModal(true);
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         const updatedTickets = tickets.map(ticket =>
             ticket.id === selectedTicket.id
                 ? { ...ticket, title: editedTitle, description: editedDescription }
                 : ticket
         );
-        setTickets(updatedTickets);
-        setOpenEditModal(false);
+        // Send update request to server
+        try {
+            await axiosInstance.put(`/beneficiary/update_ticket`, {
+                title: editedTitle,
+                description: editedDescription,
+                user_id: user._id,
+                ticket_id: selectedTicket._id
+
+            });
+            get_tickets()
+            setOpenEditModal(false);
+        } catch (error) {
+            console.error("Error updating ticket:", error);
+        }
     };
 
-    const handleDelete = (ticketId) => {
-        const updatedTickets = tickets.filter(ticket => ticket.id !== ticketId);
-        setTickets(updatedTickets);
+    const handleDelete = async (ticketId) => {
+        // Send delete request to server
+        try {
+            await axiosInstance.post('/beneficiary/delete_ticket',{ticket_id: ticketId});
+           get_tickets()
+        } catch (error) {
+            console.error("Error deleting ticket:", error);
+        }
+    };
+
+    const handleNewSave = async () => {
+        const newTicket = {
+            title: newTitle,
+            description: newDescription,
+            user_id: user._id
+        };
+        try {
+            const response = await axiosInstance.post('/beneficiary/raise_ticket', {
+                title: newTitle,
+                description: newDescription,
+                user_id: user._id,
+
+            });
+            get_tickets()
+            setOpenNewModal(false);
+            setNewTitle('');
+            setNewDescription('');
+        } catch (error) {
+            console.error("Error creating new ticket:", error);
+        }
     };
 
     const renderActions = (ticket) => {
@@ -45,7 +103,7 @@ const DonorTicketsPage = () => {
             return (
                 <Button.Group>
                     <Button onClick={() => handleEdit(ticket)}>Edit</Button>
-                    <Button onClick={() => handleDelete(ticket.id)} color='red'>Delete</Button>
+                    <Button onClick={() => handleDelete(ticket._id)} color='red'>Delete</Button>
                 </Button.Group>
             );
         } else {
@@ -55,14 +113,17 @@ const DonorTicketsPage = () => {
 
     return (
         <div>
-            <Navbar2 />
+            <Navbar />
             <Container className="tickets-page-container">
                 <Grid>
                     <Grid.Column width={0}>
                         <Sidebar />
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <Header as="h1" style = {{marginTop: "100px"}} className="page-header">Tickets</Header>
+                        <Header as="h1" style={{ marginTop: "100px" }} className="page-header">Tickets</Header>
+                        <Button primary onClick={() => setOpenNewModal(true)} style={{ marginBottom: '20px', position: "relative"}}>
+                            Raise New Ticket
+                        </Button>
                         <Table celled padded className="tickets-table">
                             <Table.Header>
                                 <Table.Row>
@@ -74,13 +135,13 @@ const DonorTicketsPage = () => {
                             </Table.Header>
 
                             <Table.Body>
-                                {tickets.map(ticket => (
+                                {tickets && tickets.map(ticket => (
                                     <Table.Row key={ticket.id} className="ticket-row">
                                         <Table.Cell>{ticket.title}</Table.Cell>
                                         <Table.Cell>{ticket.description}</Table.Cell>
                                         <Table.Cell>
                                             <Label color={ticket.archived ? 'red' : 'orange'}>
-                                                {ticket.archived ? 'Archived' : 'Active'}
+                                                {ticket.archived ? 'Archived' : 'Not Archived'}
                                             </Label>
                                         </Table.Cell>
                                         <Table.Cell>{renderActions(ticket)}</Table.Cell>
@@ -104,10 +165,11 @@ const DonorTicketsPage = () => {
                         <Form>
                             <Form.Field>
                                 <label>Title</label>
-                                <input
+                                <input readOnly={true}
                                     placeholder='Title'
                                     value={editedTitle}
                                     onChange={(e) => setEditedTitle(e.target.value)}
+                                       style={{fontStyle:"italic"}}
                                 />
                             </Form.Field>
                             <Form.Field>
@@ -126,8 +188,41 @@ const DonorTicketsPage = () => {
                     </Modal.Actions>
                 </Modal>
             )}
+
+            <Modal
+                open={openNewModal}
+                onClose={() => setOpenNewModal(false)}
+                size='small'
+                className="new-modal"
+            >
+                <Modal.Header>Raise New Ticket</Modal.Header>
+                <Modal.Content>
+                    <Form>
+                        <Form.Field>
+                            <label>Title</label>
+                            <input
+                                placeholder='Title'
+                                value={newTitle}
+                                onChange={(e) => setNewTitle(e.target.value)}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <label>Description</label>
+                            <input
+                                placeholder='Description'
+                                value={newDescription}
+                                onChange={(e) => setNewDescription(e.target.value)}
+                            />
+                        </Form.Field>
+                    </Form>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button onClick={() => setOpenNewModal(false)}>Cancel</Button>
+                    <Button color='green' onClick={handleNewSave}>Save</Button>
+                </Modal.Actions>
+            </Modal>
         </div>
     );
 };
 
-export default DonorTicketsPage;
+export default TicketsPage;

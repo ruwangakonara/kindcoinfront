@@ -20,6 +20,7 @@
     position: fixed;
     z-index: 110;
     border: 1px solid black;
+    left: 0 !important;
 }
 
 .navbar{

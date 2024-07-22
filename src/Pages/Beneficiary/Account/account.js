@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, {useContext, useState} from 'react';
 import {Container, Header, Grid, List, Button, Segment, Image, Modal, Icon} from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import './account.css';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow";
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+
 
 const BeneficiaryOwnAccount = () => {
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
+
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const history = useNavigate();
+
+
+
 
     const donorDetails = {
         name: 'John Doe',
@@ -53,19 +61,19 @@ const BeneficiaryOwnAccount = () => {
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        {donorDetails.name}
+                                        {beneficiary.name}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {donorDetails.address}
+                                        {beneficiary.address}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Description</List.Header>
-                                        {donorDetails.description}
+                                        {beneficiary.description}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {donorDetails.email}
+                                        {beneficiary.username}
                                     </List.Item>
                                 </List>
                             </Grid.Column>

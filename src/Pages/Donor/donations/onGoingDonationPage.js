@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Header, Image, List, Segment, Label, Icon, Button, Modal, Form } from 'semantic-ui-react';
+import { Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
 import './myListingPage.css';
@@ -23,16 +23,20 @@ const dummyDonation = {
     requestDescription: 'We are in need of winter clothes for the upcoming cold season. Your help will be greatly appreciated.',
     recipientPhone: '123-456-7890',
     donationPhone: '987-654-3210',
-    accepted: false
+    verified: false,
+    images: [
+        'https://via.placeholder.com/150',
+        'https://via.placeholder.com/150',
+        'https://via.placeholder.com/150'
+    ]
 };
 
-const MyListingPage = () => {
+const OnGoingDonationPage = () => {
     const { donation_id } = useParams();
     const [editModalOpen, setEditModalOpen] = useState(false);
-    const [editedDonationTitle, setEditedDonationTitle] = useState(dummyDonation.donationTitle);
-    const [editedDonationDescription, setEditedDonationDescription] = useState(dummyDonation.donationDescription);
-    const [editedGoodsList, setEditedGoodsList] = useState(dummyDonation.goodsList.map(item => ({ ...item }))); // Copy initial goods list
-    const [editedMoneyAmount, setEditedMoneyAmount] = useState(dummyDonation.moneyAmount);
+    const [imageModalOpen, setImageModalOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState(null);
+    const [editedImages, setEditedImages] = useState(dummyDonation.images);
 
     // Handle opening and closing of edit modal
     const handleEditModalOpen = () => {
@@ -43,30 +47,42 @@ const MyListingPage = () => {
         setEditModalOpen(false);
     };
 
+    // Handle opening and closing of image modal
+    const handleImageModalOpen = (image) => {
+        setSelectedImage(image);
+        setImageModalOpen(true);
+    };
+
+    const handleImageModalClose = () => {
+        setImageModalOpen(false);
+        setSelectedImage(null);
+    };
+
     // Handle form submission for editing donation details
     const handleEditFormSubmit = (e) => {
         e.preventDefault(); // Prevent default form submission
         // Perform logic to update donation details (e.g., API call)
-        console.log('Updated Donation Details:', {
-            editedDonationTitle,
-            editedDonationDescription,
-            editedGoodsList,
-            editedMoneyAmount
-        });
+        console.log('Updated Images:', editedImages);
         setEditModalOpen(false);
     };
 
-    // Handle adding a new item to the goods list
-    const handleAddItem = (e) => {
-        e.preventDefault(); // Prevent default form submission
-        setEditedGoodsList([...editedGoodsList, { item: '', amount: '' }]);
+    // Handle adding a new image
+    const handleAddImage = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setEditedImages([...editedImages, reader.result]);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
-    // Handle removing an item from the goods list
-    const handleRemoveItem = (index) => {
-        const newGoodsList = [...editedGoodsList];
-        newGoodsList.splice(index, 1);
-        setEditedGoodsList(newGoodsList);
+    // Handle removing an image
+    const handleRemoveImage = (index) => {
+        const newImages = [...editedImages];
+        newImages.splice(index, 1);
+        setEditedImages(newImages);
     };
 
     return (
@@ -97,7 +113,9 @@ const MyListingPage = () => {
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {dummyDonation.donationTitle}
-                                                <Button primary size='tiny' floated='right' onClick={handleEditModalOpen}>Edit</Button>
+                                                {!dummyDonation.verified && (
+                                                    <Button primary size='tiny' floated='right' onClick={handleEditModalOpen}>Edit</Button>
+                                                )}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
@@ -136,11 +154,23 @@ const MyListingPage = () => {
                                                 </List.Item>
                                             )}
                                         </List>
-                                        {!dummyDonation.accepted && (
-                                            <Label color='red' className='not-accepted-label'>
-                                                <Icon name='flag' /> Not Accepted
-                                            </Label>
-                                        )}
+                                    </Grid.Column>
+                                </Grid.Row>
+                                <Grid.Row>
+                                    <Grid.Column width={16}>
+                                        <Header as="h3">Additional Images</Header>
+                                        <div className="additional-images">
+                                            {dummyDonation.images.map((image, index) => (
+                                                <Image
+                                                    key={index}
+                                                    src={image}
+                                                    size='small'
+                                                    spaced
+                                                    onClick={() => handleImageModalOpen(image)}
+                                                    style={{ cursor: 'pointer' }}
+                                                />
+                                            ))}
+                                        </div>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
@@ -149,78 +179,39 @@ const MyListingPage = () => {
                 </Grid.Column>
             </Grid>
 
+            {/* Image Modal */}
+            <Modal size='small' open={imageModalOpen} onClose={handleImageModalClose} className="image-modal">
+                <Modal.Content image>
+                    <Image src={selectedImage} centered wrapped style={{ maxWidth: '100%', maxHeight: '80vh' }} />
+                </Modal.Content>
+            </Modal>
+
             {/* Edit Modal */}
             <Modal size='tiny' open={editModalOpen} onClose={handleEditModalClose}>
-                <Modal.Header>Edit Donation Details</Modal.Header>
+                <Modal.Header>Edit Donation Images</Modal.Header>
                 <Modal.Content>
                     <Form onSubmit={handleEditFormSubmit}>
                         <Form.Field>
-                            <label>Donation Title</label>
-                            <input
-                                placeholder='Donation Title'
-                                value={editedDonationTitle}
-                                onChange={(e) => setEditedDonationTitle(e.target.value)}
-                            />
+                            <label>Upload New Image</label>
+                            <input type="file" accept="image/*" onChange={handleAddImage} />
                         </Form.Field>
                         <Form.Field>
-                            <label>Donation Description</label>
-                            <textarea
-                                placeholder='Donation Description'
-                                value={editedDonationDescription}
-                                onChange={(e) => setEditedDonationDescription(e.target.value)}
-                            />
-                        </Form.Field>
-                        {dummyDonation.donationType === 'goods' && (
-                            <Form.Field>
-                                <label>Goods List</label>
-                                {editedGoodsList.map((goods, index) => (
-                                    <div key={index}>
-                                        <Form.Group widths='equal'>
-                                            <Form.Input
-                                                fluid
-                                                placeholder='Item'
-                                                value={goods.item}
-                                                onChange={(e) => {
-                                                    const newGoodsList = [...editedGoodsList];
-                                                    newGoodsList[index].item = e.target.value;
-                                                    setEditedGoodsList(newGoodsList);
-                                                }}
-                                            />
-                                            <Form.Input
-                                                fluid
-                                                placeholder='Amount'
-                                                value={goods.amount}
-                                                onChange={(e) => {
-                                                    const newGoodsList = [...editedGoodsList];
-                                                    newGoodsList[index].amount = e.target.value;
-                                                    setEditedGoodsList(newGoodsList);
-                                                }}
-                                            />
-                                            {index > 0 && (
-                                                <Button
-                                                    icon='trash'
-                                                    negative
-                                                    onClick={() => handleRemoveItem(index)}
-                                                    style={{ marginTop: '2rem' }}
-                                                    type='button' // Specify type='button' to prevent form submission
-                                                />
-                                            )}
-                                        </Form.Group>
+                            <label>Current Images</label>
+                            <div className="additional-images">
+                                {editedImages.map((image, index) => (
+                                    <div key={index} style={{ display: 'inline-block', position: 'relative' }}>
+                                        <Image src={image} size='small' spaced />
+                                        <Button
+                                            icon='trash'
+                                            negative
+                                            onClick={() => handleRemoveImage(index)}
+                                            style={{ position: 'absolute', top: 0, right: 0 }}
+                                            type='button'
+                                        />
                                     </div>
                                 ))}
-                                <Button primary onClick={handleAddItem}>Add Item</Button>
-                            </Form.Field>
-                        )}
-                        {dummyDonation.donationType === 'monetary' && (
-                            <Form.Field>
-                                <label>Amount</label>
-                                <input
-                                    placeholder='Amount'
-                                    value={editedMoneyAmount}
-                                    onChange={(e) => setEditedMoneyAmount(e.target.value)}
-                                />
-                            </Form.Field>
-                        )}
+                            </div>
+                        </Form.Field>
                         <Button type='submit'>Save</Button>
                     </Form>
                 </Modal.Content>
@@ -229,4 +220,4 @@ const MyListingPage = () => {
     );
 }
 
-export default MyListingPage;
+export default OnGoingDonationPage;

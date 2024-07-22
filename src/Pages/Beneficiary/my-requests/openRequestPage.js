@@ -1,15 +1,91 @@
 import React, { useState } from 'react';
 import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon, Form, Dropdown } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
+import Accepted from "../../../Components/Beneficiary/Donation/Accepted";
+import CompletedDonation from "../../../Components/Beneficiary/Donation/CompletedDonation";
+import Unaccepted from "../../../Components/Beneficiary/Donation/Unaccepted";
 import './account.css';
+
+const accepted_donations = [
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '$100',
+        type: 'monetary',
+        tokens: 15000,
+        recipientName: 'Charity Org',
+        id:334354,
+        accepted: true,
+    },
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '50kg of rice',
+        type: 'goods',
+        tokens: 10000,
+        recipientName: 'John Doe',
+        id:35354354,
+        accepted: true
+    },
+];
+
+const unaccepted_donations = [
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '$100',
+        type: 'monetary',
+        tokens: 15000,
+        recipientName: 'Charity Org',
+        accepted: false,
+        id:35354354
+    },
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '50kg of rice',
+        type: 'goods',
+        tokens: 10000,
+        recipientName: 'John Doe',
+        accepted: false,
+        id:35354354
+    },
+];
+
+const completed_donations = [
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '$100',
+        type: 'monetary',
+        tokens: 15000,
+        recipientName: 'Charity Org',
+    },
+    {
+        donorImage: 'https://via.placeholder.com/150',
+        recipientImage: 'https://via.placeholder.com/150',
+        title:"dfsdfsdf",
+        amount: '50kg of rice',
+        type: 'goods',
+        tokens: 10000,
+        recipientName: 'John Doe',
+    },
+];
 
 const OpenRequestPage = () => {
     const { request_id } = useParams();
+    const navigate = useNavigate();
     console.log(request_id);
 
     const [open, setOpen] = useState(false);
     const [editOpen, setEditOpen] = useState(false);
+    const [confirmOpen, setConfirmOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
     const [requestDetails, setRequestDetails] = useState({
         name: 'Charity Org',
@@ -84,6 +160,15 @@ const OpenRequestPage = () => {
         setEditedDetails({ ...editedDetails, proofImages: updatedImages });
     };
 
+    const handleCloseRequest = () => {
+        setConfirmOpen(true);
+    };
+
+    const handleConfirmClose = () => {
+        setConfirmOpen(false);
+        navigate('/beneficiary/closed-requests');  // replace '/somewhere' with the actual path to redirect
+    };
+
     return (
         <div>
             <Navbar />
@@ -135,6 +220,7 @@ const OpenRequestPage = () => {
                                     <div>
                                         <Icon name="flag" color="red" size="large" /><h4 style={{ color: "red" }}>Not Verified</h4>
                                         <Button color="blue" onClick={handleEditButtonClick}>Edit</Button>
+                                        <Button color="red" onClick={handleCloseRequest}>Close</Button>
                                     </div>
                                 )}
                             </Grid.Column>
@@ -169,6 +255,65 @@ const OpenRequestPage = () => {
                         </Grid.Column>
                     </Grid>
                 </Segment>
+            </Container>
+
+            <Container style={{padding: '20px', top: "150px", position: 'relative'}}>
+                <Header as="h2">Accepted Donations</Header>
+
+                <Grid>
+                    {accepted_donations.map((donation, index) => (
+                        <Grid.Column key={index} width={16}>
+                            <Accepted
+                                donorImage={donation.donorImage}
+                                // recipientImage={donation.recipientImage}
+                                amount={donation.amount}
+                                donationTitle={donation.title}
+                                type={donation.type}
+                                accepted={donation.accepted}
+                                id={donation.id}
+                            />
+                        </Grid.Column>
+                    ))}
+                </Grid>
+            </Container>
+
+            <Container style={{padding: '20px', top: "150px", position: 'relative'}}>
+                <Header as="h2">Non Accepted Donations</Header>
+
+                <Grid>
+                    {unaccepted_donations.map((donation, index) => (
+                        <Grid.Column key={index} width={16}>
+                            <Unaccepted
+                                donorImage={donation.donorImage}
+                                // recipientImage={donation.recipientImage}
+                                amount={donation.amount}
+                                donationTitle={donation.title}
+                                type={donation.type}
+                                accepted={donation.accepted}
+                                id={donation.id}
+                            />
+                        </Grid.Column>
+                    ))}
+                </Grid>
+            </Container>
+
+            <Container style={{padding: '20px', top: "150px", position: 'relative'}}>
+                <Header as="h2">Completed Donations</Header>
+
+                <Grid>
+                    {completed_donations.map((donation, index) => (
+                        <Grid.Column key={index} width={16}>
+                            <CompletedDonation
+                                donorImage={donation.donorImage}
+                                // recipientImage={donation.recipientImage}
+                                amount={donation.amount}
+                                donationTitle={donation.title}
+                                type={donation.type}
+                                id={donation.id}
+                            />
+                        </Grid.Column>
+                    ))}
+                </Grid>
             </Container>
 
             <Modal open={open} onClose={() => setOpen(false)} size='large'>
@@ -250,6 +395,17 @@ const OpenRequestPage = () => {
                 <Modal.Actions>
                     <Button color="blue" onClick={handleSaveChanges}>Save Changes</Button>
                     <Button onClick={() => setEditOpen(false)}>Cancel</Button>
+                </Modal.Actions>
+            </Modal>
+
+            <Modal open={confirmOpen} onClose={() => setConfirmOpen(false)} size='small'>
+                <Modal.Header>Confirm Close Request</Modal.Header>
+                <Modal.Content>
+                    <p>Are you sure you want to close this request?</p>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button color="blue" onClick={() => setConfirmOpen(false)}>Cancel</Button>
+                    <Button color="red" onClick={handleConfirmClose}>Confirm Close</Button>
                 </Modal.Actions>
             </Modal>
         </div>

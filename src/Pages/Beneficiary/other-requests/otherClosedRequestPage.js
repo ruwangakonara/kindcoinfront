@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import './account.css';
 
-const BeneficiaryOwnClosedRequestPage = () => {
+const BeneficiaryOtherClosedRequestPage = () => {
     const { request_id } = useParams();
     console.log(request_id);
 
@@ -136,4 +136,4 @@ const BeneficiaryOwnClosedRequestPage = () => {
     );
 }
 
-export default BeneficiaryOwnClosedRequestPage;
+export default BeneficiaryOtherClosedRequestPage;
