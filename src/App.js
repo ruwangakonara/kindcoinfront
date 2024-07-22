@@ -127,6 +127,18 @@ import CompletedDonationPage from "./Pages/Donor/donations/completedDonationPage
 import BeneficiaryDonorLeaderboards from "./Pages/Beneficiary/leaderboard/leaderboards";
 import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/leaderboard";
 
+import AdminDashBoard from './Pages/Admin/home/AdminDashBoard';
+import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
+import AdminDonor from "./Components/Admin/DonorDetails/AdminDonor";
+import AdminBeneficiaryList from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryList";
+import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiary";
+import OverallStatistics from './Pages/Admin/Statistics/OverallStatistics';
+import RegisterCrewMemberPage from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPage';
+// import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
+import ViewCrewMemberTransactionList from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionList';
+import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
+
+import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 
 function App() {
 
@@ -220,6 +232,27 @@ function App() {
                 <Route path = "/beneficiary/leaderboards" element = {<BeneficiaryDonorLeaderboards/>}/>
                 <Route path = "/beneficiary/leaderboard/:id" element = {<BeneficiaryDonorLeaderboardPage/>}/>
 
+
+                {/* Crew Member Routes */}
+                {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}
+
+
+                {/* Admin Routes */}
+                <Route path="/admin/home" element={<AdminDashBoard/>}/>
+                <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>
+                <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>
+                <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryList/>}/>
+                <Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>
+                <Route path='/admin/overall_stats' element={<OverallStatistics/>}/>
+                <Route path="/admin/register/crew_member" element={<RegisterCrewMemberPage/>}/>
+                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+                <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionList/>}/>
+                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+                <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
+
+                {/* Crew Member Routes */}
+                <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
 
             </Routes>
         // </UserProvider>
