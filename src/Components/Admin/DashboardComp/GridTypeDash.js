@@ -1,11 +1,12 @@
+import React from 'react'
 import classes from "./GridTypeDash.module.css"
 
-const GridTypeDash = ({children}) => {
+const GridTypeDash = (props) => {
     return (
         <div className={classes.mainContainer}>
             <div className={classes.mainContent}>
                 <div className={classes.dashboard}>
-                    {children}
+                    {props.children}
                 </div>
             </div>
         </div>

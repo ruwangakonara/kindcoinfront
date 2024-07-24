@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import Header from "../../../Components/Admin/Header/Header";
 import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin";
 import Card from "../../../Components/Admin/NavigationCard/Card";
@@ -6,15 +6,16 @@ import GridTypeDash from "../../../Components/Admin/DashboardComp/GridTypeDash";
 
 const AdminDashBoard = () => {
 
-    const [activeTab, setActiveTab] = useState('');
+    // const [activeTab, setActiveTab] = useState('');
 
-    const handleSidebarItemClick = (item) => {
-        setActiveTab(item);
-    };
+    // const handleSidebarItemClick = (item) => {
+    //     setActiveTab(item);
+    // };
+
     return ( 
         <>            
             <Header/>
-            <SidebarAdmin onItemClick={handleSidebarItemClick}/>
+            <SidebarAdmin/>
             <GridTypeDash>
                 <Card title="Donor" />
                 <Card title="Benificiary" />
