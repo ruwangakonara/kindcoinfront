@@ -1,4 +1,4 @@
-import "./Header.css";
+import classes from "./Header.module.css";
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import ProfilePic from "../Profile/ProfilePic";
 
