@@ -1,7 +1,12 @@
 import React from 'react';
-import { Paper, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Checkbox, IconButton, InputBase } from '@mui/material';
-import { Search } from '@mui/icons-material';
-import './AdminDonorList.css'
+// import classes from "./AdminDonorList.module.css"
+import Paper from '@mui/material/Paper';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 const AdminDonorList = () => {
   const rows = [
@@ -39,7 +44,6 @@ const AdminDonorList = () => {
                       <TableCell>{row.age}</TableCell>
                       <TableCell>{row.nickname}</TableCell>
                       <TableCell>
-                        {/* <Checkbox checked={row.employee} /> */}
                         <button style={{padding: '5px',backgroundColor: '#f5f5f5'}}>View</button>
                       </TableCell>
                     </TableRow>
