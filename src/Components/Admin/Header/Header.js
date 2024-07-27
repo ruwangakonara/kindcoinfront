@@ -1,5 +1,6 @@
 import classes from "./Header.module.css";
 import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import {Image} from 'semantic-ui-react'
 import ProfilePic from "../Profile/ProfilePic";
 
 const Header = ({ toggleSidebar }) => {
@@ -12,7 +13,8 @@ const Header = ({ toggleSidebar }) => {
             Kindcoin
           </Typography>
           <Typography variant="h6">
-            <ProfilePic/>
+            {/* <ProfilePic/> */}
+            <Image src={'https://via.placeholder.com/150'} circular/>
           </Typography>
         </Toolbar>
       </AppBar>
