@@ -1,0 +1,29 @@
+.donatex {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100px !important;
+    margin: 40px 40px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /*box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);*/
+
+}
+
+.donatebuttonx {
+    background: lightgreen !important;
+
+    right: 0;
+    font-size: 15px !important;
+    font-family: Verdana, Tahoma, sans-serif;
+    color: white !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+}
+
+.donatebuttonx:hover {
+    /*transform: scale(1.2);*/
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
