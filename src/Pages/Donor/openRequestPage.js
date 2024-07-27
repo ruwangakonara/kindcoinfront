@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon, Form, Input, Transition } from 'semantic-ui-react';
+import { useParams, useNavigate } from 'react-router-dom';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import './account.css';
 import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
@@ -10,12 +10,16 @@ const OpenRequestPage = () => {
     console.log(request_id);
 
     const [open, setOpen] = useState(false);
+    const [donateOpen, setDonateOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
+    const [goods, setGoods] = useState([{ item: '', amount: '' }]);
+    const [donationType, setDonationType] = useState('');
+    const navigate = useNavigate();
 
     const requestDetails = {
         name: 'Charity Org',
         title:"Need Some Food. Can I Get a Meal?",
-        // address: '456 Help St, Generosity Town, CA',
+        address: '456 Help St, Generosity Town, CA',
         description: 'Aint eate in centureies so feed me.',
         email: 'info@charityorg.org',
         telephone: '123-456-7890',
@@ -26,17 +30,31 @@ const OpenRequestPage = () => {
             'https://via.placeholder.com/300'
         ],
         certificateImage: 'https://via.placeholder.com/300',
-        // type: "organization",
-        verified: false, // Change to true to see the green fla0g
-        beneficiary:"sdfsdf",
-        raised:45969,
-        type:"goods",
-
+        verified: false,
+        beneficiary: "sdfsdf",
+        raised: 45969,
+        type: "monetary",
     };
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
         setOpen(true);
+    };
+
+    const handleAddGood = () => {
+        setGoods([...goods, { item: '', amount: '' }]);
+    };
+
+    const handleGoodChange = (index, key, value) => {
+        const newGoods = [...goods];
+        newGoods[index][key] = value;
+        setGoods(newGoods);
+    };
+
+    const handleSubmit = () => {
+        // Handle the donation submission here
+        // Redirect after submission
+        navigate('/donor/my-listings');
     };
 
     return (
@@ -123,6 +141,15 @@ const OpenRequestPage = () => {
                         </Grid.Column>
                     </Grid>
                 </Segment>
+                <Button
+                    color="green"
+                    onClick={() => {
+                        setDonationType(requestDetails.type);
+                        setDonateOpen(true);
+                    }}
+                >
+                    Donate
+                </Button>
             </Container>
 
             <Modal open={open} onClose={() => setOpen(false)} size='large'>
@@ -133,7 +160,65 @@ const OpenRequestPage = () => {
                     <Button onClick={() => setOpen(false)}>Close</Button>
                 </Modal.Actions>
             </Modal>
-            <Donatenow/>
+
+            <Transition visible={donateOpen} animation='scale' duration={500}>
+                <Modal open={donateOpen} onClose={() => setDonateOpen(false)} size='large'>
+                    <Modal.Header>Create a Donation</Modal.Header>
+                    <Modal.Content>
+                        <Form>
+                            <Form.Field>
+                                <label>Title</label>
+                                <Input placeholder='Title' />
+                            </Form.Field>
+                            <Form.Field>
+                                <label>Description</label>
+                                <Input placeholder='Description' />
+                            </Form.Field>
+                            {donationType === 'goods' ? (
+                                <>
+                                    {goods.map((good, index) => (
+                                        <Form.Group widths='equal' key={index}>
+                                            <Form.Field>
+                                                <label>Item</label>
+                                                <Input
+                                                    placeholder='Item'
+                                                    value={good.item}
+                                                    onChange={(e) => handleGoodChange(index, 'item', e.target.value)}
+                                                />
+                                            </Form.Field>
+                                            <Form.Field>
+                                                <label>Amount</label>
+                                                <Input
+                                                    placeholder='Amount'
+                                                    value={good.amount}
+                                                    onChange={(e) => handleGoodChange(index, 'amount', e.target.value)}
+                                                />
+                                            </Form.Field>
+                                        </Form.Group>
+                                    ))}
+                                    <Button type='button' onClick={handleAddGood}>
+                                        Add More Goods
+                                    </Button>
+                                </>
+                            ) : (
+                                <Form.Field>
+                                    <label>Amount</label>
+                                    <Input placeholder='Amount' type='number' />
+                                </Form.Field>
+                            )}
+                        </Form>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button color='red' onClick={() => setDonateOpen(false)}>
+                            Cancel
+                        </Button>
+                        <Button color='green' onClick={handleSubmit}>
+                            Submit
+                        </Button>
+                    </Modal.Actions>
+                </Modal>
+            </Transition>
+            <Donatenow />
         </div>
     );
 }
