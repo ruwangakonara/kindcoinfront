@@ -1,9 +1,9 @@
-import "./ViewCrewMember.css"
+import classes from "./ViewCrewMember.module.css"
 
-export default function ViewCrewMember() {
+const ViewCrewMember = () => {
     return (
-        <div>
-            <h1>ViewCrewMember</h1>
-        </div>
-    )
+        <div>ViewCrewMember</div>
+    );
 }
+ 
+export default ViewCrewMember;

@@ -73,10 +73,10 @@ const MyListingPage = () => {
         <div>
             <Navbar2 />
             <Grid>
-                <Grid.Column width={3}>
+                <Grid.Column width={1}>
                     <Sidebar3 />
                 </Grid.Column>
-                <Grid.Column width={13}>
+                <Grid.Column width={15}>
                     <Container className="donation-page-container">
                         <Header as="h1" className="page-header">Donation Details</Header>
                         <Segment raised>

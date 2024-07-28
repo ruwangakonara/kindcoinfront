@@ -1,14 +1,19 @@
-import React from 'react';
-import './Card.css';
+import { Link } from "react-router-dom"
+import classes from "./Card.module.css"
+import {Image} from 'semantic-ui-react';
 
-const Card = ({ title }) => {
-  return (
-    <div className="card">
-      <div className="card-title">{title}</div>
-      <div className="card-content">Some text</div>
-      <button className="card-button">Button</button>
-    </div>
-  );
-};
+const Card = (props) => {
 
-export default Card;
+    return (
+        <Link to={props.link}>
+            <div className={classes.card}>
+                <div className={classes.cardBody}>
+                    <h2 className={classes.cardTitle}>{props.title}</h2>
+                    <Image src={'https://via.placeholder.com/150'} circular/>
+                </div>
+            </div>
+        </Link>
+    )
+}
+
+export default Card

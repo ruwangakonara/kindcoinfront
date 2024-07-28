@@ -3,7 +3,8 @@ import { Card, Image, Icon, Label, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './OpenRequest.css';
 
-const ClosedRequest = ({ request }) => {
+
+const ClosedRequest = ({ request , image, beneficiary}) => {
     return (
         <Card className="request-card">
             <Card.Content>
@@ -11,13 +12,13 @@ const ClosedRequest = ({ request }) => {
                     Closed Request
                 </Label>
                 <Image
-                    src={request.image}
+                    src={image}
                     wrapped
                     ui={false}
                     className="request-image"
                 />
                 <Card.Header>{request.title}</Card.Header>
-                <Card.Meta>{request.beneficiaryName}</Card.Meta>
+                <Card.Meta>{beneficiary.name}</Card.Meta>
                 <Card.Description>
                     {request.verified ? (
                         <span style={{ color: 'green' }}>

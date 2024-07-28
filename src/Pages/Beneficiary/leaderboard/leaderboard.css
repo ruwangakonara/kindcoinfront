@@ -1,0 +1,100 @@
+.leaderboard-page-container {
+    margin-top: 40px;
+    padding: 20px;
+}
+
+.donor-segment {
+    padding: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 4px rgba(0, 0, 0, 0.12);
+    transition: all 0.3s ease-in-out;
+    background-color: #ffffff;
+    border-radius: 10px;
+}
+
+.donor-segment:hover {
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25), 0 8px 10px rgba(0, 0, 0, 0.22);
+}
+
+.leaderboard-header {
+    font-size: 2.5em !important;
+    font-weight: bold !important;
+    color: #4a4a4a !important;
+}
+
+.profile-picture {
+    width: 200px !important;
+    height: 200px !important;
+    border: 5px solid #f4f4f4;
+    border-radius: 50%;
+}
+
+.donor-info-list .header {
+    font-size: 1.5em !important;
+    color: #4a4a4a !important;
+}
+
+.donor-info-list .item {
+    font-size: 1.2em !important;
+    margin-bottom: 20px !important;
+}
+
+.achievements-header {
+    font-size: 2em !important;
+    margin-top: 30px !important;
+    color: #4a4a4a !important;
+}
+
+.achievements-list .item {
+    margin-right: 20px !important;
+}
+
+.description-header {
+    font-size: 2em !important;
+    margin-top: 30px !important;
+    color: #4a4a4a !important;
+}
+
+.donor-description {
+    font-size: 1.2em !important;
+    color: #4a4a4a !important;
+    line-height: 1.6 !important;
+}
+
+.images-header {
+    font-size: 2em !important;
+    margin-top: 30px !important;
+    color: #4a4a4a !important;
+}
+
+.images-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.thumbnail-image {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.thumbnail-image:hover {
+    transform: scale(1.05);
+}
+
+.comments-header {
+    font-size: 2em !important;
+    margin-top: 30px !important;
+    color: #4a4a4a !important;
+}
+
+.comments-group {
+    margin-top: 20px !important;
+}
+
+.comment-input {
+    margin-bottom: 10px !important;
+}
+
+.comment-textarea {
+    margin-bottom: 10px !important;
+}

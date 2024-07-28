@@ -61,7 +61,10 @@ export default function Navbar2() {
                     </div>) : (
                         <div className="temp">
                             <nav className="navbar" id="navbar" ref={navbar}>
-                                <a style={{ width: "fit-content"}} href="/donor/announcements" onClick={click}>Announcements</a>
+                                <a style={{width: "fit-content", background: "lightcyan", borderRadius: "15px"}} href="/donor/maintenance" onClick={click}>Maintenance</a>
+
+                                <a style={{width: "fit-content"}} href="/donor/announcements"
+                                   onClick={click}>Announcements</a>
                                 <a href="/donor/tickets" onClick={click}>Tickets</a>
                                 {/*<Dropdown  text='More' pointing className='link item'>*/}
                                 {/*    <Dropdown.Menu>*/}
@@ -71,7 +74,7 @@ export default function Navbar2() {
                                 {/*</Dropdown>*/}
                             </nav>
                             <div className="brandlogin">
-                                <a href= "/donor/account"><Icon name="user" /></a>
+                                <a href="/donor/account"><Icon name="user" /></a>
                             </div>
                         </div>
                     )

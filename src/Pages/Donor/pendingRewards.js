@@ -13,6 +13,7 @@ const donations = [
         type: 'monetary',
         tokens: 15000,
         recipientName: 'Charity Org',
+        id: 53454
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -21,6 +22,7 @@ const donations = [
         type: 'goods',
         tokens: 10000,
         recipientName: 'John Doe',
+        id: 833434
     },
 ];
 
@@ -41,6 +43,7 @@ const PendingRewards = () => (
                                     type={donation.type}
                                     tokens={donation.tokens}
                                     recipientName={donation.recipientName}
+                                    id = {donation.id}
                                 />
                             </Grid.Column>
                         ))}

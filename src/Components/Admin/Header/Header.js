@@ -1,18 +1,22 @@
-import { Icon, Dropdown, Menu } from "semantic-ui-react";
-import "./Header.css";
+import classes from "./Header.module.css";
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
+import ProfilePic from "../Profile/ProfilePic";
 
-const Header = () => {
+const Header = ({ toggleSidebar }) => {
     return (
-        <>
-            <div className="header">
-            <div className="header-title">Kindcoin</div>
-            <div className="header-greeting">Howdy, admin</div>
-            {/* <div className="header-toggle">
-                <input type="checkbox" />
-            </div> */}
-            </div>
-        </>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={toggleSidebar}>
+          </IconButton>
+          <Typography variant="h6" style={{ flexGrow: 1 }}>
+            Kindcoin
+          </Typography>
+          <Typography variant="h6">
+            <ProfilePic/>
+          </Typography>
+        </Toolbar>
+      </AppBar>
     );
-}
+  };
 
 export default Header
