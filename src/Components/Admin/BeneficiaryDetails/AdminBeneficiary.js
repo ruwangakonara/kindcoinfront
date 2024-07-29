@@ -12,7 +12,7 @@ const AdminBeneficiary = () =>{
 
     return(
         <div>
-            <h1>Admin Beneficiary Component</h1>
+            {/*  */}
         </div>
     )
 }

@@ -11,7 +11,12 @@ const AdminDonorList = () => {
 
   return (
       <div className="donor-list">
-        <h1>Admin Donor List</h1>
+        {/* <div className="search-bar">
+        <InputBase placeholder="Search…" inputProps={{ 'aria-label': 'search' }} />
+        <IconButton type="submit" aria-label="search">
+          <Search />
+        </IconButton>
+      </div> */}
       </div>
   );
 };
