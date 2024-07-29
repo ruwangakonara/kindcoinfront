@@ -140,6 +140,7 @@ import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
 
 import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 import Settings from './Pages/Admin/Settings/Settings';
+import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
 function App() {
 
@@ -252,7 +253,7 @@ function App() {
                 {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
                 <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
                 <Route path='/admin/settings' element={<Settings/>}/>
-
+                <Route path='/admin/assign/crew_member' element={<AssignCrewMember/>}/>
 
 
                 {/* Crew Member Routes */}

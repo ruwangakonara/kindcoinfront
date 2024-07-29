@@ -7,7 +7,7 @@ const ViewComplaints = () => {
     return (
         <div className={classes.mainContainer}>
             <Header/>
-            <SidebarAdmin/>
+            <SidebarAdmin visible={true}/>
             <DefaultDash>
                 <h1>Complaints</h1>
             </DefaultDash>
