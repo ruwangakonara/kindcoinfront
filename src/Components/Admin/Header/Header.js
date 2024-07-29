@@ -1,6 +1,7 @@
 // import classes from "./Header.module.css";
 import { Icon, Dropdown, Menu,Image } from "semantic-ui-react";
 import React, { useRef } from "react";
+import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
 // import ProfilePic from "../Profile/ProfilePic";
 
@@ -36,17 +37,17 @@ const Header = () => {
     return (
 
       <header className="top">
-        <a href="/donor/home">
-            <div id="brand" className="brand">
-                <img src="/charitylogo.png" alt="charity"/>
-            </div>
-        </a>
+        <Link to={"/"}>
+          <div id="brand" className="brand">
+            <img src="/charitylogo.png" alt="charity"/>
+          </div>
+        </Link>
 
         {
           location.pathname === "/" ?
             (<div className="temp">
             <nav className="navbar" id="navbar" ref={navbar}>
-                    <a href="/donor/announcements" onClick={click}>Announcements</a>
+                    {/* <a href="/donor/announcements" onClick={click}>Announcements</a> */}
                     <a href="#about" onClick={click}>About</a>
                     <a href="#projects" onClick={click}>Projects</a>
                     <a href="#skills" onClick={click}>Skills</a>
@@ -60,16 +61,13 @@ const Header = () => {
               : 
             (
             <div className="temp">
-                <nav className="navbar" id="navbar" ref={navbar}>
-                    <a style={{width: "fit-content", background: "lightcyan", borderRadius: "15px"}} href="/donor/maintenance" onClick={click}>Maintenance</a>
-
-                    <a style={{width: "fit-content"}} href="/donor/announcements"
-                        onClick={click}>Announcements</a>
-                    <a href="/donor/tickets" onClick={click}>Tickets</a>
-                </nav>
-                <div className="brandlogin">
-                    <a href="/admin/account"><Icon name="user" /></a>
-                </div>
+              <div className="brandlogin">
+                  <Link to={"/admin/account"}>
+                    <div id="brand" className="brand">
+                      <Icon name="user" />
+                    </div>
+                  </Link>
+              </div>
             </div>
           )
         }
@@ -78,12 +76,3 @@ const Header = () => {
   };
 
 export default Header
-
-
-// export default function Navbar2() {
-
-
-//     return (
-
-//     );
-// }

@@ -7,7 +7,7 @@ const Settings = () => {
     return (
         <div className={classes.mainContainer}>
             <Header/>
-            <SidebarAdmin/>
+            <SidebarAdmin visible={true}/>
             <DefaultDash>
                 <h1>Settings</h1>
             </DefaultDash>

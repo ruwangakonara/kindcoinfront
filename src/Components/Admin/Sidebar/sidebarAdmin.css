@@ -4,7 +4,7 @@
 }
 
 .ui.menu .item {
-  margin: 20px 0 !important;
+  margin: 10px 0 !important;
 }
 
 .ui.menu .item.home {
@@ -29,4 +29,9 @@
 
 .ui.menu .active.item {
   background-color: #0f4c81 !important;
+}
+
+.ui.thin.left.sidebar{
+  margin-top: 50px !important;
+  margin-bottom: 20px;
 }
