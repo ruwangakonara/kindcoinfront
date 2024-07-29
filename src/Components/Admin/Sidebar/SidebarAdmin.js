@@ -41,31 +41,6 @@ const SidebarAdmin = ({ onItemClick }) => {
               </Link>
             </li>
           ))}
-
-
-          {/* <li className={classes.litags}>
-            <Link to="/admin/home" className={classes.textVal}>Dashboard</Link>
-          </li>
-          <li className={classes.litags}> 
-            <Link to="/admin/Donor_List/Donors" className={classes.textVal}>Donor</Link>
-          </li>
-          <li className={classes.litags}>
-            <Link to="/admin/Beneficiary_List/Beneficiaries" className={classes.textVal} >Beneficiaries</Link>
-          </li>
-          <li className={classes.litags}>
-            <Link to="/admin/overall_stats" className={classes.textVal}>Statistics</Link>
-          </li>
-          <li className={classes.litags}>
-            <Link to="/admin/register/crew_member" className={classes.textVal}>Register</Link>
-          </li>
-          <li className={classes.litags}>
-            <Link to="/admin/view/complaints" className={classes.textVal}>Complaints</Link>
-          </li>
-          <li className={classes.litags}>
-            <Link to="/admin/settings" className={classes.textVal}>Settings</Link>
-          </li> */}
-
-
         </ul>
       </nav>
     </div>
