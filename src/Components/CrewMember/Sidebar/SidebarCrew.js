@@ -1,43 +1,48 @@
-import React, {useState} from "react";
+import React from 'react'
+import {
+  MenuItem,
+  Icon,
+  Menu,
+  Sidebar,
+} from 'semantic-ui-react';
 import './SidebarCrew.css';
-import { Link } from "react-router-dom";
+const SidebarCrew = () => (
+  <Sidebar
+    as={Menu}
+    animation='overlay'
+    icon='labeled'
+    inverted
+    vertical
+    visible
+    width='thin'
+    style={{ minHeight: '100vh' }}
 
-const SidebarCrew = () => {
-    const [isCollpased, setIsCollapsed] = useState(false);
-
-    const toggleSidebar = () => {
-        setIsCollapsed(!isCollpased);
-    }
-
-    return(
-        <div className={`sidebar ${isCollpased ? 'collapsed' : ''}`}>
-            <div className="sidebar-header">
-            <button onClick={toggleSidebar} className="collapse-button">
-                {isCollpased ? 'Expand': 'Collapse'}
-            </button>
-            </div>
-            <nav className="sidebar-nav">
-                <ul>
-                    <li>
-                        <Link to="#">Verify Recipients</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Verify Requests</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Verify Donation Proofs</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Token Transfer</Link>
-                    </li>
-                    <li>
-                        <Link to="#">Settings</Link>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        
-    );
-}
+  >
+    <MenuItem as='a' className='home'>
+      <Icon name='home' />
+      Home
+    </MenuItem>
+    <MenuItem as='a'>
+      <Icon name='book' />
+      Verify Requests
+    </MenuItem>
+    <MenuItem as='a'>
+      <Icon name='male' />
+      Verify Recepients
+    </MenuItem>
+    <MenuItem as='a'>
+      <Icon name='file outline' />
+      Verify Donation Proofs
+    </MenuItem>
+    <MenuItem as='a'>
+      <Icon name='credit card' />
+      Token Transfer
+    </MenuItem>
+    <MenuItem as='a' className='settings'>
+      <Icon name='settings' />
+      Settings
+    </MenuItem>
+  </Sidebar>
+)
 
 export default SidebarCrew;

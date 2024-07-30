@@ -1,35 +1,55 @@
-import React, {useState} from "react";
-import { Link } from "react-router-dom";
-import './HeaderCrew.css';
-// import logo from './logo.png';
-// import profilePic from './profile.png';
+import { Icon, Dropdown, Menu } from "semantic-ui-react";
+import React, { useRef } from "react";
+import "./HeaderCrew.css";
+import { useLocation } from 'react-router-dom';
 
-const HeaderCrew = () =>{
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+export default function HeaderCrew() {
+    const navbar = useRef(null);
+    const sidebar = useRef(null);
+    let i = 0, f = 0;
 
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
-    };
+    const show = () => {
+        if (i === 0) {
+            navbar.current.style.display = "flex";
+            i = 1;
+            f = 1;
+        } else {
+            navbar.current.style.display = "none";
+            i = 0;
+            f = 0;
+        }
+    }
 
-    return(
-        <div className="header">
-            <div className="logo">
-            <img src="https://via.placeholder.com/50" alt="Logo" />
-                {/* <img src={logo} alt="Logo" /> */}
+    const click = () => {
+        if (f === 1) {
+            console.log(f);
+            navbar.current.style.display = "none";
+            f = 0;
+            i = 0;
+        }
+    }
+
+    return (
+        <header className="top">
+            <a href="/crew/home">
+                <div id="brand" className="brand">
+                    <img src="/charitylogo.png" alt="charity" />
+                </div>
+            </a>
+
+            <div className="temp">
+                <Dropdown
+                    className="brandlogin"
+                    trigger={<Icon name="user" />}
+                    pointing="top right"
+                    icon={null}
+                >
+                    <Dropdown.Menu>
+                        <Dropdown.Item text="Profile" icon="user" />
+                        <Dropdown.Item text="Logout" icon="sign-out" />
+                    </Dropdown.Menu>
+                </Dropdown>
             </div>
-
-            <div className="profile">
-                {/* <img src={profilePic} alt="Profile" className="profile-pic" onClick={toggleDropdown}/> */}
-                <img src="https://via.placeholder.com/50" alt="Profile" className="profile-pic" onClick={toggleDropdown}/>
-                {isDropdownOpen && (
-                    <div className="dropdown">
-                        <Link to="/crew/profile">Profile</Link>
-                        <Link to="/crew/login">Logout</Link>
-                    </div>
-                )}
-            </div>
-            </div>
+        </header>
     );
 }
-
-export default HeaderCrew;
