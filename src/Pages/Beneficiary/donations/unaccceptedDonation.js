@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon } from 'semantic-ui-react';
-import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
-import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
-import './myListingPage.css';
-import { useParams } from 'react-router-dom';
+import { Container, Grid, Header, Image, List, Segment, Label, Icon, Button, Modal } from 'semantic-ui-react';
+import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
+import Sidebar3 from '../../../Components/Beneficiary/Sidebar/Sidebar3';
+// import './myListingPage2.css';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const dummyDonation = {
     donorName: 'John Doe',
@@ -23,78 +23,40 @@ const dummyDonation = {
     requestDescription: 'We are in need of winter clothes for the upcoming cold season. Your help will be greatly appreciated.',
     recipientPhone: '123-456-7890',
     donationPhone: '987-654-3210',
-    verified: false,
-    images: [
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
-    ]
+    accepted: false
 };
 
-const OnGoingDonationPage = () => {
+const UnacceptedDonation = () => {
     const { donation_id } = useParams();
-    const [editModalOpen, setEditModalOpen] = useState(false);
-    const [imageModalOpen, setImageModalOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(null);
-    const [editedImages, setEditedImages] = useState(dummyDonation.images);
+    const navigate = useNavigate();
+    const [acceptModalOpen, setAcceptModalOpen] = useState(false);
 
-    // Handle opening and closing of edit modal
-    const handleEditModalOpen = () => {
-        setEditModalOpen(true);
+    const handleAcceptModalOpen = () => {
+        setAcceptModalOpen(true);
     };
 
-    const handleEditModalClose = () => {
-        setEditModalOpen(false);
+    const handleAcceptModalClose = () => {
+        setAcceptModalOpen(false);
     };
 
-    // Handle opening and closing of image modal
-    const handleImageModalOpen = (image) => {
-        setSelectedImage(image);
-        setImageModalOpen(true);
-    };
-
-    const handleImageModalClose = () => {
-        setImageModalOpen(false);
-        setSelectedImage(null);
-    };
-
-    // Handle form submission for editing donation details
-    const handleEditFormSubmit = (e) => {
-        e.preventDefault(); // Prevent default form submission
-        // Perform logic to update donation details (e.g., API call)
-        console.log('Updated Images:', editedImages);
-        setEditModalOpen(false);
-    };
-
-    // Handle adding a new image
-    const handleAddImage = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setEditedImages([...editedImages, reader.result]);
-            };
-            reader.readAsDataURL(file);
-        }
-    };
-
-    // Handle removing an image
-    const handleRemoveImage = (index) => {
-        const newImages = [...editedImages];
-        newImages.splice(index, 1);
-        setEditedImages(newImages);
+    const handleAcceptDonation = () => {
+        // Perform logic to accept the donation (e.g., API call)
+        console.log('Donation accepted');
+        setAcceptModalOpen(false);
+        // Redirect to another page after accepting
+        navigate('/some-other-page');
     };
 
     return (
         <div>
-            <Navbar2 />
+            <Navbar />
             <Grid>
                 <Grid.Column width={1}>
                     <Sidebar3 />
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
-                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Ongoing Donation</Header>
+                        <Header as="h2" style={{ marginTop: "50px", textAlign:"center" }}  className="page-headers">Unaccepted Donation</Header>
                         <Segment raised>
                             <Grid>
                                 <Grid.Row>
@@ -113,9 +75,6 @@ const OnGoingDonationPage = () => {
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {dummyDonation.donationTitle}
-                                                {!dummyDonation.verified && (
-                                                    <Button primary size='tiny' floated='right' onClick={handleEditModalOpen}>Edit</Button>
-                                                )}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
@@ -154,23 +113,12 @@ const OnGoingDonationPage = () => {
                                                 </List.Item>
                                             )}
                                         </List>
-                                    </Grid.Column>
-                                </Grid.Row>
-                                <Grid.Row>
-                                    <Grid.Column width={16}>
-                                        <Header as="h3">Additional Images</Header>
-                                        <div className="additional-images">
-                                            {dummyDonation.images.map((image, index) => (
-                                                <Image
-                                                    key={index}
-                                                    src={image}
-                                                    size='small'
-                                                    spaced
-                                                    onClick={() => handleImageModalOpen(image)}
-                                                    style={{ cursor: 'pointer' }}
-                                                />
-                                            ))}
-                                        </div>
+                                        {!dummyDonation.accepted && (
+                                            <Label color='red' className='not-accepted-label'>
+                                                <Icon name='flag' /> Not Accepted
+                                            </Label>
+                                        )}
+                                        <Button primary size='tiny' floated='right' onClick={handleAcceptModalOpen}>Accept</Button>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
@@ -179,45 +127,19 @@ const OnGoingDonationPage = () => {
                 </Grid.Column>
             </Grid>
 
-            {/* Image Modal */}
-            <Modal size='small' open={imageModalOpen} onClose={handleImageModalClose} className="image-modal">
-                <Modal.Content image>
-                    <Image src={selectedImage} centered wrapped style={{ maxWidth: '100%', maxHeight: '80vh' }} />
-                </Modal.Content>
-            </Modal>
-
-            {/* Edit Modal */}
-            <Modal size='tiny' open={editModalOpen} onClose={handleEditModalClose}>
-                <Modal.Header>Edit Donation Images</Modal.Header>
+            {/* Accept Modal */}
+            <Modal size='tiny' open={acceptModalOpen} onClose={handleAcceptModalClose}>
+                <Modal.Header>Confirm Acceptance</Modal.Header>
                 <Modal.Content>
-                    <Form onSubmit={handleEditFormSubmit}>
-                        <Form.Field>
-                            <label>Upload New Image</label>
-                            <input type="file" accept="image/*" onChange={handleAddImage} />
-                        </Form.Field>
-                        <Form.Field>
-                            <label>Current Images</label>
-                            <div className="additional-images">
-                                {editedImages.map((image, index) => (
-                                    <div key={index} style={{ display: 'inline-block', position: 'relative' }}>
-                                        <Image src={image} size='small' spaced />
-                                        <Button
-                                            icon='trash'
-                                            negative
-                                            onClick={() => handleRemoveImage(index)}
-                                            style={{ position: 'absolute', top: 0, right: 0 }}
-                                            type='button'
-                                        />
-                                    </div>
-                                ))}
-                            </div>
-                        </Form.Field>
-                        <Button type='submit'>Save</Button>
-                    </Form>
+                    <p>Are you sure you want to accept this donation?</p>
                 </Modal.Content>
+                <Modal.Actions>
+                    <Button negative onClick={handleAcceptModalClose}>No</Button>
+                    <Button positive onClick={handleAcceptDonation}>Yes</Button>
+                </Modal.Actions>
             </Modal>
         </div>
     );
 }
 
-export default OnGoingDonationPage;
+export default UnacceptedDonation;

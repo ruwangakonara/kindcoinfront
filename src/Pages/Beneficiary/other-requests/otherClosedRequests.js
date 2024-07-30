@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import {Container, Grid, Header} from 'semantic-ui-react';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar4 from '../../../Components/Beneficiary/Sidebar/Sidebar4';
 import ClosedRequest from "../../../Components/Beneficiary/Request/ClosedRequest.js";
@@ -68,6 +68,8 @@ function BeneficiaryOtherClosedRequestList() {
             <div style={{flex: '1'}}>
                 <Navbar/>
                 <Container style={{marginTop: '100px'}}>
+                    <Header as="h2" style = {{marginBottom: "50px"}} className="page-header">Closed Requests</Header>
+
                     <Grid centered stackable columns={3}>
                         {requests.map((request, index) => (
                             <Grid.Column key={index}>

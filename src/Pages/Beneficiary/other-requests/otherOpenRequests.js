@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import {Container, Grid, Header} from 'semantic-ui-react';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar4 from '../../../Components/Beneficiary/Sidebar/Sidebar4';
 import OpenRequest from "../../../Components/Beneficiary/Request/OpenRequest";
@@ -70,6 +70,8 @@ function BeneficiaryOtherOpenRequestList() {
         <div style={{flex: '1'}}>
             <Navbar/>
             <Container style={{marginTop: '100px'}}>
+                <Header as="h2" style = {{marginBottom: "50px"}} className="page-header">Open Requests</Header>
+
                 <Grid centered stackable columns={3}>
                     { requests && requests.map((request, index) => (
                         <Grid.Column key={index}>
