@@ -32,7 +32,7 @@ import { Grid, Header, Segment,Container,List} from 'semantic-ui-react'
                 <Header inverted style ={{textAlign: 'center'}} as='h4' content='Get in Touch With Us' />
                 <List link inverted style={{textAlign: 'center'}}>
                   <List.Item as='a'>Contact Us</List.Item>
-                  <List.Item as='a'>Write To us at : donatenowindia@gmail.com</List.Item>
+                  <List.Item as='a'>Write To us at : qa@kindcoin.com</List.Item>
                 </List>
               </Grid.Column>
 

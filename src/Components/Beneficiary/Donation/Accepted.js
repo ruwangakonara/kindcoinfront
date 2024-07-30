@@ -23,7 +23,7 @@ const Accepted = ({ donorImage, amount, type, donationTitle , id, accepted}) => 
                         )}
                     </Grid.Column>
                     <Grid.Column width={2} textAlign="right">
-                        <Button as={Link} to={`${id}`} size='tiny' className='view-button'>View Donation</Button>
+                        <a href={`/beneficiary/accepted-donation/${id}`} style={{color: "black"}}> <Button size='tiny' className='view-button'>View Donation</Button></a>
                     </Grid.Column>
                 </Grid>
                 {/*{verified ? (*/}

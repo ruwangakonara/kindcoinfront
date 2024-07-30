@@ -49,7 +49,7 @@ const BeneficiaryOwnAccount = () => {
             <Navbar />
 
             <Container className="donor-account-container">
-                <Header as="h1">Donor Account</Header>
+                <Header as="h1">Beneficiary Account</Header>
                 <Segment>
                     <Header as="h2">Your Information</Header>
                     <Grid>

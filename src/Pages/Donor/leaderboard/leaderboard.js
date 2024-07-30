@@ -75,7 +75,7 @@ const DonorOtherLeaderboardPage = () => {
             <Navbar2 />
             <Container className="leaderboard-page-container">
                 <Segment raised className="donor-segment">
-                    <Header style={{ marginTop: '100px' }} as="h1" textAlign="center" className="leaderboard-header">Donor Leaderboard</Header>
+                    <Header style={{ marginTop: '100px' }} as="h2" textAlign="center" className="leaderboard-header">Donor Leaderboard</Header>
                     <Grid stackable>
                         <Grid.Row>
                             <Grid.Column width={4} textAlign="center">

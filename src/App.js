@@ -140,6 +140,10 @@ import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
 
 import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 import Settings from './Pages/Admin/Settings/Settings';
+import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
+import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
+import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
+import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
 
 function App() {
 
@@ -194,7 +198,7 @@ function App() {
                 <Route path = "/donor/my-listings/:donation_id" element={<MyListingPage/>}/>
 
                 <Route path = "/donor/announcements" element={<AnnouncementList/>}/>
-                <Route path="/donor/tickets" element={<TicketsPage/>}/>
+                <Route path="/donor/tickets" element={<DonorTicketsPage/>}/>
 
 
                 <Route path = "/donor/leaderboards" element = {<DonorLeaderboards/>}/>
@@ -212,6 +216,11 @@ function App() {
 
                 <Route path = "/beneficiary/closed-requests" element={<BeneficiaryOwnClosedRequestList/>}/>
                 <Route path = "/beneficiary/closed-requests/:request_id" element={<BeneficiaryOwnClosedRequestPage/>}/>
+
+                <Route path = "/beneficiary/unaccepted-donation/:donation_id" element={<UnaccceptedDonation/>}/>
+                <Route path = "/beneficiary/accepted-donation/:donation_id" element={<AcceptedDonation/>}/>
+                <Route path = "/beneficiary/completed-donation/:donation_id" element={<CompletedDonationBene/>}/>
+
 
                 <Route path = "/beneficiary/donors" element={<BeneficiaryDonorList/>}/>
                 <Route path = "/beneficiary/donors/:donor_id" element={<BeneficiaryDonorAccount/>}/>

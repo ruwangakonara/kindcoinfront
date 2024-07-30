@@ -67,26 +67,26 @@ export default function About() {
         <Grid.Row textAlign="center">
           <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
             <Header as="h3" style={{ fontSize: "2em" }}>
-              "A Person In Need"
+              "A Person/Organization In Need"
             </Header>
             <br/>
             <p style={{ fontSize: "1.33em" }}>
-              When You Register Yourself On Our Platform as A Person In Need, It means That You are In Need Of Financial Assistance and Would Like to Receive a Donation for The Same.
+              When You Register Yourself On Our Platform as an entity in need (Beneficiary), It means That You are In Need Of Financial Assistance or materials and Would Like to Receive a Donation for The Same.
             </p>
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: "5em", paddingTop: "5em" }}>
             <Header as="h3" style={{ fontSize: "2em" }}>
-              "An Organisation Looking To Provide Help, or an Anonymous User"
+              "An Organisation Looking To Provide Help, or a Generous Individual"
             </Header>
             <p style={{ fontSize: "1.33em" }}>
               {/* <Image avatar src="/images/avatar/large/nan.jpg" /> */}
               {/* <b>Nan</b> Chief Fun Officer Acme Toys */}
               When You Register Yourself on Our Platform as an Organisation Looking to Provide Help,
-              It means That You are are a Non-Profitable Organization
+              It may suggest That You are are a Non-Profitable/Profitable Organization
              (Most Likely a Non Governmental Organisation) That is Looking to Reach Out Towards People in Need.
              <br/>
              <br/>
-             Or You Could be a Person wishing To Donate Anonymously (No Need To Register Yourself)
+             Or You Could be a Person wishing To Donate
 
             </p>
           </Grid.Column>
@@ -97,7 +97,7 @@ export default function About() {
   <Segment style={{ padding: "8em 0em" }} vertical>
 <Container text>
   <Header as="h3" style={{ fontSize: "2em" }}>
-    What Happens after a User Successfully Registers as a Person In Need?
+    What Happens after a User Successfully Registers as a Person/Organization In Need?
   </Header>
   <p style={{ fontSize: "1.33em" }}>
     After Successfully Registering Yourself as A Person In Need,
