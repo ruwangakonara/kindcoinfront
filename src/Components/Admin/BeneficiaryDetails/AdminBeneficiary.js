@@ -1,12 +1,18 @@
 import React from 'react';
-// import classes from "./AdminBeneficiary.module.css"
-import Paper from '@mui/material/Paper';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+import classes from "./AdminBeneficiary.module.css"
+import {
+    TableRow,
+    TableHeaderCell,
+    TableHeader,
+    TableFooter,
+    TableCell,
+    TableBody,
+    MenuItem,
+    Icon,
+    Label,
+    Menu,
+    Table,
+  } from 'semantic-ui-react'
 
 const AdminBeneficiary = () =>{
 
@@ -18,35 +24,71 @@ const AdminBeneficiary = () =>{
       ];
 
     return(
-        <div>
-            <Paper>
-                <TableContainer>
-                <Table>
-                    <TableHead>
-                    <TableRow style={{ backgroundColor: '#f5f5f5' }}>
-                        <TableCell><h3>Name</h3></TableCell>
-                        <TableCell><h3>Age</h3></TableCell>
-                        <TableCell><h3>Nickname</h3></TableCell>
-                        <TableCell><h3>Employee</h3></TableCell>
+        <div className={classes.mainContainer}>
+            <Table celled>
+                <TableHeader>
+                    <TableRow>
+                        <TableHeaderCell>Header1</TableHeaderCell>
+                        <TableHeaderCell>Header2</TableHeaderCell>
+                        <TableHeaderCell>Header3</TableHeaderCell>
                     </TableRow>
-                    </TableHead>
-                    <TableBody>
-                    {rows.map((row) => (
-                        <TableRow key={row.name}>
-                            <TableCell component="th" scope="row">
-                            {row.name}<br /><small>{row.jobTitle}</small>
-                            </TableCell>
-                            <TableCell>{row.age}</TableCell>
-                            <TableCell>{row.nickname}</TableCell>
-                            <TableCell>
-                            <button style={{padding: '5px',backgroundColor: '#f5f5f5'}}>View</button>
-                            </TableCell>
-                        </TableRow>
-                    ))}
-                    </TableBody>
-                </Table>
-                </TableContainer>
-            </Paper>
+                </TableHeader>
+
+                <TableBody>
+                    <TableRow>
+                        <TableCell>
+                        {/* <Label ribbon>First</Label> */}
+                        Cell
+                        </TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                        <TableCell>Cell</TableCell>
+                    </TableRow>
+                </TableBody>
+
+                <TableFooter>
+                    <TableRow>
+                        <TableHeaderCell colSpan='3'>
+                            <Menu floated='right' pagination>
+                                <MenuItem as='a' icon>
+                                <Icon name='chevron left' />
+                                </MenuItem>
+                                <MenuItem as='a'>1</MenuItem>
+                                <MenuItem as='a'>2</MenuItem>
+                                <MenuItem as='a'>3</MenuItem>
+                                <MenuItem as='a'>4</MenuItem>
+                                <MenuItem as='a' icon>
+                                <Icon name='chevron right' />
+                                </MenuItem>
+                            </Menu>
+                        </TableHeaderCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
         </div>
     )
 }

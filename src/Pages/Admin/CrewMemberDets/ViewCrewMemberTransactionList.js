@@ -8,7 +8,7 @@ const TransactionList = () => {
         <div>
             {/* Transaction List */}
             <Header/>
-            <SidebarAdmin/>
+            <SidebarAdmin visible={true}/>
         </div>
     )
 }

@@ -1,21 +1,20 @@
-import GridTypeDash from "../../../Components/Admin/DashboardComp/GridTypeDash";
+import DefaultDash from "../../../Components/Admin/DashboardComp/DefaultDash";
 import Header from "../../../Components/Admin/Header/Header";
 import Card from "../../../Components/Admin/NavigationCard/Card";
 import SidebarAdmin from "../../../Components/Admin/Sidebar/SidebarAdmin";
-// import classes from "./OverallStatistics.module.css"
 
-const Statistics = () => {
-    return(
+const AssignCrewMember = () => {
+    return ( 
         <div>
             <Header/>
             <SidebarAdmin visible={true}/>
-            <GridTypeDash>
+            <DefaultDash>
                 <Card title={"aksdfl"}/>
                 <Card title={"aksdfl"}/>
                 <Card title={"aksdfl"}/>
-            </GridTypeDash>
+            </DefaultDash>
         </div>
-    )
-};
-
-export default Statistics
+    );
+}
+ 
+export default AssignCrewMember;
