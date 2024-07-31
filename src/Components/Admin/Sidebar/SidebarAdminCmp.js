@@ -1,5 +1,4 @@
-// import classes from "./SidebarAdmin.module.css"
-import "./sidebarAdmin.css"
+import "./SidebarAdminCmp.css"
 import {
   MenuItem,
   Header,
@@ -10,7 +9,7 @@ import {
 } from 'semantic-ui-react'
 import { Link } from 'react-router-dom';
 
-const SidebarAdmin = ({ visible }) => {
+const SidebarAdminCmp = ({ visible }) => {
 
   const items = [
     { name: 'Dashboard', path: '/admin/home', icon: 'home' },
@@ -43,4 +42,4 @@ const SidebarAdmin = ({ visible }) => {
   )
 }
 
-export default SidebarAdmin
+export default SidebarAdminCmp

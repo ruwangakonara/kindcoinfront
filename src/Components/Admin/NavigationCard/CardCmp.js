@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-import classes from "./Card.module.css"
-import {Image} from 'semantic-ui-react';
+import classes from "./CardCmp.module.css"
+import {Icon, Image} from 'semantic-ui-react';
 
-const Card = (props) => {
+const CardCmp = (props) => {
 
     return (
         <Link to={props.link}>
@@ -10,11 +10,11 @@ const Card = (props) => {
                 <div className={classes.cardBody}>
                     <h2 className={classes.cardTitle}>{props.title}</h2>
                     <Image src={'https://via.placeholder.com/150'}/>
-                    {/* <Image src={'https://via.placeholder.com/150'} circular/> */}
+                    {/* <Icon name={props.iconName} className={classes.iconStyles}/> */}
                 </div>
             </div>
         </Link>
     )
 }
 
-export default Card
+export default CardCmp

@@ -1,4 +1,4 @@
-import classes from "./CrewMemberTable.module.css"
+import classes from "./CrewMemberTableCmp.module.css"
 import {
     TableRow,
     TableHeaderCell,
@@ -12,7 +12,7 @@ import {
     Table,
   } from 'semantic-ui-react'
 
-const ViewCrewMember = () => {
+const CrewMemberTableCmp = () => {
     return (
         <div className={classes.mainContainer}>
             <Table celled compact definition>
@@ -79,4 +79,4 @@ const ViewCrewMember = () => {
     );
 }
  
-export default ViewCrewMember;
+export default CrewMemberTableCmp;

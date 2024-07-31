@@ -1,11 +1,13 @@
-import classes from "./GridTypeDash.module.css"
+import classes from "./GridTypeDashCmp.module.css"
 import React from "react";
-import { GridRow, GridColumn, Grid, Image } from 'semantic-ui-react'
-import "./GridTypeDash.module.css"
+import { GridRow, GridColumn, Grid} from 'semantic-ui-react'
 
-const GridTypeDash = ({children}) => {
+const GridTypeDashCmp = ({children}) => {
     return ( 
         <div className={classes.dashboard}>
+            <div>
+                {children.heading}
+            </div>
             <Grid columns={3} padded celled>
                 <GridRow>
                     {React.Children.map(children, (child, index) => (
@@ -19,4 +21,4 @@ const GridTypeDash = ({children}) => {
      );
 }
  
-export default GridTypeDash;
+export default GridTypeDashCmp;

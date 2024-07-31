@@ -1,11 +1,10 @@
-// import classes from "./Header.module.css";
+// import classes from "./HeaderCmp.module.css";
 import { Icon, Dropdown, Menu,Image } from "semantic-ui-react";
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-// import ProfilePic from "../Profile/ProfilePic";
 
-const Header = () => {
+const HeaderCmp = () => {
 
     const navbar = useRef(null);
     const sidebar = useRef(null);
@@ -75,4 +74,4 @@ const Header = () => {
     );
   };
 
-export default Header
+export default HeaderCmp

@@ -1,7 +1,7 @@
 import React from 'react';
-import classes from "./AdminBeneficiary.module.css"
+import classes from "./AdminBeneficiaryCmp.module.css"
 
-const AdminBeneficiary = () =>{
+const AdminBeneficiaryCmp = () =>{
 
     return(
         <div className={classes.mainContainer}>
@@ -10,4 +10,4 @@ const AdminBeneficiary = () =>{
     )
 }
 
-export default AdminBeneficiary
+export default AdminBeneficiaryCmp
