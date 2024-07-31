@@ -13,7 +13,7 @@ const donations = [
         amount: '$100',
         type: 'monetary',
         tokens: 15000,
-        recipientName: 'Charity Org',
+        donationTitle: 'One',
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -21,7 +21,7 @@ const donations = [
         amount: '50kg of rice',
         type: 'goods',
         tokens: 10000,
-        recipientName: 'John Doe',
+        donationTitle: 'Two',
     },
 ];
 
@@ -43,7 +43,7 @@ const CompletedDonations = () => (
                                     amount={donation.amount}
                                     type={donation.type}
                                     tokens={donation.tokens}
-                                    recipientName={donation.recipientName}
+                                    donationTitle={donation.donationTitle}
                                 />
                             </Grid.Column>
                         ))}

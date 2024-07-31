@@ -18,6 +18,7 @@ const accepted_donations = [
         recipientName: 'Charity Org',
         id:334354,
         accepted: true,
+        donorName: "rawdon"
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -28,7 +29,9 @@ const accepted_donations = [
         tokens: 10000,
         recipientName: 'John Doe',
         id:35354354,
-        accepted: true
+        accepted: true,
+        donorName: "rawdon"
+
     },
 ];
 
@@ -42,7 +45,9 @@ const unaccepted_donations = [
         tokens: 15000,
         recipientName: 'Charity Org',
         accepted: false,
-        id:35354354
+        id:35354354,
+        donorName: "rawdon"
+
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -53,7 +58,9 @@ const unaccepted_donations = [
         tokens: 10000,
         recipientName: 'John Doe',
         accepted: false,
-        id:35354354
+        id:35354354,
+        donorName: "rawdon"
+
     },
 ];
 
@@ -66,6 +73,8 @@ const completed_donations = [
         type: 'monetary',
         tokens: 15000,
         recipientName: 'Charity Org',
+        donorName: "rawdon"
+
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -75,6 +84,9 @@ const completed_donations = [
         type: 'goods',
         tokens: 10000,
         recipientName: 'John Doe',
+        donorName: "rawdon"
+
+
     },
 ];
 
@@ -271,6 +283,7 @@ const OpenRequestPage = () => {
                                 type={donation.type}
                                 accepted={donation.accepted}
                                 id={donation.id}
+                                donorName={donation.donorName}
                             />
                         </Grid.Column>
                     ))}
@@ -291,6 +304,8 @@ const OpenRequestPage = () => {
                                 type={donation.type}
                                 accepted={donation.accepted}
                                 id={donation.id}
+                                donorName={donation.donorName}
+
                             />
                         </Grid.Column>
                     ))}
@@ -310,6 +325,8 @@ const OpenRequestPage = () => {
                                 donationTitle={donation.title}
                                 type={donation.type}
                                 id={donation.id}
+                                donorName={donation.donorName}
+
                             />
                         </Grid.Column>
                     ))}

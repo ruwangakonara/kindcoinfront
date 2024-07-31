@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon } from 'semantic-ui-react';
+import {Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label} from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
 import './myListingPage.css';
@@ -113,8 +113,17 @@ const OnGoingDonationPage = () => {
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {dummyDonation.donationTitle}
+                                                <div style={{textAlign: "right", marginBottom: "5px"}}>
+                                                    {!dummyDonation.verified && (
+                                                        <Label color='red' className='status-label'>
+                                                            <Icon name='warning'/> Not Verified
+                                                        </Label>
+                                                    )}
+
+                                                </div>
                                                 {!dummyDonation.verified && (
-                                                    <Button primary size='tiny' floated='right' onClick={handleEditModalOpen}>Edit</Button>
+                                                    <Button primary size='tiny' floated='right'
+                                                            onClick={handleEditModalOpen}>Edit</Button>
                                                 )}
                                             </List.Item>
                                             <List.Item>

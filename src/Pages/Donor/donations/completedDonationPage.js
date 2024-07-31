@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label} from 'semantic-ui-react';
+import { Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
 import './myListingPage.css';
@@ -31,6 +31,9 @@ const dummyDonation = {
         'https://via.placeholder.com/150',
         'https://via.placeholder.com/150'
     ],
+    doc_transac_id: "44227443424",
+    doc_amount: 561,
+    doc_verified: false
 };
 
 const CompletedDonationPage = () => {
@@ -39,6 +42,8 @@ const CompletedDonationPage = () => {
     const [attestationModalOpen, setAttestationModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [editedImages, setEditedImages] = useState(dummyDonation.images);
+    const [docTransacId, setDocTransacId] = useState(dummyDonation.doc_transac_id);
+    const [editingDocTransacId, setEditingDocTransacId] = useState(false);
 
     const handleImageModalOpen = (image) => {
         setSelectedImage(image);
@@ -62,6 +67,21 @@ const CompletedDonationPage = () => {
         window.print();
     };
 
+    const handleUpdateDocTransacId = () => {
+        setEditingDocTransacId(true);
+    };
+
+    const handleDocTransacIdChange = (e) => {
+        setDocTransacId(e.target.value);
+    };
+
+    const handleSaveDocTransacId = () => {
+        // Save the updated doc_transac_id
+        setEditingDocTransacId(false);
+        dummyDonation.doc_transac_id = docTransacId
+        // Implement save logic here (e.g., API call)
+    };
+
     return (
         <div>
             <Navbar2 />
@@ -71,8 +91,7 @@ const CompletedDonationPage = () => {
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
-                        {/*<Image src="/charitylogo.png" size="small" centered />*/}
-                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Completed Donation</Header>
+                        <Header as="h2" style={{ marginTop: "50px" }} className="page-header">Completed Donation</Header>
                         <Segment raised>
                             <Grid>
                                 <Grid.Row>
@@ -81,14 +100,14 @@ const CompletedDonationPage = () => {
                                         <Header as="h3" className="image-label">Donor: {dummyDonation.donorName}</Header>
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture"/>
+                                        <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture" />
                                         <Header as="h3" className="image-label">Recipient: {dummyDonation.recipientName}</Header>
-                                        <Label style={{marginTop: '10px'}} color='green' className='not-accepted-label'>Accepted</Label>
-                                        <div style={{color: 'green'}}>
-                                            <Icon name='check circle' color='green'/>
+                                        <Label style={{ marginTop: '10px' }} color='green' className='not-accepted-label'>Accepted</Label>
+                                        <div style={{ color: 'green' }}>
+                                            <Icon name='check circle' color='green' />
                                             Verified
                                         </div>
-                                        <Label style={{marginTop: '15px'}} color='blue' className='not-accepted-label'>Tokens Transacted</Label>
+                                        <Label style={{ marginTop: '15px' }} color='blue' className='not-accepted-label'>Tokens Transacted</Label>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
@@ -131,7 +150,7 @@ const CompletedDonationPage = () => {
                                             {dummyDonation.donationType === 'monetary' && (
                                                 <List.Item>
                                                     <List.Header>Amount</List.Header>
-                                                    {dummyDonation.moneyAmount}
+                                                    {dummyDonation.amount}
                                                 </List.Item>
                                             )}
                                         </List>
@@ -157,20 +176,74 @@ const CompletedDonationPage = () => {
                             </Grid>
                         </Segment>
 
+                        {/* New Segment for Document Transaction ID */}
                         <Segment>
                             <Grid>
-                                <Grid.Column width={8}>
-                                    <Header as="h3">Amount</Header>
-                                    <p>{dummyDonation.amount}</p>
-                                </Grid.Column>
-                                <Grid.Column width={8}>
-                                    <Header as="h3">Tokens</Header>
-                                    <p>{dummyDonation.tokens}</p>
-                                </Grid.Column>
+                                <Grid.Row>
+                                    <Grid.Column width={16}>
+                                        <Header as="h3">Document Transaction ID</Header>
+                                        <p>{dummyDonation.doc_transac_id}</p>
+
+                                        {!dummyDonation.doc_verified && (
+                                            <>
+                                                {editingDocTransacId ? (
+                                                    <Form>
+                                                        <Form.Field>
+                                                            <label>Transaction ID</label>
+                                                            <input
+                                                                value={docTransacId}
+                                                                onChange={handleDocTransacIdChange}
+                                                            />
+                                                        </Form.Field>
+                                                        <Button color='blue'
+                                                                onClick={handleSaveDocTransacId}>Save</Button>
+                                                        <Button color='grey'
+                                                                onClick={() => setEditingDocTransacId(false)}>Cancel</Button>
+                                                    </Form>
+                                                ) : (
+                                                    <Button color='blue' onClick={handleUpdateDocTransacId}>Update
+                                                        Transaction ID</Button>
+                                                )}
+                                            </>
+                                        )}
+                                    </Grid.Column>
+                                </Grid.Row>
                             </Grid>
                         </Segment>
 
-                        <Button color='blue' onClick={handleAttestationModalOpen}>Show Attestation</Button>
+                        <Segment>
+                            <Grid>
+                                <Grid.Row>
+                                    <Grid.Column width={8}>
+                                        <Header as="h3">Amount</Header>
+                                        <p>{dummyDonation.amount}</p>
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <Header as="h3">Tokens</Header>
+                                        <Grid.Row style={{ display: 'flex', flexDirection: 'row' }}>
+                                            <p>{dummyDonation.tokens}</p>
+                                            <Image src="/token.png" circular className="token-image" />
+                                        </Grid.Row>
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <Header as="h3">Attestation Fee</Header>
+                                        <Grid.Row style={{ display: 'flex', flexDirection: 'row' }}>
+                                            <p>{dummyDonation.doc_amount}</p>
+                                            <Image src="/token.png" circular className="token-image" />
+                                        </Grid.Row>
+                                    </Grid.Column>
+                                    {dummyDonation.doc_verified ? (
+                                        <h4 style={{ marginBottom: "10px", marginLeft: "12px" }}>Attestation Fee <Label style={{ marginTop: '10px' }} color='green' className='not-accepted-label'>Verified</Label>. Attestation Available</h4>
+                                    ) : (
+                                        <h4 style={{ marginBottom: "10px",marginLeft: "12px"  }}>Attestation Fee Verification <Label style={{ marginTop: '10px' }} color='orange' className='not-accepted-label'>Pending</Label>. Attestation Unavailable</h4>
+                                    )}
+                                </Grid.Row>
+                            </Grid>
+                        </Segment>
+
+                        {dummyDonation.doc_verified && (
+                            <Button color='blue' onClick={handleAttestationModalOpen}>Show Attestation</Button>
+                        )}
                     </Container>
                 </Grid.Column>
             </Grid>
@@ -186,11 +259,9 @@ const CompletedDonationPage = () => {
             <Modal size='large' open={attestationModalOpen} onClose={handleAttestationModalClose}>
                 <Modal.Header>Donation Attestation</Modal.Header>
                 <Modal.Content>
-                    <div style = {{textAlign: 'right', display: "flex", marginBottom: "70px"}}>
-                        <Image src="/charitylogo.png" size="medium" style = {{textAlign: 'right', display: "flex"}} />
-
+                    <div style={{ textAlign: 'right', display: "flex", marginBottom: "70px" }}>
+                        <Image src="/charitylogo.png" size="medium" style={{ textAlign: 'right', display: "flex" }} />
                     </div>
-                    {/*<Header as="h2" textAlign="center">Attestation</Header>*/}
                     <p>We hereby attest that the following donation has been received:</p>
                     <List>
                         <List.Item>
@@ -244,7 +315,7 @@ const CompletedDonationPage = () => {
                     </List>
                     <p>Thank you for your generous contribution.</p>
                     <p>Sincerely,</p>
-                    <p style={{fontStyle: "italic"}}>KindCoin Org</p>
+                    <p style={{ fontStyle: "italic" }}>KindCoin Org</p>
                 </Modal.Content>
                 <Modal.Actions>
                     <Button color='blue' onClick={handlePrint}>Print Attestation</Button>
@@ -253,6 +324,6 @@ const CompletedDonationPage = () => {
             </Modal>
         </div>
     );
-}
+};
 
 export default CompletedDonationPage;

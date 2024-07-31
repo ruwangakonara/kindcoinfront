@@ -144,7 +144,6 @@ import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
 import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
-import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
 function App() {
 
@@ -262,7 +261,7 @@ function App() {
                 {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
                 <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
                 <Route path='/admin/settings' element={<Settings/>}/>
-                <Route path='/admin/assign/crew_member' element={<AssignCrewMember/>}/>
+
 
 
                 {/* Crew Member Routes */}

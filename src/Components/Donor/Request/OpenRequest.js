@@ -19,7 +19,7 @@ const OpenRequest = ({ request }) => {
                 <Card.Header>{request.requestDetails.title}</Card.Header>
                 <Card.Meta>{request.name}</Card.Meta>
                 <Card.Description>
-                    {request.verified ? (
+                    {request.requestDetails.verified ? (
                         <span style={{ color: 'green' }}>
                             <Icon name="flag" color="green" /> Verified
                         </span>

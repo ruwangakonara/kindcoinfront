@@ -6,11 +6,18 @@ import GridTypeDash from "../../../Components/Admin/DashboardComp/GridTypeDash";
 import classes from "./AdminDashBoard.module.css"
 
 const AdminDashBoard = () => {
+
+    // const [activeTab, setActiveTab] = useState('');
+
+    // const handleSidebarItemClick = (item) => {
+    //     setActiveTab(item);
+    // };
+
     return ( 
         <>     
             <div className={classes.mainContainer}>
                 <Header/>
-                <SidebarAdmin visible={true}/>
+                <SidebarAdmin/>
                 <GridTypeDash>
                     <Card title="Donor" link="/admin/Donor_List/Donors"/>
                     <Card title="Benificiary" link="/admin/Beneficiary_List/Beneficiaries" />

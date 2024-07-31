@@ -8,7 +8,7 @@ const AdminBeneficiaryList = () => {
     return (
         <div className={classes.mainContainer}>
             <Header />
-            <SidebarAdmin visible={true}/>
+            <SidebarAdmin/>
             <DefaultDash>
                 <h1 style={{textAlign: "center"}}>BeneficiaryList</h1>
                 <AdminBeneficiary/>

@@ -9,7 +9,7 @@ const RegisterCrewMemberPage = () => {
         <div className={classes.mainContainer}>
             {/* <h1>Register Crew Member</h1> */}
             <Header/>
-            <SidebarAdmin visible={true}/>
+            <SidebarAdmin/>
             <DefaultDash>
                 <h1>Register page</h1>
             </DefaultDash>

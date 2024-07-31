@@ -13,7 +13,7 @@ const donations = [
         recipientImage: 'https://via.placeholder.com/150',
         amount: '$100',
         type: 'monetary',
-        verified: true,
+        verified: false,
         recipientName: 'Charity Org',
         requestTitle: "fsdfsdf",
         donationTitle: "adfsdfsdf",

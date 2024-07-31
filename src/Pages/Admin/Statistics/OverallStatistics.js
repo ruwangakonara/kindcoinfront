@@ -8,7 +8,7 @@ const Statistics = () => {
     return(
         <div>
             <Header/>
-            <SidebarAdmin visible={true}/>
+            <SidebarAdmin/>
             <GridTypeDash>
                 <Card title={"aksdfl"}/>
                 <Card title={"aksdfl"}/>
