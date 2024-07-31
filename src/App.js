@@ -148,12 +148,12 @@ import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
 import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
-import Settings from './Pages/Admin/Settings/Settings';
+// import AdminSettings from './Pages/Admin/Settings/Settings';
 import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
 import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
-import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
+// import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
 function App() {
 
