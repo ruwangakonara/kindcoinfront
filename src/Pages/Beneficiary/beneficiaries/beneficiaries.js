@@ -1,6 +1,6 @@
 import React from 'react';
 import Beneficiary from '../../../Components/Beneficiary/Beneficiary/Beneficiary';
-import { Container, Grid } from 'semantic-ui-react';
+import {Container, Grid, Header} from 'semantic-ui-react';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import Sidebar from "../../../Components/Beneficiary/Sidebar/Sidebar";
 // import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
@@ -42,6 +42,8 @@ const BeneficiaryOtherBeneficiaryList = () => (
         <div style={{ flex: '1' }}>
             <Navbar/>
             <Container style={{ padding: '20px', top:"100px", position: 'relative' }}>
+                <Header as="h2" style = {{marginBottom: "50px"}} className="page-header">Beneficiaries</Header>
+
                 <Grid columns={3} stackable>
                     {beneficiaries.map((beneficiary, index) => (
                         <Grid.Column key={index} style={{ marginBottom: '20px' }}>

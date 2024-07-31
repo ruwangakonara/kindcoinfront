@@ -23,10 +23,10 @@ const Unaccepted = ({ donorImage, amount, type, donationTitle, accepted, id }) =
                         )}
                     </Grid.Column>
                     <Grid.Column width={2} textAlign="right">
-                        <Button as={Link} to={`${id}`} size='tiny' className='view-button'>View Donation</Button>
-                    </Grid.Column>
-                </Grid>
-            </Card.Content>
+                        <a href={`/beneficiary/unaccepted-donation/${id}`} style={{color: "black"}}> <Button size='tiny' className='view-button'>View Donation</Button></a>
+                </Grid.Column>
+            </Grid>
+        </Card.Content>
         </Card>
     );
 }

@@ -37,28 +37,30 @@ export default function Navbar() {
   return (
       <header className="top">
           <div id="brand" className="brand">
-            <img src="./charitylogo.png" alt="charity" />
+            <img src="/charitylogo.png" alt="charity" />
           </div>
 
-          {
-            location.pathname === "/" ?
-            (<div className="temp">
+          {/*{*/}
+          {/*  location.pathname === "/" ?*/}
+          {/*  (*/}
+                <div className="temp">
             <nav className="navbar" id="navbar" ref={navbar}>
-             <a  href="#home" onClick={click}>Home</a>
+             <a  href="/" onClick={click}>Home</a>
              <a href="#about" onClick={click}>About</a>
-             <a  href="#projects" onClick={click}>Projects</a>
-             <a  href="#skills" onClick={click}>Skills</a>
+             <a  href="/leaderboards" onClick={click}>Leaders</a>
+             {/*<a  href="#skills" onClick={click}>Skills</a>*/}
              <a  href="#contact" onClick={click}>Contact</a>
             </nav>
             <div className="sidebar" id="sidebar" ref={sidebar} onClick={show}>
                  <Icon name="ellipsis vertical"/>
             </div>
             </div>
-           ):(<div  className="brandlogin">
-                  <Icon name="user"/>
-                  </div>
-              )
-          }
+          {/*//  ):(*/}
+          {/*//      <div  className="brandlogin">*/}
+          {/*//         <Icon name="user"/>*/}
+          {/*//         </div>*/}
+          {/*//     )*/}
+          {/*// }*/}
           
           
       </header>

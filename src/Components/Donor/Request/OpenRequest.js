@@ -11,13 +11,13 @@ const OpenRequest = ({ request }) => {
                     Open Request
                 </Label>
                 <Image
-                    src={request.image}
+                    src={request.profile_image}
                     wrapped
                     ui={false}
                     className="request-image"
                 />
-                <Card.Header>{request.title}</Card.Header>
-                <Card.Meta>{request.beneficiaryName}</Card.Meta>
+                <Card.Header>{request.requestDetails.title}</Card.Header>
+                <Card.Meta>{request.name}</Card.Meta>
                 <Card.Description>
                     {request.verified ? (
                         <span style={{ color: 'green' }}>
@@ -31,7 +31,7 @@ const OpenRequest = ({ request }) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as={Link} to={`${request.id}`} color="blue" fluid>
+                <Button as={Link} to={`${request.requestDetails._id}`} color="blue" fluid>
                     View Request
                 </Button>
             </Card.Content>

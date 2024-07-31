@@ -5,11 +5,11 @@ import{Button} from 'semantic-ui-react'
 const People = () => {
   const navigate = useNavigate();
     return(
-      <div style={{marginTop:"70px"}}>
-          <div>
-              <ul style={{textAlign: "left", display:"flex", justifyContent:"space-between"}}>
-                  <li><Link to="login">login user</Link></li>
-                  <li><Link to="signup">Sign up as a Donor</Link></li>
+      <div style={{marginTop:"70px", }}>
+          <div style={{textAlign: "left", display:"flex"}}>
+              <ul style={{textAlign: "left"}}>
+                  <li style={{textAlign: "left", marginBottom: "-50px"}}><Link to="login">login user</Link></li>
+                  <li style={{textAlign: "left", marginBottom: "20px"}}><Link to="signup">Sign up as a Donor</Link></li>
               </ul>
           </div>
 

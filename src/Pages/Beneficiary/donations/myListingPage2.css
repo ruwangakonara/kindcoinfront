@@ -3,7 +3,7 @@
     padding: 20px;
 }
 
-.page-header {
+.page-headers {
     margin-bottom: 20px;
     text-align: left;
     position: relative;
@@ -46,3 +46,17 @@
     max-height: 80vh !important;
 }
 
+.status-label {
+    margin-left: 10px;
+    font-weight: bold;
+    align-self: flex-end;
+
+    display:flex;
+    text-align: right;
+    align-items: flex-end;
+}
+
+.additional-images {
+    display: flex;
+    flex-wrap: wrap;
+}

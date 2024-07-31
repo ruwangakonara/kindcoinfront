@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import Navbar2 from "../../../Components/Donor/NavBar/NavBar2";
+import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import LeaderBoard from "../../../Components/Beneficiary/LeaderBoard/LeaderBoard";
 // import Sidebar4 from "../../../Components/B/Sidebar/Sidebar4";
 
@@ -43,7 +43,7 @@ const BeneficiaryDonorLeaderboards = () => {
         <div style={{ display: 'flex', width: '100%' }}>
             {/*<Sidebar4/>*/}
             <div style={{ flex: '1' }}>
-                <Navbar2/>
+                <Navbar/>
                 <Container style={{ padding: '20px', top: '100px', position: 'relative' }}>
                     <Grid columns={3} stackable>
                         {sortedDonors.map((donor, index) => (
