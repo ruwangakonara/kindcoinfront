@@ -1,21 +1,18 @@
-import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import AdminDonorListCmp from "../../../Components/Admin/DonorDetails/AdminDonorListCmp";
-import classes from "./AdminDonorListPg.module.css";
 import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
+import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
+import classes from "./ViewComplaintsPg.module.css"
 
-const AdminDonorListPg = () => {
-
+const ViewComplaintsPg = () => {
     return (
         <div className={classes.mainContainer}>
             <HeaderCmp/>
             <SidebarAdminCmp visible={true}/>
             <DefaultDashCmp>
-                <h1 style={{textAlign: "center"}}>Donors List</h1>
-                <AdminDonorListCmp/>
+                <h1 style={{textAlign: "center"}}>Complaints</h1>
             </DefaultDashCmp>
         </div>
     );
 }
-
-export default AdminDonorListPg
+ 
+export default ViewComplaintsPg;

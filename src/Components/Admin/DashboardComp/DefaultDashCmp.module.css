@@ -1,11 +1,9 @@
 .dashboard{
-    /* margin: 0 auto; */
     width: 85%;
     justify-content: right;
     align-items:flex-end;
     margin-left: 15%;
-    /* margin-right: 30%; */
-    margin-top: 200px;
+    margin-top: 100px;
     margin-bottom: 0;
     overflow:hidden;
 }
