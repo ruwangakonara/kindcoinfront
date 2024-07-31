@@ -3,3 +3,8 @@
     flex-direction: column; */
     /* height: 100vh; */
 }
+
+.title{
+    margin-bottom: 40px;
+    color: rgb(0, 0, 0);
+}

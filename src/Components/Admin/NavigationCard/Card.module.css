@@ -9,6 +9,9 @@
     justify-content: space-between;
     padding: 15px;
     margin: 5px;
+    border: 2px black solid;
+    /* border-bottom: 2px black solid; */
+    background-color: rgb(235, 237, 241);
 }
 
 .card h2 {

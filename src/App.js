@@ -130,7 +130,7 @@ import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/lea
 import AdminDashBoard from './Pages/Admin/home/AdminDashBoard';
 import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
 import AdminDonor from "./Components/Admin/DonorDetails/AdminDonor";
-import AdminBeneficiaryList from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryList";
+import AdminBeneficiaryListPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg';
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiary";
 import OverallStatistics from './Pages/Admin/Statistics/OverallStatistics';
 import RegisterCrewMemberPage from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPage';
@@ -243,7 +243,7 @@ function App() {
                 <Route path="/admin/home" element={<AdminDashBoard/>}/>
                 <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>
                 <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>
-                <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryList/>}/>
+                <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>
                 <Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>
                 <Route path='/admin/overall_stats' element={<OverallStatistics/>}/>
                 <Route path="/admin/register/crew_member" element={<RegisterCrewMemberPage/>}/>

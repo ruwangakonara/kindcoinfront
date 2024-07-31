@@ -12,7 +12,7 @@ const AdminDonorListPg = () => {
             <Header/>
             <SidebarAdmin visible={true}/>
             <DefaultDash>
-                <h1 style={{textAlign: "center"}}>Donors List</h1>
+                <h1 style={{textAlign: "center",}}>Donors List</h1>
                 <AdminDonorList/>
             </DefaultDash>
         </div>

@@ -4,8 +4,13 @@
     justify-content: right;
     align-items:flex-end;
     margin-left: 15%;
-    /* margin-right: 30%; */
-    margin-top: 200px;
+    margin-right: 50px;
+    margin-top: 100px;
     margin-bottom: 0;
     overflow:hidden;
 }
+
+.custom-grid-row {
+    margin-bottom: 30px; /* Adjust the margin as needed */
+  }
+  

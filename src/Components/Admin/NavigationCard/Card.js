@@ -9,7 +9,8 @@ const Card = (props) => {
             <div className={classes.card}>
                 <div className={classes.cardBody}>
                     <h2 className={classes.cardTitle}>{props.title}</h2>
-                    <Image src={'https://via.placeholder.com/150'} circular/>
+                    <Image src={'https://via.placeholder.com/150'}/>
+                    {/* <Image src={'https://via.placeholder.com/150'} circular/> */}
                 </div>
             </div>
         </Link>
