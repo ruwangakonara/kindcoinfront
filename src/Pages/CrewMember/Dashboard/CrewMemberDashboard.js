@@ -5,36 +5,41 @@ import SidebarCrew from "../../../Components/CrewMember/Sidebar/SidebarCrew";
 import DashboardCard from "../../../Components/CrewMember/DashboardCard/DashboardCard";
 import './CrewMemberDashboard.css';
 
+import tokenTransferImage from "../../../assets/token_transfer.jpg";
+import proofsImage from "../../../assets/proofs.jpg";
+import recVerImage from "../../../assets/recipientVerification.jpg";
+import docVerify from "../../../assets/doc_verify.jpg";
+
 const CrewMemberDashboard = () => {
 
     const cardData = [
         {
             title: "Verify Requests",
-            description: "Total amount donated",
-            imageSrc: "https://via.placeholder.com/150",
+            description: "Requests for donations should be approved by the crew members. It is important to verify the requests before they are approved.",
+            imageSrc: docVerify,
             buttonLabel: "View Requests",
             buttonPath: "/crew/requests"
         },
         {
             title: "Verify Recipients",
-            description: "Total amount donated",
-            imageSrc: "https://via.placeholder.com/150",
-            buttonLabel: "View Requests",
+            description: "New Registrations of recipients should be approved Should go through a rigorous verification process before approving.",
+            imageSrc: recVerImage,
+            buttonLabel: "View New Recipients",
             buttonPath: "/crew/recipients"
         },
         {
             title: "Verify Donation Proofs",
-            description: "Total amount donated",
-            imageSrc: "https://via.placeholder.com/150",
-            buttonLabel: "View Requests",
-            buttonPath: "/crew/requests"
+            description: "Donors submit the proof related to donation should be approved by the crew members. Before token transfer should be approved.",
+            imageSrc: proofsImage,
+            buttonLabel: "View Proofs",
+            buttonPath: "/crew/proofs"
         },
         {
             title: "Token Transfer",
-            description: "Total amount donated",
-            imageSrc: "https://via.placeholder.com/150",
-            buttonLabel: "View Requests",
-            buttonPath: "/crew/requests"
+            description: "After approving the donation transfer the token trnasfer process should be approved with current market value.",
+            imageSrc: tokenTransferImage,
+            buttonLabel: "Transfer",
+            buttonPath: "/crew/token_transfer"
         }
     ]
 

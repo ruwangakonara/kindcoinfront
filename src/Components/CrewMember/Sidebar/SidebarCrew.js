@@ -35,11 +35,11 @@ const SidebarCrew = () => (
       <Icon name='file outline' />
       Verify Donation Proofs
     </MenuItem>
-    <MenuItem as={Link} to='/'>
+    <MenuItem as={Link} to='/crew/token_transfer'>
       <Icon name='credit card' />
       Token Transfer
     </MenuItem>
-    <MenuItem as={Link} to='/' className='settings'>
+    <MenuItem as={Link} to='/crew/settings' className='settings'>
       <Icon name='settings' />
       Settings
     </MenuItem>

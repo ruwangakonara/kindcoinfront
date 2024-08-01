@@ -157,6 +157,8 @@ import VerifyRecipients from './Pages/CrewMember/VerifyRecipients/VerifyRecipien
 import VerifyRequests from './Pages/CrewMember/VerifyRequests/VerifyRequests';
 import VerifyDonationProofs from './Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs';
 import CrewProfile from './Pages/CrewMember/Profile/CrewProfile';
+import TokenTransfer from './Pages/CrewMember/TokenTransfer/TokenTransfer';
+import CrewSettings from './Pages/CrewMember/Settings/CrewSettings';
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
 function App() {
@@ -290,6 +292,8 @@ function App() {
                 <Route path='/crew/recipients' element={<VerifyRecipients/>}/>
                 <Route path='/crew/proofs' element={<VerifyDonationProofs/>}/>
                 <Route path='/crew/profile' element={<CrewProfile/>}/>
+                <Route path='/crew/token_transfer' element={<TokenTransfer/>}/>
+                <Route path='/crew/settings' element={<CrewSettings/>}/>
 
             </Routes>
         // </UserProvider>
