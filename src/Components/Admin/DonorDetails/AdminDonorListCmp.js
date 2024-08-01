@@ -1,5 +1,6 @@
 import classes from "./AdminDonorListCmp.module.css"
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
     TableRow,
     TableHeaderCell,
@@ -16,6 +17,8 @@ import {
 } from 'semantic-ui-react'
 
 const AdminDonorListCmp = () => {
+
+    const navigate = useNavigate()
 
     const [selectedUser, setSelectedUser] = useState(null);
     const [activeRows, setActiveRows] = useState({});
@@ -34,26 +37,31 @@ const AdminDonorListCmp = () => {
      * DateOfBirth
      * StellarAddress
      * District
-     * CreatedAt
+     * CreatedAt    
      * PhoneNo 
      */
 
     const rows = [
-        { userId: "1",userName:"Sumihiri@34",name: 'Sumihiri Childrens Home',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Organization" },
-        { userId: "2",userName:"nimalperera@2",name: 'Nimal Perera',image:'https://via.placeholder.com/150', district: 'Gampaha', stellarAddress: "abcde34hijk0", address:"No: 19/5 Walawwatta Road, Nugegoda",contact:"07129354488", beneficiaryType:"Individual" },
-        { userId: "3",userName:"Vanr#ossum123",name: 'Guido Van Rossum',image:'https://via.placeholder.com/150', district: 'Trincomalee', stellarAddress: "abcd0--ijkl", address:"1st lane, China Bay, Trincomalee",contact:"071394844", beneficiaryType:"Individual" },
-        { userId: "4",userName:"Gih@n@7809",name: 'Gihan Tharindya Andrew',image:'https://via.placeholder.com/150', district: 'Kaluthara', stellarAddress: "ab==efghijk+", address:"No:33,Raja Mawatha, Kaluthara North",contact:"0714939944", beneficiaryType:"Individual" },
-        { userId: "5",userName:"Uvi@Amandy",name: 'Uvini Amandee Ferdinandez Ferdinandez',image:'https://via.placeholder.com/150', district: 'Galle', stellarAddress: "abc4;'/hijkl", address:"No:34/8,New Market Street, Galle",contact:"0711900074", beneficiaryType:"Individual" },
-        { userId: "6",userName:"chamalferdy",name: 'Chamal Fernando',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Organization" },
-        { userId: "7",userName:"chamalferdy",name: 'Chamal Fernando',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Organization" },
-        { userId: "8",userName:"chamalferdy",name: 'Chamal Fernando',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Individual" },
-        { userId: "9",userName:"chamalferdy",name: 'Chamal Fernando',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Organization" },
-        { userId: "10",userName:"chamalferdy",name: 'Chamal Fernando',image:'https://via.placeholder.com/150', district: 'Colombo', stellarAddress: "abcdefghijkl", address:"No: 17 Peiris Road, Moratuwa",contact:"071193444", beneficiaryType:"Individual" },
+        { userId: "1", userName: "michael_scott", name: "Michael Scott", image: "https://via.placeholder.com/150", district: "Kegalle", stellarAddress: "stellar123abc1", address: "No: 18 Forest Avenue, Kegalle", contact: "0771122334", beneficiaryType: "Individual" },
+        { userId: "2", userName: "abc_children_home", name: "ABC Children's Home", image: "https://via.placeholder.com/150", district: "Puttalam", stellarAddress: "stellar456def2", address: "No: 2 Lake View Road, Puttalam", contact: "0772233445", beneficiaryType: "Organization" },
+        { userId: "3", userName: "linda_smith", name: "Linda Smith", image: "https://via.placeholder.com/150", district: "Hambantota", stellarAddress: "stellar789ghi3", address: "No: 8 Harbor Lane, Hambantota", contact: "0773344556", beneficiaryType: "Individual" },
+        { userId: "4", userName: "wildlife_org", name: "Wildlife Conservation", image: "https://via.placeholder.com/150", district: "Polonnaruwa", stellarAddress: "stellar012jkl4", address: "No: 19 Jungle Road, Polonnaruwa", contact: "0774455667", beneficiaryType: "Organization" },
+        { userId: "5", userName: "daniel_james", name: "Daniel James", image: "https://via.placeholder.com/150", district: "Kandy", stellarAddress: "stellar345mno5", address: "No: 6 Temple Street, Kandy", contact: "0775566778", beneficiaryType: "Individual" },
+        { userId: "6", userName: "bright_future", name: "Bright Future Foundation", image: "https://via.placeholder.com/150", district: "Kurunegala", stellarAddress: "stellar678pqr6", address: "No: 10 Hope Avenue, Kurunegala", contact: "0776677889", beneficiaryType: "Organization" },
+        { userId: "7", userName: "jane_doe", name: "Jane Doe", image: "https://via.placeholder.com/150", district: "Ampara", stellarAddress: "stellar901stu7", address: "No: 22 Peace Street, Ampara", contact: "0777788990", beneficiaryType: "Individual" },
+        { userId: "8", userName: "save_earth", name: "Save the Earth", image: "https://via.placeholder.com/150", district: "Batticaloa", stellarAddress: "stellar234vwx8", address: "No: 3 Lagoon View, Batticaloa", contact: "0778899001", beneficiaryType: "Organization" },
+        { userId: "9", userName: "mark_evans", name: "Mark Evans", image: "https://via.placeholder.com/150", district: "Mannar", stellarAddress: "stellar567yz9", address: "No: 5 Sea Breeze Lane, Mannar", contact: "0779900112", beneficiaryType: "Individual" },
+        { userId: "10", userName: "forest_guardians", name: "Forest Guardians", image: "https://via.placeholder.com/150", district: "Monaragala", stellarAddress: "stellar890abc10", address: "No: 7 Green Street, Monaragala", contact: "0770011223", beneficiaryType: "Organization" },
     ];
 
 
-    const handleRowClick = (user) => {
-        setSelectedUser(user);
+    const handleRowClick = (userId) => {
+        navigate(`/admin/Donor_List/Donors/${userId}`);
+    };
+
+    const handleEditClick = (e, userId) => {
+        e.stopPropagation(); // Prevent the row click event
+        navigate(`/admin/Donor_List/Donors/${userId}/edit`);
     };
 
     const toggleActivation = (index) => {
@@ -87,7 +95,7 @@ const AdminDonorListCmp = () => {
                         <TableRow 
                             key={index} 
                             className={`${classes.dataRow} ${!isActive && classes.deactivatedRow}`} 
-                            onClick={() => handleRowClick(row)}
+                            onClick={() => handleRowClick(row.userId)}
                         >
                             <TableCell>{row.userId}</TableCell>
                             <TableCell>{row.userName}</TableCell>
@@ -103,7 +111,7 @@ const AdminDonorListCmp = () => {
                             <TableCell>{row.contact}</TableCell>
                             <TableCell className={classes.actionStylings}>
                                 <div className={classes.actionContainerDiv}>
-                                    <Button color='primary' /*onClick={ }*/>Edit</Button>
+                                    <Button color='primary' onClick={(e) => handleEditClick(e, row.userId)}>Edit</Button>
                                     <Button 
                                     color={isActive ? 'red' : 'green'} onClick={(e) => {
                                         e.stopPropagation();
@@ -136,21 +144,6 @@ const AdminDonorListCmp = () => {
                 </TableRow>
             </TableFooter>
         </Table>
-
-        {selectedUser && (
-            // <div className={classes.userDetails}>
-            <div>
-                <h2>User Details</h2>
-                <p><strong>User ID:</strong> {selectedUser.userId}</p>
-                <p><strong>User Name:</strong> {selectedUser.userName}</p>
-                <p><strong>Name:</strong> {selectedUser.name}</p>
-                <p><strong>District:</strong> {selectedUser.district}</p>
-                <p><strong>Stellar Address:</strong> {selectedUser.stellarAddress}</p>
-                <p><strong>Contact:</strong> {selectedUser.contact}</p>
-                <Image src={selectedUser.image} circular className={classes.userDetailImage} />
-            </div>
-        )}
-
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import classes from "./CrewMemberTableCmp.module.css"
+import { useNavigate } from 'react-router-dom';
 import {
     TableRow,
     TableHeaderCell,
@@ -7,69 +8,60 @@ import {
     TableCell,
     TableBody,
     Button,
-    Checkbox,
     Icon,
     Table,
   } from 'semantic-ui-react'
 
-const CrewMemberTableCmp = () => {
+const CrewMemberTableCmp = ({ onAddUserClick }) => {
+
+    const navigate = useNavigate();
+
+    const rows = [
+        {userId:"1",name:"Chamal Fernando",registrationDate:"2024-05-29",email:"chamaldesh2020@gmail.com",NoOfOps:"5"},
+        {userId:"2",name:"Nimal Fernando",registrationDate:"2024-05-29",email:"nimal1.fidao@hotmail.com",NoOfOps:"0"},
+        {userId:"3",name:"Sunil Perera",registrationDate:"2024-05-29",email:"sunilperera@gmail.com",NoOfOps:"1"},
+        {userId:"4",name:"Nimalsha Warushawithana",registrationDate:"2024-05-29",email:"nimalwar@hotmail.com",NoOfOps:"3"},
+    ]
+
+    const handleAddUser = () => {
+        navigate('/admin/register/crew_member');
+    };
+
     return (
         <div className={classes.mainContainer}>
             <Table celled compact definition>
                 <TableHeader fullWidth>
                     <TableRow>
-                        <TableHeaderCell />
+                        <TableHeaderCell>UserId</TableHeaderCell>
                         <TableHeaderCell>Name</TableHeaderCell>
                         <TableHeaderCell>Registration Date</TableHeaderCell>
                         <TableHeaderCell>E-mail address</TableHeaderCell>
-                        <TableHeaderCell>Premium Plan</TableHeaderCell>
+                        <TableHeaderCell>No of Operations Doing</TableHeaderCell>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
-                    <TableRow>
-                        <TableCell collapsing>
-                            <Checkbox slider />
-                        </TableCell>
-                        <TableCell>John Lilki</TableCell>
-                        <TableCell>September 14, 2013</TableCell>
-                        <TableCell>jhlilk22@yahoo.com</TableCell>
-                        <TableCell>No</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell collapsing>
-                        <Checkbox slider />
-                        </TableCell>
-                        <TableCell>Jamie Harington</TableCell>
-                        <TableCell>January 11, 2014</TableCell>
-                        <TableCell>jamieharingonton@yahoo.com</TableCell>
-                        <TableCell>Yes</TableCell>
-                    </TableRow>
-                    <TableRow>
-                        <TableCell collapsing>
-                        <Checkbox slider />
-                        </TableCell>
-                        <TableCell>Jill Lewis</TableCell>
-                        <TableCell>May 11, 2014</TableCell>
-                        <TableCell>jilsewris22@yahoo.com</TableCell>
-                        <TableCell>Yes</TableCell>
-                    </TableRow>
+                    {rows.map((row, index) => (
+                        <TableRow key={index}>
+                            <TableCell>{row.userId}</TableCell>
+                            <TableCell>{row.name}</TableCell>
+                            <TableCell>{row.registrationDate}</TableCell>
+                            <TableCell>{row.email}</TableCell>
+                            <TableCell>{row.NoOfOps}</TableCell>
+                        </TableRow>
+                    ))}
                 </TableBody>
                 <TableFooter fullWidth>
                     <TableRow>
-                        <TableHeaderCell />
-                        <TableHeaderCell colSpan='4'>
+                        <TableHeaderCell colSpan='5'>
                         <Button
                             floated='right'
                             icon
                             labelPosition='left'
                             primary
                             size='small'
+                            onClick={handleAddUser}
                         >
-                            <Icon name='user' /> Add User
-                        </Button>
-                        <Button size='small'>Approve</Button>
-                        <Button disabled size='small'>
-                            Approve All
+                            <Icon name='user' /> Add Crew Member
                         </Button>
                         </TableHeaderCell>
                     </TableRow>

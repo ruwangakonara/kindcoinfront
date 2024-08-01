@@ -10,7 +10,7 @@ const AdminBeneficiaryListPg = () => {
             <HeaderCmp />
             <SidebarAdminCmp visible={true}/>
             <DefaultDashCmp>
-                <h1 style={{textAlign: "center"}} className={classes.title}>BeneficiaryList</h1>
+                <h1 style={{textAlign: "center"}} className={classes.title}>Beneficiaries List</h1>
                 <AdminBeneficiaryListCmp/>
             </DefaultDashCmp>
         </div>
