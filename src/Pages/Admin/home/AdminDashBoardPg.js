@@ -19,8 +19,8 @@ const AdminDashBoardPg = () => {
                     <CardCmp title="Benificiaries" link="/admin/Beneficiary_List/Beneficiaries" iconName="" />
                     <CardCmp title="Statistics" link="/admin/overall_stats" iconName=""/>
                     <CardCmp title="Complaints" link="/admin/view/complaints" iconName=""/>
-                    <CardCmp title="View Cr Mem" link="/admin/register/crew_member" iconName="registered outline"/> 
-                    <CardCmp title="Assign Cr Mem" link="/admin/assign/crew_member" iconName=""/>
+                    <CardCmp title="View Crew Member" link="/admin/register/crew_member" iconName="registered outline"/> 
+                    <CardCmp title="Assign Crew Member" link="/admin/assign/crew_member" iconName=""/>
                 </GridTypeDashCmp>
             </div>
         </>

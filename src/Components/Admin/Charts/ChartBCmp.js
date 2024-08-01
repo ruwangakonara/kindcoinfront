@@ -1,11 +1,11 @@
-// ChartACmp.js
+// ChartBCmp.js
 import React, { useEffect, useRef } from 'react';
-import { Chart as ChartJS, LineElement, PointElement, LineController, CategoryScale, LinearScale } from 'chart.js';
-import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS, BarElement, BarController, CategoryScale, LinearScale } from 'chart.js';
+import { Bar } from 'react-chartjs-2';
 
-ChartJS.register(LineElement, PointElement, LineController, CategoryScale, LinearScale);
+ChartJS.register(BarElement, BarController, CategoryScale, LinearScale);
 
-const ChartACmp = () => {
+const ChartBCmp = () => {
     const chartRef = useRef(null);
 
     useEffect(() => {
@@ -22,11 +22,11 @@ const ChartACmp = () => {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [
             {
-                label: 'Token Distribution',
-                data: [65, 59, 80, 81, 56, 55, 40],
-                fill: false,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.1,
+                label: 'Monthly Registered Users',
+                data: [5, 10, 15, 20, 25, 30, 35],
+                backgroundColor: 'rgba(153, 102, 255, 0.6)',
+                borderColor: 'rgba(153, 102, 255, 1)',
+                borderWidth: 1,
             },
         ],
     };
@@ -38,7 +38,7 @@ const ChartACmp = () => {
         },
     };
 
-    return <Line ref={chartRef} data={data} options={options} />;
+    return <Bar ref={chartRef} data={data} options={options} />;
 };
 
-export default ChartACmp;
+export default ChartBCmp;

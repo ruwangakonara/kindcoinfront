@@ -9,8 +9,6 @@ const CardCmp = (props) => {
             <div className={classes.card}>
                 <div className={classes.cardBody}>
                     <h2 className={classes.cardTitle}>{props.title}</h2>
-                    <Image src={'https://via.placeholder.com/150'} circular/>
-                    {/* <Icon name={props.iconName} className={classes.iconStyles}/> */}
                 </div>
             </div>
         </Link>
