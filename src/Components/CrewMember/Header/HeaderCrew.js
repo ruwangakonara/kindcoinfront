@@ -1,7 +1,7 @@
 import { Icon, Dropdown, Menu } from "semantic-ui-react";
 import React, { useRef } from "react";
 import "./HeaderCrew.css";
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function HeaderCrew() {
     const navbar = useRef(null);
@@ -45,7 +45,7 @@ export default function HeaderCrew() {
                     icon={null}
                 >
                     <Dropdown.Menu>
-                        <Dropdown.Item text="Profile" icon="user" />
+                        <Dropdown.Item text="Profile" icon="user" as={Link} to="/crew/profile"/>
                         <Dropdown.Item text="Logout" icon="sign-out" />
                     </Dropdown.Menu>
                 </Dropdown>

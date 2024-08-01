@@ -27,11 +27,11 @@ const SidebarCrew = () => (
       <Icon name='book' />
       Verify Requests
     </MenuItem>
-    <MenuItem as={Link} to='/'>
+    <MenuItem as={Link} to='/crew/recipients'>
       <Icon name='male' />
       Verify Recepients
     </MenuItem>
-    <MenuItem as={Link} to='/'>
+    <MenuItem as={Link} to='/crew/proofs'>
       <Icon name='file outline' />
       Verify Donation Proofs
     </MenuItem>

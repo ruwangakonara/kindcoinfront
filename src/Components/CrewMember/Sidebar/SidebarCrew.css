@@ -18,6 +18,9 @@
 .ui.icon {
   color: #ffffff !important;
 }
+.ui.icon:hover {
+  color: #ffffff !important;
+}
 
 .ui.menu .item {
   color: #ffffff !important;
