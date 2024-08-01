@@ -1,11 +1,12 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import SidebarCrew from "../../../Components/CrewMember/Sidebar/SidebarCrew";
-import VerifyRequestsTable from "../../../Components/CrewMember/VerifyRequests/VerifyRequestsTable";
+import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable";
 import SearchBar from "../../../Components/CrewMember/SearchBar/CrewSearchBar";
-import './VerifyRequests.css';
+import './VerifyRecipients.css';
 
-const VerifyRequests = () => {
+
+const VerifyRecipients = () => {
 
     const handleSearch = (query) => {
         console.log('Search query:', query);
@@ -16,13 +17,13 @@ const VerifyRequests = () => {
             <HeaderCrew />
             <div className="main-container">
                 <SidebarCrew />
-                <div className="verify-requests-container">
+                <div className="verify-recipients-container">
                     <SearchBar onSearch={handleSearch} />
-                    <VerifyRequestsTable />
+                    <VerifyRecipientsTable />
                 </div>
             </div>
         </div>
     );
 }
 
-export default VerifyRequests;
+export default VerifyRecipients;
