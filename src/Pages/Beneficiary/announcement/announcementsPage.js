@@ -33,9 +33,10 @@ function BeneficiaryAnnouncementList(){
     return (
         <div>
             <Navbar/>
+            <Header as="h2" style = {{marginTop: "115px"}} className="page-header">Announcements</Header>
 
 
-            <Container style={{top: "150px", position: "relative"}} className="announcement-list-container">
+            <Container style={{ position: "relative"}} className="announcement-list-container">
 
                 {announcements.map((announcement, index) => (
                     <Announcement key={index} announcement={announcement}/>

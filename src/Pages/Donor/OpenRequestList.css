@@ -1,0 +1,19 @@
+.fixed-search-box {
+    position: fixed;
+    top: 20%;
+    right: 10px;
+    width: 300px; /* Adjust width as needed */
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+.fixed-search-box .powered-by-google {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.fixed-search-box .powered-by-google img {
+    width: 100px; /* Adjust size as needed */
+    height: auto;
+}

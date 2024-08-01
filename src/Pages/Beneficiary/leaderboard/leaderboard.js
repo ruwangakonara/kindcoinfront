@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Header, Grid, List, Image, Icon, Segment, Label, Form, Button, Comment, Modal } from 'semantic-ui-react';
-import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
+import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import './leaderboard.css';
 import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 
@@ -72,7 +72,7 @@ const BeneficiaryDonorLeaderboardPage = () => {
 
     return (
         <div>
-            <Navbar2 />
+            <Navbar />
             <Container className="leaderboard-page-container">
                 <Segment raised className="donor-segment">
                     <Header style={{ marginTop: '100px' }} as="h1" textAlign="center" className="leaderboard-header">Donor Leaderboard</Header>

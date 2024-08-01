@@ -144,7 +144,7 @@ const Login = () => {
               </Button>
             </Segment>
           </Form>
-          <Button color='teal' fluid size='large' onClick={() => navigate('/people/signup')}>
+          <Button color='teal' fluid size='large' onClick={() => navigate('/login/signup')}>
             New to us? Sign UP
           </Button>
         </Grid.Column>

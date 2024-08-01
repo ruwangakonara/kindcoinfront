@@ -120,7 +120,7 @@ function TicketsPage() {
                         <Sidebar />
                     </Grid.Column>
                     <Grid.Column width={15}>
-                        <Header as="h1" style={{ marginTop: "100px" }} className="page-header">Tickets</Header>
+                        <Header as="h2" style={{ marginTop: "90px" }} className="page-header">Tickets</Header>
                         <Button primary onClick={() => setOpenNewModal(true)} style={{ marginBottom: '20px', position: "relative"}}>
                             Raise New Ticket
                         </Button>

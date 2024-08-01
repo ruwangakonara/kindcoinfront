@@ -94,7 +94,7 @@ const OnGoingDonationPage = () => {
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
-                        <Header as="h1" className="page-header">Donation Details</Header>
+                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Ongoing Donation</Header>
                         <Segment raised>
                             <Grid>
                                 <Grid.Row>

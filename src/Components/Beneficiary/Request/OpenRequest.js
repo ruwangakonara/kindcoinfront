@@ -31,7 +31,7 @@ const OpenRequest = ({ request , image, beneficiary}) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as={Link} to={`${request.id}`} color="blue" fluid>
+                <Button as={Link} to={`${request._id}`} color="blue" fluid>
                     View Request
                 </Button>
             </Card.Content>

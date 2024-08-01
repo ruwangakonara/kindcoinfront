@@ -31,19 +31,15 @@ const dummyDonation = {
         'https://via.placeholder.com/150',
         'https://via.placeholder.com/150'
     ],
-
 };
 
 const CompletedDonationPage = () => {
     const { donation_id } = useParams();
     const [imageModalOpen, setImageModalOpen] = useState(false);
+    const [attestationModalOpen, setAttestationModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [editedImages, setEditedImages] = useState(dummyDonation.images);
 
-    // Handle opening and closing of edit modal
-
-
-    // Handle opening and closing of image modal
     const handleImageModalOpen = (image) => {
         setSelectedImage(image);
         setImageModalOpen(true);
@@ -54,18 +50,29 @@ const CompletedDonationPage = () => {
         setSelectedImage(null);
     };
 
-    // Handle form submission for editing donation details
+    const handleAttestationModalOpen = () => {
+        setAttestationModalOpen(true);
+    };
+
+    const handleAttestationModalClose = () => {
+        setAttestationModalOpen(false);
+    };
+
+    const handlePrint = () => {
+        window.print();
+    };
 
     return (
         <div>
             <Navbar2 />
             <Grid>
                 <Grid.Column width={1}>
-                    <Sidebar3 />
+                    {/*<Sidebar3 />*/}
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
-                        <Header as="h1" className="page-header">Donation Details</Header>
+                        {/*<Image src="/charitylogo.png" size="small" centered />*/}
+                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Completed Donation</Header>
                         <Segment raised>
                             <Grid>
                                 <Grid.Row>
@@ -74,18 +81,14 @@ const CompletedDonationPage = () => {
                                         <Header as="h3" className="image-label">Donor: {dummyDonation.donorName}</Header>
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.recipientProfilePic} circular
-                                               className="profile-picture"/>
-                                        <Header as="h3"
-                                                className="image-label">Recipient: {dummyDonation.recipientName}</Header>
-                                        <Label style={{marginTop: '10px'}} color='green'
-                                               className='not-accepted-label'>Accepted</Label>
+                                        <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture"/>
+                                        <Header as="h3" className="image-label">Recipient: {dummyDonation.recipientName}</Header>
+                                        <Label style={{marginTop: '10px'}} color='green' className='not-accepted-label'>Accepted</Label>
                                         <div style={{color: 'green'}}>
                                             <Icon name='check circle' color='green'/>
                                             Verified
                                         </div>
-                                        <Label style={{marginTop: '15px'}} color='blue'
-                                               className='not-accepted-label'>Tokens Transacted</Label>
+                                        <Label style={{marginTop: '15px'}} color='blue' className='not-accepted-label'>Tokens Transacted</Label>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
@@ -94,7 +97,6 @@ const CompletedDonationPage = () => {
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {dummyDonation.donationTitle}
-
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
@@ -156,7 +158,6 @@ const CompletedDonationPage = () => {
                         </Segment>
 
                         <Segment>
-                            {/*<Header as="h2">Donation Statistics</Header>*/}
                             <Grid>
                                 <Grid.Column width={8}>
                                     <Header as="h3">Amount</Header>
@@ -168,6 +169,8 @@ const CompletedDonationPage = () => {
                                 </Grid.Column>
                             </Grid>
                         </Segment>
+
+                        <Button color='blue' onClick={handleAttestationModalOpen}>Show Attestation</Button>
                     </Container>
                 </Grid.Column>
             </Grid>
@@ -179,7 +182,75 @@ const CompletedDonationPage = () => {
                 </Modal.Content>
             </Modal>
 
+            {/* Attestation Modal */}
+            <Modal size='large' open={attestationModalOpen} onClose={handleAttestationModalClose}>
+                <Modal.Header>Donation Attestation</Modal.Header>
+                <Modal.Content>
+                    <div style = {{textAlign: 'right', display: "flex", marginBottom: "70px"}}>
+                        <Image src="/charitylogo.png" size="medium" style = {{textAlign: 'right', display: "flex"}} />
 
+                    </div>
+                    {/*<Header as="h2" textAlign="center">Attestation</Header>*/}
+                    <p>We hereby attest that the following donation has been received:</p>
+                    <List>
+                        <List.Item>
+                            <List.Header>Donor Name</List.Header>
+                            {dummyDonation.donorName}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Recipient Name</List.Header>
+                            {dummyDonation.recipientName}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Donation Title</List.Header>
+                            {dummyDonation.donationTitle}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Donation Description</List.Header>
+                            {dummyDonation.donationDescription}
+                        </List.Item>
+                        {dummyDonation.donationType === 'goods' && (
+                            <List.Item>
+                                <List.Header>Goods List</List.Header>
+                                <List>
+                                    {dummyDonation.goodsList.map((goods, index) => (
+                                        <List.Item key={index}>{goods.item}: {goods.amount}</List.Item>
+                                    ))}
+                                </List>
+                            </List.Item>
+                        )}
+                        {dummyDonation.donationType === 'monetary' && (
+                            <List.Item>
+                                <List.Header>Amount</List.Header>
+                                {dummyDonation.moneyAmount}
+                            </List.Item>
+                        )}
+                        <List.Item>
+                            <List.Header>Recipient Phone</List.Header>
+                            {dummyDonation.recipientPhone}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Donation Phone</List.Header>
+                            {dummyDonation.donationPhone}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Amount</List.Header>
+                            {dummyDonation.amount}
+                        </List.Item>
+                        <List.Item>
+                            <List.Header>Tokens</List.Header>
+                            {dummyDonation.tokens}
+                        </List.Item>
+                    </List>
+                    <p>Thank you for your generous contribution.</p>
+                    <p>Sincerely,</p>
+                    <p style={{fontStyle: "italic"}}>KindCoin Org</p>
+                </Modal.Content>
+                <Modal.Actions>
+                    <Button color='blue' onClick={handlePrint}>Print Attestation</Button>
+                    <Button color='grey' onClick={handleAttestationModalClose}>Close</Button>
+                </Modal.Actions>
+            </Modal>
         </div>
     );
 }

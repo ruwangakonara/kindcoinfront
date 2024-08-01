@@ -1,0 +1,14 @@
+.dashboard{
+    width: 85%;
+    justify-content: right;
+    align-items:flex-end;
+    margin-left: 15%;
+    /* margin-right: 50px; */
+    margin-top: 10px;
+    margin-bottom: 0;
+    overflow:hidden;
+}
+
+.custom-grid-row {
+    margin-bottom: 30px; /* Adjust the margin as needed */
+  }

@@ -136,7 +136,8 @@ import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBan
 import './Dashboard.css';
 
 const BeneficiaryDashboard = () => {
-    const { user } = useContext(UserContext);
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
 
     const dashboardData = {
         listings: 10,
@@ -185,7 +186,7 @@ const BeneficiaryDashboard = () => {
             <Box sx={{ flexGrow: 1, p: 2 }}>
                 <Navbar />
                 <Container sx={{ mt: 4 }}>
-                    <Typography variant="h4" align="center" gutterBottom>Dashboard</Typography>
+                    <Typography variant="h4" align="left" style={{marginTop: "65px"}} gutterBottom>Welcome {beneficiary.name}!</Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">

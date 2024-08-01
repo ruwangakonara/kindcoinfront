@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid } from 'semantic-ui-react';
+import {Container, Grid, Header} from 'semantic-ui-react';
 import Navbar2 from "../../../Components/Donor/NavBar/NavBar2";
 import Sidebar3 from "../../../Components/Donor/Sidebar/Sidebar3";
 import Donation from '../../../Components/Donor/Donation/Donation';
@@ -40,6 +40,8 @@ const MyListingsList = () => (
     <div style={{flex: '1'}}>
         <Navbar2/>
         <Container style={{padding: '20px', top: "100px", position: 'relative'}}>
+            <Header as="h2" style = {{position: "fixed"}} className="page-header">Unaccepted Donations</Header>
+
             <Grid>
                 {donations.map((donation, index) => (
                     <Grid.Column key={index} width={16}>

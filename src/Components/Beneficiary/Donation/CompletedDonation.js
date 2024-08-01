@@ -19,7 +19,7 @@ const CompletedDonation = ({ donorImage, amount, type, id, donationTitle}) => {
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                     </Grid.Column>
                     <Grid.Column width={3} textAlign="right" className="right-column">
-                        <Button size='tiny' className='view-button'>View Donation</Button>
+                        <a href={`/beneficiary/completed-donation/${id}`} style={{color: "black"}}> <Button size='tiny' className='view-button'>View Donation</Button></a>
                         {/*<div className="token-info">*/}
                         {/*    <h2>{tokens}</h2>*/}
                         {/*    <Image src="/token.png" circular className="token-image" />*/}

@@ -1,0 +1,62 @@
+.donation-page-container {
+    margin-top: 70px; /* Adjust for navbar height */
+    padding: 20px;
+}
+
+.page-headers {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+    margin-top: 70px;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 10px;
+}
+
+.image-label {
+    margin-top: 10px;
+}
+
+.donation-details {
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.not-accepted-label {
+    margin-top: 20px;
+    font-size: 1.2em;
+    display: block;
+}
+
+.edit-donation-modal {
+    padding: 20px !important;
+}
+
+.image-modal .content {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    background: none !important;
+}
+.image-modal .content > .image {
+    max-width: 100% !important;
+    max-height: 80vh !important;
+}
+
+.status-label {
+    margin-left: 10px;
+    font-weight: bold;
+    align-self: flex-end;
+
+    display:flex;
+    text-align: right;
+    align-items: flex-end;
+}
+
+.additional-images {
+    display: flex;
+    flex-wrap: wrap;
+}
