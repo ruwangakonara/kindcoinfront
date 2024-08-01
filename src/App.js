@@ -153,10 +153,8 @@ import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
 import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
-<<<<<<< HEAD
-=======
+
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
->>>>>>> 376a8261be8306715ef28eb2d9d66a3ef4e34e89
 
 function App() {
 
@@ -279,14 +277,9 @@ function App() {
                 {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
                 {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
                 {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
-<<<<<<< HEAD
-                <Route path='/admin/view/complaints' element={<ViewComplaints/>}/>
-                <Route path='/admin/settings' element={<Settings/>}/>
+                <Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>
+                <Route path='/admin/settings' element={<AdminSettingsPg/>}/>
 
-=======
-                
-                
->>>>>>> 376a8261be8306715ef28eb2d9d66a3ef4e34e89
 
 
                 {/* Crew Member Routes */}
