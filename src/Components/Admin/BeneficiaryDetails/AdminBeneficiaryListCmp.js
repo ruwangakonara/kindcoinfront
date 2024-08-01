@@ -1,5 +1,6 @@
 import classes from "./AdminBeneficiaryListCmp.module.css"
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import {
     TableRow,
     TableHeaderCell,
@@ -16,6 +17,8 @@ import {
   } from 'semantic-ui-react'
 
 const AdminBeneficiaryListCmp = () => {
+
+    const navigate = useNavigate()
 
     const [selectedUser, setSelectedUser] = useState(null);
     const [activeRows, setActiveRows] = useState({});
@@ -51,11 +54,28 @@ const AdminBeneficiaryListCmp = () => {
         { userId: "10", userName: "nature_lovers", name: "Nature Lovers Group", image: "https://via.placeholder.com/150", district: "Nuwara Eliya", stellarAddress: "stellar890abc", address: "No: 8 Misty Hills, Nuwara Eliya", contact: "0779012345", beneficiaryType: "Organization" },
       ];
 
-      const handleRowClick = (user) => {
-        setSelectedUser(user);
-      };
+    //   const handleRowClick = (user) => {
+    //     setSelectedUser(user);
+    //   };
 
-      const toggleActivation = (index) => {
+    //   const toggleActivation = (index) => {
+    //     setActiveRows(prevState => ({
+    //         ...prevState,
+    //         [index]: !prevState[index],
+    //     }));
+    // };
+
+
+    const handleRowClick = (userId) => {
+        navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}`);
+    };
+
+    const handleEditClick = (e, userId) => {
+        e.stopPropagation(); // Prevent the row click event
+        navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}/edit`);
+    };
+
+    const toggleActivation = (index) => {
         setActiveRows(prevState => ({
             ...prevState,
             [index]: !prevState[index],
@@ -85,7 +105,7 @@ const AdminBeneficiaryListCmp = () => {
                             <TableRow 
                                 key={index} 
                                 className={`${classes.dataRow} ${!isActive && classes.deactivatedRow}`} 
-                                onClick={() => handleRowClick(row)}
+                                onClick={() => handleRowClick(row.userId)}
                             >
                                 <TableCell>{row.userId}</TableCell>
                                 <TableCell>{row.userName}</TableCell>
@@ -101,7 +121,7 @@ const AdminBeneficiaryListCmp = () => {
                                 <TableCell>{row.contact}</TableCell>
                                 <TableCell className={classes.actionStylings}>
                                     <div className={classes.actionContainerDiv}>
-                                        <Button color='primary' /*onClick={ }*/>Edit</Button>
+                                        <Button color='primary' onClick={(e) => handleEditClick(e, row.userId)}>Edit</Button>
                                         <Button 
                                         color={isActive ? 'red' : 'green'} onClick={(e) => {
                                             e.stopPropagation();
@@ -134,21 +154,6 @@ const AdminBeneficiaryListCmp = () => {
                     </TableRow>
                 </TableFooter>
             </Table>
-
-            {selectedUser && (
-                // <div className={classes.userDetails}>
-                <div>
-                    <h2>User Details</h2>
-                    <p><strong>User ID:</strong> {selectedUser.userId}</p>
-                    <p><strong>User Name:</strong> {selectedUser.userName}</p>
-                    <p><strong>Name:</strong> {selectedUser.name}</p>
-                    <p><strong>District:</strong> {selectedUser.district}</p>
-                    <p><strong>Stellar Address:</strong> {selectedUser.stellarAddress}</p>
-                    <p><strong>Contact:</strong> {selectedUser.contact}</p>
-                    <Image src={selectedUser.image} circular className={classes.userDetailImage} />
-                </div>
-            )}
-
         </div>
     );
 }

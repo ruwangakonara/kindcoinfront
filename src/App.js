@@ -133,6 +133,8 @@ import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/lea
 import AdminAccountPg from './Pages/Admin/AdminAccount/AdminAccountPg';
 import AssignCrewMemberPg from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg';
 import AdminBeneficiaryListPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg';
+import AdminBeneficiaryEditFormPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryEditFormPg';
+import AdminBeneficiaryDetailsPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryDetailsPg';
 import ViewComplaintsPg from './Pages/Admin/Complaints/ViewComplaintsPg';
 import ViewCrewMemberTransactionListPg from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg';
 import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
@@ -264,7 +266,8 @@ function App() {
                 <Route path="/admin/account" element={<AdminAccountPg/>}/>
                 <Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>
                 <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>
-                {/* <Route path='/admin/Beneficiary_List/Beneficiaries/Beneficiary_Id' element={</>}/> */}
+                <Route path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id/edit" element={<AdminBeneficiaryEditFormPg/>} />
+                <Route path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id" element={<AdminBeneficiaryDetailsPg/>}/>
                 <Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>
                 <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>
                 <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>
