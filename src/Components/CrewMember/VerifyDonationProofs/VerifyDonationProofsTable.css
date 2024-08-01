@@ -1,5 +1,5 @@
 .verify-requests-container {
-    margin-left: 15%; 
+    margin-left: 10%; 
     margin-top: 5%;
     overflow-x: auto;
     overflow-y: auto;
@@ -54,4 +54,34 @@
     color: #ffffff !important;
     border-radius: 4px;
   }
+
+
+  
+  .document-preview {
+    margin-bottom: 20px;
+  }
+  
+  .document-preview img {
+    max-width: 100%;
+  }
+  
+  .document-preview .react-pdf__Page {
+    width: 100%;
+  }
+  
+  .ui.modal {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .ui.modal .header {
+    text-align: center;
+  }
+
+  .ui.modal .close {
+    top: 10px;
+    right: 10px;
+    color: #1e3a5f;
+  }
+  
   

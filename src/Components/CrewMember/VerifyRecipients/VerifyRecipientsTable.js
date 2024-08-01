@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react';
 import {
   TableRow,
   TableHeaderCell,
@@ -11,59 +11,131 @@ import {
   Label,
   Menu,
   Table,
+  Dropdown,
+  Button,
 } from 'semantic-ui-react';
-
+import { Document, Page } from 'react-pdf';
 import './VerifyRecipientsTable.css';
 
-const VerifyRecipientsTable = () => (
-  <Table celled>
-    <TableHeader>
-      <TableRow>
-        <TableHeaderCell>Header1</TableHeaderCell>
-        <TableHeaderCell>Header</TableHeaderCell>
-        <TableHeaderCell>Header</TableHeaderCell>
-      </TableRow>
-    </TableHeader>
+const data = [
+  {
+    name: 'Liviru Weerasinghe',
+    nic: '200130704295',
+    image: 'sample1',
+    email: 'liviruweera@gmail.com',
+    telephone: '0716918856',
+    address: '35/1, Temple Road, Colombo 05',
+    status: 'Pending',
+  },
+  {
+    name: 'Saman Arachchige',
+    nic: '199930704748',
+    image: 'sample2',
+    email: 'samanarach@gmail.com',
+    telephone: '0716918758',
+    address: '35/1, Temple Road, Colombo 06',
+    status: 'Approved',
+  },
 
-    <TableBody>
-      <TableRow>
-        <TableCell>
-          <Label ribbon>First</Label>
-        </TableCell>
-        <TableCell>Cell</TableCell>
-        <TableCell>Cell</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>Cell</TableCell>
-        <TableCell>Cell</TableCell>
-        <TableCell>Cell</TableCell>
-      </TableRow>
-      <TableRow>
-        <TableCell>Cell</TableCell>
-        <TableCell>Cell</TableCell>
-        <TableCell>Cell</TableCell>
-      </TableRow>
-    </TableBody>
+];
 
-    <TableFooter>
-      <TableRow>
-        <TableHeaderCell colSpan='3'>
-          <Menu floated='right' pagination>
-            <MenuItem as='a' icon>
-              <Icon name='chevron left' />
-            </MenuItem>
-            <MenuItem as='a'>1</MenuItem>
-            <MenuItem as='a'>2</MenuItem>
-            <MenuItem as='a'>3</MenuItem>
-            <MenuItem as='a'>4</MenuItem>
-            <MenuItem as='a' icon>
-              <Icon name='chevron right' />
-            </MenuItem>
-          </Menu>
-        </TableHeaderCell>
-      </TableRow>
-    </TableFooter>
-  </Table>
-)
+const statusOptions = [
+  { key: 'pending', text: 'Pending', value: 'Pending' },
+  { key: 'rejected', text: 'Rejected', value: 'Rejected' },
+  { key: 'approved', text: 'Approved', value: 'Approved' },
+];
+
+const VerifyRecipientsTable = () => {
+  const [status, setStatus] = useState({});
+
+  const handleStatusChange = (index, value) => {
+    setStatus(prevState => ({
+      ...prevState,
+      [index]: value
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log('Submitting status changes:', status);
+  };
+
+  // const renderDocument = (url) => {
+  //   if (url.endsWith('.pdf')) {
+  //     return (
+  //       <div style={{ maxWidth: '200px', overflow: 'hidden' }}>
+  //         <Document file={url}>
+  //           <Page pageNumber={1} />
+  //         </Document>
+  //       </div>
+  //     );
+  //   } else if (url.match(/\.(jpg|jpeg|png)$/)) {
+  //     return <img src={url} alt="Document preview" style={{ maxWidth: '200px' }} />;
+  //   } else {
+  //     return <a href={url} download>Download</a>;
+  //   }
+  // };
+
+  return (
+    <div className='verify-requests-container'>
+    <Table celled>
+      <TableHeader>
+        <TableRow>
+          <TableHeaderCell>Name</TableHeaderCell>
+          <TableHeaderCell>NIC</TableHeaderCell>
+          <TableHeaderCell>Image</TableHeaderCell>
+          <TableHeaderCell>Email</TableHeaderCell>
+          <TableHeaderCell>Telephone Number</TableHeaderCell>
+          <TableHeaderCell>Address</TableHeaderCell>
+          <TableHeaderCell>Status</TableHeaderCell>
+          <TableHeaderCell>Submit</TableHeaderCell>
+        </TableRow>
+      </TableHeader>
+
+      <TableBody>
+        {data.map((row, index) => (
+          <TableRow key={index}>
+            <TableCell>{row.name}</TableCell>
+            <TableCell>{row.nic}</TableCell>
+            <TableCell>{row.image}</TableCell>
+            <TableCell>{row.email}</TableCell>
+            <TableCell>{row.telephone}</TableCell>
+            <TableCell>{row.address}</TableCell>
+            <TableCell>
+              <Dropdown
+                selection
+                options={statusOptions}
+                value={status[index] || row.status}
+                onChange={(e, { value }) => handleStatusChange(index, value)}
+              />
+            </TableCell>
+            <TableCell>
+              <Button onClick={handleSubmit}>Submit</Button>
+            </TableCell>
+          </TableRow>
+        ))}
+      </TableBody>
+
+      <TableFooter>
+        <TableRow>
+          <TableHeaderCell colSpan='8'>
+            <Menu floated='right' pagination>
+              <MenuItem as='a' icon>
+                <Icon name='chevron left' />
+              </MenuItem>
+              <MenuItem as='a'>1</MenuItem>
+              <MenuItem as='a'>2</MenuItem>
+              <MenuItem as='a'>3</MenuItem>
+              <MenuItem as='a'>4</MenuItem>
+              <MenuItem as='a' icon>
+                <Icon name='chevron right' />
+              </MenuItem>
+            </Menu>
+          </TableHeaderCell>
+        </TableRow>
+      </TableFooter>
+    </Table>
+    </div>
+  );
+};
 
 export default VerifyRecipientsTable;

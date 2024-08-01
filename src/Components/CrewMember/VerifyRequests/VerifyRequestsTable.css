@@ -1,5 +1,5 @@
 .verify-requests-container {
-    margin-left: 15%; 
+    margin-left: 5%; 
     margin-top: 5%;
     overflow-x: auto;
     overflow-y: auto;
@@ -11,6 +11,10 @@
     min-width: 700px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .ui.celled.table tr:hover{
+    background-color: #0f52a9;
   }
   
 
@@ -54,4 +58,14 @@
     color: #ffffff !important;
     border-radius: 4px;
   }
+
+  .ui.celled.table tbody td:nth-child(6) {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.ui.celled.table tbody td:nth-child(6) {
+  width: 25%; /* Adjust as needed for description */
+}
   
