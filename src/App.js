@@ -141,6 +141,8 @@ import ViewComplaints from './Pages/Admin/Complaints/ViewComplaints';
 import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 import Settings from './Pages/Admin/Settings/Settings';
 import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
+import VerifyRequestsTable from './Components/CrewMember/VerifyRequests/VerifyRequestsTable';
+import VerifyRequests from './Pages/CrewMember/VerifyRequests/VerifyRequests';
 
 function App() {
 
@@ -258,6 +260,7 @@ function App() {
 
                 {/* Crew Member Routes */}
                 <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
+                <Route path='/crew/requests' element={<VerifyRequests/>}/>
 
             </Routes>
         // </UserProvider>
