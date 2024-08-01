@@ -1,35 +1,35 @@
-.sidebar {
-  width: 250px;
-  transition: width 0.3s;
+.ui.sidebar {
+  background-color: #063361 !important;
+  width: 15% !important;
 }
 
-.sidebar.collapsed {
-  width: 80px;
+.ui.menu .item {
+  margin: 20px 0 !important;
 }
 
-.sidebar-header {
-  display: flex;
-  justify-content: flex-end;
-  padding: 10px;
+.ui.menu .item.home {
+  margin-top: 10vh !important;
+}
+.ui.menu .item.settings {
+  margin-top: 10vh !important;
 }
 
-.collapse-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
+
+.ui.icon {
+  color: #ffffff !important;
 }
 
-.sidebar-nav ul {
-  list-style: none;
-  padding: 0;
+.ui.menu .item {
+  color: #ffffff !important;
 }
 
-.sidebar-nav ul li {
-  padding: 10px;
+
+.ui.menu .item:hover {
+  background-color: #0f4c81 !important;
+  color: #ffffff !important;
 }
 
-.sidebar-nav ul li a {
-  text-decoration: none;
-  color: #333;
-  display: block;
+.ui.menu .active.item {
+  background-color: #0f4c81 !important;
 }
+

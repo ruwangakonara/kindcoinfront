@@ -282,6 +282,7 @@ function App() {
 
                 {/* Crew Member Routes */}
                 <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
+                <Route path='/crew/requests' element={<VerifyRequests/>}/>
 
             </Routes>
         // </UserProvider>
