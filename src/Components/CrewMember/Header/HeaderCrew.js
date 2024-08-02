@@ -46,7 +46,7 @@ export default function HeaderCrew() {
                 >
                     <Dropdown.Menu>
                         <Dropdown.Item text="Profile" icon="user" as={Link} to="/crew/profile"/>
-                        <Dropdown.Item text="Logout" icon="sign-out" />
+                        <Dropdown.Item text="Logout" icon="sign-out" as={Link} to="/" onClick={click} />
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

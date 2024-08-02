@@ -49,7 +49,7 @@ const data = [
 const statusOptions = [
   { key: 'pending', text: 'Pending', value: 'Pending' },
   { key: 'rejected', text: 'Rejected', value: 'Rejected' },
-  { key: 'published', text: 'Published', value: 'Published' },
+  { key: 'accepted', text: 'Accepted', value: 'Accepted' },
 ];
 
 const VerifyRequestsTable = () => {
