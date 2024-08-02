@@ -1,0 +1,12 @@
+.exchange-rate{
+     margin-top: 7.5%;
+}
+
+.token-transfer{
+    margin-left: 10%;
+    margin-top: 15%; 
+    overflow-x: auto; 
+    overflow-y: auto;
+    max-height: calc(100vh - 10%);
+    padding-right: 15px;
+}
