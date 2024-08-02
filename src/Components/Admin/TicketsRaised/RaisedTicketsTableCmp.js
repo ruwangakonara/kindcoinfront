@@ -1,5 +1,5 @@
-import classes from "./AdminBeneficiaryListCmp.module.css"
-import { useState } from 'react';
+import classes from "./RaisedTicketsTableCmp.module.css"
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     TableRow,
@@ -14,9 +14,9 @@ import {
     Table,
     Image,
     Button
-  } from 'semantic-ui-react'
+} from 'semantic-ui-react'
 
-const AdminBeneficiaryListCmp = () => {
+const RaisedTicketsTableCmp = () => {
 
     const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ const AdminBeneficiaryListCmp = () => {
     const [activeRows, setActiveRows] = useState({});
 
     /**
-     * Fields to be included
+     * Fields to be included 
      * 
      * userId
      * Name
@@ -32,47 +32,36 @@ const AdminBeneficiaryListCmp = () => {
      * Address
      * Images
      * ProfileImage
-     * CertificateImage
      * Description
      * Type
      * DateOfBirth
+     * StellarAddress
      * District
-     * CreatedAt
-     * PhoneNo
+     * CreatedAt    
+     * PhoneNo 
      */
 
     const rows = [
-        { userId: "1", userName: "alex_jones99", name: "Alex Jones", image: "https://via.placeholder.com/150", district: "Colombo", stellarAddress: "stellar123abc", address: "No: 5 Main Street, Colombo", contact: "0771234567", beneficiaryType: "Individual" },
-        { userId: "2", userName: "rose_marie", name: "Rose Marie Trust", image: "https://via.placeholder.com/150", district: "Kandy", stellarAddress: "stellar456def", address: "No: 23 Hilltop Avenue, Kandy", contact: "0777654321", beneficiaryType: "Organization" },
-        { userId: "3", userName: "samwilliams", name: "Sam Williams", image: "https://via.placeholder.com/150", district: "Galle", stellarAddress: "stellar789ghi", address: "No: 10 Lighthouse Road, Galle", contact: "0779876543", beneficiaryType: "Individual" },
-        { userId: "4", userName: "greenearth_org", name: "Green Earth Foundation", image: "https://via.placeholder.com/150", district: "Jaffna", stellarAddress: "stellar012jkl", address: "No: 1 North Lane, Jaffna", contact: "0773456789", beneficiaryType: "Organization" },
-        { userId: "5", userName: "emily_clark", name: "Emily Clark", image: "https://via.placeholder.com/150", district: "Matara", stellarAddress: "stellar345mno", address: "No: 45 Beach Road, Matara", contact: "0776543210", beneficiaryType: "Individual" },
-        { userId: "6", userName: "happy_kids_home", name: "Happy Kids Home", image: "https://via.placeholder.com/150", district: "Badulla", stellarAddress: "stellar678pqr", address: "No: 9 Sunrise Boulevard, Badulla", contact: "0778765432", beneficiaryType: "Organization" },
-        { userId: "7", userName: "john_doe", name: "John Doe", image: "https://via.placeholder.com/150", district: "Anuradhapura", stellarAddress: "stellar901stu", address: "No: 11 Sacred City, Anuradhapura", contact: "0772345678", beneficiaryType: "Individual" },
-        { userId: "8", userName: "blue_ocean", name: "Blue Ocean Society", image: "https://via.placeholder.com/150", district: "Trincomalee", stellarAddress: "stellar234vwx", address: "No: 7 Marine Drive, Trincomalee", contact: "0775432109", beneficiaryType: "Organization" },
-        { userId: "9", userName: "rachel_green", name: "Rachel Green", image: "https://via.placeholder.com/150", district: "Ratnapura", stellarAddress: "stellar567yz", address: "No: 3 Gem Street, Ratnapura", contact: "0776789012", beneficiaryType: "Individual" },
-        { userId: "10", userName: "nature_lovers", name: "Nature Lovers Group", image: "https://via.placeholder.com/150", district: "Nuwara Eliya", stellarAddress: "stellar890abc", address: "No: 8 Misty Hills, Nuwara Eliya", contact: "0779012345", beneficiaryType: "Organization" },
-      ];
-
-    //   const handleRowClick = (user) => {
-    //     setSelectedUser(user);
-    //   };
-
-    //   const toggleActivation = (index) => {
-    //     setActiveRows(prevState => ({
-    //         ...prevState,
-    //         [index]: !prevState[index],
-    //     }));
-    // };
+        { userId: "1", userName: "michael_scott", name: "Michael Scott", image: "https://via.placeholder.com/150", district: "Kegalle", stellarAddress: "stellar123abc1", address: "No: 18 Forest Avenue, Kegalle", contact: "0771122334", beneficiaryType: "Individual" },
+        { userId: "2", userName: "abc_children_home", name: "ABC Children's Home", image: "https://via.placeholder.com/150", district: "Puttalam", stellarAddress: "stellar456def2", address: "No: 2 Lake View Road, Puttalam", contact: "0772233445", beneficiaryType: "Organization" },
+        { userId: "3", userName: "linda_smith", name: "Linda Smith", image: "https://via.placeholder.com/150", district: "Hambantota", stellarAddress: "stellar789ghi3", address: "No: 8 Harbor Lane, Hambantota", contact: "0773344556", beneficiaryType: "Individual" },
+        { userId: "4", userName: "wildlife_org", name: "Wildlife Conservation", image: "https://via.placeholder.com/150", district: "Polonnaruwa", stellarAddress: "stellar012jkl4", address: "No: 19 Jungle Road, Polonnaruwa", contact: "0774455667", beneficiaryType: "Organization" },
+        { userId: "5", userName: "daniel_james", name: "Daniel James", image: "https://via.placeholder.com/150", district: "Kandy", stellarAddress: "stellar345mno5", address: "No: 6 Temple Street, Kandy", contact: "0775566778", beneficiaryType: "Individual" },
+        { userId: "6", userName: "bright_future", name: "Bright Future Foundation", image: "https://via.placeholder.com/150", district: "Kurunegala", stellarAddress: "stellar678pqr6", address: "No: 10 Hope Avenue, Kurunegala", contact: "0776677889", beneficiaryType: "Organization" },
+        { userId: "7", userName: "jane_doe", name: "Jane Doe", image: "https://via.placeholder.com/150", district: "Ampara", stellarAddress: "stellar901stu7", address: "No: 22 Peace Street, Ampara", contact: "0777788990", beneficiaryType: "Individual" },
+        { userId: "8", userName: "save_earth", name: "Save the Earth", image: "https://via.placeholder.com/150", district: "Batticaloa", stellarAddress: "stellar234vwx8", address: "No: 3 Lagoon View, Batticaloa", contact: "0778899001", beneficiaryType: "Organization" },
+        { userId: "9", userName: "mark_evans", name: "Mark Evans", image: "https://via.placeholder.com/150", district: "Mannar", stellarAddress: "stellar567yz9", address: "No: 5 Sea Breeze Lane, Mannar", contact: "0779900112", beneficiaryType: "Individual" },
+        { userId: "10", userName: "forest_guardians", name: "Forest Guardians", image: "https://via.placeholder.com/150", district: "Monaragala", stellarAddress: "stellar890abc10", address: "No: 7 Green Street, Monaragala", contact: "0770011223", beneficiaryType: "Organization" },
+    ];
 
 
     const handleRowClick = (userId) => {
-        navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}`);
+        // navigate(`/admin/Donor_List/Donors/${userId}`);
     };
 
     const handleEditClick = (e, userId) => {
         e.stopPropagation(); // Prevent the row click event
-        navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}/edit`);
+        // navigate(`/admin/Donor_List/Donors/${userId}/edit`);
     };
 
     const toggleActivation = (index) => {
@@ -82,14 +71,15 @@ const AdminBeneficiaryListCmp = () => {
         }));
     };
 
+
     return (
         <div className={classes.mainContainer}>
             <Table celled>
                 <TableHeader>
                     <TableRow>
+                        <TableHeaderCell className={classes.customFont}>TicketId</TableHeaderCell>
                         <TableHeaderCell className={classes.customFont}>UserId</TableHeaderCell>
-                        <TableHeaderCell className={classes.customFont}>Name</TableHeaderCell>
-                        <TableHeaderCell className={classes.customFont}>UserName</TableHeaderCell>
+                        <TableHeaderCell className={classes.customFont}>UserType</TableHeaderCell>
                         <TableHeaderCell className={classes.customFont}>District</TableHeaderCell>
                         {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
                         <TableHeaderCell className={classes.customFont}>Address</TableHeaderCell>
@@ -111,8 +101,8 @@ const AdminBeneficiaryListCmp = () => {
                                 <TableCell>{row.userName}</TableCell>
                                 <TableCell >
                                     <div className={classes.userNameContainer}>
-                                        <Image src={row.image} circular className={classes.imageStylings}></Image>
-                                        <span className={classes.truncatedText}>{row.name}</span>
+                                        {/* <Image src={row.image} circular className={classes.imageStylings}></Image> */}
+                                        {/* <span className={classes.truncatedText}>{row.name}</span> */}
                                     </div>
                                 </TableCell>
                                 <TableCell>{row.district}</TableCell>
@@ -121,13 +111,13 @@ const AdminBeneficiaryListCmp = () => {
                                 <TableCell>{row.contact}</TableCell>
                                 <TableCell className={classes.actionStylings}>
                                     <div className={classes.actionContainerDiv}>
-                                        <Button color='primary' onClick={(e) => handleEditClick(e, row.userId)}>Edit</Button>
+                                        <Button color='primary' onClick={(e) => handleEditClick(e, row.userId)}>View Detail</Button>
                                         <Button 
                                         color={isActive ? 'red' : 'green'} onClick={(e) => {
                                             e.stopPropagation();
                                             toggleActivation(index);
                                         }}>
-                                        {isActive ? 'Deactivate' : 'Activate'}</Button>
+                                        {isActive ? 'Open' : 'Resolved'}</Button>
                                     </div>
                                 </TableCell>
                                 {/* <TableCell>{row.beneficiaryType}</TableCell> */}
@@ -158,4 +148,4 @@ const AdminBeneficiaryListCmp = () => {
     );
 }
  
-export default AdminBeneficiaryListCmp;
+export default RaisedTicketsTableCmp;

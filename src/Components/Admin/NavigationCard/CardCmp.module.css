@@ -26,3 +26,10 @@
     width: 100%;
     height: 100%;
 }
+
+.cardBody{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
