@@ -1,3 +1,16 @@
 .mainContainer{
-    
+    /* height: 100vh; */
+    margin: 25px;
+    margin-top: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.subContainer{
+    width: 500px;
+}
+
+.cardDescription p{
+    size: 25px;
 }

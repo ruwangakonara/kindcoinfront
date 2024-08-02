@@ -133,18 +133,23 @@ import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/lea
 import AdminAccountPg from './Pages/Admin/AdminAccount/AdminAccountPg';
 import AssignCrewMemberPg from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg';
 import AdminBeneficiaryListPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg';
+import AdminBeneficiaryEditFormPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryEditFormPg';
+import AdminBeneficiaryDetailsPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryDetailsPg';
 import ViewComplaintsPg from './Pages/Admin/Complaints/ViewComplaintsPg';
 import ViewCrewMemberTransactionListPg from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg';
 import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
+import AdminDonorDetailsPg from './Pages/Admin/DonorListView/AdminDonorDetailsPg';
+import AdminDonorEditFormPg from './Pages/Admin/DonorListView/AdminDonorEditFormPg';
 import AdminDashBoardPg from './Pages/Admin/home/AdminDashBoardPg';
-import RegisterCrewMemberPg from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPg';
+import ViewCrewMembersPg from './Pages/Admin/RegisterCrewMember/ViewCrewMembersPg';
+import RegisterCrewMemFormPg from './Pages/Admin/RegisterCrewMember/RegisterCrewMemFormPg';
 import AdminSettingsPg from './Pages/Admin/Settings/AdminSettingsPg';
 import OverallStatisticsPg from './Pages/Admin/Statistics/OverallStatisticsPg';
 
 
 
 
-import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
+// import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
 import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
@@ -267,17 +272,23 @@ function App() {
                 <Route path="/admin/account" element={<AdminAccountPg/>}/>
                 <Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>
                 <Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>
+                <Route path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id/edit" element={<AdminBeneficiaryEditFormPg/>} />
+                <Route path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id" element={<AdminBeneficiaryDetailsPg/>}/>
                 <Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>
                 <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>
                 <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>
+                <Route path="/admin/Donor_List/Donors/:Donor_Id/edit" element={<AdminDonorEditFormPg/>} />
+                <Route path="/admin/Donor_List/Donors/:Donor_Id" element={<AdminDonorDetailsPg/>}/>
                 <Route path="/admin/home" element={<AdminDashBoardPg/>}/>
-                <Route path="/admin/register/crew_member" element={<RegisterCrewMemberPg/>}/>
+                <Route path="/admin/view/crew_member" element={<ViewCrewMembersPg/>}/>
+                {/* <Route path="/admin/view/crew_member/:Crew_Mem_Id" element={</>}/> */}
+                <Route path="/admin/register/crew_member" element={<RegisterCrewMemFormPg/>}/>
                 <Route path='/admin/settings' element={<AdminSettingsPg/>}/>
                 <Route path='/admin/overall_stats' element={<OverallStatisticsPg/>}/>
 
 {/** =============================================================== */}
                 
-                <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>
+                <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonorDetailsPg/>}/>
                 <Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>
                 {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
                 {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
