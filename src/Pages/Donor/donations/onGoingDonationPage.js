@@ -128,7 +128,7 @@ const OnGoingDonationPage = () => {
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
-                                                {dummyDonation.requestTitle}
+                                                <a href= "/donor/open-requests/66a839c8dcf503fee44ea1ce">{dummyDonation.requestTitle}</a>
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Description</List.Header>

@@ -11,15 +11,15 @@ const ClosedRequest = ({ request }) => {
                     Closed Request
                 </Label>
                 <Image
-                    src={request.image}
+                    src={request.profile_image}
                     wrapped
                     ui={false}
                     className="request-image"
                 />
-                <Card.Header>{request.title}</Card.Header>
-                <Card.Meta>{request.beneficiaryName}</Card.Meta>
+                <Card.Header>{request.requestDetails.title}</Card.Header>
+                <Card.Meta>{request.name}</Card.Meta>
                 <Card.Description>
-                    {request.verified ? (
+                    {request.requestDetails.verified ? (
                         <span style={{ color: 'green' }}>
                             <Icon name="flag" color="green" /> Verified
                         </span>
@@ -31,7 +31,7 @@ const ClosedRequest = ({ request }) => {
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>
-                <Button as={Link} to={`${request.id}`} color="blue" fluid>
+                <Button as={Link} to={`${request.requestDetails._id}`} color="blue" fluid>
                     View Request
                 </Button>
             </Card.Content>

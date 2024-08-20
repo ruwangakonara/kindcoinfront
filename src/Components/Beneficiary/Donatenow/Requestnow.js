@@ -21,6 +21,7 @@ export default function Requestnow() {
         type: 'goods',
         address: '',
         phone: '',
+        email: '',
         user_id: user._id,
         beneficiary_id: beneficiary._id
     });
@@ -108,6 +109,13 @@ export default function Requestnow() {
                                 label='Phone'
                                 name='phone'
                                 value={formData.phone}
+                                onChange={handleChange}
+                            />
+                            <Form.Input
+                                required={true}
+                                label='Email'
+                                name='email'
+                                value={formData.email}
                                 onChange={handleChange}
                             />
                         </Form>

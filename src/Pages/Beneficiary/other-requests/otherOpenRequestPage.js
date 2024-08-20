@@ -101,7 +101,7 @@ const BeneficiaryOtherOpenRequestPage = () => {
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        <a href={`donor/beneficiaries/${requestDetails.beneficiary}`}>{requestDetails.name}</a>
+                                        <a href={`/beneficiary/beneficiaries/${requestDetails.beneficiary}`}>{requestDetails.name}</a>
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Title</List.Header>

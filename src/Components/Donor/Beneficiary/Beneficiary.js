@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Beneficiary = ({ name, type, image, verified, id }) => (
     <Card>
         <div style={{ height: '150px', overflow: 'hidden', position: 'relative' }}>
-            <Image src={image} wrapped ui={false} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
+            <Image src={(image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + image): "https://via.placeholder.com/150"} wrapped ui={false} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
         </div>
         <Card.Content>
             <Card.Header>{name}</Card.Header>

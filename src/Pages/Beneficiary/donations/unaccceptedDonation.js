@@ -62,7 +62,7 @@ const UnacceptedDonation = () => {
                                 <Grid.Row>
                                     <Grid.Column width={8} textAlign="center">
                                         <Image src={dummyDonation.donorProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Donor: {dummyDonation.donorName}</Header>
+                                        <Header as="h3" className="image-label"><a href = "/beneficiary/donors/34343434">Donor: {dummyDonation.donorName}</a></Header>
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
                                         <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture" />

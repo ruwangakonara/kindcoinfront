@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {Container, Grid, Header} from 'semantic-ui-react';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar4 from '../../../Components/Beneficiary/Sidebar/Sidebar4';
-import ClosedRequest from "../../../Components/Beneficiary/Request/ClosedRequest.js";
+import OtherClosedRequest from "../../../Components/Beneficiary/OtherRequest/OtherClosedRequest.js";
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import axios from "axios";
 
@@ -44,23 +44,23 @@ const requests = [
 ];
 
 function BeneficiaryOtherClosedRequestList() {
-    // const [other-requests, setRequests] = useState([])
+    const [otherrequests, setRequests] = useState([])
     const { user, userDetails } = useContext(UserContext);
     const beneficiary = userDetails;
 
     useEffect(() => {
-        // get_requests()
+        get_requests();
     }, []);
 
     const get_requests = async () => {
-
-        try{
-            const response = await axiosInstance.post('/beneficiary/get_my_requests', {user_id: user._id, beneficiary_id: beneficiary._id, open: false});
-            // setRequests(response.data.other-requests);
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_requests', { open: false });
+            const req = response.data.requests.filter(d => d.beneficiary_id !== beneficiary._id);
+            setRequests(req);
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     return (
         <div style={{display: 'flex', width: '100%'}}>
@@ -71,9 +71,9 @@ function BeneficiaryOtherClosedRequestList() {
                     <Header as="h2" style = {{marginBottom: "50px"}} className="page-header">Closed Requests</Header>
 
                     <Grid centered stackable columns={3}>
-                        {requests.map((request, index) => (
+                        {otherrequests && otherrequests.map((request, index) => (
                             <Grid.Column key={index}>
-                                <ClosedRequest request={request} image = {beneficiary.profile_image ? beneficiary.profile_image : 'https://via.placeholder.com/150'} beneficiary={beneficiary}/>
+                                <OtherClosedRequest request={request}/>
                             </Grid.Column>
                         ))}
                     </Grid>

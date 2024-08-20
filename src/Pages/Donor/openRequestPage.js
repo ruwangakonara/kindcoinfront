@@ -6,6 +6,7 @@ import './account.css';
 import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 import { UserContext } from '../../Components/Home/UserConext/UserContext';
 import axios from "axios";
+import donation from "../../Components/Donor/Donation/Donation";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -16,6 +17,9 @@ function OpenRequestPage() {
     const { request_id } = useParams();
     console.log(request_id);
 
+    const navigate = useNavigate();
+
+
     const [request, setRequest] = useState({});
     const [open, setOpen] = useState(false);
     const [donateOpen, setDonateOpen] = useState(false);
@@ -25,7 +29,6 @@ function OpenRequestPage() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
-    const navigate = useNavigate();
     const { user, userDetails } = useContext(UserContext);
     const donor = userDetails;
 
@@ -63,6 +66,7 @@ function OpenRequestPage() {
             user_id: user._id,
             donor_id: donor._id,
             request_id: request.requestDetails._id,
+            beneficiary_id: request.requestDetails.beneficiary_id,
             type: request.requestDetails.type,
             title: title,
             description: description,
@@ -99,7 +103,7 @@ function OpenRequestPage() {
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        <a href={`donor/beneficiaries/${request.beneficiary_id}`}>{request.name}</a>
+                                        <a href={`/donor/beneficiaries/${request.beneficiary_id}`}>{request.name}</a>
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Title</List.Header>
