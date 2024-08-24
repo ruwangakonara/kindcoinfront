@@ -100,6 +100,7 @@
   font-size: 1.2rem;
   padding: 10px 20px;
   color: #333 !important;
+  z-index: 100;
 }
 
 .ui.dropdown .menu > .item:hover {

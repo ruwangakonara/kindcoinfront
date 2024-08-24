@@ -190,7 +190,7 @@ const Login = () => {
       password: form.password.value,
     };
 
-    if(data.username === "~"){
+    if(data.username === "admin@kindcoin.com") {
 
       navigate("/admin/home")
 
