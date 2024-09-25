@@ -7,7 +7,7 @@ import Navbar from "../../Components/Home/NavBar/NavBar";
 export class message extends Component {
   render() {
     return (
-      <div>
+      <div><p></p>
           <Navbar/>
 
           <Banner />
