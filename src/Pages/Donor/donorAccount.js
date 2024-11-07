@@ -1,99 +1,118 @@
-import React from 'react';
-import { Container, Header, Grid, List, Button, Segment, Image } from 'semantic-ui-react';
-import { useNavigate } from 'react-router-dom';
-import './account.css';
+import React, { useContext, useEffect, useState } from 'react';
+import { Container, Header, Grid, List, Segment, Image, Button } from 'semantic-ui-react';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
-import {useParams} from "react-router-dom";
+import './account.css';
 import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
+import axios from 'axios';
+import { UserContext } from '../../Components/Home/UserConext/UserContext';
 
-const DonorAccount = () => {
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
+function DonorAccount() {
+    const { donor_id } = useParams();
+    console.log('Donor ID:', donor_id); // Check if ID is correctly logged
+
+    const { userDetails } = useContext(UserContext);
+    const [donor, setDonor] = useState({});
     const history = useNavigate();
-    const {donor_id} = useParams();
-    console.log(donor_id)
 
-    const donorDetails = {
-        name: 'John Doe',
-        address: '123 Charity Lane, Kindness City, CA',
-        description: 'Generous donor helping various causes.',
-        email: 'john.doe@example.com',
-        commonDonationItems: ['Clothes', 'Books', 'Toys', 'Food'],
-        donatedAmount: '$2000',
-        tokens: 150,
-        profilePicture: 'https://via.placeholder.com/150',
-        type: "individual"
+    const fetchDonorDetails = async () => {
+        console.log("Fetching donor details...");
+        try {
+            const response = await axiosInstance.post('/donor/get_donor', { _id: donor_id });
+            console.log("Response:", response);
+            if (response.status === 200) {
+                const donorDet = response.data.donor;
+                console.log("Donor Details:", donorDet);
+                setDonor(donorDet); // Update state with fetched details
+            } else {
+                console.error(`Error: Received status code ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error fetching donor details:', error);
+        }
     };
 
-    // const handleUpdate = () => {
-    //     history('/donor/update-account');
-    // }
+    useEffect(() => {
+        if (donor_id) {
+            fetchDonorDetails();
+        }
+    }, [donor_id]);
 
     return (
         <div>
-            <Navbar2/>
+            <Navbar2 />
 
-            <Container className="donor-account-container">
+            <Container className="donor-account-container" style={{ position: "relative", top: "150px" }}>
                 <Header as="h1">Donor Account</Header>
                 <Segment>
                     <Header as="h2">Donor Information</Header>
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Image src={donorDetails.profilePicture} circular className="profile-picture" />
+                                <Image
+                                    src={donor.profile_image ? `http://localhost:9013/images/profileimages/donor/${donor.profile_image}` : "https://via.placeholder.com/150"}
+                                    circular
+                                    className="profile-picture"
+                                />
                             </Grid.Column>
                             <Grid.Column width={10}>
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        {donorDetails.name}
+                                        {donor.name || 'N/A'}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {donorDetails.address}
+                                        {donor.address || 'N/A'}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Description</List.Header>
-                                        {donorDetails.description}
+                                        {donor.description || 'N/A'}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {donorDetails.email}
+                                        {donor.username}
                                     </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={2}>
-                                 <h4>Type: {donorDetails.type}</h4>
+                                <h4>Type: {donor.type || 'N/A'}</h4>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16}>
                                 <Header as="h3">Common Donation Items</Header>
                                 <List>
-                                    {donorDetails.commonDonationItems.map((item, index) => (
+                                    {(donor.usual_donations) && donor.usual_donations.map((item, index) => (
                                         <List.Item key={index}>{item}</List.Item>
                                     ))}
                                 </List>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
-                    {/*<Button primary onClick={handleUpdate}>Update</Button>*/}
                 </Segment>
                 <Segment>
                     <Header as="h2">Donation Statistics</Header>
                     <Grid>
                         <Grid.Column width={8}>
                             <Header as="h3">Donated Amount</Header>
-                            <p>{donorDetails.donatedAmount}</p>
+                            <p>{donor.donated}</p>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <Header as="h3">Tokens</Header>
-                            <p>{donorDetails.tokens}</p>
+                        <Header as="h3">Tokens</Header>
+                            <p>{donor.tokens}</p>
                         </Grid.Column>
                     </Grid>
                 </Segment>
             </Container>
-            <Donatenow/>
-        </div>
 
+            <Donatenow />
+        </div>
     );
 }
 

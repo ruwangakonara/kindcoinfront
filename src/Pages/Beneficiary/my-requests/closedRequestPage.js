@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import {useNavigate, useParams} from 'react-router-dom';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import './account.css';
 import Accepted from "../../../Components/Beneficiary/Donation/Accepted";
 import Unaccepted from "../../../Components/Beneficiary/Donation/Unaccepted";
 import CompletedDonation from "../../../Components/Beneficiary/Donation/CompletedDonation";
+import axios from 'axios';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
 const accepted_donations = [
     {
@@ -18,6 +25,8 @@ const accepted_donations = [
         recipientName: 'Charity Org',
         id:334354,
         accepted: true,
+        donorName: "rawdon"
+
 
     },
     {
@@ -29,7 +38,9 @@ const accepted_donations = [
         tokens: 10000,
         recipientName: 'John Doe',
         id:35354354,
-        accepted: true
+        accepted: true,
+        donorName: "rawdon"
+
 
     },
 ];
@@ -44,7 +55,9 @@ const unaccepted_donations = [
         tokens: 15000,
         recipientName: 'Charity Org',
         accepted: false,
-        id:35354354
+        id:35354354,
+        donorName: "rawdon"
+
 
     },
     {
@@ -56,7 +69,9 @@ const unaccepted_donations = [
         tokens: 10000,
         recipientName: 'John Doe',
         accepted: false,
-        id:35354354
+        id:35354354,
+        donorName: "rawdon"
+
 
 
     },
@@ -71,6 +86,8 @@ const completed_donations = [
         type: 'monetary',
         tokens: 15000,
         recipientName: 'Charity Org',
+        donorName: "rawdon"
+
     },
     {
         donorImage: 'https://via.placeholder.com/150',
@@ -80,35 +97,89 @@ const completed_donations = [
         type: 'goods',
         tokens: 10000,
         recipientName: 'John Doe',
+        donorName: "rawdon"
+
     },
 ];
 
-const BeneficiaryOwnClosedRequestPage = () => {
+function BeneficiaryOwnClosedRequestPage(){
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
+    const navigate = useNavigate();
+
     const { request_id } = useParams();
     console.log(request_id);
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
+    const [confirmOpen, setConfirmOpen] = useState(false);
+    const [requestDetails, setRequestDetails] = useState({});
 
-    const requestDetails = {
-        name: 'Charity Org',
-        title:"Need Some Food. Can I Get a Meal?",
-        // address: '456 Help St, Generosity Town, CA',
-        description: 'Aint eate in centureies so feed me.',
-        email: 'info@charityorg.org',
-        telephone: '123-456-7890',
-        profilePicture: 'https://via.placeholder.com/150',
-        proofImages: [
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300'
-        ],
-        certificateImage: 'https://via.placeholder.com/300',
-        // type: "organization",
-        verified: false,// Change to true to see the green flag
-        beneficiary:"sdfsdf",
-        raised:45969
-    };
+
+    const [acceptedDonations, setAcceptedDonations] = useState([])
+    const [unacceptedDonations, setUnacceptedDonations] = useState([])
+    const [completedDonations, setCompletedDonations] = useState([])
+
+
+    async function fetchRequestDetails() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_my_request', {_id: request_id, open: false});
+
+            if (response.status === 200) {
+                const requestDet = response.data.request;
+                setRequestDetails(requestDet);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+    async function fetchAcceptedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, accepted: true, verified:false});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setAcceptedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchUnacceptedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, accepted: false});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setUnacceptedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchCompletedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, verified: true});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setCompletedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    useEffect(() => {
+        fetchRequestDetails();
+        fetchAcceptedDonations()
+        fetchUnacceptedDonations()
+        fetchCompletedDonations()
+    }, []);
+
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
@@ -126,14 +197,16 @@ const BeneficiaryOwnClosedRequestPage = () => {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Image src={requestDetails.profilePicture} circular className="profile-picture" />
+                                <Image src={(beneficiary.profile_image !== "https://via.placeholder.com/150"
+                                    ? `http://localhost:9013/images/profileimages/beneficiary/${beneficiary.profile_image}`
+                                    : "https://via.placeholder.com/150")} circular className="profile-picture" />
                             </Grid.Column>
                             <Grid.Column width={9}>
                                 <List>
-                                    <List.Item>
-                                        <List.Header>Name</List.Header>
-                                        <a href={`donor/beneficiaries/${requestDetails.beneficiary}`}>{requestDetails.name}</a>
-                                    </List.Item>
+                                    {/*<List.Item>*/}
+                                    {/*    <List.Header>Name</List.Header>*/}
+                                    {/*    <a href={`donor/beneficiaries/${requestDetails.beneficiary}`}>{requestDetails.name}</a>*/}
+                                    {/*</List.Item>*/}
 
                                     <List.Item>
                                         <List.Header>Title</List.Header>
@@ -176,16 +249,52 @@ const BeneficiaryOwnClosedRequestPage = () => {
                 <Segment>
                     <Header as="h2">Proof Images</Header>
                     <Grid>
-                        {requestDetails.proofImages.map((image, index) => (
-                            <Grid.Column width={4} key={index}>
-                                <Image
-                                    src={image}
-                                    className="proof-image"
-                                    onClick={() => handleImageClick(image)}
-                                    style={{ cursor: 'pointer' }}
-                                />
-                            </Grid.Column>
-                        ))}
+                        {/*{requestDetails.proofImages.map((image, index) => (*/}
+                        {/*    <Grid.Column width={4} key={index}>*/}
+                        {/*        <Image*/}
+                        {/*            src={image}*/}
+                        {/*            className="proof-image"*/}
+                        {/*            onClick={() => handleImageClick(image)}*/}
+                        {/*            style={{ cursor: 'pointer' }}*/}
+                        {/*        />*/}
+                        {/*    </Grid.Column>*/}
+                        {/*))}*/}
+                        <Grid.Column width={4} key={1}>
+                            <Image
+                                src={(requestDetails?.image1 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image1}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick((requestDetails?.image1 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image1}`
+                                    : "https://via.placeholder.com/300")}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width={4} key={2}>
+                            <Image
+                                src={(requestDetails?.image2 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image2}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick((requestDetails?.image2 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image2}`
+                                    : "https://via.placeholder.com/300")}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Grid.Column>
+                        <Grid.Column width={4} key={3}>
+                            <Image
+                                src={(requestDetails?.image3 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image3}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick((requestDetails?.image3 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image3}`
+                                    : "https://via.placeholder.com/300")}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Grid.Column>
                     </Grid>
                 </Segment>
                 <Segment>
@@ -207,19 +316,17 @@ const BeneficiaryOwnClosedRequestPage = () => {
                 <Header as="h2">Accepted Donations</Header>
 
                 <Grid>
-                    {accepted_donations.map((donation, index) => (
+                    {acceptedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <Accepted
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-
-                                type={donation.type}
-                                // recipientName={donation.recipientName}
-                                accepted = {donation.accepted}
-                                id = {donation.id}
-
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                accepted={donation.donationDetails.accepted}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
                             />
                         </Grid.Column>
                     ))}
@@ -231,17 +338,18 @@ const BeneficiaryOwnClosedRequestPage = () => {
                 <Header as="h2">Non Accepted Donations</Header>
 
                 <Grid>
-                    {unaccepted_donations.map((donation, index) => (
+                    {unacceptedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <Unaccepted
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-                                type={donation.type}
-                                // recipientName={donation.recipientName}
-                                id = {donation.id}
-                                accepted = {donation.accepted}
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                accepted={donation.donationDetails.accepted}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
+
                             />
                         </Grid.Column>
                     ))}
@@ -252,18 +360,16 @@ const BeneficiaryOwnClosedRequestPage = () => {
                 <Header as="h2">Completed Donations</Header>
 
                 <Grid>
-                    {completed_donations.map((donation, index) => (
+                    {completedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <CompletedDonation
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-
-                                type={donation.type}
-                                // recipientName={donation.recipientName}
-                                // accepted = {donation.accepted}
-                                id = {donation.id}
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
 
                             />
                         </Grid.Column>

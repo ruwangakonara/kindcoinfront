@@ -12,7 +12,9 @@ const ClosedRequest = ({ request , image, beneficiary}) => {
                     Closed Request
                 </Label>
                 <Image
-                    src={image}
+                    src={(image !== "https://via.placeholder.com/150")
+                        ? `http://localhost:9013/images/profileimages/beneficiary/${image}`
+                        : image}
                     wrapped
                     ui={false}
                     className="request-image"

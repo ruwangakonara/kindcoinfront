@@ -23,20 +23,20 @@ const SidebarAdminCmp = ({ visible }) => {
 
   return (
       <Sidebar
-        as={Menu}
-        animation='overlay'
-        icon='labeled'
-        inverted
-        vertical
-        visible={visible}
-        width='thin'
+          as={Menu}
+          animation='overlay'
+          icon='labeled'
+          inverted
+          vertical
+          visible={visible}
+          width='thin'
       >
-          {items.map((item, index) => (
+        {items.map((item, index) => (
             <MenuItem as={Link} to={item.path} key={index}>
               <Icon name={item.icon} />
               {item.name}
             </MenuItem>
-          ))}
+        ))}
       </Sidebar>
   )
 }

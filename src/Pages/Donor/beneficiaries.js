@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Beneficiary from '../../Components/Donor/Beneficiary/Beneficiary';
 import { Container, Grid, Header, Form, Button } from 'semantic-ui-react';
 import Navbar2 from "../../Components/Donor/NavBar/NavBar2";
 import Sidebar from "../../Components/Donor/Sidebar/Sidebar";
 import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 import './OpenRequestList.css'; // Make sure you have this CSS file
+import { UserContext } from '../../Components/Home/UserConext/UserContext';
+import axios from "axios";
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
 const beneficiaries = [
     {
@@ -38,7 +45,25 @@ const beneficiaries = [
 ];
 
 const BeneficiaryList = () => {
+
+    const [beneficiaries, setBeneficiaries] = useState([]);
+    const { user, userDetails } = useContext(UserContext);
+    const donor = userDetails;
     const [searchQuery, setSearchQuery] = useState('');
+
+    useEffect(() => {
+        get_requests();
+    }, []);
+
+    const get_requests = async () => {
+        try {
+            const response = await axiosInstance.get('/donor/get_beneficiaries');
+            setBeneficiaries(response.data.beneficiaries);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     const handleSearch = (e) => {
         e.preventDefault();
@@ -55,14 +80,14 @@ const BeneficiaryList = () => {
                     <Header as="h2" style={{ marginBottom: "50px" }} className="page-header">Beneficiaries</Header>
 
                     <Grid columns={3} stackable>
-                        {beneficiaries.map((beneficiary, index) => (
+                        {beneficiaries && beneficiaries.map((beneficiary, index) => (
                             <Grid.Column key={index} style={{ marginBottom: '20px' }}>
                                 <Beneficiary
                                     name={beneficiary.name}
                                     type={beneficiary.type}
-                                    image={beneficiary.image}
+                                    image={beneficiary.profile_image}
                                     verified={beneficiary.verified}
-                                    id={beneficiary.id}
+                                    id={beneficiary._id}
                                 />
                             </Grid.Column>
                         ))}

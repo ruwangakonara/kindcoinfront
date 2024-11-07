@@ -1,68 +1,50 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import './account.css';
-// import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
+import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow";
+import axios from 'axios';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 
-const requests = [
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'Request for Help A',
-        beneficiaryName: 'Charity Org A',
-        verified: false,
-        id: "4dfadfaafaf",
-        open: false
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'Request for Help B',
-        beneficiaryName: 'Charity Org B',
-        verified: true,
-        id: "dfadadvadv",
-        open:true
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'Request for Help C',
-        beneficiaryName: 'Charity Org C',
-        verified: false,
-        id: "dafa554554",
-        open: true
-    },
-    {
-        image: 'https://via.placeholder.com/150',
-        title: 'Request for Help C',
-        beneficiaryName: 'Charity Org C',
-        verified: false,
-        id: "as44484",
-        open: false
-    }
-];
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
-const BeneficiaryOtherBeneficiaryAccount = () => {
+function BeneficiaryOtherBeneficiaryAccount() {
     const { beneficiary_id } = useParams();
-    console.log(beneficiary_id);
+    console.log('Beneficiary ID:', beneficiary_id); // Check if ID is correctly logged
+
+    const { user, userDetails } = useContext(UserContext);
+    const we_beneficiary = userDetails;
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
+    const [beneficiary, setBeneficiary] = useState(null); // Initialize beneficiary state
 
-    const beneficiaryDetails = {
-        name: 'Charity Org',
-        address: '456 Help St, Generosity Town, CA',
-        description: 'Non-profit organization focused on providing aid to underprivileged communities.',
-        email: 'info@charityorg.org',
-        telephone: '123-456-7890',
-        profilePicture: 'https://via.placeholder.com/150',
-        proofImages: [
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300'
-        ],
-        certificateImage: 'https://via.placeholder.com/300',
-        type: "organization",
-        verified: false // Change to true to see the green flag
+    const history = useNavigate();
+
+    const fetchBeneficiaryDetails = async () => {
+        console.log("Fetching beneficiary details...");
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_beneficiary', { _id: beneficiary_id });
+            console.log("Response:", response);
+            if (response.status === 200) {
+                const beneficiaryDet = response.data.beneficiary;
+                console.log("Beneficiary Details:", beneficiaryDet);
+                setBeneficiary(beneficiaryDet); // Update state with fetched details
+            } else {
+                console.error(`Error: Received status code ${response.status}`);
+            }
+        } catch (error) {
+            console.error('Error fetching beneficiary details:', error);
+        }
     };
+
+    useEffect(() => {
+        fetchBeneficiaryDetails();
+    }, [beneficiary_id]); // Add beneficiary_id to dependency array
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
@@ -80,41 +62,45 @@ const BeneficiaryOtherBeneficiaryAccount = () => {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Image src={beneficiaryDetails.profilePicture} circular className="profile-picture" />
+                                <Image src={beneficiary && (beneficiary.profile_image !== "https://via.placeholder.com/150" ? `http://localhost:9013/images/profileimages/beneficiary/${beneficiary.profile_image}` : "https://via.placeholder.com/150")} circular className="profile-picture"/>
                             </Grid.Column>
                             <Grid.Column width={10}>
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        {beneficiaryDetails.name}
+                                        {beneficiary?.name}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {beneficiaryDetails.address}
+                                        {beneficiary?.address}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>District</List.Header>
+                                        {beneficiary?.district}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Description</List.Header>
-                                        {beneficiaryDetails.description}
+                                        {beneficiary?.description}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {beneficiaryDetails.email}
+                                        {beneficiary?.username}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Telephone</List.Header>
-                                        {beneficiaryDetails.telephone}
+                                        {beneficiary?.phoneNo}
                                     </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={2}>
-                                <h4>Type: {beneficiaryDetails.type}</h4>
-                                {beneficiaryDetails.verified ? (
+                                <h4>Type: {beneficiary?.type}</h4>
+                                {beneficiary?.verified ? (
                                     <div>
-                                        <Icon name="flag" color="green" size="large" /><h4 style={{color: "green"}}>Verified</h4>
+                                        <Icon name="flag" color="green" size="large" /><h4 style={{ color: "green" }}>Verified</h4>
                                     </div>
                                 ) : (
                                     <div>
-                                        <Icon name="flag" color="red" size="large"/><h4 style={{color: "red"}}>Not Verified</h4>
+                                        <Icon name="flag" color="red" size="large" /><h4 style={{ color: "red" }}>Not Verified</h4>
                                     </div>
                                 )}
                             </Grid.Column>
@@ -124,16 +110,34 @@ const BeneficiaryOtherBeneficiaryAccount = () => {
                 <Segment>
                     <Header as="h2">Proof Images</Header>
                     <Grid>
-                        {beneficiaryDetails.proofImages.map((image, index) => (
-                            <Grid.Column width={4} key={index}>
-                                <Image
-                                    src={image}
-                                    className="proof-image"
-                                    onClick={() => handleImageClick(image)}
-                                    style={{ cursor: 'pointer' }}
-                                />
-                            </Grid.Column>
-                        ))}
+                        {beneficiary && (
+                            <>
+                                <Grid.Column width={4} key={1}>
+                                    <Image
+                                        src={(beneficiary.image1 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image1): "https://via.placeholder.com/300"}
+                                        className="proof-image"
+                                        onClick={() => handleImageClick(beneficiary.image1)}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                </Grid.Column>
+                                <Grid.Column width={4} key={2}>
+                                    <Image
+                                        src={(beneficiary.image2 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image2): "https://via.placeholder.com/300"}
+                                        className="proof-image"
+                                        onClick={() => handleImageClick(beneficiary.image2)}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                </Grid.Column>
+                                <Grid.Column width={4} key={3}>
+                                    <Image
+                                        src={(beneficiary.image3 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image3): "https://via.placeholder.com/300"}
+                                        className="proof-image"
+                                        onClick={() => handleImageClick(beneficiary.image3)}
+                                        style={{ cursor: 'pointer' }}
+                                    />
+                                </Grid.Column>
+                            </>
+                        )}
                     </Grid>
                 </Segment>
                 <Segment>
@@ -141,9 +145,9 @@ const BeneficiaryOtherBeneficiaryAccount = () => {
                     <Grid>
                         <Grid.Column width={16}>
                             <Image
-                                src={beneficiaryDetails.certificateImage}
+                                src={(beneficiary?.certificate_image !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary?.certificate_image): "https://via.placeholder.com/300"}
                                 className="certificate-image"
-                                onClick={() => handleImageClick(beneficiaryDetails.certificateImage)}
+                                onClick={() => handleImageClick(beneficiary?.certificateImage)}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -159,7 +163,7 @@ const BeneficiaryOtherBeneficiaryAccount = () => {
                     <Button onClick={() => setOpen(false)}>Close</Button>
                 </Modal.Actions>
             </Modal>
-            {/*<Donatenow/>*/}
+            <Requestnow/>
         </div>
     );
 }

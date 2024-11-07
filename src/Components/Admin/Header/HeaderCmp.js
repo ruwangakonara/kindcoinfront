@@ -35,43 +35,43 @@ const HeaderCmp = () => {
 
     return (
 
-      <header className="top">
-        <Link to={"/"}>
-          <div id="brand" className="brand">
-            <img src="/charitylogo.png" alt="charity"/>
-          </div>
-        </Link>
-
-        {
-          location.pathname === "/" ?
-            (<div className="temp">
-            <nav className="navbar" id="navbar" ref={navbar}>
-                    {/* <a href="/donor/announcements" onClick={click}>Announcements</a> */}
-                    <a href="#about" onClick={click}>About</a>
-                    <a href="#projects" onClick={click}>Projects</a>
-                    <a href="#skills" onClick={click}>Skills</a>
-                    <a href="#contact" onClick={click}>Contact</a>
-                </nav>
-                <div className="sidebar" id="sidebar" ref={sidebar} onClick={show}>
-                    <Icon name="ellipsis vertical" />
+        <header className="top">
+            <Link to={"/"}>
+                <div id="brand" className="brand">
+                    <img src="/charitylogo.png" alt="charity"/>
                 </div>
-            </div>
-            )
-              : 
-            (
-            <div className="temp">
-              <div className="brandlogin">
-                  <Link to={"/admin/account"}>
-                    <div id="brand" className="brand">
-                      <Icon name="user" />
-                    </div>
-                  </Link>
-              </div>
-            </div>
-          )
-        }
-      </header>
+            </Link>
+
+            {
+                location.pathname === "/" ?
+                    (<div className="temp">
+                            <nav className="navbar" id="navbar" ref={navbar}>
+                                {/* <a href="/donor/announcements" onClick={click}>Announcements</a> */}
+                                <a href="#about" onClick={click}>About</a>
+                                <a href="#projects" onClick={click}>Projects</a>
+                                <a href="#skills" onClick={click}>Skills</a>
+                                <a href="#contact" onClick={click}>Contact</a>
+                            </nav>
+                            <div className="sidebar" id="sidebar" ref={sidebar} onClick={show}>
+                                <Icon name="ellipsis vertical" />
+                            </div>
+                        </div>
+                    )
+                    :
+                    (
+                        <div className="temp">
+                            <div className="brandlogin">
+                                <Link to={"/admin/account"}>
+                                    <div id="brand" className="brand">
+                                        <Icon name="user" />
+                                    </div>
+                                </Link>
+                            </div>
+                        </div>
+                    )
+            }
+        </header>
     );
-  };
+};
 
 export default HeaderCmp

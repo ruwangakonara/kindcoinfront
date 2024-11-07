@@ -156,14 +156,9 @@ import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboar
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
-import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
+import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
-import VerifyRecipients from './Pages/CrewMember/VerifyRecipients/VerifyRecipients';
-import VerifyRequests from './Pages/CrewMember/VerifyRequests/VerifyRequests';
-import VerifyDonationProofs from './Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs';
-import CrewProfile from './Pages/CrewMember/Profile/CrewProfile';
-import TokenTransfer from './Pages/CrewMember/TokenTransfer/TokenTransfer';
-import CrewSettings from './Pages/CrewMember/Settings/CrewSettings';
+
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
 function App() {
@@ -202,7 +197,7 @@ function App() {
                 <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
                 <Route path = "/donor/pending-rewards/:donation_id" element={<PendingRewardsPage/>}/>
                 <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
-                <Route path = "/donor/completed-donations/:donations_id" element={<CompletedDonationPage/>}/>
+                <Route path = "/donor/completed-donations/:donation_id" element={<CompletedDonationPage/>}/>
 
                 <Route path = "/donor/donors" element={<DonorList/>}/>
                 <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>
@@ -293,18 +288,13 @@ function App() {
                 {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
                 {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
                 {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
-                
-                
+                <Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>
+                <Route path='/admin/settings' element={<AdminSettingsPg/>}/>
+
 
 
                 {/* Crew Member Routes */}
                 <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
-                <Route path='/crew/requests' element={<VerifyRequests/>}/>
-                <Route path='/crew/recipients' element={<VerifyRecipients/>}/>
-                <Route path='/crew/proofs' element={<VerifyDonationProofs/>}/>
-                <Route path='/crew/profile' element={<CrewProfile/>}/>
-                <Route path='/crew/token_transfer' element={<TokenTransfer/>}/>
-                <Route path='/crew/settings' element={<CrewSettings/>}/>
 
             </Routes>
         // </UserProvider>

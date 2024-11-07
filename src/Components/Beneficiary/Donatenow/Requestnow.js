@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import { Button, Modal, Form, Transition } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import './Donate.css';
 import { UserContext } from '../../Home/UserConext/UserContext';
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -14,12 +14,14 @@ export default function Requestnow() {
     const { user, userDetails } = useContext(UserContext);
     const beneficiary = userDetails;
     const [open, setOpen] = useState(false);
+    const [infoOpen, setInfoOpen] = useState(false); // State for additional popup
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         type: 'goods',
         address: '',
         phone: '',
+        email: '',
         user_id: user._id,
         beneficiary_id: beneficiary._id
     });
@@ -30,20 +32,24 @@ export default function Requestnow() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const  handleSubmit = async () => {
-        try{
+    const handleSubmit = async () => {
+        try {
             console.log(formData);
-            // Handle form submission logic here
-
-            await axiosInstance.post("/beneficiary/post_request", formData)
-
+            await axiosInstance.post('/beneficiary/post_request', formData);
             setOpen(false);
-            // Redirect after submission
             navigate('/beneficiary/open-requests');
         } catch (error) {
             console.log(error);
         }
+    };
 
+    const handleButtonClick = () => {
+        console.log(beneficiary);
+        if (beneficiary.verified) {
+            setOpen(true);
+        } else {
+            setInfoOpen(true); // Open additional popup if not verified
+        }
     };
 
     return (
@@ -51,12 +57,12 @@ export default function Requestnow() {
             <Button
                 className='donatebutton'
                 style={{ backgroundColor: 'lightcyan', color: 'white', fontSize: '18px' }}
-                onClick={() => setOpen(true)}
+                onClick={handleButtonClick}
             >
                 Request Now
             </Button>
 
-
+            {/* Modal for creating a new request */}
             <Transition visible={open} animation='scale' duration={500}>
                 <Modal
                     size='small'
@@ -105,11 +111,36 @@ export default function Requestnow() {
                                 value={formData.phone}
                                 onChange={handleChange}
                             />
+                            <Form.Input
+                                required={true}
+                                label='Email'
+                                name='email'
+                                value={formData.email}
+                                onChange={handleChange}
+                            />
                         </Form>
                     </Modal.Content>
                     <Modal.Actions>
                         <Button color='blue' onClick={() => setOpen(false)}>Cancel</Button>
                         <Button color='blue' onClick={handleSubmit}>Submit</Button>
+                    </Modal.Actions>
+                </Modal>
+            </Transition>
+
+            {/* Modal for indicating beneficiary is not verified */}
+            <Transition visible={infoOpen} animation='scale' duration={500}>
+                <Modal
+                    size='small'
+                    open={infoOpen}
+                    onClose={() => setInfoOpen(false)}
+                    className="info-modal"
+                >
+                    <Modal.Header>Verification Required</Modal.Header>
+                    <Modal.Content>
+                        <p>You must be verified before you can make a request.</p>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button color='red' onClick={() => setInfoOpen(false)}>OK</Button>
                     </Modal.Actions>
                 </Modal>
             </Transition>

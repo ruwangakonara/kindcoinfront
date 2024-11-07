@@ -1,8 +1,8 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label} from 'semantic-ui-react';
-import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
-import Sidebar2 from '../../../Components/Donor/Sidebar/Sidebar2';
-import './myListingPage.css';
+import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
+// import Sidebar2 from '../../../Components/Donor/Sidebar/Sidebar2';
+import './myListingPage2.css';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import axios from "axios";
@@ -13,46 +13,22 @@ const axiosInstance = axios.create({
     withCredentials: true,
 });
 
-const dummyDonation = {
-    donorName: 'John Doe',
-    donorProfilePic: 'https://via.placeholder.com/150',
-    recipientName: 'Charity Org',
-    recipientProfilePic: 'https://via.placeholder.com/150',
-    donationType: 'goods',
-    donationTitle: 'Winter Clothes Donation',
-    donationDescription: 'This is a donation for winter clothes including jackets, sweaters, and gloves.',
-    goodsList: [
-        { item: 'Clothes', amount: '50 pieces' },
-        { item: 'Books', amount: '30 pieces' },
-        { item: 'Toys', amount: '20 pieces' }
-    ],
-    moneyAmount: '',
-    requestTitle: 'Request for Winter Clothes',
-    requestDescription: 'We are in need of winter clothes for the upcoming cold season. Your help will be greatly appreciated.',
-    recipientPhone: '123-456-7890',
-    donationPhone: '987-654-3210',
-    verified: false,
-    images: [
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150',
-        'https://via.placeholder.com/150'
-    ]
-};
+
 
 function OnGoingDonationPage(){
     const { donation_id } = useParams();
     const { user, userDetails } = useContext(UserContext);
-    const donor = userDetails;
+    const beneficiary = userDetails;
 
-    const [editModalOpen, setEditModalOpen] = useState(false);
+    // const [editModalOpen, setEditModalOpen] = useState(false);
     const [imageModalOpen, setImageModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     // const [editedImages, setEditedImages] = useState(null);
-    const [editedDetails, setEditedDetails] = useState({});
+    // const [editedDetails, setEditedDetails] = useState({});
 
     const [donation, setDonation] = useState({});
     const [request, setRequest] = useState({});
-    const [beneficiary, setBeneficiary] = useState({});
+    const [donor, setDonor] = useState({});
     const [member, setMember] = useState({});
 
     const [selectedFiles, setSelectedFiles] = useState({
@@ -68,35 +44,35 @@ function OnGoingDonationPage(){
 
     const get_donation = async () => {
         try {
-            const response = await axiosInstance.post('/donor/get_donation', { accepted: true, _id: donation_id });
+            const response = await axiosInstance.post('/beneficiary/get_donation', { accepted: true, _id: donation_id });
             setDonation(response.data.donation);
-            setBeneficiary(response.data.beneficiary);
+            setDonor(response.data.donor);
             setRequest(response.data.request);
             if(response.data.member){
                 setMember(response.data.member);
             }
-            console.log(beneficiary)
+            console.log(donor)
         } catch (error) {
             console.log(error);
         }
     };
 
     // Handle opening and closing of edit modal
-    const handleEditModalOpen = () => {
-        setEditModalOpen(true);
-        setEditedDetails({
-            image1: donation.image1,
-            image2: donation.image2,
-            image3: donation.image3,
-            image4: donation.image4,
-        })
-    };
+    // const handleEditModalOpen = () => {
+    //     setEditModalOpen(true);
+    //     setEditedDetails({
+    //         image1: donation.image1,
+    //         image2: donation.image2,
+    //         image3: donation.image3,
+    //         image4: donation.image4,
+    //     })
+    // };
 
-    const handleEditModalClose = () => {
-        setEditModalOpen(false);
-    };
-
-    // Handle opening and closing of image modal
+    // const handleEditModalClose = () => {
+    //     setEditModalOpen(false);
+    // };
+    //
+    // // Handle opening and closing of image modal
     const handleImageModalOpen = (image) => {
         setSelectedImage(image);
         setImageModalOpen(true);
@@ -108,38 +84,38 @@ function OnGoingDonationPage(){
     };
 
     // Handle form submission for editing donation details
-    const handleEditFormSubmit = async (e) => {
-        e.preventDefault(); // Prevent default form submission
-        // Perform logic to update donation details (e.g., API call)
-        // console.log('Updated Images:', editedImages);
-        const data = new FormData();
-        Object.keys(selectedFiles).forEach((key) => {
-            if (selectedFiles[key]) {
-                data.append(key, selectedFiles[key]);
-            }
-        });
-        data.append('donation_id', donation_id);
-        data.append('user_id', user._id);
-        try {
-            await axiosInstance.put('/donor/update_donation_image', data, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            get_donation()
-            setSelectedFiles({
-                image1: null,
-                image2: null,
-                image3: null,
-                image4: null,
-            })
-            setEditModalOpen(false);
-
-        } catch (error) {
-            console.error('Error updating donation:', error);
-        }
-
-    };
+    // const handleEditFormSubmit = async (e) => {
+    //     e.preventDefault(); // Prevent default form submission
+    //     // Perform logic to update donation details (e.g., API call)
+    //     // console.log('Updated Images:', editedImages);
+    //     const data = new FormData();
+    //     Object.keys(selectedFiles).forEach((key) => {
+    //         if (selectedFiles[key]) {
+    //             data.append(key, selectedFiles[key]);
+    //         }
+    //     });
+    //     data.append('donation_id', donation_id);
+    //     data.append('user_id', user._id);
+    //     try {
+    //         await axiosInstance.put('/donor/update_donation_image', data, {
+    //             headers: {
+    //                 'Content-Type': 'multipart/form-data',
+    //             },
+    //         });
+    //         get_donation()
+    //         setSelectedFiles({
+    //             image1: null,
+    //             image2: null,
+    //             image3: null,
+    //             image4: null,
+    //         })
+    //         setEditModalOpen(false);
+    //
+    //     } catch (error) {
+    //         console.error('Error updating donation:', error);
+    //     }
+    //
+    // };
 
     // Handle adding a new image
     // const handleAddImage = (e) => {
@@ -153,14 +129,14 @@ function OnGoingDonationPage(){
     //     }
     // };
 
-    const handleFileChange = (e, fieldName) => {
-        const file = e.target.files[0];
-        if (file) {
-            const previewUrl = URL.createObjectURL(file);
-            setSelectedFiles({ ...selectedFiles, [fieldName]: file });
-            setEditedDetails({ ...editedDetails, [fieldName]: previewUrl });
-        }
-    };
+    // const handleFileChange = (e, fieldName) => {
+    //     const file = e.target.files[0];
+    //     if (file) {
+    //         const previewUrl = URL.createObjectURL(file);
+    //         setSelectedFiles({ ...selectedFiles, [fieldName]: file });
+    //         setEditedDetails({ ...editedDetails, [fieldName]: previewUrl });
+    //     }
+    // };
 
     // Handle removing an image
     // const handleRemoveImage = (index) => {
@@ -171,24 +147,25 @@ function OnGoingDonationPage(){
 
     return (
         <div>
-            <Navbar2 />
+            <Navbar />
             <Grid>
                 <Grid.Column width={1}>
-                    <Sidebar2 />
+                    {/*<Sidebar2 />*/}
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
-                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Ongoing Donation</Header>
+                        <Header as="h2" style = {{marginTop: "50px"}} className="page-header">Accepted Donation</Header>
                         <Segment raised>
                             <Grid>
                                 <Grid.Row>
                                     <Grid.Column width={8} textAlign="center">
                                         <Image src={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Donor: {donor.name}</Header>
+                                        <Header as="h3" className="image-label">Donor: <a href={`http://localhost:3000/beneficiary/donors/${donor?._id}`}>{donor?.name}</a></Header>
+
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
                                         <Image src={(beneficiary?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + beneficiary?.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Recipient: <a href={`http://localhost:3000/donor/beneficiaries/${beneficiary?._id}`}>{beneficiary?.name}</a></Header>
+                                        <Header as="h3" className="image-label">Donor: {beneficiary.name}</Header>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
@@ -197,6 +174,8 @@ function OnGoingDonationPage(){
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {donation.title}
+                                                <List.Header>Donation</List.Header>
+                                                {donation.description}
                                                 <div style={{textAlign: "right", marginBottom: "5px"}}>
                                                     {!donation.verified && (
                                                         <Label color='red' className='status-label'>
@@ -205,17 +184,17 @@ function OnGoingDonationPage(){
                                                     )}
 
                                                 </div>
-                                                {!donation.verified && request.type === "monetary" && (
-                                                    <Button primary size='tiny' floated='right'
-                                                            onClick={handleEditModalOpen}>Edit</Button>
-                                                )}
+                                                {/*{!donation.verified && request.type === "monetary" && (*/}
+                                                {/*    <Button primary size='tiny' floated='right'*/}
+                                                {/*            onClick={handleEditModalOpen}>Edit</Button>*/}
+                                                {/*)}*/}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
                                                 {request.open ?
-                                                    <a href={`http://localhost:3000/donor/open-requests/${request?._id}`}>{request?.title}</a>
+                                                    <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
                                                     :
-                                                    <a href={`http://localhost:3000/donor/closed-requests/${request?._id}`}>{request?.title}</a>
+                                                    <a href={`http://localhost:3000/beneficiary/closed-requests/${request?._id}`}>{request?.title}</a>
                                                 }
                                             </List.Item>
                                             <List.Item>
@@ -347,7 +326,7 @@ function OnGoingDonationPage(){
 
 
                                     </Grid>
-                                    )}
+                                )}
                                 {!donation.member_id && (
                                     <Grid>
 
@@ -381,133 +360,133 @@ function OnGoingDonationPage(){
             </Modal>
 
             {/* Edit Modal */}
-            <Modal size='tiny' open={editModalOpen} onClose={handleEditModalClose}>
-                <Modal.Header>Edit Donation Images</Modal.Header>
-                <Modal.Content>
-                    <Form onSubmit={handleEditFormSubmit}>
-                        {/*<Form.Field>*/}
-                        {/*    <label>Upload New Image</label>*/}
-                        {/*    <input type="file" accept="image/*" onChange={handleAddImage} />*/}
-                        {/*</Form.Field>*/}
-                        <Form.Field>
-                            <label>Current Images</label>
-                            {/*<div className="additional-images">*/}
-                            {/*    {editedImages.map((image, index) => (*/}
-                            {/*        <div key={index} style={{ display: 'inline-block', position: 'relative' }}>*/}
-                            {/*            <Image src={image} size='small' spaced />*/}
-                            {/*            <Button*/}
-                            {/*                icon='trash'*/}
-                            {/*                negative*/}
-                            {/*                onClick={() => handleRemoveImage(index)}*/}
-                            {/*                style={{ position: 'absolute', top: 0, right: 0 }}*/}
-                            {/*                type='button'*/}
-                            {/*            />*/}
-                            {/*        </div>*/}
-                            {/*    ))}*/}
-                            {/*</div>*/}
-                            <Grid>
-                                <Grid.Column width={4}>
-                                    <Image
-                                        src={selectedFiles.image1
-                                            ? editedDetails.image1
-                                            : editedDetails.image1 !== "https://via.placeholder.com/300"
-                                                ? `http://localhost:9013/images/donation_proof/${editedDetails.image1}`
-                                                : "https://via.placeholder.com/300"
-                                        }
-                                        className="proof-image"
-                                    />
-                                    <Button
-                                        as="label"
-                                        htmlFor="image1Upload"
-                                        icon="upload"
-                                        content="Change Image 1"
-                                    />
-                                    <input
-                                        type="file"
-                                        id="image1Upload"
-                                        accept="image/*"
-                                        hidden
-                                        onChange={(e) => handleFileChange(e, 'image1')}
-                                    />
-                                </Grid.Column>
-                                <Grid.Column width={4}>
-                                    <Image
-                                        src={selectedFiles.image2
-                                            ? editedDetails.image2
-                                            : editedDetails.image2 !== "https://via.placeholder.com/300"
-                                                ? `http://localhost:9013/images/donation_proof/${editedDetails.image2}`
-                                                : "https://via.placeholder.com/300"
-                                        }
-                                        className="proof-image"
-                                    />
-                                    <Button
-                                        as="label"
-                                        htmlFor="image2Upload"
-                                        icon="upload"
-                                        content="Change Image 2"
-                                    />
-                                    <input
-                                        type="file"
-                                        id="image2Upload"
-                                        accept="image/*"
-                                        hidden
-                                        onChange={(e) => handleFileChange(e, 'image2')}
-                                    />
-                                </Grid.Column>
-                                <Grid.Column width={4}>
-                                    <Image
-                                        src={selectedFiles.image3
-                                            ? editedDetails.image3
-                                            : editedDetails.image3 !== "https://via.placeholder.com/300"
-                                                ? `http://localhost:9013/images/donation_proof/${editedDetails.image3}`
-                                                : "https://via.placeholder.com/300"
-                                        }
-                                        className="proof-image"
-                                    />
-                                    <Button
-                                        as="label"
-                                        htmlFor="image3Upload"
-                                        icon="upload"
-                                        content="Change Image 3"
-                                    />
-                                    <input
-                                        type="file"
-                                        id="image3Upload"
-                                        accept="image/*"
-                                        hidden
-                                        onChange={(e) => handleFileChange(e, 'image3')}
-                                    />
-                                </Grid.Column>
-                                <Grid.Column width={4}>
-                                    <Image
-                                        src={selectedFiles.image4
-                                            ? editedDetails.image4
-                                            : editedDetails.image4 !== "https://via.placeholder.com/300"
-                                                ? `http://localhost:9013/images/donation_proof/${editedDetails.image4}`
-                                                : "https://via.placeholder.com/300"
-                                        }
-                                        className="proof-image"
-                                    />
-                                    <Button
-                                        as="label"
-                                        htmlFor="image4Upload"
-                                        icon="upload"
-                                        content="Change Image 4"
-                                    />
-                                    <input
-                                        type="file"
-                                        id="image4Upload"
-                                        accept="image/*"
-                                        hidden
-                                        onChange={(e) => handleFileChange(e, 'image4')}
-                                    />
-                                </Grid.Column>
-                            </Grid>
-                        </Form.Field>
-                        <Button type='submit'>Save</Button>
-                    </Form>
-                </Modal.Content>
-            </Modal>
+            {/*<Modal size='tiny' open={editModalOpen} onClose={handleEditModalClose}>*/}
+            {/*    <Modal.Header>Edit Donation Images</Modal.Header>*/}
+            {/*    <Modal.Content>*/}
+            {/*        <Form onSubmit={handleEditFormSubmit}>*/}
+            {/*            /!*<Form.Field>*!/*/}
+            {/*            /!*    <label>Upload New Image</label>*!/*/}
+            {/*            /!*    <input type="file" accept="image/*" onChange={handleAddImage} />*!/*/}
+            {/*            /!*</Form.Field>*!/*/}
+            {/*            <Form.Field>*/}
+            {/*                <label>Current Images</label>*/}
+            {/*                /!*<div className="additional-images">*!/*/}
+            {/*                /!*    {editedImages.map((image, index) => (*!/*/}
+            {/*                /!*        <div key={index} style={{ display: 'inline-block', position: 'relative' }}>*!/*/}
+            {/*                /!*            <Image src={image} size='small' spaced />*!/*/}
+            {/*                /!*            <Button*!/*/}
+            {/*                /!*                icon='trash'*!/*/}
+            {/*                /!*                negative*!/*/}
+            {/*                /!*                onClick={() => handleRemoveImage(index)}*!/*/}
+            {/*                /!*                style={{ position: 'absolute', top: 0, right: 0 }}*!/*/}
+            {/*                /!*                type='button'*!/*/}
+            {/*                /!*            />*!/*/}
+            {/*                /!*        </div>*!/*/}
+            {/*                /!*    ))}*!/*/}
+            {/*                /!*</div>*!/*/}
+            {/*                <Grid>*/}
+            {/*                    <Grid.Column width={4}>*/}
+            {/*                        <Image*/}
+            {/*                            src={selectedFiles.image1*/}
+            {/*                                ? editedDetails.image1*/}
+            {/*                                : editedDetails.image1 !== "https://via.placeholder.com/300"*/}
+            {/*                                    ? `http://localhost:9013/images/donation_proof/${editedDetails.image1}`*/}
+            {/*                                    : "https://via.placeholder.com/300"*/}
+            {/*                            }*/}
+            {/*                            className="proof-image"*/}
+            {/*                        />*/}
+            {/*                        <Button*/}
+            {/*                            as="label"*/}
+            {/*                            htmlFor="image1Upload"*/}
+            {/*                            icon="upload"*/}
+            {/*                            content="Change Image 1"*/}
+            {/*                        />*/}
+            {/*                        <input*/}
+            {/*                            type="file"*/}
+            {/*                            id="image1Upload"*/}
+            {/*                            accept="image/*"*/}
+            {/*                            hidden*/}
+            {/*                            onChange={(e) => handleFileChange(e, 'image1')}*/}
+            {/*                        />*/}
+            {/*                    </Grid.Column>*/}
+            {/*                    <Grid.Column width={4}>*/}
+            {/*                        <Image*/}
+            {/*                            src={selectedFiles.image2*/}
+            {/*                                ? editedDetails.image2*/}
+            {/*                                : editedDetails.image2 !== "https://via.placeholder.com/300"*/}
+            {/*                                    ? `http://localhost:9013/images/donation_proof/${editedDetails.image2}`*/}
+            {/*                                    : "https://via.placeholder.com/300"*/}
+            {/*                            }*/}
+            {/*                            className="proof-image"*/}
+            {/*                        />*/}
+            {/*                        <Button*/}
+            {/*                            as="label"*/}
+            {/*                            htmlFor="image2Upload"*/}
+            {/*                            icon="upload"*/}
+            {/*                            content="Change Image 2"*/}
+            {/*                        />*/}
+            {/*                        <input*/}
+            {/*                            type="file"*/}
+            {/*                            id="image2Upload"*/}
+            {/*                            accept="image/*"*/}
+            {/*                            hidden*/}
+            {/*                            onChange={(e) => handleFileChange(e, 'image2')}*/}
+            {/*                        />*/}
+            {/*                    </Grid.Column>*/}
+            {/*                    <Grid.Column width={4}>*/}
+            {/*                        <Image*/}
+            {/*                            src={selectedFiles.image3*/}
+            {/*                                ? editedDetails.image3*/}
+            {/*                                : editedDetails.image3 !== "https://via.placeholder.com/300"*/}
+            {/*                                    ? `http://localhost:9013/images/donation_proof/${editedDetails.image3}`*/}
+            {/*                                    : "https://via.placeholder.com/300"*/}
+            {/*                            }*/}
+            {/*                            className="proof-image"*/}
+            {/*                        />*/}
+            {/*                        <Button*/}
+            {/*                            as="label"*/}
+            {/*                            htmlFor="image3Upload"*/}
+            {/*                            icon="upload"*/}
+            {/*                            content="Change Image 3"*/}
+            {/*                        />*/}
+            {/*                        <input*/}
+            {/*                            type="file"*/}
+            {/*                            id="image3Upload"*/}
+            {/*                            accept="image/*"*/}
+            {/*                            hidden*/}
+            {/*                            onChange={(e) => handleFileChange(e, 'image3')}*/}
+            {/*                        />*/}
+            {/*                    </Grid.Column>*/}
+            {/*                    <Grid.Column width={4}>*/}
+            {/*                        <Image*/}
+            {/*                            src={selectedFiles.image4*/}
+            {/*                                ? editedDetails.image4*/}
+            {/*                                : editedDetails.image4 !== "https://via.placeholder.com/300"*/}
+            {/*                                    ? `http://localhost:9013/images/donation_proof/${editedDetails.image4}`*/}
+            {/*                                    : "https://via.placeholder.com/300"*/}
+            {/*                            }*/}
+            {/*                            className="proof-image"*/}
+            {/*                        />*/}
+            {/*                        <Button*/}
+            {/*                            as="label"*/}
+            {/*                            htmlFor="image4Upload"*/}
+            {/*                            icon="upload"*/}
+            {/*                            content="Change Image 4"*/}
+            {/*                        />*/}
+            {/*                        <input*/}
+            {/*                            type="file"*/}
+            {/*                            id="image4Upload"*/}
+            {/*                            accept="image/*"*/}
+            {/*                            hidden*/}
+            {/*                            onChange={(e) => handleFileChange(e, 'image4')}*/}
+            {/*                        />*/}
+            {/*                    </Grid.Column>*/}
+            {/*                </Grid>*/}
+            {/*            </Form.Field>*/}
+            {/*            <Button type='submit'>Save</Button>*/}
+            {/*        </Form>*/}
+            {/*    </Modal.Content>*/}
+            {/*</Modal>*/}
         </div>
     );
 }
