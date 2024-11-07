@@ -137,6 +137,10 @@ function OpenRequestPage(){
         certificate_image: null,
     });
 
+    const [acceptedDonations, setAcceptedDonations] = useState([])
+    const [unacceptedDonations, setUnacceptedDonations] = useState([])
+    const [completedDonations, setCompletedDonations] = useState([])
+
 
     async function fetchRequestDetails() {
         try {
@@ -151,8 +155,50 @@ function OpenRequestPage(){
         }
     }
 
+
+    async function fetchAcceptedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, accepted: true, verified:false});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setAcceptedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchUnacceptedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, accepted: false});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setUnacceptedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchCompletedDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donations', {request_id: request_id, verified: true});
+
+            if (response.status === 200) {
+                const donations = response.data.donations;
+                setCompletedDonations(donations);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect(() => {
         fetchRequestDetails();
+        fetchAcceptedDonations()
+        fetchUnacceptedDonations()
+        fetchCompletedDonations()
     }, []);
 
     const handleImageClick = (image) => {
@@ -209,6 +255,12 @@ function OpenRequestPage(){
             });
             setEditOpen(false);
             fetchRequestDetails()
+            setSelectedFiles({
+                image1: null,
+                image2: null,
+                image3: null,
+                certificate_image: null,
+            })
         } catch (error) {
             console.error('Error updating beneficiary:', error);
         }
@@ -235,9 +287,19 @@ function OpenRequestPage(){
         setConfirmOpen(true);
     };
 
-    const handleConfirmClose = () => {
+    const handleConfirmClose = async () => {
         setConfirmOpen(false);
-        navigate('/beneficiary/closed-requests');  // replace '/somewhere' with the actual path to redirect
+
+        try{
+            const response = await axiosInstance.post('/beneficiary/close_request', {request_id: request_id, beneficiary_id: beneficiary._id});
+
+            if (response.status === 200) {
+                navigate('/beneficiary/closed-requests');  // replace '/somewhere' with the actual path to redirect
+            }
+        } catch (error){
+            console.error('Error closing request:', error);
+        }
+
     };
 
     return (
@@ -324,7 +386,9 @@ function OpenRequestPage(){
                                     ? `http://localhost:9013/images/request_proof/${requestDetails?.image1}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(requestDetails?.image1 )}
+                                onClick={() => handleImageClick((requestDetails?.image1 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image1}`
+                                    : "https://via.placeholder.com/300")}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -334,7 +398,9 @@ function OpenRequestPage(){
                                     ? `http://localhost:9013/images/request_proof/${requestDetails?.image2}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(requestDetails?.image2 )}
+                                onClick={() => handleImageClick((requestDetails?.image2 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image2}`
+                                    : "https://via.placeholder.com/300")}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -344,7 +410,9 @@ function OpenRequestPage(){
                                     ? `http://localhost:9013/images/request_proof/${requestDetails?.image3}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(requestDetails?.image3 )}
+                                onClick={() => handleImageClick((requestDetails?.image3 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${requestDetails?.image3}`
+                                    : "https://via.placeholder.com/300")}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -359,7 +427,9 @@ function OpenRequestPage(){
                                     ? `http://localhost:9013/images/request_certificate/${requestDetails?.certificate_image}`
                                     : "https://via.placeholder.com/300"}
                                 className="certificate-image"
-                                onClick={() => handleImageClick(requestDetails.certificate_image)}
+                                onClick={() => handleImageClick((requestDetails?.certificate_image !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_certificate/${requestDetails?.certificate_image}`
+                                    : "https://via.placeholder.com/300")}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -371,17 +441,17 @@ function OpenRequestPage(){
                 <Header as="h2">Accepted Donations</Header>
 
                 <Grid>
-                    {accepted_donations.map((donation, index) => (
+                    {acceptedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <Accepted
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-                                type={donation.type}
-                                accepted={donation.accepted}
-                                id={donation.id}
-                                donorName={donation.donorName}
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                accepted={donation.donationDetails.accepted}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
                             />
                         </Grid.Column>
                     ))}
@@ -392,17 +462,17 @@ function OpenRequestPage(){
                 <Header as="h2">Non Accepted Donations</Header>
 
                 <Grid>
-                    {unaccepted_donations.map((donation, index) => (
+                    {unacceptedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <Unaccepted
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-                                type={donation.type}
-                                accepted={donation.accepted}
-                                id={donation.id}
-                                donorName={donation.donorName}
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                accepted={donation.donationDetails.accepted}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
 
                             />
                         </Grid.Column>
@@ -414,16 +484,16 @@ function OpenRequestPage(){
                 <Header as="h2">Completed Donations</Header>
 
                 <Grid>
-                    {completed_donations.map((donation, index) => (
+                    {completedDonations.map((donation, index) => (
                         <Grid.Column key={index} width={16}>
                             <CompletedDonation
-                                donorImage={donation.donorImage}
+                                donorImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donation.profile_image): "https://via.placeholder.com/150"}
                                 // recipientImage={donation.recipientImage}
-                                amount={donation.amount}
-                                donationTitle={donation.title}
-                                type={donation.type}
-                                id={donation.id}
-                                donorName={donation.donorName}
+                                amount={donation.donationDetails.value}
+                                donationTitle={donation.donationDetails.title}
+                                type={donation.donationDetails.type}
+                                id={donation.donationDetails._id}
+                                donorName={donation.name}
 
                             />
                         </Grid.Column>

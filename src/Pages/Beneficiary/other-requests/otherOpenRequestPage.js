@@ -1,87 +1,67 @@
-import React, { useState } from 'react';
-import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon, Form, Dropdown } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
+import { Container, Header, Grid, List, Segment, Image, Modal, Button, Icon } from 'semantic-ui-react';
+import {useNavigate, useParams} from 'react-router-dom';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import './account.css';
+import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow";
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import axios from "axios";
 
-const BeneficiaryOtherOpenRequestPage = () => {
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
+function BeneficiaryOtherOpenRequestPage(){
     const { request_id } = useParams();
     console.log(request_id);
 
-    const [open, setOpen] = useState(false);
-    const [editOpen, setEditOpen] = useState(false);
-    const [selectedImage, setSelectedImage] = useState('');
-    const [requestDetails, setRequestDetails] = useState({
-        name: 'Charity Org',
-        title: "Need Some Food. Can I Get a Meal?",
-        description: 'Aint eate in centureies so feed me.',
-        email: 'info@charityorg.org',
-        telephone: '123-456-7890',
-        profilePicture: 'https://via.placeholder.com/150',
-        proofImages: [
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300',
-            'https://via.placeholder.com/300'
-        ],
-        certificateImage: 'https://via.placeholder.com/300',
-        verified: false,
-        beneficiary: "sdfsdf",
-        raised: 45969,
-        type: "goods",
-    });
+    const navigate = useNavigate();
 
-    const [editedDetails, setEditedDetails] = useState({ ...requestDetails });
+
+    const [open, setOpen] = useState(false);
+    const [selectedImage, setSelectedImage] = useState('');
+    const [request, setRequest] = useState({});
+
+
+
+    const get_request = useCallback(async () => {
+        try {
+            const response = await axiosInstance.post('/beneficiary/getrequest', { _id: request_id });
+            setRequest(response.data.request);
+            console.log(response.data.request);
+        } catch (error) {
+            console.log(error);
+        }
+    }, [request_id]);
+
+    useEffect(() => {
+        get_request();
+    }, [get_request]);
+
+    // const requestDetails = {
+    //     name: 'Charity Org',
+    //     title:"Need Some Food. Can I Get a Meal?",
+    //     // address: '456 Help St, Generosity Town, CA',
+    //     description: 'Aint eate in centureies so feed me.',
+    //     email: 'info@charityorg.org',
+    //     telephone: '123-456-7890',
+    //     profilePicture: 'https://via.placeholder.com/150',
+    //     proofImages: [
+    //         'https://via.placeholder.com/300',
+    //         'https://via.placeholder.com/300',
+    //         'https://via.placeholder.com/300'
+    //     ],
+    //     certificateImage: 'https://via.placeholder.com/300',
+    //     // type: "organization",
+    //     verified: false,// Change to true to see the green flag
+    //     beneficiary:"sdfsdf",
+    //     raised:45969
+    // };
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
         setOpen(true);
-    };
-
-    const handleEditButtonClick = () => {
-        setEditedDetails({ ...requestDetails });
-        setEditOpen(true);
-    };
-
-    const handleInputChange = (e, { name, value }) => {
-        setEditedDetails({ ...editedDetails, [name]: value });
-    };
-
-    const handleFileChange = (e, { name }) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            if (name === 'certificateImage') {
-                setEditedDetails({ ...editedDetails, certificateImage: reader.result });
-            } else {
-                const updatedImages = editedDetails.proofImages.map((img, index) =>
-                    index === parseInt(name) ? reader.result : img
-                );
-                setEditedDetails({ ...editedDetails, proofImages: updatedImages });
-            }
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const handleSaveChanges = () => {
-        setRequestDetails({ ...editedDetails });
-        setEditOpen(false);
-    };
-
-    const handleAddProofImage = (e) => {
-        const file = e.target.files[0];
-        const reader = new FileReader();
-        reader.onload = () => {
-            setEditedDetails({
-                ...editedDetails,
-                proofImages: [...editedDetails.proofImages, reader.result],
-            });
-        };
-        reader.readAsDataURL(file);
-    };
-
-    const handleRemoveProofImage = (index) => {
-        const updatedImages = editedDetails.proofImages.filter((_, i) => i !== index);
-        setEditedDetails({ ...editedDetails, proofImages: updatedImages });
     };
 
     return (
@@ -95,48 +75,49 @@ const BeneficiaryOtherOpenRequestPage = () => {
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Image src={requestDetails.profilePicture} circular className="profile-picture" />
+                                <Image src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
                             </Grid.Column>
                             <Grid.Column width={9}>
                                 <List>
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        <a href={`/beneficiary/beneficiaries/${requestDetails.beneficiary}`}>{requestDetails.name}</a>
+                                        <a href={`/beneficiary/beneficiaries/${request.beneficiary_id}`}>{request.name}</a>
                                     </List.Item>
+
                                     <List.Item>
                                         <List.Header>Title</List.Header>
-                                        {requestDetails.title}
+                                        {request.requestDetails?.title}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {requestDetails.address}
+                                        {request.requestDetails?.address}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Description</List.Header>
-                                        {requestDetails.description}
+                                        {request.requestDetails?.description}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {requestDetails.email}
+                                        {request.requestDetails?.username}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Telephone</List.Header>
-                                        {requestDetails.telephone}
+                                        {request.requestDetails?.phone}
                                     </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={3}>
-                                <h4>Type: {requestDetails.type}</h4>
-                                {requestDetails.verified ? (
+                                <h4>Type: {request.requestDetails?.type}</h4>
+                                {request.requestDetails?.verified ? (
                                     <div>
-                                        <Icon name="flag" color="green" size="large" /><h4 style={{ color: "green" }}>Verified</h4>
+                                        <Icon name="flag" color="green" size="large" /><h4 style={{color: "green"}}>Verified</h4>
                                     </div>
                                 ) : (
                                     <div>
-                                        <Icon name="flag" color="red" size="large" /><h4 style={{ color: "red" }}>Not Verified</h4>
-                                        {/*<Button color="blue" onClick={handleEditButtonClick}>Edit</Button>*/}
+                                        <Icon name="flag" color="red" size="large"/><h4 style={{color: "red"}}>Not Verified</h4>
                                     </div>
                                 )}
+                                <h2>Raised {request.requestDetails?.raised} LKR</h2>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -144,16 +125,40 @@ const BeneficiaryOtherOpenRequestPage = () => {
                 <Segment>
                     <Header as="h2">Proof Images</Header>
                     <Grid>
-                        {requestDetails.proofImages.map((image, index) => (
-                            <Grid.Column width={4} key={index}>
-                                <Image
-                                    src={image}
-                                    className="proof-image"
-                                    onClick={() => handleImageClick(image)}
-                                    style={{ cursor: 'pointer' }}
-                                />
-                            </Grid.Column>
-                        ))}
+                        <Grid.Column width={4} key={1}>
+                            <Image
+                                src={(request.requestDetails?.image1 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image1}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image1)}
+                                style={{ cursor: 'pointer' }}
+                            />
+
+                        </Grid.Column>
+                        <Grid.Column width={4} key={1}>
+
+                            <Image
+                                src={(request.requestDetails?.image2 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image2}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image2)}
+                                style={{ cursor: 'pointer' }}
+                            />
+
+                        </Grid.Column>
+                        <Grid.Column width={4} key={1}>
+
+                            <Image
+                                src={(request.requestDetails?.image3 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image3}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image3)}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Grid.Column>
                     </Grid>
                 </Segment>
                 <Segment>
@@ -161,9 +166,11 @@ const BeneficiaryOtherOpenRequestPage = () => {
                     <Grid>
                         <Grid.Column width={16}>
                             <Image
-                                src={requestDetails.certificateImage}
+                                src={(request.requestDetails?.certificate_image !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_certificate/${request.requestDetails?.certificate_image}`
+                                    : "https://via.placeholder.com/300"}
                                 className="certificate-image"
-                                onClick={() => handleImageClick(requestDetails.certificateImage)}
+                                onClick={() => handleImageClick(request.requestDetails?.certificate_image)}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -179,79 +186,7 @@ const BeneficiaryOtherOpenRequestPage = () => {
                     <Button onClick={() => setOpen(false)}>Close</Button>
                 </Modal.Actions>
             </Modal>
-
-            <Modal open={editOpen} onClose={() => setEditOpen(false)} size='large'>
-                <Modal.Header>Edit Request Details</Modal.Header>
-                <Modal.Content>
-                    <Form>
-                        <Form.Input
-                            label="Title"
-                            name="title"
-                            value={editedDetails.title}
-                            onChange={handleInputChange}
-                        />
-                        <Form.TextArea
-                            label="Description"
-                            name="description"
-                            value={editedDetails.description}
-                            onChange={handleInputChange}
-                        />
-                        <Form.Input
-                            label="Address"
-                            name="address"
-                            value={editedDetails.address}
-                            onChange={handleInputChange}
-                        />
-                        <Form.Dropdown
-                            label="Type"
-                            name="type"
-                            selection
-                            options={[
-                                { key: 'goods', text: 'Goods', value: 'goods' },
-                                { key: 'monetary', text: 'Monetary', value: 'monetary' }
-                            ]}
-                            value={editedDetails.type}
-                            onChange={handleInputChange}
-                        />
-                        <Form.Input
-                            type="file"
-                            label="GS/DS Certificate Image"
-                            name="certificateImage"
-                            onChange={(e) => handleFileChange(e, { name: 'certificateImage' })}
-                        />
-                        <Header as="h3">Proof Images</Header>
-                        <Grid>
-                            {editedDetails.proofImages.map((image, index) => (
-                                <Grid.Column width={4} key={index}>
-                                    <Image src={image} className="proof-image" />
-                                    <Button color="red" onClick={() => handleRemoveProofImage(index)}>Remove</Button>
-                                    <Form.Input
-                                        type="file"
-                                        label="Change Image"
-                                        name={`${index}`}
-                                        onChange={(e) => handleFileChange(e, { name: `${index}` })}
-                                    />
-                                </Grid.Column>
-                            ))}
-                            <Grid.Column width={4}>
-                                <Button as="label" htmlFor="file" color="green">
-                                    Add Image
-                                </Button>
-                                <input
-                                    type="file"
-                                    id="file"
-                                    style={{ display: 'none' }}
-                                    onChange={handleAddProofImage}
-                                />
-                            </Grid.Column>
-                        </Grid>
-                    </Form>
-                </Modal.Content>
-                <Modal.Actions>
-                    <Button color="blue" onClick={handleSaveChanges}>Save Changes</Button>
-                    <Button onClick={() => setEditOpen(false)}>Cancel</Button>
-                </Modal.Actions>
-            </Modal>
+            <Requestnow/>
         </div>
     );
 }

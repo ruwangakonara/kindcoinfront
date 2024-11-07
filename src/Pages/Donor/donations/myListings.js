@@ -70,17 +70,17 @@ function MyListingsList() {
                     <Header as="h2" style={{position: "fixed"}} className="page-header">Unaccepted Donations</Header>
 
                     <Grid>
-                        {donations.map((donation, index) => (
+                        {donations && donations.map((donation, index) => (
                             <Grid.Column key={index} width={16}>
                                 <MyListing
                                     donorImage={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"}
-                                    recipientImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + donation.profile_image): "https://via.placeholder.com/150"}
-                                    amount={donation.donationDetails.amount}
-                                    type={donation.donationDetails.type}
-                                    recipientName={donation.beneficiary_name}
-                                    requestTitle={donation.request_title}
-                                    donationTitle={donation.donationdetails.title}
-                                    id={donation.id}
+                                    recipientImage={(donation?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + donation.profile_image): "https://via.placeholder.com/150"}
+                                    amount={donation.donationDetails?.amount}
+                                    type={donation.donationDetails?.type}
+                                    recipientName={donation?.beneficiary_name}
+                                    requestTitle={donation?.request_title}
+                                    donationTitle={donation.donationdetails?.title}
+                                    id={donation?._id}
 
                                 />
                             </Grid.Column>

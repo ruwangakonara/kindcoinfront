@@ -11,7 +11,7 @@ const OpenRequest = ({ request }) => {
                     Open Request
                 </Label>
                 <Image
-                    src={request.profile_image}
+                    src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"}
                     wrapped
                     ui={false}
                     className="request-image"

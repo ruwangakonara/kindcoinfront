@@ -1,9 +1,19 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Grid, Header, Image, List, Segment, Label, Icon, Button, Modal } from 'semantic-ui-react';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar3 from '../../../Components/Beneficiary/Sidebar/Sidebar3';
 // import './myListingPage2.css';
 import { useParams, useNavigate } from 'react-router-dom';
+
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import axios from "axios";
+
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
 
 const dummyDonation = {
     donorName: 'John Doe',
@@ -26,10 +36,17 @@ const dummyDonation = {
     accepted: false
 };
 
-const UnacceptedDonation = () => {
-    const { donation_id } = useParams();
+function UnacceptedDonation(){
     const navigate = useNavigate();
+
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
+    const { donation_id } = useParams();
     const [acceptModalOpen, setAcceptModalOpen] = useState(false);
+    const [donation, setDonation] = useState({});
+    const [request, setRequest] = useState({});
+    const [donor, setDonor] = useState({});
+
 
     const handleAcceptModalOpen = () => {
         setAcceptModalOpen(true);
@@ -39,13 +56,39 @@ const UnacceptedDonation = () => {
         setAcceptModalOpen(false);
     };
 
-    const handleAcceptDonation = () => {
+    const handleAcceptDonation = async () => {
         // Perform logic to accept the donation (e.g., API call)
-        console.log('Donation accepted');
-        setAcceptModalOpen(false);
-        // Redirect to another page after accepting
-        navigate('/some-other-page');
+        try {
+            const response = await axiosInstance.post('/beneficiary/accept_donation', { accepted: true, donation_id: donation_id })
+            if (response.status === 200) {
+                console.log('Donation accepted');
+                setAcceptModalOpen(false);
+                // Redirect to another page after accepting
+                navigate(`/beneficiary/open-requests/${request._id}`);
+            }
+
+        }catch(error){
+            console.error(error);
+        }
+
     };
+
+    useEffect(() => {
+        get_donation();
+    }, []);
+
+    const get_donation = async () => {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donation', { accepted: false, _id: donation_id });
+            setDonation(response.data.donation);
+            setDonor(response.data.donor);
+            setRequest(response.data.request);
+            console.log(request)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
 
     return (
         <div>
@@ -61,12 +104,12 @@ const UnacceptedDonation = () => {
                             <Grid>
                                 <Grid.Row>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.donorProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label"><a href = "/beneficiary/donors/34343434">Donor: {dummyDonation.donorName}</a></Header>
+                                        <Image src={(donor?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor?.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Donor: <a href={`http://localhost:3000/beneficiary/donors/${donor?._id}`}>{donor?.name}</a></Header>
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Recipient: {dummyDonation.recipientName}</Header>
+                                        <Image src={(beneficiary.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + beneficiary.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Beneficiary: {beneficiary.name}</Header>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
@@ -74,46 +117,51 @@ const UnacceptedDonation = () => {
                                         <List className="donation-details">
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
-                                                {dummyDonation.donationTitle}
+                                                {donation?.title}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
-                                                {dummyDonation.requestTitle}
+                                                {request.open ?
+                                                    <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
+                                                    :
+                                                    <a href={`http://localhost:3000/benficiary/closed-requests/${request?._id}`}>{request?.title}</a>
+                                                }
+
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Description</List.Header>
-                                                {dummyDonation.requestDescription}
+                                                {request?.description}
                                             </List.Item>
                                             <List.Item>
-                                                <List.Header>Recipient Phone</List.Header>
-                                                {dummyDonation.recipientPhone}
+                                                <List.Header>Recipient(Request) Phone</List.Header>
+                                                {request?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Phone</List.Header>
-                                                {dummyDonation.donationPhone}
+                                                {donation?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Type</List.Header>
-                                                {dummyDonation.donationType === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
+                                                {donation?.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
                                             </List.Item>
-                                            {dummyDonation.donationType === 'goods' && (
+                                            {donation?.type === 'goods' && (
                                                 <List.Item>
                                                     <List.Header>Goods List</List.Header>
                                                     <List>
-                                                        {dummyDonation.goodsList.map((goods, index) => (
+                                                        {donation.goods.map((goods, index) => (
                                                             <List.Item key={index}>{goods.item}: {goods.amount}</List.Item>
                                                         ))}
                                                     </List>
                                                 </List.Item>
                                             )}
-                                            {dummyDonation.donationType === 'monetary' && (
+                                            {donation?.type === 'monetary' && (
                                                 <List.Item>
                                                     <List.Header>Amount</List.Header>
-                                                    {dummyDonation.moneyAmount}
+                                                    {donation.value}
                                                 </List.Item>
                                             )}
                                         </List>
-                                        {!dummyDonation.accepted && (
+                                        {!donation?.accepted && (
                                             <Label color='red' className='not-accepted-label'>
                                                 <Icon name='flag' /> Not Accepted
                                             </Label>

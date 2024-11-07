@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Grid, Header, Image, List, Segment, Label, Icon, Button, Modal, Form } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
 import './myListingPage.css';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import axios from "axios";
+
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
 
 const dummyDonation = {
     donorName: 'John Doe',
@@ -26,17 +35,48 @@ const dummyDonation = {
     accepted: false
 };
 
-const MyListingPage = () => {
+function MyListingPage(){
     const { donation_id } = useParams();
+    const { user, userDetails } = useContext(UserContext);
+    const donor = userDetails;
+
     const [editModalOpen, setEditModalOpen] = useState(false);
-    const [editedDonationTitle, setEditedDonationTitle] = useState(dummyDonation.donationTitle);
-    const [editedDonationDescription, setEditedDonationDescription] = useState(dummyDonation.donationDescription);
-    const [editedGoodsList, setEditedGoodsList] = useState(dummyDonation.goodsList.map(item => ({ ...item }))); // Copy initial goods list
-    const [editedMoneyAmount, setEditedMoneyAmount] = useState(dummyDonation.moneyAmount);
+    const [editedDonationTitle, setEditedDonationTitle] = useState("");
+    const [editedDonationDescription, setEditedDonationDescription] = useState("");
+    const [editedGoodsList, setEditedGoodsList] = useState([]); // Copy initial goods list
+    const [editedMoneyAmount, setEditedMoneyAmount] = useState(0);
+    const [editedPhone, setEditedPhone] = useState("");
+
+    const [donation, setDonation] = useState({});
+    const [request, setRequest] = useState({});
+    const [beneficiary, setBeneficiary] = useState({});
+
+    useEffect(() => {
+        get_donation();
+    }, []);
+
+    const get_donation = async () => {
+        try {
+            const response = await axiosInstance.post('/donor/get_donation', { accepted: false, _id: donation_id });
+            setDonation(response.data.donation);
+            setBeneficiary(response.data.beneficiary);
+            setRequest(response.data.request);
+            console.log(beneficiary)
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
     // Handle opening and closing of edit modal
     const handleEditModalOpen = () => {
+        setEditedDonationTitle(donation.title);
+        setEditedDonationDescription(donation.description);
+        setEditedGoodsList(donation.goods.map(item => ({ ...item })))
+        setEditedMoneyAmount(donation.value)
         setEditModalOpen(true);
+        if(donation.phone){
+            setEditedPhone(donation.phone)
+        }
     };
 
     const handleEditModalClose = () => {
@@ -44,16 +84,29 @@ const MyListingPage = () => {
     };
 
     // Handle form submission for editing donation details
-    const handleEditFormSubmit = (e) => {
+    const handleEditFormSubmit = async (e) => {
         e.preventDefault(); // Prevent default form submission
         // Perform logic to update donation details (e.g., API call)
-        console.log('Updated Donation Details:', {
-            editedDonationTitle,
-            editedDonationDescription,
-            editedGoodsList,
-            editedMoneyAmount
-        });
-        setEditModalOpen(false);
+
+        const data = {
+            title: editedDonationTitle,
+            description: editedDonationDescription,
+            goods: editedGoodsList,
+            value: editedMoneyAmount,
+            donation_id: donation._id,
+            phone: editedPhone
+        }
+
+        const response = await axiosInstance.put('/donor/update_donation', data);
+        if (response.status === 201) {
+
+            console.log("something")
+            setDonation(response.data.donation);
+            console.log(data);
+            handleEditModalClose()
+
+        }
+
     };
 
     // Handle adding a new item to the goods list
@@ -83,12 +136,12 @@ const MyListingPage = () => {
                             <Grid>
                                 <Grid.Row>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.donorProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Donor: {dummyDonation.donorName}</Header>
+                                        <Image src={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Donor: {donor.name}</Header>
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.recipientProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label">Recipient: {dummyDonation.recipientName}</Header>
+                                        <Image src={(beneficiary?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + beneficiary?.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Recipient: <a href={`http://localhost:3000/donor/beneficiaries/${beneficiary?._id}`}>{beneficiary?.name}</a></Header>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
@@ -96,47 +149,54 @@ const MyListingPage = () => {
                                         <List className="donation-details">
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
-                                                {dummyDonation.donationTitle}
+                                                {donation.title}
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation.description}
                                                 <Button primary size='tiny' floated='right' onClick={handleEditModalOpen}>Edit</Button>
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
-                                                {dummyDonation.requestTitle}
+                                                {request.open ?
+                                                    <a href={`http://localhost:3000/donor/open-requests/${request?._id}`}>{request?.title}</a>
+                                                    :
+                                                    <a href={`http://localhost:3000/donor/closed-requests/${request?._id}`}>{request?.title}</a>
+                                                }
+
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Description</List.Header>
-                                                {dummyDonation.requestDescription}
+                                                {request?.description}
                                             </List.Item>
                                             <List.Item>
-                                                <List.Header>Recipient Phone</List.Header>
-                                                {dummyDonation.recipientPhone}
+                                                <List.Header>Recipient(Request) Phone</List.Header>
+                                                {request?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Phone</List.Header>
-                                                {dummyDonation.donationPhone}
+                                                {donation?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Type</List.Header>
-                                                {dummyDonation.donationType === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
+                                                {donation?.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
                                             </List.Item>
-                                            {dummyDonation.donationType === 'goods' && (
+                                            {donation?.type === 'goods' && (
                                                 <List.Item>
                                                     <List.Header>Goods List</List.Header>
                                                     <List>
-                                                        {dummyDonation.goodsList.map((goods, index) => (
+                                                        {donation?.goods.map((goods, index) => (
                                                             <List.Item key={index}>{goods.item}: {goods.amount}</List.Item>
                                                         ))}
                                                     </List>
                                                 </List.Item>
                                             )}
-                                            {dummyDonation.donationType === 'monetary' && (
+                                            {donation?.type === 'monetary' && (
                                                 <List.Item>
                                                     <List.Header>Amount</List.Header>
-                                                    {dummyDonation.moneyAmount}
+                                                    {donation?.value}
                                                 </List.Item>
                                             )}
                                         </List>
-                                        {!dummyDonation.accepted && (
+                                        {!donation?.accepted && (
                                             <Label color='red' className='not-accepted-label'>
                                                 <Icon name='flag' /> Not Accepted
                                             </Label>
@@ -170,7 +230,7 @@ const MyListingPage = () => {
                                 onChange={(e) => setEditedDonationDescription(e.target.value)}
                             />
                         </Form.Field>
-                        {dummyDonation.donationType === 'goods' && (
+                        {donation.type === 'goods' && (
                             <Form.Field>
                                 <label>Goods List</label>
                                 {editedGoodsList.map((goods, index) => (
@@ -211,7 +271,7 @@ const MyListingPage = () => {
                                 <Button primary onClick={handleAddItem}>Add Item</Button>
                             </Form.Field>
                         )}
-                        {dummyDonation.donationType === 'monetary' && (
+                        {donation.type === 'monetary' && (
                             <Form.Field>
                                 <label>Amount</label>
                                 <input
@@ -221,6 +281,14 @@ const MyListingPage = () => {
                                 />
                             </Form.Field>
                         )}
+                        <Form.Field>
+                            <label>Donation Phone</label>
+                            <input
+                                placeholder='Phone'
+                                value={editedPhone}
+                                onChange={(e) => setEditedPhone(e.target.value)}
+                            />
+                        </Form.Field>
                         <Button type='submit'>Save</Button>
                     </Form>
                 </Modal.Content>

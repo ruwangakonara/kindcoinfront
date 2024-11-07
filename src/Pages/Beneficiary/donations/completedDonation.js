@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label} from 'semantic-ui-react';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar3 from '../../../Components/Beneficiary/Sidebar/Sidebar3';
 import './myListingPage2.css';
 import { useParams } from 'react-router-dom';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import axios from "axios";
+
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
 
 const dummyDonation = {
     donorName: 'John Doe',
@@ -34,14 +43,18 @@ const dummyDonation = {
 
 };
 
-const CompletedDonationBene = () => {
+function CompletedDonationBene(){
     const { donation_id } = useParams();
+    const { user, userDetails } = useContext(UserContext);
+    const beneficiary = userDetails;
     const [imageModalOpen, setImageModalOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [editedImages, setEditedImages] = useState(dummyDonation.images);
 
     // Handle opening and closing of edit modal
-
+    const [donation, setDonation] = useState({});
+    const [request, setRequest] = useState({});
+    const [donor, setDonor] = useState({});
+    const [member, setMember] = useState({});
 
     // Handle opening and closing of image modal
     const handleImageModalOpen = (image) => {
@@ -52,6 +65,26 @@ const CompletedDonationBene = () => {
     const handleImageModalClose = () => {
         setImageModalOpen(false);
         setSelectedImage(null);
+    };
+
+
+    useEffect(() => {
+        get_donation();
+    }, []);
+
+    const get_donation = async () => {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_donation', { verified: true, _id: donation_id });
+            setDonation(response.data.donation);
+            setDonor(response.data.donor);
+            setRequest(response.data.request);
+            if(response.data.member){
+                setMember(response.data.member);
+            }
+            console.log(beneficiary)
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     // Handle form submission for editing donation details
@@ -70,14 +103,13 @@ const CompletedDonationBene = () => {
                             <Grid>
                                 <Grid.Row>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.donorProfilePic} circular className="profile-picture" />
-                                        <Header as="h3" className="image-label"><a href = "/beneficiary/donors/34343434">Donor: {dummyDonation.donorName}</a></Header>
+                                        <Image src={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Donor: <a href={`http://localhost:3000/beneficiary/donors/${donor?._id}`}>{donor?.name}</a></Header>
+
                                     </Grid.Column>
                                     <Grid.Column width={8} textAlign="center">
-                                        <Image src={dummyDonation.recipientProfilePic} circular
-                                               className="profile-picture"/>
-                                        <Header as="h3"
-                                                className="image-label">Recipient: {dummyDonation.recipientName}</Header>
+                                        <Image src={(beneficiary?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + beneficiary?.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                        <Header as="h3" className="image-label">Recipient: {beneficiary.name}</Header>
 
                                     </Grid.Column>
                                 </Grid.Row>
@@ -86,10 +118,10 @@ const CompletedDonationBene = () => {
                                         <List className="donation-details">
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
-                                                {dummyDonation.donationTitle}
+                                                {donation?.title}
 
                                                 <div style={{textAlign: "right"}}>
-                                                    {!dummyDonation.verified && (
+                                                    {!donation?.verified && (
                                                         <Label color='green' className='status-label'>
                                                             <Icon name='warning' /> Verified
                                                         </Label>
@@ -104,73 +136,164 @@ const CompletedDonationBene = () => {
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
-                                                {dummyDonation.requestTitle}
+                                                {request.open ?
+                                                    <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
+                                                    :
+                                                    <a href={`http://localhost:3000/beneficiary/closed-requests/${request?._id}`}>{request?.title}</a>
+                                                }
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Description</List.Header>
-                                                {dummyDonation.requestDescription}
+                                                {request.description}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Recipient Phone</List.Header>
-                                                {dummyDonation.recipientPhone}
+                                                {request?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Phone</List.Header>
-                                                {dummyDonation.donationPhone}
+                                                {donation?.phone}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Donation Type</List.Header>
-                                                {dummyDonation.donationType === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
+                                                {donation?.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
                                             </List.Item>
-                                            {dummyDonation.donationType === 'goods' && (
+                                            {donation?.type === 'goods' && (
                                                 <List.Item>
                                                     <List.Header>Goods List</List.Header>
                                                     <List>
-                                                        {dummyDonation.goodsList.map((goods, index) => (
+                                                        {donation?.goods.map((goods, index) => (
                                                             <List.Item key={index}>{goods.item}: {goods.amount}</List.Item>
                                                         ))}
                                                     </List>
                                                 </List.Item>
                                             )}
-                                            {dummyDonation.donationType === 'monetary' && (
+                                            {donation.type === 'monetary' && (
                                                 <List.Item>
                                                     <List.Header>Amount</List.Header>
-                                                    {dummyDonation.moneyAmount}
+                                                    {donation.value}
                                                 </List.Item>
                                             )}
                                         </List>
                                     </Grid.Column>
                                 </Grid.Row>
                                 <Grid.Row>
-                                    <Grid.Column width={16}>
-                                        <Header as="h3">Additional Images</Header>
-                                        <div className="additional-images">
-                                            {dummyDonation.images.map((image, index) => (
-                                                <Image
-                                                    key={index}
-                                                    src={image}
-                                                    size='small'
-                                                    spaced
-                                                    onClick={() => handleImageModalOpen(image)}
-                                                    style={{ cursor: 'pointer' }}
-                                                />
-                                            ))}
-                                        </div>
+
+                                    <Grid.Column width={4} key={1}>
+
+                                        <Image
+                                            src={(donation?.image1 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image1}`
+                                                : "https://via.placeholder.com/300"}
+                                            className="proof-image"
+                                            onClick={() => handleImageModalOpen((donation?.image1 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image1}`
+                                                : "https://via.placeholder.com/300")}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4} key={2}>
+                                        <Image
+                                            src={(donation?.image2 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image2}`
+                                                : "https://via.placeholder.com/300"}
+                                            className="proof-image"
+                                            onClick={() => handleImageModalOpen((donation?.image2 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image2}`
+                                                : "https://via.placeholder.com/300")}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4} key={3}>
+                                        <Image
+                                            src={(donation?.image3 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image3}`
+                                                : "https://via.placeholder.com/300"}
+                                            className="proof-image"
+                                            onClick={() => handleImageModalOpen((donation?.image3 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image3}`
+                                                : "https://via.placeholder.com/300")}
+                                            style={{ cursor: 'pointer' }}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4} key={3}>
+                                        <Image
+                                            src={(donation?.image4 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image4}`
+                                                : "https://via.placeholder.com/300"}
+                                            className="proof-image"
+                                            onClick={() => handleImageModalOpen((donation?.image4 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/donation_proof/${donation?.image4}`
+                                                : "https://via.placeholder.com/300")}
+                                            style={{ cursor: 'pointer' }}
+                                        />
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
                         </Segment>
+                        {(donation.type === "goods") &&
 
+                            <Segment raised>
+                                {donation.member_id && (
+                                    <Grid>
+
+                                        <Grid.Row>
+                                            <Grid.Column width={16}>
+                                                <List className="donation-details">
+                                                    <Grid.Column width={8} textAlign="center">
+                                                        <Image src={(member.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/member/" + member.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
+                                                    </Grid.Column>
+                                                    <List.Item>
+                                                        <List.Header>Member Name</List.Header>
+                                                        {member?.name}
+                                                    </List.Item>
+                                                    <List.Item>
+                                                        <List.Header>Member Phone</List.Header>
+                                                        {member?.phone}
+                                                    </List.Item>
+                                                    <List.Item>
+                                                        <List.Header>Member Email</List.Header>
+                                                        {member?.email}
+                                                    </List.Item>
+
+                                                </List>
+                                            </Grid.Column>
+                                        </Grid.Row>
+
+
+                                    </Grid>
+                                )}
+                                {!donation.member_id && (
+                                    <Grid>
+
+                                        <Grid.Row>
+                                            <Grid.Column width={16}>
+                                                <List className="donation-details">
+                                                    <List.Item>
+                                                        <List.Header>Member</List.Header>
+                                                        Not Assigned Yet
+                                                    </List.Item>
+
+                                                </List>
+                                            </Grid.Column>
+                                        </Grid.Row>
+
+
+                                    </Grid>
+                                )}
+                            </Segment>
+
+                        }
                         <Segment>
                             {/*<Header as="h2">Donation Statistics</Header>*/}
                             <Grid>
                                 <Grid.Column width={8}>
                                     <Header as="h3">Amount</Header>
-                                    <p>{dummyDonation.amount}</p>
+                                    <p>{donation?.amount}</p>
                                 </Grid.Column>
                                 <Grid.Column width={8}>
                                     <Header as="h3">Tokens</Header>
-                                    <p>{dummyDonation.tokens}</p>
+                                    <p>{donation?.tokens}</p>
                                 </Grid.Column>
                             </Grid>
                         </Segment>

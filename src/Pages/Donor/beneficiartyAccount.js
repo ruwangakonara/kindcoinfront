@@ -145,7 +145,7 @@ function BeneficiaryAccount() {
                     <Grid>
                         <Grid.Column width={16}>
                             <Image
-                                src={(beneficiary?.certificate_image !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary?.certificate_image): "https://via.placeholder.com/300"}
+                                src={(beneficiary?.certificate_image !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_certificate/" + beneficiary?.certificate_image): "https://via.placeholder.com/300"}
                                 className="certificate-image"
                                 onClick={() => handleImageClick(beneficiary?.certificateImage)}
                                 style={{ cursor: 'pointer' }}

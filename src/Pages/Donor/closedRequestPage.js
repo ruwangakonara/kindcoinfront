@@ -76,7 +76,7 @@ function ClosedRequestPage(){
                     <Grid>
                         <Grid.Row>
                             <Grid.Column width={4}>
-                                <Image src={request.profile_image} circular className="profile-picture" />
+                                <Image src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"} circular className="profile-picture" />
                             </Grid.Column>
                             <Grid.Column width={9}>
                                 <List>
@@ -126,16 +126,40 @@ function ClosedRequestPage(){
                 <Segment>
                     <Header as="h2">Proof Images</Header>
                     <Grid>
-                        {request.requestDetails?.images?.map((image, index) => (
-                            <Grid.Column width={4} key={index}>
-                                <Image
-                                    src={image}
-                                    className="proof-image"
-                                    onClick={() => handleImageClick(image)}
-                                    style={{ cursor: 'pointer' }}
-                                />
-                            </Grid.Column>
-                        ))}
+                        <Grid.Column width={4} key={1}>
+                            <Image
+                                src={(request.requestDetails?.image1 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image1}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image1)}
+                                style={{ cursor: 'pointer' }}
+                            />
+
+                        </Grid.Column>
+                        <Grid.Column width={4} key={1}>
+
+                            <Image
+                                src={(request.requestDetails?.image2 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image2}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image2)}
+                                style={{ cursor: 'pointer' }}
+                            />
+
+                        </Grid.Column>
+                        <Grid.Column width={4} key={1}>
+
+                            <Image
+                                src={(request.requestDetails?.image3 !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image3}`
+                                    : "https://via.placeholder.com/300"}
+                                className="proof-image"
+                                onClick={() => handleImageClick(request.requestDetails?.image3)}
+                                style={{ cursor: 'pointer' }}
+                            />
+                        </Grid.Column>
                     </Grid>
                 </Segment>
                 <Segment>
@@ -143,7 +167,9 @@ function ClosedRequestPage(){
                     <Grid>
                         <Grid.Column width={16}>
                             <Image
-                                src={request.requestDetails?.certificate_image}
+                                src={(request.requestDetails?.certificate_image !== "https://via.placeholder.com/300")
+                                    ? `http://localhost:9013/images/request_certificate/${request.requestDetails?.certificate_image}`
+                                    : "https://via.placeholder.com/300"}
                                 className="certificate-image"
                                 onClick={() => handleImageClick(request.requestDetails?.certificate_image)}
                                 style={{ cursor: 'pointer' }}

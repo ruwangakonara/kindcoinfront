@@ -151,7 +151,7 @@ import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboar
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
-import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation";
+import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
@@ -192,7 +192,7 @@ function App() {
                 <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
                 <Route path = "/donor/pending-rewards/:donation_id" element={<PendingRewardsPage/>}/>
                 <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
-                <Route path = "/donor/completed-donations/:donations_id" element={<CompletedDonationPage/>}/>
+                <Route path = "/donor/completed-donations/:donation_id" element={<CompletedDonationPage/>}/>
 
                 <Route path = "/donor/donors" element={<DonorList/>}/>
                 <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>

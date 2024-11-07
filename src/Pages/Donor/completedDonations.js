@@ -68,10 +68,13 @@ function CompletedDonations() {
                                 <CompletedDonation
                                     donorImage={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"}
                                     recipientImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + donation.profile_image): "https://via.placeholder.com/150"}
-                                    amount={donation.donationDetails.amount}
+                                    amount={donation.donationDetails.value}
                                     type={donation.donationDetails.type}
-                                    tokens={donation.tokens}
-                                    donationTitle={donation.donationTitle}
+                                    tokens={donation.donationDetails.tokens}
+                                    donationTitle={donation.donationDetails.title}
+                                    id={donation.donationDetails._id}
+                                    request={donation.request_title}
+
                                 />
                             </Grid.Column>
                         ))}
