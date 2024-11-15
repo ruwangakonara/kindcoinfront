@@ -1,13 +1,13 @@
-/*.sideBarStyles{*/
-/*  background-color: #fdfdfd;*/
-/*  width: 15%;*/
-/*  color: white;*/
-/*  height: 100vh;*/
-/*  display: flex;*/
-/*  flex-direction: column;*/
-/*  position:absolute;*/
-/*  left: 0;*/
-/*  transition: left 0.3s ease-in-out;*/
-/*  padding: 1rem;*/
-/*  box-shadow: 2px 0 5px rgba(0,0,0,0.1);*/
-/*}*/
+.sideBarStyles{
+ background-color: #fdfdfd;
+ width: 15%;
+ color: white;
+ height: 100vh;
+ display: flex;
+ flex-direction: column;
+ position:absolute;
+ left: 0;
+ transition: left 0.3s ease-in-out;
+ padding: 1rem;
+ box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}

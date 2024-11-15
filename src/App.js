@@ -414,12 +414,12 @@ function App() {
 
       {/* Crew Member Routes */}
       <Route path="/crew/home" element={<CrewMemberDashboard />} />
-      <Route path="/crew/requests" element={<VerifyRequests />} />
+      {/* <Route path="/crew/requests" element={<VerifyRequests />} />
       <Route path="/crew/recipients" element={<VerifyRecipients />} />
       <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
       <Route path="/crew/profile" element={<CrewProfile />} />
       <Route path="/crew/token_transfer" element={<TokenTransfer />} />
-      <Route path="/crew/settings" element={<CrewSettings />} />
+      <Route path="/crew/settings" element={<CrewSettings />} /> */}
     </Routes>
     // </UserProvider>
   );
