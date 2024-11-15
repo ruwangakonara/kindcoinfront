@@ -186,23 +186,38 @@ function App() {
 
       {/*Donor Routes*/}
 
-                <Route path="/donor/home" element={<DonorHome/>}/>
-                <Route path="/donor/maintenance" element={<Maintenance/>}/>
-                {/*<Route path="/donor/leaderboard" element={<DonorHome/>}/>*/}
-                <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
-                <Route path = "/donor/beneficiaries/:beneficiary_id" element={<BeneficiaryAccount/>}/>
+      <Route path="/donor/home" element={<DonorHome />} />
+      <Route path="/donor/maintenance" element={<Maintenance />} />
+      {/*<Route path="/donor/leaderboard" element={<DonorHome/>}/>*/}
+      <Route path="/donor/beneficiaries" element={<BeneficiaryList />} />
+      <Route
+        path="/donor/beneficiaries/:beneficiary_id"
+        element={<BeneficiaryAccount />}
+      />
 
-                <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
-                <Route path = "/donor/ongoing-donations/:donation_id" element={<OnGoingDonationPage/>}/>
-                <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
-                <Route path = "/donor/pending-rewards/:donation_id" element={<PendingRewardsPage/>}/>
-                <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
-                <Route path = "/donor/completed-donations/:donation_id" element={<CompletedDonationPage/>}/>
+      <Route path="/donor/ongoing-donations" element={<DonationList />} />
+      <Route
+        path="/donor/ongoing-donations/:donation_id"
+        element={<OnGoingDonationPage />}
+      />
+      <Route path="/donor/pending-rewards" element={<PendingRewards />} />
+      <Route
+        path="/donor/pending-rewards/:donation_id"
+        element={<PendingRewardsPage />}
+      />
+      <Route
+        path="/donor/completed-donations"
+        element={<CompletedDonations />}
+      />
+      <Route
+        path="/donor/completed-donations/:donation_id"
+        element={<CompletedDonationPage />}
+      />
 
-                <Route path = "/donor/donors" element={<DonorList/>}/>
-                <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>
-                <Route path = "/donor/account" element={<Account/>}/>
-                <Route path = "/donor/update-account" element={<UpdateAccount/>}/>
+      <Route path="/donor/donors" element={<DonorList />} />
+      <Route path="/donor/donors/:donor_id" element={<DonorAccount />} />
+      <Route path="/donor/account" element={<Account />} />
+      <Route path="/donor/update-account" element={<UpdateAccount />} />
 
       <Route path="/donor/open-requests" element={<OpenRequestList />} />
       <Route
@@ -367,16 +382,21 @@ function App() {
       <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
       <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
 
-{/** =============================================================== */}
-                
-                <Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonorDetailsPg/>}/>
-                <Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>
-                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
-                <Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>
-                <Route path='/admin/settings' element={<AdminSettingsPg/>}/>
+      {/** =============================================================== */}
 
+      <Route
+        path="/admin/Donor_List/Donors/:donor_id"
+        element={<AdminDonorDetailsPg />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
+        element={<AdminBeneficiary />}
+      />
+      {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+      <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
+      <Route path="/admin/settings" element={<AdminSettingsPg />} />
 
       {/** =============================================================== */}
 
