@@ -81,7 +81,7 @@ const HeaderCmp = () => {
 
   return (
     <header className="top">
-      <Link to={"/"}>
+      <Link to={"/admin/home"}>
         <div id="brand" className="brand">
           <img src="/charitylogo.png" alt="charity" />
         </div>
@@ -109,14 +109,21 @@ const HeaderCmp = () => {
           </div>
         </div>
       ) : (
-        <div className="temp">
-          <div className="brandlogin">
-            <Link to={"/admin/account"}>
-              <div id="brand" className="brand">
-                <Icon name="user" />
-              </div>
-            </Link>
-          </div>
+        <div className="loggedGroup">
+          <Link to={"/admin/account"}>
+            <div className="accountLogo">
+              <Icon size="large" name="user" />
+            </div>
+          </Link>
+          <Link to={"/admin/handle/announcements"}>
+            <ButtonToggle children={"Announcements"} />
+          </Link>
+          <Link to={"/admin/view/tickets"}>
+            <ButtonToggle children={"Tickets"} />
+          </Link>
+          <LogoutButton children={"Logout"} />
+          {/* <div className="brandlogin">
+          </div> */}
         </div>
       )}
     </header>

@@ -155,12 +155,7 @@ const RaisedTicketsTableCmp = () => {
   ];
 
   const InputExampleIconPosition = () => (
-    <Input
-      icon=""
-      iconPosition="left"
-      placeholder="Search Complaints..."
-      focus
-    />
+    <Input icon="" iconPosition="left" placeholder="Search Tickets..." focus />
   );
 
   const handleRowClick = (userId) => {
