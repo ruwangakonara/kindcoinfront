@@ -28,6 +28,7 @@ const SidebarAdminCmp = ({ visible }) => {
 
   return (
     <>
+      {/** needed to change  the styles of this side bar due to changes from others. */}
       <Sidebar
         as={Menu}
         animation="overlay"
