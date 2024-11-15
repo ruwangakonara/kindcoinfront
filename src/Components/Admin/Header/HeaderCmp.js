@@ -5,7 +5,7 @@ import { UserContext } from "../../../Components/Home/UserConext/UserContext.jsx
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const ButtonToggle = () => {
+const ButtonToggle = ({ children }) => {
   const [active, setActive] = useState(false);
 
   const handleClick = () => {
@@ -14,7 +14,7 @@ const ButtonToggle = () => {
 
   return (
     <Button toggle active={active} onClick={handleClick}>
-      Announcements
+      {children}
     </Button>
   );
 };
@@ -59,10 +59,10 @@ const HeaderCmp = () => {
     withCredentials: true,
   });
 
-  const LogoutButton = () => (
+  const LogoutButton = ({ children }) => (
     <div>
       <Button negative onClick={handleLogout}>
-        Logout
+        {children}
       </Button>
     </div>
   );
@@ -113,8 +113,9 @@ const HeaderCmp = () => {
           <Link to={"/admin/account"}>
             <Icon name="user" size="large" />
           </Link>
-          <ButtonToggle />
-          <LogoutButton />
+          <ButtonToggle children={"Announcements"} />
+          <ButtonToggle children={"Tickets"} />
+          <LogoutButton children={"Logout"} />
         </div>
       )}
     </header>
