@@ -16,6 +16,7 @@
     "chart.js": "^4.4.3",
     "crypto-js": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
+    "kindcoinfront": "file:",
     "pdfjs-dist": "^4.5.136",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",

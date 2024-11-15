@@ -41,8 +41,20 @@
     width: 40vw;
     height: 55px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     background-color: white;
+    position: fixed;
+    right: 0;
+    z-index: 110;
+}
+
+.loggedGroup{
+    width: 20vw;
+    height: 55px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     position: fixed;
     right: 0;
     z-index: 110;
@@ -68,7 +80,7 @@
     color: white;
 }
 
-.brandlogin{
+/* .brandlogin{
     display: flex;
     justify-content: center;
     position:absolute;
@@ -79,14 +91,11 @@
     height: 40px;
     cursor:pointer;
     color:#636361;
+} */
 
-}
-
-.brandlogin:hover{
+/* .brandlogin:hover{
     color:black;
-
-
-}
+} */
 
 
 @media screen and (max-width: 620px){
@@ -147,4 +156,8 @@
 
 .ui.dropdown .menu > .item {
     font-size: 1.2rem; /* Increase the font size for dropdown items */
+}
+
+.logoutButton{
+    
 }
