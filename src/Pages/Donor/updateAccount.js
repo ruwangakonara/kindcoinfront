@@ -61,7 +61,7 @@ const UpdateAccount = () => {
         if (selectedFile) {
             data.append('profileImage', selectedFile);
         }
-        data.append('user_id', user.id);
+        data.append('user_id', user._id);
         data.append('donor_id', donor._id);
 
         Object.keys(formData).forEach(key => {

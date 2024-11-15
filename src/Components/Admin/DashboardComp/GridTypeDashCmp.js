@@ -3,7 +3,7 @@ import React from "react";
 import { GridRow, GridColumn, Grid} from 'semantic-ui-react'
 
 const GridTypeDashCmp = ({children}) => {
-    return ( 
+    return (
         <div className={classes.dashboard}>
             <div>
                 {children.heading}
@@ -18,7 +18,7 @@ const GridTypeDashCmp = ({children}) => {
                 </GridRow>
             </Grid>
         </div>
-     );
+    );
 }
- 
+
 export default GridTypeDashCmp;

@@ -3,7 +3,7 @@ import { Card, Image, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
 import{Link} from 'react-router-dom';
 
-const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, recipientName, id }) => {
+const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, donationTitle, id , request}) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -13,7 +13,8 @@ const CompletedDonation = ({ donorImage, recipientImage, amount, type, tokens, r
                         <Image src={recipientImage} circular className="recipient-image" />
                     </Grid.Column>
                     <Grid.Column width={6}>
-                        <Card.Header className="recipient-name">{recipientName}</Card.Header>
+                        <Card.Header className="recipient-name">{donationTitle}</Card.Header>
+                        <Card.Header className="recipient-name">Request: {request}</Card.Header>
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                     </Grid.Column>

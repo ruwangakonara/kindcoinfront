@@ -3,7 +3,7 @@ import { Card, Image, Icon, Label, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './OpenRequest.css';
 
-const OpenRequest = ({ request }) => {
+const OtherOpenRequest = ({ request}) => {
     return (
         <Card className="request-card">
             <Card.Content>
@@ -11,7 +11,9 @@ const OpenRequest = ({ request }) => {
                     Open Request
                 </Label>
                 <Image
-                    src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"}
+                    src={(request.profile_image !== "https://via.placeholder.com/150")
+                        ? `http://localhost:9013/images/profileimages/beneficiary/${request.profile_image}`
+                        : request.profile_image}
                     wrapped
                     ui={false}
                     className="request-image"
@@ -19,7 +21,7 @@ const OpenRequest = ({ request }) => {
                 <Card.Header>{request.requestDetails.title}</Card.Header>
                 <Card.Meta>{request.name}</Card.Meta>
                 <Card.Description>
-                    {request.requestDetails.verified ? (
+                    {request.requestDetails.verified  ? (
                         <span style={{ color: 'green' }}>
                             <Icon name="flag" color="green" /> Verified
                         </span>
@@ -39,4 +41,4 @@ const OpenRequest = ({ request }) => {
     );
 };
 
-export default OpenRequest;
+export default OtherOpenRequest;

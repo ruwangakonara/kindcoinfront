@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Image, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
 
-const CompletedDonation = ({ donorImage, amount, type, id, donationTitle}) => {
+const CompletedDonation = ({ donorImage, amount, type, id, donationTitle, donorName}) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -14,6 +14,7 @@ const CompletedDonation = ({ donorImage, amount, type, id, donationTitle}) => {
                     <Grid.Column width={6}>
                         {/*<Card.Header className="recipient-name">{recipientName}</Card.Header>*/}
                         <Card.Header className="recipient-name">{donationTitle}</Card.Header>
+                        <Card.Description style = {{marginBottom: "10px"}} className="donation-amount">Donor: {donorName}</Card.Description>
 
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>

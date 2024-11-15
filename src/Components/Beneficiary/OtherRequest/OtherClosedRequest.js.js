@@ -3,15 +3,18 @@ import { Card, Image, Icon, Label, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './OpenRequest.css';
 
-const OpenRequest = ({ request }) => {
+
+const OtherClosedRequest = ({ request}) => {
     return (
         <Card className="request-card">
             <Card.Content>
-                <Label color="green" ribbon="right" className="request-status-label">
-                    Open Request
+                <Label color="red" ribbon="right" className="request-status-label">
+                    Closed Request
                 </Label>
                 <Image
-                    src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"}
+                    src={(request.profile_image !== "https://via.placeholder.com/150")
+                        ? `http://localhost:9013/images/profileimages/beneficiary/${request.profile_image}`
+                        : request.profile_image}
                     wrapped
                     ui={false}
                     className="request-image"
@@ -39,4 +42,4 @@ const OpenRequest = ({ request }) => {
     );
 };
 
-export default OpenRequest;
+export default OtherClosedRequest;

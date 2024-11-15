@@ -3,7 +3,7 @@ import { Card, Image, Icon, Label, Grid, Button } from 'semantic-ui-react';
 import './donation.css';
 import {Link} from "react-router-dom";
 
-const Unaccepted = ({ donorImage, amount, type, donationTitle, accepted, id }) => {
+const Unaccepted = ({ donorImage, amount, type, donationTitle, accepted, id, donorName }) => {
     return (
         <Card fluid className="donation-card">
             <Card.Content>
@@ -16,6 +16,8 @@ const Unaccepted = ({ donorImage, amount, type, donationTitle, accepted, id }) =
                         {/*<Card.Header className="recipient-name">Recipient: {recipientName}</Card.Header>*/}
                         {/*<Card.Header className="recipient-name">Request: {requestTitle}</Card.Header>*/}
                         <Card.Header className="recipient-name">{donationTitle}</Card.Header>
+                        <Card.Description style = {{marginBottom: "10px"}} className="donation-amount">Donor: {donorName}</Card.Description>
+
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
                         <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                         {!accepted && (
