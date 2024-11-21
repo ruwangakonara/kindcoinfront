@@ -6,7 +6,6 @@ import './account.css';
 import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
 import { UserContext } from '../../Components/Home/UserConext/UserContext';
 import axios from "axios";
-import donation from "../../Components/Donor/Donation/Donation";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -161,7 +160,7 @@ function OpenRequestPage() {
                                     ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image1}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(request.requestDetails?.image1)}
+                                onClick={(e) => handleImageClick(e.target.src)}
                                 style={{ cursor: 'pointer' }}
                             />
 
@@ -173,7 +172,7 @@ function OpenRequestPage() {
                                     ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image2}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(request.requestDetails?.image2)}
+                                onClick={(e) => handleImageClick(e.target.src)}
                                 style={{ cursor: 'pointer' }}
                             />
 
@@ -185,7 +184,7 @@ function OpenRequestPage() {
                                     ? `http://localhost:9013/images/request_proof/${request.requestDetails?.image3}`
                                     : "https://via.placeholder.com/300"}
                                 className="proof-image"
-                                onClick={() => handleImageClick(request.requestDetails?.image3)}
+                                onClick={(e) => handleImageClick(e.target.src)}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
@@ -200,7 +199,7 @@ function OpenRequestPage() {
                                     ? `http://localhost:9013/images/request_certificate/${request.requestDetails?.certificate_image}`
                                     : "https://via.placeholder.com/300"}
                                 className="certificate-image"
-                                onClick={() => handleImageClick(request.requestDetails?.certificate_image)}
+                                onClick={(e) => handleImageClick(e.target.src)}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>

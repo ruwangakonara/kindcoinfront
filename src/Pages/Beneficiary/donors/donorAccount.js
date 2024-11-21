@@ -55,33 +55,42 @@ function BeneficiaryDonorAccount() {
                         <Grid.Row>
                             <Grid.Column width={4}>
                                 <Image
-                                    src={donor.profile_image ? `http://localhost:9013/images/profileimages/donor/${donor.profile_image}` : "https://via.placeholder.com/150"}
+                                    src={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"}
                                     circular
                                     className="profile-picture"
                                 />
                             </Grid.Column>
                             <Grid.Column width={10}>
-                                <List>
-                                    <List.Item>
-                                        <List.Header>Name</List.Header>
-                                        {donor.name || 'N/A'}
-                                    </List.Item>
-                                    <List.Item>
-                                        <List.Header>Address</List.Header>
-                                        {donor.address || 'N/A'}
-                                    </List.Item>
-                                    <List.Item>
-                                        <List.Header>Description</List.Header>
-                                        {donor.description || 'N/A'}
-                                    </List.Item>
-                                    <List.Item>
-                                        <List.Header>Email</List.Header>
-                                        {donor.username}
-                                    </List.Item>
-                                </List>
+                                {donor.anonymous ? (
+                                    <List>
+                                        <List.Item>
+                                            <List.Header>Name</List.Header>
+                                            {"Anonymous " + donor.anonymous_id}
+                                        </List.Item>
+                                    </List>
+                                ) : (
+                                    <List>
+                                        <List.Item>
+                                            <List.Header>Name</List.Header>
+                                            {donor.name || 'N/A'}
+                                        </List.Item>
+                                        <List.Item>
+                                            <List.Header>Address</List.Header>
+                                            {donor.address || 'N/A'}
+                                        </List.Item>
+                                        <List.Item>
+                                            <List.Header>Description</List.Header>
+                                            {donor.description || 'N/A'}
+                                        </List.Item>
+                                        <List.Item>
+                                            <List.Header>Email</List.Header>
+                                            {donor.username}
+                                        </List.Item>
+                                    </List>
+                                )}
                             </Grid.Column>
                             <Grid.Column width={2}>
-                                <h4>Type: {donor.type || 'N/A'}</h4>
+                                <h4>Type: {!donor.anonymous ? donor.type : ""}</h4>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
@@ -112,6 +121,16 @@ function BeneficiaryDonorAccount() {
                         </Grid.Column>
                     </Grid>
                 </Segment>
+
+                {donor.anonymous && (
+                    <Segment color="yellow" style={{ marginTop: "20px" }}>
+                        <Header as="h3" textAlign="center">
+                            This donor has chosen to remain anonymous.
+                            {/*They are identified by the ID: {donor.anonymous_id}.*/}
+                        </Header>
+                    </Segment>
+                )}
+
             </Container>
 
             <Requestnow/>

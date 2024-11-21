@@ -2,13 +2,13 @@ import React from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 
-const Donor = ({ name, type, image, rank, id }) => (
+const Donor = ({ name, type, image, rank, id, anonymous, anonymous_id  }) => (
     <Card>
         <div style={{ height: '150px', overflow: 'hidden', position: 'relative' }}>
             <Image src={(image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + image): "https://via.placeholder.com/150"} wrapped ui={false} style={{ objectFit: 'cover', width: '100%', height: '100%' }} />
         </div>
         <Card.Content>
-            <Card.Header>{name}</Card.Header>
+            <Card.Header>{!anonymous ? name : ("Anonymous" + anonymous_id)}</Card.Header>
             <Card.Meta>{type}</Card.Meta>
             <Card.Description>
                 {/*{verified ? (*/}

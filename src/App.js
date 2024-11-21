@@ -81,7 +81,7 @@ import Forgot from './Components/Home/Forgot/Forgot'
 import Main from './Pages/Home/Main'
 
 
-import DonorHome from './Pages/Donor/home/home'
+import DonorHome from './Pages/Donor/home/dhome'
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
 import DonationList from "./Pages/Donor/donations/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
@@ -91,7 +91,7 @@ import Account from "./Pages/Donor/account";
 import UpdateAccount from "./Pages/Donor/updateAccount";
 import DonorAccount from "./Pages/Donor/donorAccount";
 import BeneficiaryAccount from "./Pages/Donor/beneficiartyAccount";
-import OpenRequestList from "./Pages/Donor/openRequests";
+import OpenRequestList3 from "./Pages/Donor/openRequests3";
 import OpenRequestPage from "./Pages/Donor/openRequestPage";
 import ClosedRequestList from "./Pages/Donor/closedRequests";
 import ClosedRequestPage from "./Pages/Donor/closedRequestPage";
@@ -176,7 +176,7 @@ function App() {
 
 
                 <Route path = "leaderboards" element = {<Leaderboards/>}/>
-                <Route path = "leaderboard/:id" element = {<LeaderboardPage/>}/>
+                <Route path = "leaderboard/:id/:rank" element = {<LeaderboardPage/>}/>
 
 
                 {/*Donor Routes*/}
@@ -199,7 +199,7 @@ function App() {
                 <Route path = "/donor/account" element={<Account/>}/>
                 <Route path = "/donor/update-account" element={<UpdateAccount/>}/>
 
-                <Route path = "/donor/open-requests" element={<OpenRequestList/>}/>
+                <Route path = "/donor/open-requests" element={<OpenRequestList3/>}/>
                 <Route path = "/donor/open-requests/:request_id" element={<OpenRequestPage/>}/>
 
                 <Route path = "/donor/closed-requests" element={<ClosedRequestList/>}/>
@@ -213,8 +213,8 @@ function App() {
 
 
                 <Route path = "/donor/leaderboards" element = {<DonorLeaderboards/>}/>
-                <Route path = "/donor/leaderboard" element = {<MyLeaderboardPage/>}/>
-                <Route path = "/donor/leaderboard/:id" element = {<DonorOtherLeaderboardPage/>}/>
+                <Route path = "/donor/leaderboard/:rank" element = {<MyLeaderboardPage/>}/>
+                <Route path = "/donor/leaderboard/:id/:rank" element = {<DonorOtherLeaderboardPage/>}/>
 
 
 
@@ -251,7 +251,7 @@ function App() {
                 <Route path = "/beneficiary/other-closed-requests/:request_id" element={<BeneficiaryOtherClosedRequestPage/>}/>
 
                 <Route path = "/beneficiary/leaderboards" element = {<BeneficiaryDonorLeaderboards/>}/>
-                <Route path = "/beneficiary/leaderboard/:id" element = {<BeneficiaryDonorLeaderboardPage/>}/>
+                <Route path = "/beneficiary/leaderboard/:id/:rank" element = {<BeneficiaryDonorLeaderboardPage/>}/>
 
 
                 {/* Crew Member Routes */}

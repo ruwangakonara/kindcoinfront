@@ -50,7 +50,7 @@ import {useState,useEffect} from 'react';
     }else{
       setOpen(false);
       setErrMessage(true);
-      // setMessage(data.msg);
+      setMessage("Username already in use");
     }
   }
      

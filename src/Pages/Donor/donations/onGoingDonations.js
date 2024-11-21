@@ -76,7 +76,7 @@ function DonationList() {
                                 <Donation
                                     donorImage={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"}
                                     recipientImage={(donation.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + donation.profile_image): "https://via.placeholder.com/150"}
-                                    amount={donation.donationDetails.amount}
+                                    amount={donation.donationDetails.value}
                                     type={donation.donationDetails.type}
                                     verified={donation.donationDetails.verified}
                                     recipientName={donation.beneficiary_name}

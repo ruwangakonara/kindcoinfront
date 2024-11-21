@@ -18,15 +18,18 @@ const UpdateAccount = () => {
 
     const initialFormData = {
         name: donor.name,
+        anonymous: donor.anonymous,
         address: donor.address || '', // Handle null values gracefully
         description: donor.description || '', // Handle null values gracefully
         username: donor.username,
         usual_donations: donor.usual_donations || [],
         profile_image: donor.profile_image || '',
+        stellar_address: donor.stellar_address
     };
 
     const [formData, setFormData] = useState(initialFormData);
     const [selectedFile, setSelectedFile] = useState(null);
+    const [changed, setChanged] = useState(false);
 
     const handleChange = (e, { name, value }) => {
         setFormData({ ...formData, [name]: value });
@@ -36,6 +39,7 @@ const UpdateAccount = () => {
         const file = e.target.files[0];
         setSelectedFile(file);
         setFormData({ ...formData, profile_image: URL.createObjectURL(file) });
+        setChanged(true)
     };
 
     const handleAddDonation = () => {
@@ -91,7 +95,7 @@ const UpdateAccount = () => {
                     <Form.Field>
                         <label>Profile Picture</label>
                         {formData.profile_image && (
-                            <Image src={formData.profile_image} circular size='small' />
+                            <Image src={!changed ? ((formData.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + formData.profile_image): "https://via.placeholder.com/150") : formData.profile_image} circular size='small' />
                         )}
                         <input type="file" accept="image/*" onChange={handleFileChange} />
                     </Form.Field>
@@ -107,10 +111,25 @@ const UpdateAccount = () => {
                         value={formData.address}
                         onChange={handleChange}
                     />
+                    <Form.Field>
+                        <label>Anonymous</label>
+                        <input
+                            type="checkbox"
+                            name="anonymous"
+                            checked={formData.anonymous}
+                            onChange={(e) => handleChange(e, { name: 'anonymous', value: e.target.checked })}
+                        />
+                    </Form.Field>
                     <Form.TextArea
                         label="Description"
                         name="description"
                         value={formData.description}
+                        onChange={handleChange}
+                    />
+                    <Form.Input
+                        label="Stellar Address"
+                        name="stellar_address"
+                        value={formData.stellar_address}
                         onChange={handleChange}
                     />
                     <Button type="button" onClick={handleAddDonation}>

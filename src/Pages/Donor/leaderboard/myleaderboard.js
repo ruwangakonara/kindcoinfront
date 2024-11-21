@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Header, Grid, List, Image, Icon, Segment, Label, Form, Button, Comment, Modal } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import './leaderboard.css';
 import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
+import axios from "axios";
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import {useParams} from "react-router-dom";
 
-const donor = {
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
+
+
+const donoro = {
     name: 'John Doe',
     email: 'john.doe@example.com',
     address: '123 Charity Lane, Kindness City, CA',
@@ -41,25 +52,93 @@ const getAchievements = (tokens) => {
 };
 
 const MyLeaderboardPage = () => {
-    const [comments, setComments] = useState([
-        { name: 'Alice', comment: 'Great job, John!' },
-        { name: 'Bob', comment: 'Keep up the good work!' },
-    ]);
-    const [newComment, setNewComment] = useState({ name: '', comment: '' });
+
+    const { rank } = useParams();
+
+    const { user, userDetails, setUserDetails } = useContext(UserContext);
+    var donor = userDetails;
+
+    // console.
+    const [comments, setComments] = useState([]);
+    // const [newComment, setNewComment] = useState({ name: '', comment: '' });
     const [selectedImage, setSelectedImage] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [newImageUrl, setNewImageUrl] = useState('');
+    const [editModalOpen, setEditModalOpen] = useState(false);
 
-    const achievements = getAchievements(donor.tokensEarned);
+    const [editedDetails, setEditedDetails] = useState({});
+    const [selectedFiles, setSelectedFiles] = useState({
+        image1: null,
+        image2: null,
+        image3: null,
+        image4:null,
+        image5:null
 
-    const handleCommentChange = (e, { name, value }) => {
-        setNewComment({ ...newComment, [name]: value });
+    });
+
+    const handleEditModalOpen = () => {
+        setEditModalOpen(true);
+        setEditedDetails({
+            image1: donor.image1,
+            image2: donor.image2,
+            image3: donor.image3,
+            image4: donor.image4,
+            image5: donor.image5,
+        })
     };
 
-    const handleCommentSubmit = () => {
-        setComments([...comments, newComment]);
-        setNewComment({ name: '', comment: '' });
+    const handleEditModalClose = () => {
+        setEditModalOpen(false);
     };
+    const handleEditFormSubmit = async (e) => {
+        e.preventDefault(); // Prevent default form submission
+        // Perform logic to update donation details (e.g., API call)
+        // console.log('Updated Images:', editedImages);
+        const data = new FormData();
+        Object.keys(selectedFiles).forEach((key) => {
+            if (selectedFiles[key]) {
+                data.append(key, selectedFiles[key]);
+            }
+        });
+        data.append('id', donor._id);
+        data.append('user_id', user._id);
+        try {
+            const response =  await axiosInstance.put('/donor/update_leaderboard_image', data, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            // getDonor()
+
+            const mdonor = response.data.donor;
+
+            setUserDetails(mdonor)
+            donor = mdonor
+
+            setSelectedFiles({
+                image1: null,
+                image2: null,
+                image3: null,
+                image4: null,
+                image5: null,
+            })
+            setEditModalOpen(false);
+
+        } catch (error) {
+            console.error('Error updating donation:', error);
+        }
+
+    };
+
+    const [achievements, setAchievements] = useState([])
+
+    // const handleCommentChange = (e, { name, value }) => {
+    //     setNewComment({ ...newComment, [name]: value });
+    // };
+    //
+    // const handleCommentSubmit = () => {
+    //     setComments([...comments, newComment]);
+    //     setNewComment({ name: '', comment: '' });
+    // };
 
     const handleImageClick = (image) => {
         setSelectedImage(image);
@@ -71,19 +150,48 @@ const MyLeaderboardPage = () => {
         setSelectedImage(null);
     };
 
-    const handleAddImage = () => {
-        if (newImageUrl.trim() !== '') {
-            const updatedImages = [...donor.images, newImageUrl];
-            donor.images = updatedImages;
-            setNewImageUrl('');
+    const handleFileChange = (e, fieldName) => {
+        const file = e.target.files[0];
+        if (file) {
+            const previewUrl = URL.createObjectURL(file);
+            setSelectedFiles({ ...selectedFiles, [fieldName]: file });
+            setEditedDetails({ ...editedDetails, [fieldName]: previewUrl });
         }
     };
 
-    const handleRemoveImage = (index) => {
-        const updatedImages = [...donor.images];
-        updatedImages.splice(index, 1);
-        donor.images = updatedImages;
-    };
+
+    // const handleAddImage = () => {
+    //     if (newImageUrl.trim() !== '') {
+    //         const updatedImages = [...donor.images, newImageUrl];
+    //         donor.images = updatedImages;
+    //         setNewImageUrl('');
+    //     }
+    // };
+    //
+    // const handleRemoveImage = (index) => {
+    //     const updatedImages = [...donor.images];
+    //     updatedImages.splice(index, 1);
+    //     donor.images = updatedImages;
+    // };
+
+    useEffect(() => {
+        getComments()
+    }, []);
+
+    const getComments = async() => {
+
+        try{
+            const response = await axiosInstance.post("/donor/get_comments", {donor_id: donor._id})
+
+            setComments(response.data.comments);
+            setAchievements(getAchievements(donor.tokens));
+
+            console.log(comments)
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div>
@@ -94,41 +202,42 @@ const MyLeaderboardPage = () => {
                     <Grid stackable>
                         <Grid.Row>
                             <Grid.Column width={4} textAlign="center">
-                                <Image src={donor.profilePicture} circular size='medium' className="profile-picture" />
+                                <Image src={(donor?.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor?.profile_image): "https://via.placeholder.com/150"} circular size='medium' className="profile-picture" />
                             </Grid.Column>
                             <Grid.Column width={12}>
                                 <List className="donor-info-list">
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        {donor.name}
+                                        {donor?.name}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {donor.email}
+                                        {donor?.username}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {donor.address}
+                                        {donor?.address}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Type</List.Header>
-                                        {donor.type}
+                                        {donor?.type}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Rank</List.Header>
-                                        #{donor.rank}
+                                        {/*#{donor.rank}*/}
+                                        {rank}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Number of Donations</List.Header>
-                                        {donor.numberOfDonations}
+                                        {donor?.no_donations}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Donated Amount</List.Header>
-                                        {donor.raisedAmount}
+                                        {donor?.donated}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Tokens Earned</List.Header>
-                                        {donor.tokensEarned}
+                                        {donor?.tokens}
                                     </List.Item>
                                 </List>
                             </Grid.Column>
@@ -155,46 +264,78 @@ const MyLeaderboardPage = () => {
                         <Grid.Row>
                             <Grid.Column width={16}>
                                 <Header as="h3" className="description-header">Description</Header>
-                                <p className="donor-description">{donor.description}</p>
+                                <p className="donor-description">{donor?.description}</p>
                             </Grid.Column>
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16}>
                                 <Header as="h3" className="images-header">Images</Header>
-                                <div className="images-grid">
-                                    {donor.images.map((image, index) => (
-                                        <div key={index} className="image-item">
-                                            <Image
-                                                src={image}
-                                                size='small'
-                                                className="thumbnail-image"
-                                                onClick={() => handleImageClick(image)}
-                                            />
-                                            <Button
-                                                icon='trash'
-                                                color='red'
-                                                size='tiny'
-                                                onClick={() => handleRemoveImage(index)}
-                                                className="remove-image-button"
-                                            />
-                                        </div>
-                                    ))}
-                                    <Form className="add-image-form">
-                                        <Form.Input
-                                            placeholder="Enter image URL"
-                                            value={newImageUrl}
-                                            onChange={(e) => setNewImageUrl(e.target.value)}
-                                        />
-                                        <Button
-                                            content='Add Image'
-                                            icon='plus'
-                                            color='blue'
-                                            onClick={handleAddImage}
-                                            className="add-image-button"
-                                        />
-                                    </Form>
-                                </div>
                             </Grid.Column>
+                        </Grid.Row>
+
+                                    <Grid.Row>
+
+                                        {/*<div className="images-grid">*/}
+                                        {/*    {donor.images.map((image, index) => (*/}
+                                        {/*        <Image*/}
+                                        {/*            key={index}*/}
+                                        {/*            src={image}*/}
+                                        {/*            size='small'*/}
+                                        {/*            className="thumbnail-image"*/}
+                                        {/*            onClick={() => handleImageClick(image)}*/}
+                                        {/*        />*/}
+                                        {/*    ))}*/}
+                                        {/*</div>*/}
+                                        <Image
+                                            key={1}
+                                            src={(donor.image1 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/leaderboard/${donor.image1}`
+                                                : "https://via.placeholder.com/300"}
+                                            size='small'
+                                            className="thumbnail-image"
+                                            onClick={(e) => handleImageClick(e.target.src)}
+                                        />
+                                        <Image
+                                            key={2}
+                                            src={(donor?.image2 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/leaderboard/${donor?.image2}`
+                                                : "https://via.placeholder.com/300"}
+                                            size='small'
+                                            className="thumbnail-image"
+                                            onClick={(e) => handleImageClick(e.target.src)}
+                                        />
+                                        <Image
+                                            key={3}
+                                            src={(donor?.image3 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/leaderboard/${donor?.image3}`
+                                                : "https://via.placeholder.com/300"}
+                                            size='small'
+                                            className="thumbnail-image"
+                                            onClick={(e) => handleImageClick(e.target.src)}
+                                        />
+                                        <Image
+                                            key={4}
+                                            src={(donor?.image4 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/leaderboard/${donor?.image4}`
+                                                : "https://via.placeholder.com/300"}
+                                            size='small'
+                                            className="thumbnail-image"
+                                            onClick={(e) => handleImageClick(e.target.src)}
+                                        />
+                                        <Image
+                                            key={5}
+                                            src={(donor?.image5 !== "https://via.placeholder.com/300")
+                                                ? `http://localhost:9013/images/leaderboard/${donor?.image5}`
+                                                : "https://via.placeholder.com/300"}
+                                            size='small'
+                                            className="thumbnail-image"
+                                            onClick={(e) => handleImageClick(e.target.src)}
+                                        />
+                                        {/*</Grid.Column>*/}
+                                    </Grid.Row>
+                        <Grid.Row>
+                            <Button primary size='tiny' floated='right'
+                                    onClick={handleEditModalOpen}>Edit</Button>
                         </Grid.Row>
                         <Grid.Row>
                             <Grid.Column width={16}>
@@ -203,28 +344,52 @@ const MyLeaderboardPage = () => {
                                     {comments.map((comment, index) => (
                                         <Comment key={index}>
                                             <Comment.Content>
-                                                <Comment.Author>{comment.name}</Comment.Author>
-                                                <Comment.Text>{comment.comment}</Comment.Text>
+                                                <div className="comment-author">
+                                                    <Image
+                                                        src={comment?.profile_image !== "https://via.placeholder.com/150"
+                                                            ? `http://localhost:9013/images/profileimages/beneficiary/${comment?.profile_image}`
+                                                            : "https://via.placeholder.com/150"}
+                                                        size="mini"
+                                                        circular
+                                                        className="comment-author-image"
+                                                    />
+                                                    <Comment.Author>
+                                                        <a href={`/donor/beneficiaries/${comment.beneficiary_id}`}>{comment.name}</a>
+                                                    </Comment.Author>
+                                                </div>
+                                                <Comment.Text>{comment.body}</Comment.Text>
+                                                {/*{comment.beneficiary_id === beneficiary._id && (*/}
+                                                {/*    <Button*/}
+                                                {/*        size='mini'*/}
+                                                {/*        icon='edit'*/}
+                                                {/*        content='Edit'*/}
+                                                {/*        onClick={() => handleEditClick(comment)}*/}
+                                                {/*    />*/}
+
+                                                {/*)}*/}
+                                                {/*{comment.beneficiary_id === beneficiary._id && (*/}
+                                                {/*    <Button*/}
+                                                {/*        size='mini'*/}
+                                                {/*        icon='delete'*/}
+                                                {/*        content='Delete'*/}
+                                                {/*        color= 'red'*/}
+                                                {/*        onClick={() => handleDeleteClick(comment)}*/}
+                                                {/*    />*/}
+
+                                                {/*)}*/}
                                             </Comment.Content>
                                         </Comment>
                                     ))}
-                                    <Form reply>
-                                        <Form.Input
-                                            label="Name"
-                                            name="name"
-                                            value={newComment.name}
-                                            onChange={handleCommentChange}
-                                            className="comment-input"
-                                        />
-                                        <Form.TextArea
-                                            label="Comment"
-                                            name="comment"
-                                            value={newComment.comment}
-                                            onChange={handleCommentChange}
-                                            className="comment-textarea"
-                                        />
-                                        <Button content='Add Comment' labelPosition='left' icon='edit' primary onClick={handleCommentSubmit} />
-                                    </Form>
+                                    {/*<Form reply>*/}
+                                    {/*    <Form.TextArea*/}
+                                    {/*        label="Comment"*/}
+                                    {/*        name="body"*/}
+                                    {/*        value={newComment.body}*/}
+                                    {/*        onChange={handleCommentChange}*/}
+                                    {/*        className="comment-textarea"*/}
+                                    {/*    />*/}
+                                    {/*    <Button content='Add Comment' labelPosition='left' icon='edit' primary onClick={handleCommentSubmit} />*/}
+                                    {/*</Form>*/}
                                 </Comment.Group>
                             </Grid.Column>
                         </Grid.Row>
@@ -233,6 +398,160 @@ const MyLeaderboardPage = () => {
                 <Modal open={isModalOpen} onClose={handleCloseModal} size='large' centered={false}>
                     <Modal.Content image>
                         <Image src={selectedImage} wrapped fluid />
+                    </Modal.Content>
+                </Modal>
+                <Modal size='tiny' open={editModalOpen} onClose={handleEditModalClose}>
+                    <Modal.Header>Edit Leaderboard Images</Modal.Header>
+                    <Modal.Content>
+                        <Form onSubmit={handleEditFormSubmit}>
+                            {/*<Form.Field>*/}
+                            {/*    <label>Upload New Image</label>*/}
+                            {/*    <input type="file" accept="image/*" onChange={handleAddImage} />*/}
+                            {/*</Form.Field>*/}
+                            <Form.Field>
+                                <label>Current Images</label>
+                                {/*<div className="additional-images">*/}
+                                {/*    {editedImages.map((image, index) => (*/}
+                                {/*        <div key={index} style={{ display: 'inline-block', position: 'relative' }}>*/}
+                                {/*            <Image src={image} size='small' spaced />*/}
+                                {/*            <Button*/}
+                                {/*                icon='trash'*/}
+                                {/*                negative*/}
+                                {/*                onClick={() => handleRemoveImage(index)}*/}
+                                {/*                style={{ position: 'absolute', top: 0, right: 0 }}*/}
+                                {/*                type='button'*/}
+                                {/*            />*/}
+                                {/*        </div>*/}
+                                {/*    ))}*/}
+                                {/*</div>*/}
+                                <Grid>
+                                    <Grid.Column width={4}>
+                                        <Image
+                                            src={selectedFiles.image1
+                                                ? editedDetails.image1
+                                                : editedDetails.image1 !== "https://via.placeholder.com/300"
+                                                    ? `http://localhost:9013/images/leaderboard/${editedDetails.image1}`
+                                                    : "https://via.placeholder.com/300"
+                                            }
+                                            className="proof-image"
+                                        />
+                                        <Button
+                                            as="label"
+                                            htmlFor="image1Upload"
+                                            icon="upload"
+                                            content="Change Image 1"
+                                        />
+                                        <input
+                                            type="file"
+                                            id="image1Upload"
+                                            accept="image/*"
+                                            hidden
+                                            onChange={(e) => handleFileChange(e, 'image1')}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <Image
+                                            src={selectedFiles.image2
+                                                ? editedDetails.image2
+                                                : editedDetails.image2 !== "https://via.placeholder.com/300"
+                                                    ? `http://localhost:9013/images/leaderboard/${editedDetails.image2}`
+                                                    : "https://via.placeholder.com/300"
+                                            }
+                                            className="proof-image"
+                                        />
+                                        <Button
+                                            as="label"
+                                            htmlFor="image2Upload"
+                                            icon="upload"
+                                            content="Change Image 2"
+                                        />
+                                        <input
+                                            type="file"
+                                            id="image2Upload"
+                                            accept="image/*"
+                                            hidden
+                                            onChange={(e) => handleFileChange(e, 'image2')}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <Image
+                                            src={selectedFiles.image3
+                                                ? editedDetails.image3
+                                                : editedDetails.image3 !== "https://via.placeholder.com/300"
+                                                    ? `http://localhost:9013/images/leaderboard/${editedDetails.image3}`
+                                                    : "https://via.placeholder.com/300"
+                                            }
+                                            className="proof-image"
+                                        />
+                                        <Button
+                                            as="label"
+                                            htmlFor="image3Upload"
+                                            icon="upload"
+                                            content="Change Image 3"
+                                        />
+                                        <input
+                                            type="file"
+                                            id="image3Upload"
+                                            accept="image/*"
+                                            hidden
+                                            onChange={(e) => handleFileChange(e, 'image3')}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Column width={4}>
+                                        <Image
+                                            src={selectedFiles.image4
+                                                ? editedDetails.image4
+                                                : editedDetails.image4 !== "https://via.placeholder.com/300"
+                                                    ? `http://localhost:9013/images/leaderboard/${editedDetails.image4}`
+                                                    : "https://via.placeholder.com/300"
+                                            }
+                                            className="proof-image"
+                                        />
+                                        <Button
+                                            as="label"
+                                            htmlFor="image4Upload"
+                                            icon="upload"
+                                            content="Change Image 4"
+                                        />
+                                        <input
+                                            type="file"
+                                            id="image4Upload"
+                                            accept="image/*"
+                                            hidden
+                                            onChange={(e) => handleFileChange(e, 'image4')}
+                                        />
+                                    </Grid.Column>
+                                    <Grid.Row>
+                                        <Grid.Column width={4}>
+
+                                        <Image
+                                            src={selectedFiles.image5
+                                                ? editedDetails.image5
+                                                : editedDetails.image5 !== "https://via.placeholder.com/300"
+                                                    ? `http://localhost:9013/images/leaderboard/${editedDetails.image5}`
+                                                    : "https://via.placeholder.com/300"
+                                            }
+                                            className="proof-image"
+                                        />
+                                        <Button
+                                            as="label"
+                                            htmlFor="image5Upload"
+                                            icon="upload"
+                                            content="Change Image 5"
+                                        />
+                                        <input
+                                            type="file"
+                                            id="image5Upload"
+                                            accept="image/*"
+                                            hidden
+                                            onChange={(e) => handleFileChange(e, 'image')}
+                                        />
+                                        </Grid.Column>
+                                    </Grid.Row>
+                                </Grid>
+                            </Form.Field>
+                            <Button type='submit'>Save</Button>
+                        </Form>
                     </Modal.Content>
                 </Modal>
             </Container>

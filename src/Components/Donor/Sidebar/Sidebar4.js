@@ -6,7 +6,7 @@ import axios from 'axios';
 import { UserContext } from '../../Home/UserConext/UserContext'; // Adjust the import path if necessary
 
 
-export default function Sidebar4() {
+export default function Sidebar4({ userRank }) {
     const [activeItem, setActiveItem] = useState('Leaderboards');
     const [visible, setVisible] = useState(false);
     const [icon, setIcon] = useState('angle right');
@@ -60,7 +60,7 @@ export default function Sidebar4() {
                         active={activeItem === 'My Leaderboard'}
                         onClick={handleItemClick}
                         as={Link}
-                        to="/donor/leaderboard"
+                        to={`/donor/leaderboard/${userRank}`}
                     >
                         <Icon name='user' />
                         My Leaderboard
