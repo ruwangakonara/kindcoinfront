@@ -49,40 +49,38 @@ function  BeneficiaryDonorList() {
     const beneficiary = userDetails;
 
     useEffect(() => {
-        get_requests();
+        get_donors();
     }, []);
 
-    const get_requests = async () => {
+    const get_donors = async () => {
         try {
             const response = await axiosInstance.get('/beneficiary/get_donors');
             const fetchedDonors = response.data.donors;
-            // Filter out the donor whose _id matches donor._id
+
             // Sort donors by donated_amount in descending order
-            fetchedDonors.sort((a, b) => b.donated_amount - a.donated_amount);
+            fetchedDonors.sort((a, b) => b.donated - a.donated);
 
             // Assign ranks with tie handling
+            let previousRank = 1;
             const rankedDonors = fetchedDonors.map((d, index, arr) => {
-                const currentAmount = d.donated_amount;
-                const previousDonor = arr[index - 1];
-                let rank = index + 1; // Default rank
-
-                // Check if the current donor has the same donated_amount as the previous donor
-                if (previousDonor && currentAmount === previousDonor.donated_amount) {
-                    rank = previousDonor.rank; // Assign the same rank as the previous donor
+                if (index > 0 && d.donated === arr[index - 1].donated) {
+                    // If donated amount is the same as the previous, assign the same rank
+                    d.rank = previousRank;
+                } else {
+                    // Otherwise, update rank based on index
+                    d.rank = index + 1;
+                    previousRank = d.rank; // Store this rank for potential ties
                 }
 
-                return {
-                    ...d,
-                    rank: rank
-                };
+                return d;
             });
 
             setDonors(rankedDonors);
-            setDonors(response.data.donors);
         } catch (error) {
             console.log(error);
         }
     };
+
 
 
     return(
@@ -102,6 +100,8 @@ function  BeneficiaryDonorList() {
                                 image={donor.profile_image}
                                 rank={donor.rank}
                                 id={donor._id}
+                                anonymous={donor.anonymous}
+                                anonymous_id={donor.anonymous_id}
                             />
                         </Grid.Column>
                     ))}

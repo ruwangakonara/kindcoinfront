@@ -73,8 +73,16 @@ const Account = () => {
                                         {donor.description}
                                     </List.Item>
                                     <List.Item>
+                                        <List.Header>Stellar Address</List.Header>
+                                        {donor.stellar_address}
+                                    </List.Item>
+                                    <List.Item>
                                         <List.Header>Email</List.Header>
                                         {donor.username}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Anonymous</List.Header>
+                                        {donor.anonymous ? "Yes" : "No"}
                                     </List.Item>
                                 </List>
                             </Grid.Column>
@@ -108,6 +116,15 @@ const Account = () => {
                         </Grid.Column>
                     </Grid>
                 </Segment>
+                {donor.stellar_address === "" && (
+                    <Segment color="yellow" style={{ marginTop: "20px" }}>
+                        <Header as="h3" textAlign="center">
+                            Please Enter a Stellar Address to Receive Tokens
+                            {/*They are identified by the ID: {donor.anonymous_id}.*/}
+                        </Header>
+                    </Segment>
+                )}
+
             </Container>
             <Donatenow />
         </div>

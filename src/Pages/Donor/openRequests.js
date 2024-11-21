@@ -58,6 +58,7 @@ function OpenRequestList() {
         try {
             const response = await axiosInstance.post('/donor/get_requests', { open: true });
             setRequests(response.data.requests);
+            console.log(response.data.requests);
         } catch (error) {
             console.log(error);
         }

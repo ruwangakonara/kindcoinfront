@@ -14,10 +14,12 @@ const axiosInstance = axios.create({
 
 function BeneficiaryOtherBeneficiaryAccount() {
     const { beneficiary_id } = useParams();
+
     console.log('Beneficiary ID:', beneficiary_id); // Check if ID is correctly logged
 
     const { user, userDetails } = useContext(UserContext);
     const we_beneficiary = userDetails;
+
 
     const [open, setOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState('');
@@ -25,6 +27,9 @@ function BeneficiaryOtherBeneficiaryAccount() {
 
     const history = useNavigate();
 
+    if(beneficiary_id == we_beneficiary._id){
+        history("/beneficiary/account")
+    }
     const fetchBeneficiaryDetails = async () => {
         console.log("Fetching beneficiary details...");
         try {

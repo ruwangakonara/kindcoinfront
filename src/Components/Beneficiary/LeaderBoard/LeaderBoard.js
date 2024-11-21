@@ -8,7 +8,7 @@ const BeneLeaderBoard = ({ name, type, image, rank, id }) => (
         <Grid>
             <Grid.Column width={4} className="image-column">
                 <div className="image-wrapper">
-                    <Image src={image} className="profile-image" circular />
+                    <Image src={(image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + image): "https://via.placeholder.com/150"} className="profile-image" circular />
                 </div>
             </Grid.Column>
             <Grid.Column width={8} className="content-column">
@@ -21,7 +21,7 @@ const BeneLeaderBoard = ({ name, type, image, rank, id }) => (
                 </div>
             </Grid.Column>
             <Grid.Column width={4} className="button-column">
-                <Button as={Link} to={`/beneficiary/leaderboard/${id}`} basic color="green" className='view-button'>
+                <Button as={Link} to={`/beneficiary/leaderboard/${id}/${rank}`} basic color="green" className='view-button'>
                     Leaderboard
                 </Button>
             </Grid.Column>

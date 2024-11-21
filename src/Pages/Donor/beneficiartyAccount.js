@@ -116,7 +116,7 @@ function BeneficiaryAccount() {
                                     <Image
                                         src={(beneficiary.image1 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image1): "https://via.placeholder.com/300"}
                                         className="proof-image"
-                                        onClick={() => handleImageClick(beneficiary.image1)}
+                                        onClick={(e) => handleImageClick(e.target.src)}
                                         style={{ cursor: 'pointer' }}
                                     />
                                 </Grid.Column>
@@ -124,7 +124,7 @@ function BeneficiaryAccount() {
                                     <Image
                                         src={(beneficiary.image2 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image2): "https://via.placeholder.com/300"}
                                         className="proof-image"
-                                        onClick={() => handleImageClick(beneficiary.image2)}
+                                        onClick={(e) => handleImageClick(e.target.src)}
                                         style={{ cursor: 'pointer' }}
                                     />
                                 </Grid.Column>
@@ -132,7 +132,7 @@ function BeneficiaryAccount() {
                                     <Image
                                         src={(beneficiary.image3 !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_proof/" + beneficiary.image3): "https://via.placeholder.com/300"}
                                         className="proof-image"
-                                        onClick={() => handleImageClick(beneficiary.image3)}
+                                        onClick={(e) => handleImageClick(e.target.src)}
                                         style={{ cursor: 'pointer' }}
                                     />
                                 </Grid.Column>
@@ -147,7 +147,7 @@ function BeneficiaryAccount() {
                             <Image
                                 src={(beneficiary?.certificate_image !==  "https://via.placeholder.com/300" ) ?  ("http://localhost:9013/images/beneficiary_certificate/" + beneficiary?.certificate_image): "https://via.placeholder.com/300"}
                                 className="certificate-image"
-                                onClick={() => handleImageClick(beneficiary?.certificateImage)}
+                                onClick={(e) => handleImageClick(e.target.src)}
                                 style={{ cursor: 'pointer' }}
                             />
                         </Grid.Column>
