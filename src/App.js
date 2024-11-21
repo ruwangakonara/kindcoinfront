@@ -137,7 +137,7 @@ import ViewComplaintsPg from './Pages/Admin/Complaints/ViewComplaintsPg';
 import ViewCrewMemberTransactionListPg from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg';
 import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
 import AdminDashBoardPg from './Pages/Admin/home/AdminDashBoardPg';
-import RegisterCrewMemberPg from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPg';
+// import RegisterCrewMemberPg from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPg';
 import AdminSettingsPg from './Pages/Admin/Settings/AdminSettingsPg';
 import OverallStatisticsPg from './Pages/Admin/Statistics/OverallStatisticsPg';
 
