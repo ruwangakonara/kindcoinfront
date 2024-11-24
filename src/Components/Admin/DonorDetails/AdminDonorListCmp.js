@@ -1,6 +1,7 @@
 import classes from "./AdminDonorListCmp.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -18,7 +19,6 @@ import {
 } from "semantic-ui-react";
 
 const AdminDonorListCmp = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
   const [donors, setDonors] = useState([]); // Store the fetched donors here
   const [activeRows, setActiveRows] = useState({});
   const navigate = useNavigate();
@@ -27,148 +27,25 @@ const AdminDonorListCmp = () => {
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        //
-        const response = await fetch("http://localhost:5000/api/donors"); // Make the API request
-        const data = await response.json(); // Parse the JSON response
-        setDonors(data); // Set the data in state
+        const token = localStorage.getItem("authToken"); // Retrieve token (if stored in localStorage)
+        console.log(token);
+        const response = await axios.get(
+          "http://localhost:9013/admin/Donor_List/Donors",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        ); // Make the API request
+        setDonors(response.data); // Set the fetched donors
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching donor data:", error);
       }
     };
 
-    fetchDonors(); // Call the function
+    fetchDonors(); // Call the function when the component is mounted
   }, []); // Empty dependency array means this runs once on component mount
-
-  /**
-   * Fields to be included
-   *
-   * userId
-   * Name
-   * UserName
-   * Address
-   * Images
-   * ProfileImage
-   * Description
-   * Type
-   * DateOfBirth
-   * StellarAddress
-   * District
-   * CreatedAt
-   * PhoneNo
-   */
-
-  const rows = [
-    {
-      userId: "1",
-      userName: "michael_scott",
-      name: "Michael Scott",
-      image: "https://via.placeholder.com/150",
-      district: "Kegalle",
-      stellarAddress: "stellar123abc1",
-      address: "No: 18 Forest Avenue, Kegalle",
-      contact: "0771122334",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "2",
-      userName: "abc_children_home",
-      name: "ABC Children's Home",
-      image: "https://via.placeholder.com/150",
-      district: "Puttalam",
-      stellarAddress: "stellar456def2",
-      address: "No: 2 Lake View Road, Puttalam",
-      contact: "0772233445",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "3",
-      userName: "linda_smith",
-      name: "Linda Smith",
-      image: "https://via.placeholder.com/150",
-      district: "Hambantota",
-      stellarAddress: "stellar789ghi3",
-      address: "No: 8 Harbor Lane, Hambantota",
-      contact: "0773344556",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "4",
-      userName: "wildlife_org",
-      name: "Wildlife Conservation",
-      image: "https://via.placeholder.com/150",
-      district: "Polonnaruwa",
-      stellarAddress: "stellar012jkl4",
-      address: "No: 19 Jungle Road, Polonnaruwa",
-      contact: "0774455667",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "5",
-      userName: "daniel_james",
-      name: "Daniel James",
-      image: "https://via.placeholder.com/150",
-      district: "Kandy",
-      stellarAddress: "stellar345mno5",
-      address: "No: 6 Temple Street, Kandy",
-      contact: "0775566778",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "6",
-      userName: "bright_future",
-      name: "Bright Future Foundation",
-      image: "https://via.placeholder.com/150",
-      district: "Kurunegala",
-      stellarAddress: "stellar678pqr6",
-      address: "No: 10 Hope Avenue, Kurunegala",
-      contact: "0776677889",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "7",
-      userName: "jane_doe",
-      name: "Jane Doe",
-      image: "https://via.placeholder.com/150",
-      district: "Ampara",
-      stellarAddress: "stellar901stu7",
-      address: "No: 22 Peace Street, Ampara",
-      contact: "0777788990",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "8",
-      userName: "save_earth",
-      name: "Save the Earth",
-      image: "https://via.placeholder.com/150",
-      district: "Batticaloa",
-      stellarAddress: "stellar234vwx8",
-      address: "No: 3 Lagoon View, Batticaloa",
-      contact: "0778899001",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "9",
-      userName: "mark_evans",
-      name: "Mark Evans",
-      image: "https://via.placeholder.com/150",
-      district: "Mannar",
-      stellarAddress: "stellar567yz9",
-      address: "No: 5 Sea Breeze Lane, Mannar",
-      contact: "0779900112",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "10",
-      userName: "forest_guardians",
-      name: "Forest Guardians",
-      image: "https://via.placeholder.com/150",
-      district: "Monaragala",
-      stellarAddress: "stellar890abc10",
-      address: "No: 7 Green Street, Monaragala",
-      contact: "0770011223",
-      beneficiaryType: "Organization",
-    },
-  ];
 
   const InputExampleIconPosition = () => (
     <Input
@@ -179,13 +56,13 @@ const AdminDonorListCmp = () => {
     />
   );
 
-  const handleRowClick = (userId) => {
-    navigate(`/admin/Donor_List/Donors/${userId}`);
+  const handleRowClick = (user_id) => {
+    navigate(`/admin/Donor_List/Donors/${user_id}`);
   };
 
-  const handleEditClick = (e, userId) => {
+  const handleEditClick = (e, user_id) => {
     e.stopPropagation(); // Prevent the row click event
-    navigate(`/admin/Donor_List/Donors/${userId}/edit`);
+    navigate(`/admin/Donor_List/Donors/edit/${user_id}`);
   };
 
   const toggleActivation = (index) => {
@@ -202,7 +79,7 @@ const AdminDonorListCmp = () => {
         <TableHeader>
           <TableRow>
             <TableHeaderCell className={classes.customFont}>
-              UserId
+              user_id
             </TableHeaderCell>
             <TableHeaderCell className={classes.customFont}>
               Name
@@ -213,7 +90,6 @@ const AdminDonorListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               District
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
             <TableHeaderCell className={classes.customFont}>
               Address
             </TableHeaderCell>
@@ -223,41 +99,42 @@ const AdminDonorListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               Action
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}>Beneficiary Type</TableHeaderCell> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row, index) => {
+          {donors.map((donor, index) => {
             const isActive = activeRows[index] ?? true;
             return (
               <TableRow
-                key={index}
+                key={donor.user_id}
                 className={`${classes.dataRow} ${
                   !isActive && classes.deactivatedRow
                 }`}
-                onClick={() => handleRowClick(row.userId)}
+                onClick={() => {
+                  console.log(donor.user_id);
+                  handleRowClick(donor.user_id);
+                }}
               >
-                <TableCell>{row.userId}</TableCell>
-                <TableCell>{row.userName}</TableCell>
+                <TableCell>{donor.user_id}</TableCell>
                 <TableCell>
                   <div className={classes.userNameContainer}>
                     <Image
-                      src={row.image}
+                      src={donor.profile_image}
                       circular
                       className={classes.imageStylings}
                     ></Image>
-                    <span className={classes.truncatedText}>{row.name}</span>
+                    <span className={classes.truncatedText}>{donor.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{row.district}</TableCell>
-                {/* <TableCell>{row.address}</TableCell> */}
-                <TableCell>{row.stellarAddress}</TableCell>
-                <TableCell>{row.contact}</TableCell>
+                <TableCell>{donor.username}</TableCell>
+                <TableCell>{donor.district}</TableCell>
+                <TableCell>{donor.stellar_address}</TableCell>
+                <TableCell>{donor.phoneNo}</TableCell>
                 <TableCell className={classes.actionStylings}>
                   <div className={classes.actionContainerDiv}>
                     <Button
                       color="primary"
-                      onClick={(e) => handleEditClick(e, row.userId)}
+                      onClick={(e) => handleEditClick(e, donor.user_id)}
                     >
                       Edit
                     </Button>
@@ -272,7 +149,6 @@ const AdminDonorListCmp = () => {
                     </Button>
                   </div>
                 </TableCell>
-                {/* <TableCell>{row.beneficiaryType}</TableCell> */}
               </TableRow>
             );
           })}
