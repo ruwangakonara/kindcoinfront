@@ -11,6 +11,7 @@ import {
   TableBody,
   MenuItem,
   Icon,
+  IconGroup,
   Menu,
   Table,
   Image,
@@ -57,12 +58,37 @@ const AdminDonorListCmp = () => {
   );
 
   const handleRowClick = (user_id) => {
-    navigate(`/admin/Donor_List/Donors/${user_id}`);
+    navigate(`/admin/Donor_List/Donors/${user_id._id}`);
   };
 
   const handleEditClick = (e, user_id) => {
+    console.log(user_id);
     e.stopPropagation(); // Prevent the row click event
-    navigate(`/admin/Donor_List/Donors/edit/${user_id}`);
+    navigate(`/admin/Donor_List/Donors/edit/${user_id._id}`);
+  };
+
+  const handleDeleteClick = async (e, user_id) => {
+    e.stopPropagation(); // Prevent the row click event
+
+    if (window.confirm("Are you sure you want to delete this donor?")) {
+      try {
+        // Send DELETE request to the server
+        const response = await axios.delete(
+          `http://localhost:9013/admin/Donor_List/Donors/${user_id}`
+        );
+        console.log("Response for delete:", response);
+
+        // Check if the response is successful (status code 200 or 204)
+        if (response.status === 200 || response.status === 204) {
+          console.log("User deleted successfully:", response);
+          // Redirect to the Donors List after a successful deletion
+          navigate("/admin/Donor_List/Donors");
+        }
+      } catch (error) {
+        console.error("Error deleting donor:", error);
+        alert("There was an issue deleting the donor.");
+      }
+    }
   };
 
   const toggleActivation = (index) => {
@@ -104,9 +130,11 @@ const AdminDonorListCmp = () => {
         <TableBody>
           {donors.map((donor, index) => {
             const isActive = activeRows[index] ?? true;
+            const userId = donor.user_id?._id || "N/A"; // Safe access for user_id._id
+
             return (
               <TableRow
-                key={donor.user_id}
+                key={userId}
                 className={`${classes.dataRow} ${
                   !isActive && classes.deactivatedRow
                 }`}
@@ -115,7 +143,7 @@ const AdminDonorListCmp = () => {
                   handleRowClick(donor.user_id);
                 }}
               >
-                <TableCell>{donor.user_id}</TableCell>
+                <TableCell>{userId}</TableCell>
                 <TableCell>
                   <div className={classes.userNameContainer}>
                     <Image
@@ -133,20 +161,41 @@ const AdminDonorListCmp = () => {
                 <TableCell className={classes.actionStylings}>
                   <div className={classes.actionContainerDiv}>
                     <Button
-                      color="primary"
-                      onClick={(e) => handleEditClick(e, donor.user_id)}
-                    >
-                      Edit
-                    </Button>
-                    <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleActivation(index);
+                        // have to include the logic in order to change the user_id.isEthical to be false.
                       }}
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
+                    {/* <div className={classes.iconContainer}> */}
+                    {/* <Button
+                        color="primary"
+                        onClick={(e) => handleEditClick(e, donor.user_id)}
+                      >
+                        Edit
+                      </Button> */}
+                    {/* <Button
+                        color="primary"
+                        onClick={(e) => handleEditClick(e, donor.user_id)}
+                      >
+                        Edit
+                      </Button> */}
+                    <IconGroup size="large" className={classes.iconContainer}>
+                      <Icon
+                        name="edit"
+                        onClick={(e) => handleEditClick(e, donor.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                      <Icon
+                        name="user delete"
+                        onClick={(e) => handleDeleteClick(e, donor.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </IconGroup>
+                    {/* </div> */}
                   </div>
                 </TableCell>
               </TableRow>
