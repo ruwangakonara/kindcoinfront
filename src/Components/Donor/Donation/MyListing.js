@@ -17,7 +17,7 @@ const MyListing = ({ donorImage, recipientImage, amount, type, recipientName, re
                         <Card.Header className="recipient-name">Request: {requestTitle}</Card.Header>
                         <Card.Header className="recipient-name">{donationTitle}</Card.Header>
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
-                        <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
+                        <Card.Description className="donation-amount">Amount: {(type === "goods" ) ? (amount ? amount: "Pending") : amount}</Card.Description>
                         {!accepted && (
                             <Label style = {{marginTop: '10px'}} color='red' className='not-accepted-label'>Not Accepted</Label>
                         )}

@@ -125,8 +125,29 @@ const Account = () => {
                     </Segment>
                 )}
 
+                {donor.stellar_address !== "" && (
+                    <Segment color="blue" style={{marginTop: "20px"}}>
+                        <Header as="h3" textAlign="center">
+                            Please establish a Trustline on your Stellar account for KINDCOIN to receive KINDCOIN.
+                        </Header>
+                        <p style={{textAlign: "center"}}>
+                            Learn more about setting up a trustline{" "}
+                            <a
+                                href="https://developers.stellar.org/docs/glossary/trustline/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                here
+                            </a>.
+                        </p>
+                        <p style={{textAlign: "center"}}>
+                     Issuer ID:
+                        </p>
+                    </Segment>
+                )}
+
             </Container>
-            <Donatenow />
+            <Donatenow/>
         </div>
 
     );

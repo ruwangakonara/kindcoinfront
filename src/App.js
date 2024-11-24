@@ -165,6 +165,7 @@ import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
 import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
+import DonorNotificationList from "./Pages/Donor/notification/notificationsPage";
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
@@ -224,7 +225,8 @@ function App() {
             <Route path="/donor/tickets" element={<DonorTicketsPage/>}/>
 
 
-            <Route path = "/donor/leaderboards" element = {<DonorLeaderboards/>}/>
+                <Route path = "/donor/leaderboards" element = {<DonorLeaderboards/>}/>
+                <Route path = "/donor/notifications" element = {<DonorNotificationList/>}/>
             <Route path = "/donor/leaderboard/:rank" element = {<MyLeaderboardPage/>}/>
             <Route path = "/donor/leaderboard/:id/:rank" element = {<DonorOtherLeaderboardPage/>}/>
 

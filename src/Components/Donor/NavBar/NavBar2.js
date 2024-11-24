@@ -74,7 +74,8 @@ export default function Navbar2() {
                                 {/*</Dropdown>*/}
                             </nav>
                             <div className="brandlogin">
-                                <a href="/donor/account"><Icon name="user" /></a>
+                                <a style={{marginRight:"40px"}} href="/donor/account"><Icon name="user"/></a>
+                                <a href="/donor/notifications"><Icon name="bell"/></a>
                             </div>
                         </div>
                     )
