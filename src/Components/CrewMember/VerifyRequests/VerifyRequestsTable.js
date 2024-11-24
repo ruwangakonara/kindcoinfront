@@ -63,28 +63,6 @@ const VerifyRequestsTable = () => {
       }
   };
 
-  const handleSubmit = async (requestId, newStatus) => {
-    try {
-        // Send the status update to the backend
-        const response = await axios.put('http://localhost:9013/crew/update_request_status', {
-            requestId,
-            status: newStatus,
-        });
-
-        // Update the local state to reflect the updated status
-        setRequests((prevRequests) =>
-            prevRequests.map((request) =>
-                request._id === requestId ? { ...request, status: newStatus } : request
-            )
-        );
-
-        alert('Request status updated successfully!');
-    } catch (error) {
-        console.error('Error updating request status:', error);
-        alert('Failed to update request status. Please try again.');
-    }
-};
-
   
     const openModal = (document) => {
         setSelectedDocument(document);

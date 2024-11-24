@@ -62,7 +62,7 @@ const Login = () => {
             navigate('/beneficiary/home');
             break;
           case 'crew_member':
-            navigate('/crew_member/home');
+            navigate('/crew/home');
             break;
           default:
             navigate('/'); // Navigate to default home if status is unknown

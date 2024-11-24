@@ -1,141 +1,111 @@
-import React, { useState } from 'react';
-import {
-  TableRow,
-  TableHeaderCell,
-  TableHeader,
-  TableFooter,
-  TableCell,
-  TableBody,
-  MenuItem,
-  Icon,
-  Label,
-  Menu,
-  Table,
-  Dropdown,
-  Button,
-} from 'semantic-ui-react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import { Document, Page } from 'react-pdf';
+import Modal from 'react-modal';
+import { Table, TableBody, TableCell, TableFooter, TableHeader, TableHeaderCell, TableRow, Button, Menu, MenuItem, Icon } from 'semantic-ui-react';
 import './VerifyRecipientsTable.css';
 
-const data = [
-  {
-    name: 'Liviru Weerasinghe',
-    nic: '200130704295',
-    image: 'sample1',
-    email: 'liviruweera@gmail.com',
-    telephone: '0716918856',
-    address: '35/1, Temple Road, Colombo 05',
-    status: 'Pending',
-  },
-  {
-    name: 'Saman Arachchige',
-    nic: '199930704748',
-    image: 'sample2',
-    email: 'samanarach@gmail.com',
-    telephone: '0716918758',
-    address: '35/1, Temple Road, Colombo 06',
-    status: 'Approved',
-  },
-
-];
-
-const statusOptions = [
-  { key: 'pending', text: 'Pending', value: 'Pending' },
-  { key: 'rejected', text: 'Rejected', value: 'Rejected' },
-  { key: 'approved', text: 'Approved', value: 'Approved' },
-];
-
 const VerifyRecipientsTable = () => {
-  const [status, setStatus] = useState({});
+    const [recipients, setRecipients] = useState([]);
+    const [selectedDocument, setSelectedDocument] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
 
-  const handleStatusChange = (index, value) => {
-    setStatus(prevState => ({
-      ...prevState,
-      [index]: value
-    }));
+    useEffect(() => {
+        const fetchRecipients = async () => {
+            try {
+                const response = await axios.get('http://localhost:9013/crew/get_recepient'); // Ensure this URL is correct
+                setRecipients(response.data.recipients); // Ensure the correct path to the data
+            } catch (error) {
+                console.error('Error fetching recipients:', error);
+            }
+        };
+
+        fetchRecipients();
+    }, []);
+
+    const handleStatusChange = (event, recipientId) => {
+        const newStatus = event.target.value;
+
+        // Update the status in the backend
+        axios.put('http://localhost:9013/crew/update_recepient_status', { recipientId, status: newStatus }) // Ensure this URL is correct
+            .then(response => {
+                console.log('Status updated:', response.data);
+                // Optionally, update the local state to reflect the change
+                setRecipients(prevRecipients => prevRecipients.map(recipient => 
+                    recipient._id === recipientId ? { ...recipient, status: newStatus } : recipient
+                ));
+            })
+            .catch(error => {
+                console.error('Error updating status:', error);
+            });
+    };
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        // Handle form submission logic here
+        console.log('Form submitted');
+    };
+
+    const openModal = (document) => {
+      setSelectedDocument(document);
+      setModalIsOpen(true);
   };
 
-  const handleSubmit = () => {
-    console.log('Submitting status changes:', status);
+  const closeModal = () => {
+      setSelectedDocument(null);
+      setModalIsOpen(false);
   };
 
-  // const renderDocument = (url) => {
-  //   if (url.endsWith('.pdf')) {
-  //     return (
-  //       <div style={{ maxWidth: '200px', overflow: 'hidden' }}>
-  //         <Document file={url}>
-  //           <Page pageNumber={1} />
-  //         </Document>
-  //       </div>
-  //     );
-  //   } else if (url.match(/\.(jpg|jpeg|png)$/)) {
-  //     return <img src={url} alt="Document preview" style={{ maxWidth: '200px' }} />;
-  //   } else {
-  //     return <a href={url} download>Download</a>;
-  //   }
-  // };
+    return (
+        <div className='verify-recipients-container'>
+            <form onSubmit={handleSubmit}>
+                <Table className='verify-recipients-table'>
+                    <TableHeader>
+                        <TableRow>
+                            <TableHeaderCell>Name</TableHeaderCell>
+                            <TableHeaderCell>Username</TableHeaderCell>
+                            <TableHeaderCell>Email</TableHeaderCell>
+                            <TableHeaderCell>Phone Number</TableHeaderCell>
+                            <TableHeaderCell>Status</TableHeaderCell>
+                            <TableHeaderCell>Actions</TableHeaderCell>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                        {recipients.map(recipient => (
+                            <TableRow key={recipient._id}>
+                                <TableCell>{recipient.name}</TableCell>
+                                <TableCell>{recipient.username}</TableCell>
+                                <TableCell>{recipient.email}</TableCell>
+                                <TableCell>{recipient.phoneNo}</TableCell>
+                                <TableCell>
+                                    <select value={recipient.status} onChange={(e) => handleStatusChange(e, recipient._id)}>
+                                        <option value="Pending">Pending</option>
+                                        <option value="Approved">Approved</option>
+                                        <option value="Rejected">Rejected</option>
+                                    </select>
+                                </TableCell>
+                                <TableCell>
+                                    <Button onClick={() => openModal(recipient)}>View</Button>
+                                    <Button onClick={handleSubmit}>Submit</Button>
+                                </TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </form>
 
-  return (
-    <div className='verify-requests-container'>
-    <Table celled>
-      <TableHeader>
-        <TableRow>
-          <TableHeaderCell>Name</TableHeaderCell>
-          <TableHeaderCell>NIC</TableHeaderCell>
-          <TableHeaderCell>Image</TableHeaderCell>
-          <TableHeaderCell>Email</TableHeaderCell>
-          <TableHeaderCell>Telephone Number</TableHeaderCell>
-          <TableHeaderCell>Address</TableHeaderCell>
-          <TableHeaderCell>Status</TableHeaderCell>
-          <TableHeaderCell>Submit</TableHeaderCell>
-        </TableRow>
-      </TableHeader>
-
-      <TableBody>
-        {data.map((row, index) => (
-          <TableRow key={index}>
-            <TableCell>{row.name}</TableCell>
-            <TableCell>{row.nic}</TableCell>
-            <TableCell>{row.image}</TableCell>
-            <TableCell>{row.email}</TableCell>
-            <TableCell>{row.telephone}</TableCell>
-            <TableCell>{row.address}</TableCell>
-            <TableCell>
-              <Dropdown
-                selection
-                options={statusOptions}
-                value={status[index] || row.status}
-                onChange={(e, { value }) => handleStatusChange(index, value)}
-              />
-            </TableCell>
-            <TableCell>
-              <Button onClick={handleSubmit}>Submit</Button>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-
-      <TableFooter>
-        <TableRow>
-          <TableHeaderCell colSpan='8'>
-            <Menu floated='right' pagination>
-              <MenuItem as='a' icon>
-                <Icon name='chevron left' />
-              </MenuItem>
-              <MenuItem as='a'>1</MenuItem>
-              <MenuItem as='a'>2</MenuItem>
-              <MenuItem as='a'>3</MenuItem>
-              <MenuItem as='a'>4</MenuItem>
-              <MenuItem as='a' icon>
-                <Icon name='chevron right' />
-              </MenuItem>
-            </Menu>
-          </TableHeaderCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
-    </div>
-  );
+            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Document Viewer">
+                <button onClick={closeModal}>Close</button>
+                {selectedDocument && selectedDocument.endsWith('.pdf') ? (
+                    <Document file={selectedDocument}>
+                        <Page pageNumber={1} />
+                    </Document>
+                ) : (
+                    <img src={selectedDocument} alt="Document" style={{ width: '100%' }} />
+                )}
+            </Modal>
+        </div>
+    );
 };
 
 export default VerifyRecipientsTable;
