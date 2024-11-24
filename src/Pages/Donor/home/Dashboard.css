@@ -81,3 +81,41 @@
     transform: translateY(-5px);
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
 }
+
+/* Right-aligned Status Column */
+.status-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+/* Status Tags */
+.status-open, .status-closed, .status-verified, .status-unverified {
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    min-width: 60px;
+}
+
+.status-open {
+    color: #388e3c; /* Green text */
+    background-color: #c8e6c9; /* Light green background */
+}
+
+.status-closed {
+    color: #d32f2f; /* Red text */
+    background-color: #ffcdd2; /* Light red background */
+}
+
+.status-verified {
+    color: #1976d2; /* Blue text */
+    background-color: #bbdefb; /* Light blue background */
+}
+
+.status-unverified {
+    color: #f57c00; /* Orange text */
+    background-color: #ffe0b2; /* Light orange background */
+}
+

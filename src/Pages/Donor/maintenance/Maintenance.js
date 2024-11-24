@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Container, Grid, Header, Form, Button, Segment, Image, Card, Modal, List } from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
-import Sidebar3 from '../../../Components/Donor/Sidebar/Sidebar3';
+import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
 import axios from 'axios';
 import './donationPage.css';
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
@@ -156,7 +156,7 @@ const DonationPage = () => {
             <Navbar2 />
             <Grid>
                 <Grid.Column width={1}>
-                    <Sidebar3 />
+                    <Sidebar />
                 </Grid.Column>
                 <Grid.Column width={15}>
                     <Container className="donation-page-container">
@@ -171,7 +171,7 @@ const DonationPage = () => {
                                 <Grid.Row>
                                     <Grid.Column width={4}>
                                         <Card style={{ boxShadow: 'none' }}>
-                                            <Image src={donor.profile_image} wrapped ui={false} style={{ borderRadius: '50%', width: '150px', height: '150px', margin: 'auto', display: "flex" }} />
+                                            <Image src={(donor.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/donor/" + donor.profile_image): "https://via.placeholder.com/150"} wrapped ui={false} style={{ borderRadius: '50%', width: '150px', height: '150px', margin: 'auto', display: "flex" }} />
                                             <Card.Content style={{ position: "relative" }} textAlign="center">
                                                 <Card.Header style={{ color: '#1E90FF' }}>{donor.name}</Card.Header>
                                                 <Card.Description>{donor.description}</Card.Description>

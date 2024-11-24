@@ -1,16 +1,15 @@
-import React from 'react';
-import classes from "./AdminBeneficiaryCmp.module.css"
-import { useParams } from 'react-router-dom';
+import React from "react";
+import classes from "./AdminBeneficiaryCmp.module.css";
+import { useParams } from "react-router-dom";
 import {
-    CardMeta,
-    CardHeader,
-    CardDescription,
-    CardContent,
-    Card,
-    Icon,
-    Image,
-  } from 'semantic-ui-react'
-
+  CardMeta,
+  CardHeader,
+  CardDescription,
+  CardContent,
+  Card,
+  Icon,
+  Image,
+} from "semantic-ui-react";
 
 // const getDonorDetails = (userId) => {
 //     const donors = [
@@ -28,47 +27,78 @@ import {
 //     return donors.find(donor => donor.userId === userId);
 // };
 
+const AdminBeneficiaryCmp = () => {
+  const { userId } = useParams();
 
+  const donorDetails = {
+    userId: "1",
+    userName: "michael_scott",
+    name: "Michael Scott",
+    image: "https://via.placeholder.com/150",
+    district: "Kegalle",
+    stellarAddress: "stellar123abc1",
+    address: "No: 18 Forest Avenue, Kegalle",
+    contact: "0771122334",
+    beneficiaryType: "Individual",
+  };
 
-const AdminBeneficiaryCmp = () =>{
-
-    const { userId } = useParams();
-
-    const donorDetails = { userId: "1", userName: "michael_scott", name: "Michael Scott", image: "https://via.placeholder.com/150", district: "Kegalle", stellarAddress: "stellar123abc1", address: "No: 18 Forest Avenue, Kegalle", contact: "0771122334", beneficiaryType: "Individual" }
-
-    return(
-        <div className={classes.mainContainer}>
-            <div className={classes.subContainer}>
-                <Card className={classes.donorCardStylings} fluid={true} centered={true} raised>
-                    <Image src='https://react.semantic-ui.com/images/avatar/large/daniel.jpg' wrapped ui={false} />
-                    <CardContent>
-                        <CardHeader>Daniel</CardHeader>
-                        <CardMeta>
-                            <span className='date'>Joined in 2012</span>
-                        </CardMeta>
-                        <CardDescription textAlign="left">
-                            <div className={classes.cardDescription}>
-                            Daniel is a Janiter in Bangladesh.
-                                <p><strong>User ID:</strong> {donorDetails.userId}</p>
-                                <p><strong>Name:</strong> {donorDetails.name}</p>
-                                <p><strong>UserName:</strong> {donorDetails.userName}</p>
-                                <p><strong>District:</strong> {donorDetails.district}</p>
-                                <p><strong>Address:</strong> {donorDetails.address}</p>
-                                <p><strong>Contact No.:</strong> {donorDetails.contact}</p>
-                                <p><strong>Stellar Address:</strong> {donorDetails.stellarAddress}</p>
-                            </div>
-                        </CardDescription>
-                    </CardContent>
-                    <CardContent extra>
-                        {/* <a>
+  return (
+    <div className={classes.mainContainer}>
+      <div className={classes.subContainer}>
+        <Card
+          className={classes.donorCardStylings}
+          fluid={true}
+          centered={true}
+          raised
+        >
+          <Image
+            src="https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
+            wrapped
+            ui={false}
+          />
+          <CardContent>
+            <CardHeader>Daniel</CardHeader>
+            <CardMeta>
+              <span className="date">Joined in 2012</span>
+            </CardMeta>
+            <CardDescription textAlign="left">
+              <div className={classes.cardDescription}>
+                Daniel is a Janiter in Bangladesh.
+                <p>
+                  <strong>User ID:</strong> {donorDetails.userId}
+                </p>
+                <p>
+                  <strong>Name:</strong> {donorDetails.name}
+                </p>
+                <p>
+                  <strong>UserName:</strong> {donorDetails.userName}
+                </p>
+                <p>
+                  <strong>District:</strong> {donorDetails.district}
+                </p>
+                <p>
+                  <strong>Address:</strong> {donorDetails.address}
+                </p>
+                <p>
+                  <strong>Contact No.:</strong> {donorDetails.contact}
+                </p>
+                <p>
+                  <strong>Stellar Address:</strong>{" "}
+                  {donorDetails.stellarAddress}
+                </p>
+              </div>
+            </CardDescription>
+          </CardContent>
+          <CardContent extra>
+            {/* <a>
                             <Icon name='user' />
                             22 Friends
                         </a> */}
-                    </CardContent>
-                </Card>
-            </div>
-        </div>
-    )
-}
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
 
-export default AdminBeneficiaryCmp
+export default AdminBeneficiaryCmp;

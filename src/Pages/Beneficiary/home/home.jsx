@@ -125,7 +125,7 @@
 // export default BeneficiaryDashboard;
 
 
-import React, { useContext } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import { Container, Grid, Card, CardContent, Typography, Avatar, Box } from '@mui/material';
 import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
@@ -135,9 +135,64 @@ import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow"; /
 import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBanner'; // Import the banner component
 import './Dashboard.css';
 
-const BeneficiaryDashboard = () => {
+import axios from "axios";
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
+
+function BeneficiaryDashboard(){
     const { user, userDetails } = useContext(UserContext);
     const beneficiary = userDetails;
+
+    const [cards, setCards] = useState({});
+    const [donors, setDonors] = useState([]);
+    const [donations, setDonations] = useState([]);
+    useEffect(() => {
+        fetchCards();
+        fetchDonations()
+        fetchDonors()
+    }, []);
+
+    async function fetchCards() {
+        try {
+            const response = await axiosInstance.get('/beneficiary/get_beneficiary_cards');
+
+            if (response.status === 200) {
+                const d_cards = response.data;
+                setCards(d_cards);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchDonors() {
+        try {
+            const response = await axiosInstance.get('/beneficiary/get_home_donors');
+
+            if (response.status === 200) {
+                const d_donors = response.data.donors;
+                setDonors(d_donors);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async function fetchDonations() {
+        try {
+            const response = await axiosInstance.post('/beneficiary/get_home_donations', {beneficiary_id: beneficiary._id});
+
+            if (response.status === 200) {
+                const d_donations = response.data.donations;
+                setDonations(d_donations);            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
 
     const dashboardData = {
         listings: 10,
@@ -194,7 +249,7 @@ const BeneficiaryDashboard = () => {
                                     <AiOutlineFundProjectionScreen size={40} color="#FF6347" />
                                     <Typography variant="h6">Total Amount Raised</Typography>
 
-                                    <Typography variant="h4">{dashboardData.listings}</Typography>
+                                    <Typography variant="h4">{cards.amount}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -203,7 +258,7 @@ const BeneficiaryDashboard = () => {
                                 <CardContent sx={{ textAlign: 'center' }}>
                                     <AiOutlineCheckCircle size={40} color="#FFA500" />
                                     <Typography variant="h6">Open Requests</Typography>
-                                    <Typography variant="h4">{dashboardData.completedDonations}</Typography>
+                                    <Typography variant="h4">{cards.c_open}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
@@ -213,25 +268,59 @@ const BeneficiaryDashboard = () => {
                                 <CardContent sx={{ textAlign: 'center' }}>
                                     <AiOutlineTrophy size={40} color="#FF1493" />
                                     <Typography variant="h6">Closed Requests</Typography>
-                                    <Typography variant="h4">{dashboardData.tokensReceived}</Typography>
+                                    <Typography variant="h4">{cards.c_closed}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
                         <Grid item xs={12} md={9}>
-                            <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="primary">Recently Posted Requests</Typography>
+                            <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="primary">
+                                Recently Received Donations
+                            </Typography>
                             <Grid container spacing={3}>
-                                {dashboardData.recentRequests.map(request => (
-                                    <Grid item xs={12} key={request.id}>
+                                {donations.map(donation => (
+                                    <Grid item xs={12} key={donation._id}>
                                         <Card className="request-item">
                                             <CardContent>
                                                 <Grid container spacing={2}>
                                                     <Grid item>
-                                                        <Avatar src={request.donorProfilePic} alt={request.donorName} sx={{ width: 56, height: 56 }} />
+                                                        <Avatar
+                                                            src={
+                                                                donation.profile_image !== "https://via.placeholder.com/150"
+                                                                    ? "http://localhost:9013/images/profileimages/donor/" + donation.profile_image
+                                                                    : "https://via.placeholder.com/150"
+                                                            }
+                                                            alt={donation.name}
+                                                            sx={{ width: 56, height: 56 }}
+                                                        />
                                                     </Grid>
                                                     <Grid item xs>
-                                                        <Typography variant="h6">{request.requestTitle}</Typography>
-                                                        <Typography>{request.requestDescription}</Typography>
-                                                        <Typography variant="caption">Posted by: {request.donorName}</Typography>
+                                                        <Typography variant="h6">{donation.title}</Typography>
+                                                        <Typography>{donation.description}</Typography>
+                                                        <Typography>
+                                                            Request: <a href={`/beneficiary/${donation.open ? "open" : "closed"}-requests/${donation.request_id}`}>
+                                                            {donation.request_title}
+                                                        </a>
+                                                        </Typography>
+                                                        <Typography variant="caption">Offered by: {donation.donor_name}</Typography><br />
+                                                        <Typography variant="caption">
+                                                            Offered on {donation.created.slice(0, 10)} at {donation.created.slice(11, 19)}
+                                                        </Typography>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        {/* Container for vertically stacked status labels */}
+                                                        <div className="status-column">
+                                                            {/* Accepted flag */}
+                                                            <Typography className={`status-${donation.accepted ? 'open' : 'closed'}`}>
+                                                                {donation.accepted ? 'Accepted' : 'Not Accepted'}
+                                                            </Typography>
+
+                                                            {/* Verified flag only if accepted */}
+                                                            {donation.accepted && (
+                                                                <Typography className={`status-${donation.verified ? 'verified' : 'unverified'}`}>
+                                                                    {donation.verified ? 'Verified' : 'Not Verified'}
+                                                                </Typography>
+                                                            )}
+                                                        </div>
                                                     </Grid>
                                                 </Grid>
                                             </CardContent>
@@ -240,24 +329,27 @@ const BeneficiaryDashboard = () => {
                                 ))}
                             </Grid>
                         </Grid>
+
                         <Grid item xs={12} md={3}>
                             <RotatingBanner />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="secondary">Top Donors</Typography>
                             <Grid container spacing={3}>
-                                {dashboardData.topDonors.map(donor => (
-                                    <Grid item xs={12} key={donor.id}>
+                                {donors?.map(donor => (
+                                    <Grid item xs={12} key={donor._id}>
                                         <Card className="donor-item">
                                             <CardContent>
                                                 <Grid container spacing={2}>
                                                     <Grid item>
-                                                        <Avatar src={donor.donorProfilePic} alt={donor.donorName} sx={{ width: 56, height: 56 }} />
+                                                        <Avatar src={donor.profile_image !== "https://via.placeholder.com/150"
+                                                            ? "http://localhost:9013/images/profileimages/donor/" + donor.profile_image
+                                                            : "https://via.placeholder.com/150"} alt={donor.name} sx={{ width: 56, height: 56 }} />
                                                     </Grid>
                                                     <Grid item xs>
-                                                        <Typography variant="h6">{donor.donorName}</Typography>
-                                                        <Typography>${donor.amountDonated} Donated</Typography>
-                                                        <Typography variant="caption">{donor.tokensReceived} Tokens Received</Typography>
+                                                        <Typography variant="h6"><a href={`/beneficiary/donors/${donor._id}`}>{donor.name}</a></Typography>
+                                                        <Typography>Rs. {donor.donated} Donated</Typography>
+                                                        <Typography variant="caption">{donor.tokens} KindCoin Received</Typography>
                                                     </Grid>
                                                 </Grid>
                                             </CardContent>

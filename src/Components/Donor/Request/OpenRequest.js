@@ -11,7 +11,7 @@ const OpenRequest = ({ request }) => {
                     Open Request
                 </Label>
                 <Image
-                    src={request.profile_image}
+                    src={(request.profile_image !==  "https://via.placeholder.com/150" ) ?  ("http://localhost:9013/images/profileimages/beneficiary/" + request.profile_image): "https://via.placeholder.com/150"}
                     wrapped
                     ui={false}
                     className="request-image"
@@ -19,7 +19,7 @@ const OpenRequest = ({ request }) => {
                 <Card.Header>{request.requestDetails.title}</Card.Header>
                 <Card.Meta>{request.name}</Card.Meta>
                 <Card.Description>
-                    {request.verified ? (
+                    {request.requestDetails.verified ? (
                         <span style={{ color: 'green' }}>
                             <Icon name="flag" color="green" /> Verified
                         </span>
