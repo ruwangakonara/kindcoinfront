@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Input } from 'semantic-ui-react';
-import './CrewSearchBar.css';
+import './Searchbar.css';
 
 const SearchBar = ({ placeholder = "Search...", onSearch }) => {
   const [query, setQuery] = useState('');
