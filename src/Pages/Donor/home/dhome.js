@@ -52,7 +52,7 @@ function Dashboard(){
             if (response.status === 200) {
                 const d_requests = response.data.requests;
                 setRequests(d_requests);
-                console.log(d_requests);
+                // console.log(d_requests);
             }
         } catch (error) {
             console.log(error);

@@ -166,6 +166,9 @@ import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonati
 import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
 import DonorNotificationList from "./Pages/Donor/notification/notificationsPage";
+import BeneficiaryNotificationList from "./Pages/Beneficiary/notification/notificationsPage";
+import NotVerified from "./Pages/Home/verified/not_verified";
+import Verified from "./Pages/Home/verified/verified";
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
@@ -191,6 +194,8 @@ function App() {
             <Route path = "leaderboards" element = {<Leaderboards/>}/>
             <Route path = "leaderboard/:id/:rank" element = {<LeaderboardPage/>}/>
 
+                <Route path = "not_verified" element = {<NotVerified/>}/>
+                <Route path = "verify/:token" element = {<Verified/>}/>
 
             {/*Donor Routes*/}
 
@@ -253,7 +258,8 @@ function App() {
             <Route path = "/beneficiary/beneficiaries" element={<BeneficiaryOtherBeneficiaryList/>}/>
             <Route path = "/beneficiary/beneficiaries/:beneficiary_id" element={<BeneficiaryOtherBeneficiaryAccount/>}/>
 
-            <Route path = "/beneficiary/announcements" element={<BeneficiaryAnnouncementList/>}/>
+                <Route path = "/beneficiary/announcements" element={<BeneficiaryAnnouncementList/>}/>
+                <Route path = "/beneficiary/notifications" element={<BeneficiaryNotificationList/>}/>
 
             <Route path = "/beneficiary/account" element={<BeneficiaryOwnAccount/>}/>
             <Route path = "/beneficiary/update-account" element={<BeneficiaryUpdateAccount/>}/>

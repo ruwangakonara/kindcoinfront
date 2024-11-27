@@ -78,7 +78,7 @@ const Signup =  ({form :{form, handleChange,saveAndContinue,formError,countryOpt
                 <Modal.Header>Thank you!</Modal.Header>
                 <Modal.Content>
                   <Modal.Description>
-                    Registration Successful Now you have to login to continue
+                    Registration Successful Now please check your inbox to verify username.
                   </Modal.Description>
                 </Modal.Content>
                 <Modal.Actions>

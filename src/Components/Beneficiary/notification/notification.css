@@ -1,13 +1,5 @@
-.announcement-list-container {
-    margin-top: 40px;
-    padding: 20px;
-    background: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .notification-card {
-    margin: 0; /* Remove margin */
+    margin: 10px;
     cursor: pointer;
     transition: transform 0.2s ease;
 }
@@ -26,8 +18,7 @@
     color: white;
 }
 
-.viewed-label,
-.unviewed-label {
+.viewed-label, .unviewed-label {
     display: flex;
     align-items: center;
     padding: 5px;

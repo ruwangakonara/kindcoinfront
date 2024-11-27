@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Header, Grid } from 'semantic-ui-react'; // Import Grid from Semantic UI
-import Navbar2 from "../../../Components/Donor/NavBar/NavBar2";
-import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
+import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
+import Requestnow from "../../../Components/Beneficiary/Donatenow/Requestnow";
 import axios from "axios";
-import Notification from '../../../Components/Donor/notification/notification'; // Import the Notification component
+import Notification from '../../../Components/Beneficiary/notification/notification'; // Import the Notification component
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 
 
@@ -12,14 +12,14 @@ const axiosInstance = axios.create({
     withCredentials: true,
 });
 
-function DonorNotificationList() {
+function BeneficiaryNotificationList() {
     const { user, userDetails } = useContext(UserContext);
-    const donor = userDetails;
+    const beneficiary = userDetails;
     const [notifications, setNotifications] = useState([]);
 
     const fetchNotifications = async () => {
         try {
-            const response = await axiosInstance.get('/donor/get_notifications');
+            const response = await axiosInstance.get('/beneficiary/get_notifications');
             const notify = response.data.notifications;
             setNotifications(notify);
         } catch (error) {
@@ -29,7 +29,7 @@ function DonorNotificationList() {
 
     const handleNotificationClick = async (id) => {
         try {
-            const response = await axiosInstance.post('/donor/mark_as_viewed', { notify_id: id , donor_id: donor._id });
+            const response = await axiosInstance.post('/beneficiary/mark_as_viewed', { notify_id: id , beneficiary_id: beneficiary._id });
             if (response.status === 200) {
                 setNotifications(notifications.map(notification =>
                     notification._id === id
@@ -50,7 +50,7 @@ function DonorNotificationList() {
 
     return (
         <div>
-            <Navbar2 />
+            <Navbar />
             <Header as="h2" style={{ marginTop: "115px" }} className="page-header">Notifications</Header>
 
             <Container style={{ position: "relative" }} className="announcement-list-container">
@@ -65,9 +65,9 @@ function DonorNotificationList() {
                     ))}
                 </Grid>
             </Container>
-            <Donatenow />
+            <Requestnow />
         </div>
     );
 }
 
-export default DonorNotificationList;
+export default BeneficiaryNotificationList;
