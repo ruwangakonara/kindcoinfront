@@ -9,6 +9,7 @@ import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBan
 import './Dashboard.css';
 
 import axios from "axios";
+import {Image} from "semantic-ui-react";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -51,7 +52,7 @@ function Dashboard(){
             if (response.status === 200) {
                 const d_requests = response.data.requests;
                 setRequests(d_requests);
-                console.log(d_requests);
+                // console.log(d_requests);
             }
         } catch (error) {
             console.log(error);
@@ -141,24 +142,32 @@ function Dashboard(){
                         </Grid>
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
-                                <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineDollarCircle size={40} color="#1E90FF" />
+                                <CardContent sx={{textAlign: 'center'}}>
+                                    {/*<AiOutlineDollarCircle size={40} color="#1E90FF" />*/}
+                                    <div style={{marginBottom: "8px"}}>
+                                        <Image centered rounded size="mini" src="/rs.jpg"/>
+
+                                    </div>
                                     <Typography variant="h6">Amount Donated</Typography>
-                                    <Typography variant="h4">${cards.amount}</Typography>
+                                    <Typography variant="h4">LKR {cards.amount}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
-                                <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineTrophy size={40} color="#FF1493" />
-                                    <Typography variant="h6">Tokens Received</Typography>
-                                    <Typography variant="h4">{cards.tokens}</Typography>
+                                <CardContent sx={{textAlign: 'center'}}>
+                                    {/*<AiOutlineTrophy size={40} color="#FF1493" />*/}
+                                    <div style={{marginBottom: "10px"}}>
+                                        <Image centered rounded size="mini" src="/token.svg"/>
+
+                                    </div>
+                                    <Typography variant="h6">KindCoin Earned</Typography>
+                                    <Typography variant="h4">{Math.round((cards.tokens))}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
                         <Grid item xs={12} md={9}>
-                            <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="primary">
+                            <Typography variant="h5" sx={{mt: 4, mb: 2 }} color="primary">
                                 Recently Posted Requests
                             </Typography>
                             <Grid container spacing={3}>
@@ -230,19 +239,36 @@ function Dashboard(){
                                             <CardContent>
                                                 <Grid container spacing={2}>
                                                     <Grid item>
-                                                        <Avatar src={donorx.profile_image !== "https://via.placeholder.com/150"
-                                                            ? "http://localhost:9013/images/profileimages/donor/" + donorx.profile_image
-                                                            : "https://via.placeholder.com/150"} alt={donorx.name} sx={{ width: 56, height: 56 }} />
+                                                        <Avatar
+                                                            src={donorx.profile_image !== "https://via.placeholder.com/150"
+                                                                ? "http://localhost:9013/images/profileimages/donor/" + donorx.profile_image
+                                                                : "https://via.placeholder.com/150"}
+                                                            alt={donorx.name}
+                                                            sx={{ width: 56, height: 56 }}
+                                                        />
                                                     </Grid>
                                                     <Grid item xs>
-                                                        <Typography variant="h6"><a href={(donorx.user_id !== donor.user_id) ? `/donor/donors/${donorx._id}`: '/donor/account'}>{donorx.name}</a></Typography>
-                                                        <Typography>Rs. {donorx.donated} Donated</Typography>
-                                                        <Typography variant="caption">{donorx.tokens} KindCoin Received</Typography>
+                                                        <Typography variant="h6">
+                                                            <a href={(donorx.user_id !== donor.user_id) ? `/donor/donors/${donorx._id}` : '/donor/account'}>
+                                                                {donorx.name}
+                                                            </a>
+                                                        </Typography>
+                                                        <Typography>
+                                                            Rs. {donorx.donated} Donated
+                                                        </Typography>
+                                                        <Typography variant="caption">
+                                                            {donorx.tokens}
+                                                            <span style={{ display: 'inline-block', verticalAlign: 'middle', marginBottom: "5px"}}>
+                            <Image centered rounded size="small" src="/tag.png" />
+                        </span>
+                                                            Received
+                                                        </Typography>
                                                     </Grid>
                                                 </Grid>
                                             </CardContent>
                                         </Card>
                                     </Grid>
+
                                 ))}
                             </Grid>
                         </Grid>
