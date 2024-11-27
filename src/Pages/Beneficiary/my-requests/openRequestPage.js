@@ -353,18 +353,14 @@ function OpenRequestPage(){
                                 <h4>Type: {requestDetails.type}</h4>
                                 {requestDetails.verified ? (
                                     <div>
-                                        <Icon name="flag" color="green" size="large"/><h4
-                                        style={{color: "green"}}>Verified</h4>
+                                        <Icon name="flag" color="green" size="large" /><h4 style={{ color: "green" }}>Verified</h4>
                                     </div>
                                 ) : (
                                     <div>
-                                        <Icon name="flag" color="red" size="large"/><h4 style={{color: "red"}}>Not
-                                        Verified</h4>
+                                        <Icon name="flag" color="red" size="large" /><h4 style={{ color: "red" }}>Not Verified</h4>
                                         <Button color="blue" onClick={handleEditButtonClick}>Edit</Button>
                                     </div>
                                 )}
-                                <h2>Raised {requestDetails.raised} LKR</h2>
-
                                 <Button color="red" onClick={handleCloseRequest}>Close</Button>
 
                             </Grid.Column>

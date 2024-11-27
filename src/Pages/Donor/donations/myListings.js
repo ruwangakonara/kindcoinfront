@@ -79,7 +79,7 @@ function MyListingsList() {
                                     type={donation.donationDetails?.type}
                                     recipientName={donation?.beneficiary_name}
                                     requestTitle={donation?.request_title}
-                                    donationTitle={donation.donationDetails?.title}
+                                    donationTitle={donation.donationdetails?.title}
                                     id={donation?._id}
 
                                 />

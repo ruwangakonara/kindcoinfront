@@ -136,7 +136,6 @@ import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBan
 import './Dashboard.css';
 
 import axios from "axios";
-import {Image} from "semantic-ui-react";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -246,23 +245,18 @@ function BeneficiaryDashboard(){
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
-                                <CardContent sx={{textAlign: 'center'}}>
-                                    {/*<AiOutlineFundProjectionScreen size={40} color="#FF6347" />*/}
-                                    <div style={{marginBottom: "8px"}}>
-                                        <Image centered rounded size="mini" src="/rs.jpg"/>
-
-                                    </div>
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <AiOutlineFundProjectionScreen size={40} color="#FF6347" />
                                     <Typography variant="h6">Total Amount Raised</Typography>
 
-                                    <Typography variant="h4">LKR {cards.amount}</Typography>
+                                    <Typography variant="h4">{cards.amount}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineTrophy size={40} color="#FF1493" />
-
+                                    <AiOutlineCheckCircle size={40} color="#FFA500" />
                                     <Typography variant="h6">Open Requests</Typography>
                                     <Typography variant="h4">{cards.c_open}</Typography>
                                 </CardContent>
@@ -272,8 +266,7 @@ function BeneficiaryDashboard(){
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineCheckCircle size={40} color="#FFA500" />
-
+                                    <AiOutlineTrophy size={40} color="#FF1493" />
                                     <Typography variant="h6">Closed Requests</Typography>
                                     <Typography variant="h4">{cards.c_closed}</Typography>
                                 </CardContent>
@@ -343,36 +336,20 @@ function BeneficiaryDashboard(){
                         <Grid item xs={12}>
                             <Typography variant="h5" sx={{ mt: 4, mb: 2 }} color="secondary">Top Donors</Typography>
                             <Grid container spacing={3}>
-                                {donors?.map(donorx => (
-                                    <Grid item xs={12} key={donorx._id}>
+                                {donors?.map(donor => (
+                                    <Grid item xs={12} key={donor._id}>
                                         <Card className="donor-item">
                                             <CardContent>
                                                 <Grid container spacing={2}>
                                                     <Grid item>
-                                                        <Avatar
-                                                            src={donorx.profile_image !== "https://via.placeholder.com/150"
-                                                                ? "http://localhost:9013/images/profileimages/donor/" + donorx.profile_image
-                                                                : "https://via.placeholder.com/150"}
-                                                            alt={donorx.name}
-                                                            sx={{ width: 56, height: 56 }}
-                                                        />
+                                                        <Avatar src={donor.profile_image !== "https://via.placeholder.com/150"
+                                                            ? "http://localhost:9013/images/profileimages/donor/" + donor.profile_image
+                                                            : "https://via.placeholder.com/150"} alt={donor.name} sx={{ width: 56, height: 56 }} />
                                                     </Grid>
                                                     <Grid item xs>
-                                                        <Typography variant="h6">
-                                                            <a href={`/beneficiary/donors/${donorx._id}`}>
-                                                                {donorx.name}
-                                                            </a>
-                                                        </Typography>
-                                                        <Typography>
-                                                            Rs. {donorx.donated} Donated
-                                                        </Typography>
-                                                        <Typography variant="caption">
-                                                            {donorx.tokens}
-                                                            <span style={{ display: 'inline-block', verticalAlign: 'middle', marginBottom: "5px"}}>
-                            <Image centered rounded size="small" src="/tag.png" />
-                        </span>
-                                                            Received
-                                                        </Typography>
+                                                        <Typography variant="h6"><a href={`/beneficiary/donors/${donor._id}`}>{donor.name}</a></Typography>
+                                                        <Typography>Rs. {donor.donated} Donated</Typography>
+                                                        <Typography variant="caption">{donor.tokens} KindCoin Received</Typography>
                                                     </Grid>
                                                 </Grid>
                                             </CardContent>
