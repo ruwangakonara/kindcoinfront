@@ -374,7 +374,7 @@ function App() {
         element={<AdminBeneficiaryListPg />}
       />
       <Route
-        path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id/edit"
+        path="/admin/Beneficiary_List/Beneficiaries/edit/:Beneficiary_Id"
         element={<AdminBeneficiaryEditFormPg />}
       />
       <Route

@@ -22,6 +22,8 @@ import {
 const AdminDonorListCmp = () => {
   const [donors, setDonors] = useState([]); // Store the fetched donors here
   const [activeRows, setActiveRows] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 5; // Number of rows per page
   const navigate = useNavigate();
 
   // Fetch data from the backend
@@ -47,6 +49,19 @@ const AdminDonorListCmp = () => {
 
     fetchDonors(); // Call the function when the component is mounted
   }, []); // Empty dependency array means this runs once on component mount
+
+  // Calculate total pages
+  const totalPages = Math.ceil(donors.length / rowsPerPage);
+
+  // Determine the rows to display on the current page
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = donors.slice(indexOfFirstRow, indexOfLastRow);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const InputExampleIconPosition = () => (
     <Input
@@ -170,19 +185,6 @@ const AdminDonorListCmp = () => {
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
-                    {/* <div className={classes.iconContainer}> */}
-                    {/* <Button
-                        color="primary"
-                        onClick={(e) => handleEditClick(e, donor.user_id)}
-                      >
-                        Edit
-                      </Button> */}
-                    {/* <Button
-                        color="primary"
-                        onClick={(e) => handleEditClick(e, donor.user_id)}
-                      >
-                        Edit
-                      </Button> */}
                     <IconGroup size="large" className={classes.iconContainer}>
                       <Icon
                         name="edit"
@@ -202,7 +204,7 @@ const AdminDonorListCmp = () => {
             );
           })}
         </TableBody>
-        <TableFooter>
+        {/* <TableFooter>
           <TableRow>
             <TableHeaderCell colSpan="7">
               <Menu floated="right" pagination>
@@ -214,6 +216,41 @@ const AdminDonorListCmp = () => {
                 <MenuItem as="a">3</MenuItem>
                 <MenuItem as="a">4</MenuItem>
                 <MenuItem as="a" icon>
+                  <Icon name="chevron right" />
+                </MenuItem>
+              </Menu>
+            </TableHeaderCell>
+          </TableRow>
+        </TableFooter> */}
+
+        <TableFooter>
+          <TableRow>
+            <TableHeaderCell colSpan="7">
+              <Menu floated="right" pagination>
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  <Icon name="chevron left" />
+                </MenuItem>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <MenuItem
+                    key={i + 1}
+                    as="a"
+                    active={currentPage === i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                  >
+                    {i + 1}
+                  </MenuItem>
+                ))}
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
                   <Icon name="chevron right" />
                 </MenuItem>
               </Menu>
