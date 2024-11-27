@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import './OpenRequest.css';
 
 const OpenRequest = ({ request , image, beneficiary}) => {
-    const requestTypeIcon = request.type === 'goods' ? 'box' : 'money bill alternate'; // Box for goods, Money for monetary
-    const requestTypeColor = request.type === 'goods' ? 'brown' : 'orange'; // Brown for goods, Orange for monetary
-    const requestTypeText = request.type === 'goods' ? 'Goods Request' : 'Monetary Request';
     return (
         <Card className="request-card">
             <Card.Content>
@@ -33,10 +30,6 @@ const OpenRequest = ({ request , image, beneficiary}) => {
                             <Icon name="flag" color="red" /> Not Verified
                         </span>
                     )}
-                    <Label style={{ marginTop: '10px', marginBottom: '10px', backgroundColor: requestTypeColor, color: 'white' }}>
-                        <Icon name={requestTypeIcon} />
-                        {requestTypeText}
-                    </Label>
                 </Card.Description>
             </Card.Content>
             <Card.Content extra>

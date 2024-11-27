@@ -149,19 +149,3 @@
 .ui.dropdown .menu > .item {
     font-size: 1.2rem; /* Increase the font size for dropdown items */
 }
-
-.notification-icon {
-    position: relative;
-}
-
-.red-marker {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 10px;
-    background-color: red;
-    border-radius: 50%;
-    border: 2px solid white; /* Optional: Add a white border for better visibility */
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.3); /* Optional: Add a shadow for a polished look */
-}

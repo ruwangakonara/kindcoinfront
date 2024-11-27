@@ -398,7 +398,7 @@ function CompletedDonationPage(){
                                     <Grid.Column width={4}>
                                         <Header as="h3">Attestation Fee</Header>
                                         <Grid.Row style={{ display: 'flex', flexDirection: 'row' }}>
-                                            <p>{donation.attestation_fee}</p>
+                                            <p>{donation.doc_token_amount}</p>
                                             <Image src="/token.png" circular className="token-image" />
                                         </Grid.Row>
                                     </Grid.Column>
