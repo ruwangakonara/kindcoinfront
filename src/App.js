@@ -153,7 +153,6 @@ import RaisedTicketsPg from "./Pages/Admin/RaisedTickets/RaisedTicketsPg";
 import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
-import CrewMemberDashboard from "./Pages/CrewMember/Dashboard/CrewMemberDashboard";
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
 import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
@@ -161,6 +160,15 @@ import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
 import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
+
+//Crew Member
+import CrewMemberDashboard from "./Pages/CrewMember/Dashboard/CrewMemberDashboard";
+import VerifyRequests from "./Pages/CrewMember/VerifyRequests/VerifyRequests";
+import VerifyDonationProofs from "./Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs";
+import VerifyRecipients from "./Pages/CrewMember/VerifyRecipients/VerifyRecipients";
+import TokenTranafer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
+// import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
+// import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
 
 function App() {
   return (
@@ -439,6 +447,12 @@ function App() {
 
       {/* Crew Member Routes */}
       <Route path="/crew/home" element={<CrewMemberDashboard />} />
+      <Route path="/crew/requests" element={<VerifyRequests />} />
+      <Route path="/crew/recipients" element={<VerifyRecipients />} />
+      <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
+      {/* <Route path="/crew/settings" element={<CrewSettings />} />
+      <Route path="/crew/profile" element={<CrewProfile />} /> */}
+
     </Routes>
     // </UserProvider>
   );

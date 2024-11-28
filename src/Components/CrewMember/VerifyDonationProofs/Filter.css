@@ -1,0 +1,24 @@
+.filter-container {
+    display: flex;
+    align-items: center;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: fit-content;
+}
+
+.filter-container .ui.form .grouped.fields .field {
+    margin-right: 20px;
+}
+
+.filter-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.ui.radio.checkbox label {
+    font-weight: normal;
+}
