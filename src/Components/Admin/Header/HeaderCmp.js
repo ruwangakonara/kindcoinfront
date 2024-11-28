@@ -21,7 +21,7 @@ const ButtonToggle = ({ children }) => {
 
 // export default ButtonToggle
 
-const HeaderCmp = () => {
+const HeaderCmp = ({ toggleSidebar }) => {
   const navbar = useRef(null);
   const sidebar = useRef(null);
   let i = 0,

@@ -1,4 +1,8 @@
-.footer {
+/*
+use admin_ as a prefix for the custom class names
+*/
+
+.admin_footer {
     display: flex;
     justify-content: space-between;
     padding: 1rem;
@@ -9,8 +13,8 @@
     bottom: 0;
   }
   
-  .footerLeft,
-  .footerRght {
+  .admin_footerLeft,
+  .admin_footerRght {
     font-size: 0.9rem;
   }
   

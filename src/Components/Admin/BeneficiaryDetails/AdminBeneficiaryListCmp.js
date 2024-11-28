@@ -126,30 +126,30 @@ const AdminBeneficiaryListCmp = () => {
   };
 
   return (
-    <div className={classes.mainContainer}>
+    <div className={classes.admin_mainContainer}>
       <InputExampleIconPosition />
       <Table celled>
         <TableHeader>
           <TableRow>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               UserId
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               Name
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               UserName
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               District
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               Date Of Birth
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               Contact No.
             </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
+            <TableHeaderCell className={classes.admin_customFont}>
               Action
             </TableHeaderCell>
           </TableRow>
@@ -161,29 +161,31 @@ const AdminBeneficiaryListCmp = () => {
             return (
               <TableRow
                 key={index}
-                className={`${classes.dataRow} ${
-                  !isActive && classes.deactivatedRow
+                className={`${classes.admin_dataRow} ${
+                  !isActive && classes.admin_deactivatedRow
                 }`}
                 onClick={() => handleRowClick(row.userId)}
               >
                 <TableCell>{userId}</TableCell>
 
                 <TableCell>
-                  <div className={classes.userNameContainer}>
+                  <div className={classes.admin_userNameContainer}>
                     <Image
                       src={row.image}
                       circular
-                      className={classes.imageStylings}
+                      className={classes.admin_imageStylings}
                     ></Image>
-                    <span className={classes.truncatedText}>{row.name}</span>
+                    <span className={classes.admin_truncatedText}>
+                      {row.name}
+                    </span>
                   </div>
                 </TableCell>
                 <TableCell>{row.username}</TableCell>
                 <TableCell>{row.district}</TableCell>
                 <TableCell>{row.date_of_birth}</TableCell>
                 <TableCell>{row.phoneNo}</TableCell>
-                <TableCell className={classes.actionStylings}>
-                  <div className={classes.actionContainerDiv}>
+                <TableCell className={classes.admin_actionStylings}>
+                  <div className={classes.admin_actionContainerDiv}>
                     <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {

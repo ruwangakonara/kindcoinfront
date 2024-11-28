@@ -167,6 +167,7 @@ import VerifyRequests from "./Pages/CrewMember/VerifyRequests/VerifyRequests";
 import VerifyDonationProofs from "./Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs";
 import VerifyRecipients from "./Pages/CrewMember/VerifyRecipients/VerifyRecipients";
 import TokenTranafer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
+import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
 
@@ -453,6 +454,7 @@ function App() {
       {/* <Route path="/crew/settings" element={<CrewSettings />} />
       <Route path="/crew/profile" element={<CrewProfile />} /> */}
 
+      <Route path="/admin/layouts" element={<DashboardLayout />} />
     </Routes>
     // </UserProvider>
   );
