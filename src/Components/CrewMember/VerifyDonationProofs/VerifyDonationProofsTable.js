@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import {
   TableRow,
   TableHeaderCell,
@@ -13,43 +13,37 @@ import {
   Dropdown,
   Button,
   Modal,
-} from 'semantic-ui-react';
-import { Document, Page } from 'react-pdf';
-import './VerifyDonationProofsTable.css';
+} from "semantic-ui-react";
+import { Document, Page } from "react-pdf";
+import "./VerifyDonationProofsTable.css";
 
 const data = [
   {
-    name: 'Liviru Weerasinghe',
-    registrationNo: '0001',
-    requestNo: '0001',
-    email: 'liviruweera@gmail.com',
-    telephone: '0716918856',
-    description: 'Description about the 0001 Fund Request Application',
-    documents: [
-      'Image1',
-      'Pdf1',
-    ],
-    status: 'Pending',
+    name: "Liviru Weerasinghe",
+    registrationNo: "0001",
+    requestNo: "0001",
+    email: "liviruweera@gmail.com",
+    telephone: "0716918856",
+    description: "Description about the 0001 Fund Request Application",
+    documents: ["Image1", "Pdf1"],
+    status: "Pending",
   },
   {
-    name: 'Saman Arachchige',
-    registrationNo: '0002',
-    requestNo: '0002',
-    email: 'samanarach@gmail.com',
-    telephone: '0716647856',
-    description: 'Description about the 0002 Fund Request Application',
-    documents: [
-      'Image2',
-      'Pdf2',
-    ],
-    status: 'Published',
+    name: "Saman Arachchige",
+    registrationNo: "0002",
+    requestNo: "0002",
+    email: "samanarach@gmail.com",
+    telephone: "0716647856",
+    description: "Description about the 0002 Fund Request Application",
+    documents: ["Image2", "Pdf2"],
+    status: "Published",
   },
 ];
 
 const statusOptions = [
-  { key: 'pending', text: 'Pending', value: 'Pending' },
-  { key: 'rejected', text: 'Rejected', value: 'Rejected' },
-  { key: 'accepted', text: 'Accepted', value: 'Accepted' },
+  { key: "pending", text: "Pending", value: "Pending" },
+  { key: "rejected", text: "Rejected", value: "Rejected" },
+  { key: "accepted", text: "Accepted", value: "Accepted" },
 ];
 
 const VerifyRequestsTable = () => {
@@ -58,14 +52,14 @@ const VerifyRequestsTable = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleStatusChange = (index, value) => {
-    setStatus(prevState => ({
+    setStatus((prevState) => ({
       ...prevState,
-      [index]: value
+      [index]: value,
     }));
   };
 
   const handleSubmit = () => {
-    console.log('Submitting status changes:', status);
+    console.log("Submitting status changes:", status);
   };
 
   const handleRowClick = (documents) => {
@@ -74,28 +68,38 @@ const VerifyRequestsTable = () => {
   };
 
   const getFileName = (url) => {
-    return url.substring(url.lastIndexOf('/') + 1);
+    return url.substring(url.lastIndexOf("/") + 1);
   };
 
   const renderDocumentPreview = (url) => {
-    if (url.endsWith('.pdf')) {
+    if (url.endsWith(".pdf")) {
       return (
-        <div style={{ maxWidth: '200px', marginBottom: '10px' }}>
+        <div style={{ maxWidth: "200px", marginBottom: "10px" }}>
           <Document file={url}>
             <Page pageNumber={1} />
           </Document>
         </div>
       );
     } else if (url.match(/\.(jpg|jpeg|png)$/)) {
-      return <img src={url} alt="Document preview" style={{ maxWidth: '200px', marginBottom: '10px' }} />;
+      return (
+        <img
+          src={url}
+          alt="Document preview"
+          style={{ maxWidth: "200px", marginBottom: "10px" }}
+        />
+      );
     } else {
       const fileName = getFileName(url);
-      return <a href={url} download>{fileName}</a>;
+      return (
+        <a href={url} download>
+          {fileName}
+        </a>
+      );
     }
   };
 
   return (
-    <div className='verify-requests-container'>
+    <div className="verify-requests-container">
       <Table celled>
         <TableHeader>
           <TableRow>
@@ -119,7 +123,9 @@ const VerifyRequestsTable = () => {
               <TableCell>{row.requestNo}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.telephone}</TableCell>
-              <TableCell data-tooltip={row.description}>{row.description}</TableCell>
+              <TableCell data-tooltip={row.description}>
+                {row.description}
+              </TableCell>
               <TableCell>{renderDocumentPreview(row.documents[0])}</TableCell>
               <TableCell>
                 <Dropdown
@@ -138,17 +144,17 @@ const VerifyRequestsTable = () => {
 
         <TableFooter>
           <TableRow>
-            <TableHeaderCell colSpan='8'>
-              <Menu floated='right' pagination>
-                <MenuItem as='a' icon>
-                  <Icon name='chevron left' />
+            <TableHeaderCell colSpan="8">
+              <Menu floated="right" pagination>
+                <MenuItem as="a" icon>
+                  <Icon name="chevron left" />
                 </MenuItem>
-                <MenuItem as='a'>1</MenuItem>
-                <MenuItem as='a'>2</MenuItem>
-                <MenuItem as='a'>3</MenuItem>
-                <MenuItem as='a'>4</MenuItem>
-                <MenuItem as='a' icon>
-                  <Icon name='chevron right' />
+                <MenuItem as="a">1</MenuItem>
+                <MenuItem as="a">2</MenuItem>
+                <MenuItem as="a">3</MenuItem>
+                <MenuItem as="a">4</MenuItem>
+                <MenuItem as="a" icon>
+                  <Icon name="chevron right" />
                 </MenuItem>
               </Menu>
             </TableHeaderCell>
@@ -159,13 +165,13 @@ const VerifyRequestsTable = () => {
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        size='large'
+        size="large"
         closeIcon
       >
         <Modal.Header>Document Preview</Modal.Header>
         <Modal.Content>
           {selectedDocuments.map((docUrl, index) => (
-            <div key={index} className='document-preview'>
+            <div key={index} className="document-preview">
               {renderDocumentPreview(docUrl)}
             </div>
           ))}
@@ -176,7 +182,6 @@ const VerifyRequestsTable = () => {
 };
 
 export default VerifyRequestsTable;
-
 
 // import React, { useState } from 'react';
 // import { Form, Checkbox } from 'semantic-ui-react';
