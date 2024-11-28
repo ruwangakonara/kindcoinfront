@@ -1,0 +1,87 @@
+.token-transfer-container {
+    padding: 20px;
+}
+
+.rate-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.rate-box {
+    width: 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.right-aligned {
+    text-align: right;
+}
+
+.left-aligned {
+    text-align: left;
+}
+
+.transfer-form {
+    margin-bottom: 20px;
+}
+
+.transfer-form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.transfer-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.transfer-form .message {
+    margin-top: 10px;
+    color: red;
+}
+
+.filter-search {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.filter-search select,
+.filter-search input {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.filter-search button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.token-transfer-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.token-transfer-table th,
+.token-transfer-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}

@@ -6,20 +6,33 @@ import TokenTransferTable from "../../../Components/CrewMember/TokenTransfer/Tok
 import './TokenTransfer.css';
 
 const TokenTransfer = () => {
+    // return (
+    //     <div className="app-container">
+    //         <HeaderCrew />
+    //         <div className="main-container">
+    //             <Sidebar />
+    //             <div className="exchange-rate">
+    //                 <ExchangeRate />
+    //             </div>
+    //             <div className="token-transfer">
+    //                 <TokenTransferTable />
+    //             </div>
+    //         </div>
+    //     </div>
+    // );
+
     return (
         <div className="app-container">
             <HeaderCrew />
             <div className="main-container">
                 <Sidebar />
-                <div className="exchange-rate">
-                    <ExchangeRate />
-                </div>
-                <div className="token-transfer">
-                    <TokenTransferTable />
-                </div>
-            </div>
+        <div>
+            <TokenTransfer />
+        </div>
+        </div>
         </div>
     );
+    
 }
 
 export default TokenTransfer;
