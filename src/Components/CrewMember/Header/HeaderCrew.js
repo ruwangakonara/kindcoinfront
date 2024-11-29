@@ -30,16 +30,16 @@ export default function HeaderCrew() {
     }
 
     return (
-        <header className="top">
+        <header className="crew-top">
             <a href="/crew/home">
-                <div id="brand" className="brand">
+                <div id="brand" className="crew-brand">
                     <img src="/charitylogo.png" alt="charity" />
                 </div>
             </a>
 
-            <div className="temp">
+            <div className="crew-temp">
                 <Dropdown
-                    className="brandlogin"
+                    className="crew-brandlogin"
                     trigger={<Icon name="user" />}
                     pointing="top right"
                     icon={null}

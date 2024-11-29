@@ -1,0 +1,87 @@
+.crew-token-transfer-container {
+    padding: 20px;
+}
+
+.crew-rate-boxes {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.crew-rate-box {
+    width: 45%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.crew-right-aligned {
+    text-align: right;
+}
+
+.crew-left-aligned {
+    text-align: left;
+}
+
+.crew-transfer-form {
+    margin-bottom: 20px;
+}
+
+.crew-transfer-form input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.crew-transfer-form button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.crew-transfer-form .message {
+    margin-top: 10px;
+    color: red;
+}
+
+.crew-filter-search {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.crew-filter-search select,
+.crew-filter-search input {
+    width: 48%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.crew-filter-search button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.crew-token-transfer-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.crew-token-transfer-table th,
+.crew-token-transfer-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
