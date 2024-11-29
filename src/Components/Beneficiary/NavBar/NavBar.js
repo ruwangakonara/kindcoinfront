@@ -1,9 +1,38 @@
 import { Icon, Dropdown, Menu } from "semantic-ui-react";
-import React, { useRef } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import "./NavBar.css";
 import { useLocation } from 'react-router-dom';
+import axios from "axios";
+
+const axiosInstance = axios.create({
+    baseURL: 'http://localhost:9013',
+    withCredentials: true,
+});
 
 export default function Navbar() {
+
+    const [notificationsa, setNotificationsa] = useState([]);
+    const [hasUnread, setHasUnread] = useState(false); // State to track unread notifications
+
+    const fetchNotifications = async () => {
+        try {
+            const response = await axiosInstance.get('/beneficiary/get_notifications_sidebar');
+            const notify = response.data.notifications;
+            setNotificationsa(notify);
+            console.log(notify)
+            // Check if there's any notification with `viewed: false`
+            const unreadExists = notify.some(notification => !notification.viewed);
+            setHasUnread(unreadExists);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        fetchNotifications();
+    }, []);
+
+
     const navbar = useRef(null);
     const sidebar = useRef(null);
     let i = 0, f = 0;
@@ -71,7 +100,13 @@ export default function Navbar() {
                                 {/*</Dropdown>*/}
                             </nav>
                             <div className="brandlogin">
-                                <a href= "/beneficiary/account"><Icon name="user" /></a>
+                                <a style={{ marginRight: "40px" }} href="/beneficiary/account"><Icon name="user"/></a>
+
+                                <a href="/beneficiary/notifications" className="notification-icon">
+                                    <Icon name="bell"/>
+                                    {hasUnread && <div
+                                        className="red-marker"></div>} {/* Add marker if unread notifications exist */}
+                                </a>
                             </div>
                         </div>
                     )

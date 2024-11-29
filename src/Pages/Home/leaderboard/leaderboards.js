@@ -98,6 +98,8 @@ const Leaderboards = () => {
                                     image={donor.profile_image}
                                     rank={donor.rank}
                                     id={donor._id}
+                                    leaderboard_anonymous={donor.leaderboard_anonymous}
+                                    anonymous_id={donor.anonymous_id}
                                 />
                             </Grid.Column>
                         ))}

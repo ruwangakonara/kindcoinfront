@@ -1,0 +1,35 @@
+.notification-card {
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.notification-card:hover {
+    transform: scale(1.05);
+}
+
+.viewed .viewed-label {
+    background-color: green !important;
+    color: white;
+}
+
+.unviewed-label {
+    background-color: red !important;
+    color: white;
+}
+
+.viewed-label, .unviewed-label {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+.notification-card .card-header {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.notification-card .card-meta {
+    font-size: 14px;
+    color: grey;
+}

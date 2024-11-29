@@ -84,6 +84,10 @@ const Account = () => {
                                         <List.Header>Anonymous</List.Header>
                                         {donor.anonymous ? "Yes" : "No"}
                                     </List.Item>
+                                    <List.Item>
+                                        <List.Header>Leaderboard Anonymous</List.Header>
+                                        {donor.leaderboard_anonymous ? "Yes" : "No"}
+                                    </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={2}>
@@ -111,7 +115,7 @@ const Account = () => {
                             <p>{donor.donated}</p>
                         </Grid.Column>
                         <Grid.Column width={8}>
-                            <Header as="h3">Tokens</Header>
+                            <Header as="h3">KINDCOIN</Header>
                             <p>{donor.tokens}</p>
                         </Grid.Column>
                     </Grid>
@@ -125,8 +129,29 @@ const Account = () => {
                     </Segment>
                 )}
 
+                {donor.stellar_address !== "" && (
+                    <Segment color="blue" style={{marginTop: "20px"}}>
+                        <Header as="h3" textAlign="center">
+                            If you have not already, please establish a Trustline on your Stellar account for KINDCOIN to receive KINDCOIN.
+                        </Header>
+                        <p style={{textAlign: "center"}}>
+                            Learn more about setting up a trustline{" "}
+                            <a
+                                href="https://developers.stellar.org/docs/glossary/trustline/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                here
+                            </a>.
+                        </p>
+                        <p style={{textAlign: "center"}}>
+                     Issuer ID:{process.env.ISSUER_PUBLIC_KEY}
+                        </p>
+                    </Segment>
+                )}
+
             </Container>
-            <Donatenow />
+            <Donatenow/>
         </div>
 
     );

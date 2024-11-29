@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useRef} from 'react'
-import { Button, Form, Grid, Header, Segment,Icon,Message } from 'semantic-ui-react'
+import {Button, Form, Grid, Header, Segment, Icon, Message, Modal} from 'semantic-ui-react'
 import { useNavigate} from "react-router-dom";
 
 
@@ -17,74 +17,82 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
   const [time,setTime] = useState(false);
   const [resendtimer,setResendtimer] = useState(120);
 
+    const handleopen = () =>{
+        setModopen(false);
+        console.log(" qquery completed");
+        navigate("/");
+        setreset();
+    }
 
   useEffect(()=>{
     if(open){
         console.log("i am in useeffect",retmail);
         if(retmail==="Send mail"){
+
             if(modOpen===false)
-            fetchData("http://localhost:3000/email-send",form,"forgot","POST");
+
+            fetchData("http://localhost:9013/forgot",form,"forgot","POST");
 
             if(modOpen===true)
             {
                 setRetmail("Change Password");
                 setTime(true);
                 setCurrent("forgot");
-                setModopen(false);
+                // setModopen(false);
                 setOpen(false);
             }
 
         }
-        else{
-            let data = {
-                email: form.email,
-                password: form.password,
-                OTP: form.OTP,
-              }
-              if(modOpen===false)
-              fetchData("http://localhost:3000/changepassword",data,"forgot","PUT");
-
-                if(modOpen===true){
-                    setreset();
-                    navigate(-1);
-                }
-        }
+        // else{
+        //     let data = {
+        //         email: form.email,
+        //         password: form.password,
+        //         OTP: form.OTP,
+        //       }
+        //       if(modOpen===false)
+        //       fetchData("http://localhost:3000/reset",data,"forgot","PUT");
+        //
+        //         // if(modOpen===true){
+        //         //     setreset();
+        //         //     navigate(-1);
+        //         // }
+        // }
     }
 
   },[open,modOpen]);
 
-  const timeoutRef = useRef(null);
+  // const timeoutRef = useRef(null);
+  //
+  // function resetTimeout() {
+  //   if (timeoutRef.current) {
+  //     clearTimeout(timeoutRef.current);
+  //   }
+  // }
 
-  function resetTimeout() {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-  }
-
-    useEffect(() => {
-        if(time)
-        {
-            resetTimeout();
-            timeoutRef.current = setTimeout(
-            () =>
-                setResendtimer(resendtimer - 1),
-            delay
-            );
-
-            return () => {
-            resetTimeout();
-            };
-        }
-  }, [resendtimer,time]);
-
-
-
-  const resend = ()=>{
-      fetchData("http://localhost:3000/email-send",form,"forgot","POST");
-      setResendtimer(120);
-  }
+  //   useEffect(() => {
+  //       if(time)
+  //       {
+  //           resetTimeout();
+  //           timeoutRef.current = setTimeout(
+  //           () =>
+  //               setResendtimer(resendtimer - 1),
+  //           delay
+  //           );
+  //
+  //           return () => {
+  //           resetTimeout();
+  //           };
+  //       }
+  // }, [resendtimer,time]);
 
 
+
+  // const resend = ()=>{
+  //     fetchData("http://localhost:9013/forgot",form,"forgot","POST");
+  //     setResendtimer(120);
+  // }
+  //
+  //
 
 
   const togglePassword = (val) =>{
@@ -118,7 +126,19 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
             <p>{message}</p>
             </Message>
           }
-
+            {modOpen &&
+                <Modal open={modOpen}>
+                    <Modal.Header>Thank you!</Modal.Header>
+                    <Modal.Content>
+                        <Modal.Description>
+                            Please check your Inbox
+                        </Modal.Description>
+                    </Modal.Content>
+                    <Modal.Actions>
+                        <Button onClick={handleopen}>OK</Button>
+                    </Modal.Actions>
+                </Modal>
+            }
           
           <Form size='large' onSubmit={saveAndContinue}>
             <Segment stacked>
@@ -180,7 +200,7 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
                         />
                         <Icon name={confirmicon} link onClick={()=>togglePassword('cnfirm')} className="showicon" style={{top:25}}/>
                     </Form.Field>
-                    {resendtimer>0?(<p>Resend OTP in <strong>{resendtimer}s</strong></p>):(<a onClick={resend} style={{cursor:"pointer"}}>Resend OTP</a>)}
+                    {/*{resendtimer>0?(<p>Resend OTP in <strong>{resendtimer}s</strong></p>):(<a onClick={resend} style={{cursor:"pointer"}}>Resend OTP</a>)}*/}
                     
                   </div>
 

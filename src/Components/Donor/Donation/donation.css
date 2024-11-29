@@ -72,8 +72,8 @@
 }
 
 .token-image {
-    width: 30px; /* Ensure the image is not too small */
-    height: 30px; /* Ensure the image is not too small */
+    width: 15px; /* Ensure the image is not too small */
+    height: 15px; /* Ensure the image is not too small */
     margin-left: 10px;
     border-radius: 50%;
     text-align: right;

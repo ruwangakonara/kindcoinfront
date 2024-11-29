@@ -6,6 +6,7 @@ import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 import axios from "axios";
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import {useParams} from "react-router-dom";
+import {Typography} from "@mui/material";
 
 
 const axiosInstance = axios.create({
@@ -236,9 +237,17 @@ const MyLeaderboardPage = () => {
                                         {donor?.donated}
                                     </List.Item>
                                     <List.Item>
-                                        <List.Header>Tokens Earned</List.Header>
+                                        <Typography>
+                                            <List.Header style={{ display: 'flex', alignItems: 'center' }}>
+                                                KINDCOIN Earned
+                                                <span style={{ marginLeft: '0.5rem' }}>
+                <Image centered rounded size="small" src="/tag.png" />
+            </span>
+                                            </List.Header>
+                                        </Typography>
                                         {donor?.tokens}
                                     </List.Item>
+
                                 </List>
                             </Grid.Column>
                         </Grid.Row>
@@ -544,7 +553,7 @@ const MyLeaderboardPage = () => {
                                             id="image5Upload"
                                             accept="image/*"
                                             hidden
-                                            onChange={(e) => handleFileChange(e, 'image')}
+                                            onChange={(e) => handleFileChange(e, 'image5')}
                                         />
                                         </Grid.Column>
                                     </Grid.Row>

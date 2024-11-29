@@ -39,6 +39,7 @@ import {useState,useEffect} from 'react';
     // console.log(data);
     // if(data.msg.includes("Sucess")){
       if(response.status === 200){
+        console.log("yes")
       setModopen(true);
 
       // if(type==="Login"){

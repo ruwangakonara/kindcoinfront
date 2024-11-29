@@ -6,6 +6,7 @@ import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 import axios from "axios";
 import {useParams} from "react-router-dom";
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+import {Typography} from "@mui/material"
 
 
 const axiosInstance = axios.create({
@@ -199,6 +200,14 @@ const BeneficiaryDonorLeaderboardPage = () => {
             <Container className="leaderboard-page-container">
                 <Segment raised className="donor-segment">
                     <Header style={{ marginTop: '100px' }} as="h1" textAlign="center" className="leaderboard-header">Donor Leaderboard</Header>
+                    {donor?.leaderboard_anonymous && (
+                        <Segment color="yellow" style={{ marginTop: "20px" }}>
+                            <Header as="h3" textAlign="center">
+                                This donor has chosen to remain anonymous.
+                                {/*They are identified by the ID: {donor.anonymous_id}.*/}
+                            </Header>
+                        </Segment>
+                    )}
                     <Grid stackable>
                         <Grid.Row>
                             <Grid.Column width={4} textAlign="center">
@@ -208,15 +217,15 @@ const BeneficiaryDonorLeaderboardPage = () => {
                                 <List className="donor-info-list">
                                     <List.Item>
                                         <List.Header>Name</List.Header>
-                                        {donor?.name}
+                                        {!donor?.leaderboard_anonymous ? donor?.name: ("Anonymous" + donor?.anonymous_id)}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Email</List.Header>
-                                        {donor?.email}
+                                        {!donor?.leaderboard_anonymous ? donor?.username: ("Anonymous")}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Address</List.Header>
-                                        {donor?.address}
+                                        {!donor?.leaderboard_anonymous ? donor?.address: "Anonymous"}
                                     </List.Item>
                                     <List.Item>
                                         <List.Header>Type</List.Header>
@@ -236,9 +245,17 @@ const BeneficiaryDonorLeaderboardPage = () => {
                                         {donor?.donated}
                                     </List.Item>
                                     <List.Item>
-                                        <List.Header>Tokens Earned</List.Header>
+                                        <Typography>
+                                            <List.Header style={{ display: 'flex', alignItems: 'center' }}>
+                                                KINDCOIN Earned
+                                                <span style={{ marginLeft: '0.5rem' }}>
+                <Image centered rounded size="small" src="/tag.png" />
+            </span>
+                                            </List.Header>
+                                        </Typography>
                                         {donor?.tokens}
                                     </List.Item>
+
                                 </List>
                             </Grid.Column>
                         </Grid.Row>
