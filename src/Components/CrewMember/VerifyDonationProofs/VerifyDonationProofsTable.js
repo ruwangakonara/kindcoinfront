@@ -103,9 +103,10 @@ const VerifyRequestsTable = () => {
       <Table celled>
         <TableHeader>
           <TableRow>
-            <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Registration No</TableHeaderCell>
-            <TableHeaderCell>Request Number</TableHeaderCell>
+            <TableHeaderCell>Donor Name</TableHeaderCell>
+            <TableHeaderCell>Donation ID</TableHeaderCell>
+            <TableHeaderCell>Request ID</TableHeaderCell>
+            <TableHeaderCell>Benficiary ID</TableHeaderCell>
             <TableHeaderCell>Email</TableHeaderCell>
             <TableHeaderCell>Telephone Number</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
