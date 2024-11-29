@@ -1,51 +1,55 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.customFont {
+/*
+use admin_ as a prefix for the custom class names
+*/
+
+.admin_customFont {
     font-family: 'YourCustomFont', Arial, sans-serif;
     font-size: 20px; /* Adjust the font size as needed */
     color: #333; /* Adjust the color as needed */
     text-align: center;
 }
 
-.mainContainer{
+.admin_mainContainer{
     margin: 25px;
 }
 
-.dataRow{
+.admin_dataRow{
     font-size: 15px;
     cursor: pointer;
 }
 
-.imageStylings{
+.admin_imageStylings{
     width: 50px;
     height: 50px;
 }
 
-.actionStylings{
+.admin_actionStylings{
     flex-direction: column;
     cursor: auto;
 }
 
-.actionContainerDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 15px; 
-  }
+.admin_actionContainerDiv {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; 
+}
 
-  .userNameContainer{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+.admin_userNameContainer{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-  .truncatedText {
-    display: inline-block; /* Required for applying the text truncation */
-    max-width: 150px; /* Set the maximum width for the cell content */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide the overflowing text */
-    text-overflow: ellipsis; /* Add an ellipsis (...) at the end of the truncated text */
-  }
+.admin_truncatedText {
+  display: inline-block; /* Required for applying the text truncation */
+  max-width: 150px; /* Set the maximum width for the cell content */
+  white-space: nowrap; /* Prevent text from wrapping */
+  overflow: hidden; /* Hide the overflowing text */
+  text-overflow: ellipsis; /* Add an ellipsis (...) at the end of the truncated text */
+}
 
-  .deactivatedRow {
-    background-color: #f8d7da; /* Light red background for deactivated rows */
-  }
+.admin_deactivatedRow {
+  background-color: #f8d7da; /* Light red background for deactivated rows */
+}

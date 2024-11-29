@@ -157,7 +157,7 @@ const CrewMemberTableCmp = () => {
   );
 
   return (
-    <div className={classes.mainContainer}>
+    <div className={classes.admin_mainContainer}>
       <InputExampleIconPosition />
       <Table celled compact definition>
         <TableHeader fullWidth>
@@ -180,7 +180,7 @@ const CrewMemberTableCmp = () => {
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.town}</TableCell>
               <TableCell>{row.NoOfOps}</TableCell>
-              <TableCell className={classes.buttonStyles}>
+              <TableCell className={classes.admin_buttonStyles}>
                 <Button color="red" floated="center">
                   Assign New Task
                 </Button>
