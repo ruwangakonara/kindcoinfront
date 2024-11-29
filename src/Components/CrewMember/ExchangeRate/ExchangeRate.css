@@ -1,4 +1,4 @@
-.exchange-rate {
+.crew-exchange-rate {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -10,42 +10,42 @@
     font-family: 'Arial', sans-serif;
   }
   
-  .rate-display {
+  .crew-rate-display {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 5px;
   }
   
-  .rate-text {
+  .crew-rate-text {
     font-weight: bold;
     color: #333;
   }
   
-  .rate-value {
+  .crew-rate-value {
     font-size: 18px;
     color: #2a9d8f;
   }
   
-  .currency-selector {
+  .crew-currency-selector {
     display: flex;
     align-items: center;
     margin-top: 5px;
   }
   
-  .currency-selector label {
+  .crew-currency-selector label {
     margin-right: 5px;
     font-weight: bold;
     color: #333;
   }
   
-  .currency-selector select {
+  .crew-currency-selector select {
     padding: 2px 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
   }
   
-  .error-message {
+  .crew-error-message {
     color: red;
     font-weight: bold;
   }

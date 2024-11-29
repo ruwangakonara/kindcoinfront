@@ -21,7 +21,7 @@ const Filter = ({ onFilterChange }) => {
   };
 
   return (
-    <div className="filter-container">
+    <div className="crew-filter-container">
       <Form>
         <Form.Group inline>
           <label>Status:</label>

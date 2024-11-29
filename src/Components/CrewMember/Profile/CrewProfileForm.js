@@ -42,12 +42,12 @@ const CrewMemberForm = () => {
     };
 
     return (
-        <div className="form-container">
-            <div className="image-container">
+        <div className="crew-form-container">
+            <div className="crew-image-container">
                 <img
                     src="https://via.placeholder.com/150"
                     alt="Profile"
-                    className="profile-image"
+                    className="crew-profile-image"
                 />
             </div>
             <Form>

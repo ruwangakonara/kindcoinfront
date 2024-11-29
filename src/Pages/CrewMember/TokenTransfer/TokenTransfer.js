@@ -1,6 +1,7 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
+import TokenTransferComp from "../../../Components/CrewMember/TokenTransfer/TokenTransferTable/TokenTransferTable";
 import ExchangeRate from "../../../Components/CrewMember/ExchangeRate/ExchangeRate";
 import TokenTransferTable from "../../../Components/CrewMember/TokenTransfer/TokenTransferTable";
 import './TokenTransfer.css';
@@ -11,10 +12,10 @@ const TokenTransfer = () => {
     //         <HeaderCrew />
     //         <div className="main-container">
     //             <Sidebar />
-    //             <div className="exchange-rate">
+    //             <div className="crew-exchange-rate">
     //                 <ExchangeRate />
     //             </div>
-    //             <div className="token-transfer">
+    //             <div className="crew-token-transfer">
     //                 <TokenTransferTable />
     //             </div>
     //         </div>
@@ -27,7 +28,7 @@ const TokenTransfer = () => {
             <div className="main-container">
                 <Sidebar />
         <div>
-            <TokenTransfer />
+            <TokenTransferComp />
         </div>
         </div>
         </div>

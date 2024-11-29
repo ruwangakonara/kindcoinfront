@@ -71,7 +71,7 @@ const VerifyRecipientsTable = () => {
     };
 
     return (
-        <div className='verify-recipients-container'>
+        <div className='crew-verify-recipients-container'>
             <table className='ui celled table'>
                 <thead>
                     <tr>

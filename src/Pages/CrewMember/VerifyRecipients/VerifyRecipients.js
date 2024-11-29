@@ -2,7 +2,7 @@ import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable";
-import SearchBar from "../../../Components/CrewMember/SearchBar/SearchBar";
+import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import './VerifyRecipients.css';
 
 
@@ -17,7 +17,7 @@ const VerifyRecipients = () => {
             <HeaderCrew />
             <div className="main-container">
                 <Sidebar />
-                <div className="verify-recipients-container">
+                <div className="crew-verify-recipients-container">
                     <SearchBar onSearch={handleSearch} />
                     <VerifyRecipientsTable />
                 </div>

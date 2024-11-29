@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './TokenTransfer.css';
+import './TokenTransferTable.css';
 
-const TokenTransfer = () => {
+const TokenTransferComp = () => {
     const [xlmToLkrRate, setXlmToLkrRate] = useState(null);
     const [tokenToXlmRate, setTokenToXlmRate] = useState(null);
     const [donationId, setDonationId] = useState('');
@@ -55,18 +55,18 @@ const TokenTransfer = () => {
     };
 
     return (
-        <div className="token-transfer-container">
-            <div className="rate-boxes">
-                <div className="rate-box right-aligned">
+        <div className="crew-token-transfer-container">
+            <div className="crew-rate-boxes">
+                <div className="crew-rate-box crew-right-aligned">
                     <h3>XLM to LKR Rate</h3>
                     <p>{xlmToLkrRate}</p>
                 </div>
-                <div className="rate-box left-aligned">
+                <div className="crew-rate-box crew-left-aligned">
                     <h3>Token to XLM Rate</h3>
                     <p>{tokenToXlmRate}</p>
                 </div>
             </div>
-            <div className="transfer-form">
+            <div className="crew-transfer-form">
                 <h3>Transfer Donation</h3>
                 <input
                     type="text"
@@ -81,9 +81,9 @@ const TokenTransfer = () => {
                     onChange={(e) => setDonationAmountInLKR(e.target.value)}
                 />
                 <button onClick={handleTransfer}>Transfer</button>
-                {message && <p className="message">{message}</p>}
+                {message && <p className="crew-message">{message}</p>}
             </div>
-            <div className="filter-search">
+            <div className="crew-filter-search">
                 <select value={filter} onChange={(e) => setFilter(e.target.value)}>
                     <option value="">All</option>
                     <option value="successful">Successful</option>
@@ -97,7 +97,7 @@ const TokenTransfer = () => {
                 />
                 <button onClick={fetchTokenTransfers}>Search</button>
             </div>
-            <div className="token-transfer-table">
+            <div className="crew-token-transfer-table">
                 <table>
                     <thead>
                         <tr>
@@ -127,4 +127,4 @@ const TokenTransfer = () => {
     );
 };
 
-export default TokenTransfer;
+export default TokenTransferComp;
