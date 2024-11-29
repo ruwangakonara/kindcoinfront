@@ -96,7 +96,7 @@ const VerifyRequestsTable = () => {
                             <td>{request.user_id?.name || 'N/A'}</td>
                             <td>{request.beneficiary_id?.username || 'N/A'}</td>
                             <td>{request._id}</td>
-                            <td>{request.beneficiary_id?.email || 'N/A'}</td>
+                            <td>{request.user_id?.email || 'N/A'}</td>
                             <td>{request.beneficiary_id?.phoneNo || 'N/A'}</td>
                             <td>{request.description || 'No Description'}</td>
                             <td>

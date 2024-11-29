@@ -1,98 +1,99 @@
 import React,{useState,useEffect,useRef} from 'react'
 import {Button, Form, Grid, Header, Segment, Icon, Message, Modal} from 'semantic-ui-react'
-import { useNavigate} from "react-router-dom";
+import { useNavigate, useParams} from "react-router-dom";
 
 
 
-const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCurrent,errMessage,
+const  Forgot2= ({form :{form, handleChange,saveAndContinue,formError,open,setCurrent,errMessage,
     message,fetchData,modOpen,setOpen,setModopen,setreset
   }}) => {
-    
+
+    const {token} = useParams()
+
   const delay = 1000;
   const [passwordType, setPasswordType] = useState("password");
   const [confirm,setConfirm] = useState("password");
   const [icon,setIcon] = useState("eye");
   const [confirmicon,setConfirmIcon] = useState("eye");
-  const [retmail,setRetmail] = useState("Send mail");
+  const [retmail,setRetmail] = useState("Change Password");
   const [time,setTime] = useState(false);
   const [resendtimer,setResendtimer] = useState(120);
 
-    const handleopen = () =>{
-        setModopen(false);
-        console.log(" qquery completed");
-        navigate("/");
-        setreset();
-    }
 
   useEffect(()=>{
     if(open){
         console.log("i am in useeffect",retmail);
         if(retmail==="Send mail"){
-
-            if(modOpen===false)
-
-            fetchData("http://localhost:9013/forgot",form,"forgot","POST");
-
-            if(modOpen===true)
-            {
-                setRetmail("Change Password");
-                setTime(true);
-                setCurrent("forgot");
-                // setModopen(false);
-                setOpen(false);
-            }
+            // if(modOpen===false)
+            // fetchData("http://localhost:9013/forgot",form,"forgot","POST");
+            //
+            // if(modOpen===true)
+            // {
+            //     setRetmail("Change Password");
+            //     setTime(true);
+            //     setCurrent("forgot");
+            //     setModopen(false);
+            //     setOpen(false);
+            // }
 
         }
-        // else{
-        //     let data = {
-        //         email: form.email,
-        //         password: form.password,
-        //         OTP: form.OTP,
-        //       }
-        //       if(modOpen===false)
-        //       fetchData("http://localhost:3000/reset",data,"forgot","PUT");
-        //
-        //         // if(modOpen===true){
-        //         //     setreset();
-        //         //     navigate(-1);
-        //         // }
-        // }
+        else{
+            let data = {
+                email: form.email,
+                password: form.password,
+                token: token,
+              }
+              if(modOpen===false)
+              fetchData("http://localhost:9013/reset",data,"forgot","POST");
+
+                // if(modOpen===true){
+                //     setreset();
+                //     navigate(-1);
+                // }
+        }
     }
 
   },[open,modOpen]);
 
-  // const timeoutRef = useRef(null);
-  //
-  // function resetTimeout() {
-  //   if (timeoutRef.current) {
-  //     clearTimeout(timeoutRef.current);
-  //   }
-  // }
+    const handleopen = () =>{
+        setModopen(false);
+        console.log(" reset completed");
+        navigate("/login/login");
+        setreset();
+    }
 
-  //   useEffect(() => {
-  //       if(time)
-  //       {
-  //           resetTimeout();
-  //           timeoutRef.current = setTimeout(
-  //           () =>
-  //               setResendtimer(resendtimer - 1),
-  //           delay
-  //           );
-  //
-  //           return () => {
-  //           resetTimeout();
-  //           };
-  //       }
-  // }, [resendtimer,time]);
+  const timeoutRef = useRef(null);
+
+  function resetTimeout() {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+  }
+
+    useEffect(() => {
+        if(time)
+        {
+            resetTimeout();
+            timeoutRef.current = setTimeout(
+            () =>
+                setResendtimer(resendtimer - 1),
+            delay
+            );
+
+            return () => {
+            resetTimeout();
+            };
+        }
+  }, [resendtimer,time]);
 
 
 
-  // const resend = ()=>{
-  //     fetchData("http://localhost:9013/forgot",form,"forgot","POST");
-  //     setResendtimer(120);
-  // }
-  //
-  //
+  const resend = ()=>{
+      fetchData("http://localhost:9013/forgot",form,"forgot","POST");
+      setResendtimer(120);
+  }
+
+
 
 
   const togglePassword = (val) =>{
@@ -126,12 +127,13 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
             <p>{message}</p>
             </Message>
           }
+
             {modOpen &&
                 <Modal open={modOpen}>
                     <Modal.Header>Thank you!</Modal.Header>
                     <Modal.Content>
                         <Modal.Description>
-                            Please check your Inbox
+                            Password has been reset
                         </Modal.Description>
                     </Modal.Content>
                     <Modal.Actions>
@@ -139,7 +141,6 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
                     </Modal.Actions>
                 </Modal>
             }
-          
           <Form size='large' onSubmit={saveAndContinue}>
             <Segment stacked>
               <Form.Input fluid 
@@ -154,18 +155,18 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
               />
               {retmail === "Change Password" &&
                   <div>
-                      <Form.Input
-                        fluid
-                        label="OTP"
-                        name="OTP"
-                        value={form.OTP||""}
-                        placeholder='OTP'
-                        onChange={handleChange}
-                        type='Number'
-                        min = {1000}
-                        max = {9999}
-                        error={(formError.OTPError? true: false)?{content: formError.OTPError} : false}
-                      />
+                      {/*<Form.Input*/}
+                      {/*  fluid*/}
+                      {/*  label="OTP"*/}
+                      {/*  name="OTP"*/}
+                      {/*  value={form.OTP||""}*/}
+                      {/*  placeholder='OTP'*/}
+                      {/*  onChange={handleChange}*/}
+                      {/*  type='Number'*/}
+                      {/*  min = {1000}*/}
+                      {/*  max = {9999}*/}
+                      {/*  error={(formError.OTPError? true: false)?{content: formError.OTPError} : false}*/}
+                      {/*/>*/}
                       <Form.Field style={{ position: 'relative' }}>
                         <Form.Input
                             fluid
@@ -201,7 +202,11 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
                         <Icon name={confirmicon} link onClick={()=>togglePassword('cnfirm')} className="showicon" style={{top:25}}/>
                     </Form.Field>
                     {/*{resendtimer>0?(<p>Resend OTP in <strong>{resendtimer}s</strong></p>):(<a onClick={resend} style={{cursor:"pointer"}}>Resend OTP</a>)}*/}
-                    
+                    {/*  {resendtimer>0?(<p>Resend OTP in <strong>{resendtimer}s</strong></p>):*/}
+                          <a href="http://localhost:3000/forgot" style={{cursor:"pointer"}}>Resend Link</a>
+                  {/*}*/}
+
+
                   </div>
 
               }
@@ -218,4 +223,4 @@ const  Forgot= ({form :{form, handleChange,saveAndContinue,formError,open,setCur
   )
 }
 
-export default Forgot;
+export default Forgot2;

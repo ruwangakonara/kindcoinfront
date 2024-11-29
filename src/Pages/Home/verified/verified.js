@@ -64,7 +64,7 @@ function Verified() {
         <div className="verified-container">
             <div className="verified-content">
                 {/* Token Image */}
-                <Image src="/token.png" circular className="token-image" />
+                <Image src="/token.png" circular className="token-image2" />
 
                 <h1 className="verified-title">Congratulations {details?.name || 'there'}!</h1>
                 <h2 className="verified-subtitle">{userTypeMessage}</h2>

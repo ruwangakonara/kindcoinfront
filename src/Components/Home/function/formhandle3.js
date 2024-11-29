@@ -21,11 +21,12 @@ import {useState,useEffect} from 'react';
         e.preventDefault();
         setIsSubmitting(true);
         console.log(current)
-        setFormError(validate(form,current));
+        setFormError(validate3(form,current));
       }
 
       
   async function fetchData(url,dt,type,method){
+        console.log("arrived")
     const response = await fetch(url,{
       method: method,
       headers: {
@@ -39,9 +40,9 @@ import {useState,useEffect} from 'react';
     // console.log(data);
     // if(data.msg.includes("Sucess")){
       if(response.status === 200){
-        console.log("yes")
       setModopen(true);
 
+      console.log(response)
       // if(type==="Login"){
       //   localStorage.setItem("token",data.token);
       // }
@@ -51,7 +52,7 @@ import {useState,useEffect} from 'react';
     }else{
       setOpen(false);
       setErrMessage(true);
-      setMessage("Username already in use");
+      setMessage(response.data.message);
     }
   }
      
@@ -111,73 +112,73 @@ import {useState,useEffect} from 'react';
 
   }
   
-  const  validate = (val,type) =>{
+  const  validate3 = (val,type) =>{
     const errors = {};
    
-    if(type === 'donor' || type === "beneficiary")
-    {
-      if (!val.name || val.name.length < 3)
-      {
-        if(!val.name)
-        errors.nameError = 'Name Required';
-        else
-        errors.nameError = 'Name must be at least 3 characters';
-      }
-    }
-    
-    if(type === 'donor' || type === 'beneficiary')
-    {
-
-
-      if (!val.district ) {
-        if(!val.district)
-        errors.stateError = ' District Required';
-        else
-        errors.stateError = ' District not found';
-      }
-
-      if (!val.type ) {
-        if(!val.type)
-          errors.typeError = ' Type Required';
-        else
-          errors.typeError = ' Type not found';
-      }
-
-      if(!val.phoneNo || val.phoneNo.length < 10){
-        if(!val.phoneNo)
-        errors.phoneNoError = ' Phone No. Required';
-        else
-        errors.phoneNoError = ' Phone No. must be at least 10 characters';
-      }
-
-      if(!val.date_of_birth)
-      {
-        errors.dateError = ' Date Required';
-      }
-
-    }
-
-    if(type === 'donor' || type === 'beneficiary' || type === "forgot")
-    {
-      if (!val?.confirmPassword || val?.confirmPassword !== val.password || val.confirmPassword.length < 8) {
-        if(!val?.confirmPassword)
-        errors.confirmPasswordError = ' Confirm Password Required';
-        else if(val?.confirmPassword !== val?.password)
-        errors.confirmPasswordError = ' Password does not match';
-        else
-        errors.confirmPasswordError = ' Password must be at least 8 characters';
-      }
-      if (!val.password || val.password.length < 8) {
-        if(!val?.password)
-        errors.passwordError = ' Password Required';
-        else
-        errors.passwordError = ' Password must be at least 8 characters';
-      }
-
-    }
+    // if(type === 'donor' || type === "beneficiary")
+    // {
+    //   if (!val.name || val.name.length < 3)
+    //   {
+    //     if(!val.name)
+    //     errors.nameError = 'Name Required';
+    //     else
+    //     errors.nameError = 'Name must be at least 3 characters';
+    //   }
+    // }
+    //
+    // if(type === 'donor' || type === 'beneficiary')
+    // {
+    //
+    //
+    //   if (!val.district ) {
+    //     if(!val.district)
+    //     errors.stateError = ' District Required';
+    //     else
+    //     errors.stateError = ' District not found';
+    //   }
+    //
+    //   if (!val.type ) {
+    //     if(!val.type)
+    //       errors.typeError = ' Type Required';
+    //     else
+    //       errors.typeError = ' Type not found';
+    //   }
+    //
+    //   if(!val.phoneNo || val.phoneNo.length < 10){
+    //     if(!val.phoneNo)
+    //     errors.phoneNoError = ' Phone No. Required';
+    //     else
+    //     errors.phoneNoError = ' Phone No. must be at least 10 characters';
+    //   }
+    //
+    //   if(!val.date_of_birth)
+    //   {
+    //     errors.dateError = ' Date Required';
+    //   }
+    //
+    // }
+    //
+    // if(type === 'donor' || type === 'beneficiary' || type === "forgot")
+    // {
+    //   if (!val?.confirmPassword || val?.confirmPassword !== val.password || val.confirmPassword.length < 8) {
+    //     if(!val?.confirmPassword)
+    //     errors.confirmPasswordError = ' Confirm Password Required';
+    //     else if(val?.confirmPassword !== val?.password)
+    //     errors.confirmPasswordError = ' Password does not match';
+    //     else
+    //     errors.confirmPasswordError = ' Password must be at least 8 characters';
+    //   }
+    //   if (!val.password || val.password.length < 8) {
+    //     if(!val?.password)
+    //     errors.passwordError = ' Password Required';
+    //     else
+    //     errors.passwordError = ' Password must be at least 8 characters';
+    //   }
+    //
+    // }
         
-    if (!val.username || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val?.username)) {
-      if(!val.username)
+    if (!val.email || !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val?.email)) {
+      if(!val.email)
       errors.emailError = ' Email Required';
       else
       errors.emailError = 'Invalid Email';
@@ -194,12 +195,12 @@ import {useState,useEffect} from 'react';
     //
     // }
 
-    if(type === 'forgot'){
-      if(!val.OTP)
-      {
-        errors.OTPError = ' OTP Required';
-      }
-    }
+    // if(type === 'forgot'){
+    //   if(!val.OTP)
+    //   {
+    //     errors.OTPError = ' OTP Required';
+    //   }
+    // }
 
     
     return errors;
@@ -207,4 +208,4 @@ import {useState,useEffect} from 'react';
   
 
 
-  export  {validate}
+  export  {validate3}

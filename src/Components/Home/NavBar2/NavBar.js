@@ -53,7 +53,7 @@ export default function Navbar() {
             <div className="temp">
                 <nav className="navbar" id="navbar" ref={navbar}>
                     <a href="/" onClick={(e) => click(e)}>Home</a>
-                    <a href="#about" onClick={(e) => click(e, 'about')}>About</a>
+                    {/*<a href="#about" onClick={(e) => click(e, 'about')}>About</a>*/}
                     <a href="/leaderboards" onClick={(e) => click(e)}>Leaders</a>
                     {/*<a href="#skills" onClick={click}>Skills</a>*/}
                     {/*<a href="#contact" onClick={(e) => click(e, "footer")}>Contact</a>*/}

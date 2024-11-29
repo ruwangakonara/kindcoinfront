@@ -128,6 +128,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Container, Grid, Card, CardContent, Typography, Avatar, Box } from '@mui/material';
 import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
+import {FcDonate} from 'react-icons/fc';
+import { MdRequestQuote } from "react-icons/md";
+import { PiCalendarXBold } from "react-icons/pi";
+
+
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import Sidebar from '../../../Components/Beneficiary/Sidebar/Sidebar';
@@ -261,7 +266,7 @@ function BeneficiaryDashboard(){
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineTrophy size={40} color="#FF1493" />
+                                    <MdRequestQuote size={40} color="#FF1493" />
 
                                     <Typography variant="h6">Open Requests</Typography>
                                     <Typography variant="h4">{cards.c_open}</Typography>
@@ -272,10 +277,20 @@ function BeneficiaryDashboard(){
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineCheckCircle size={40} color="#FFA500" />
+                                    <PiCalendarXBold size={40} color="#FFA500" />
 
                                     <Typography variant="h6">Closed Requests</Typography>
                                     <Typography variant="h4">{cards.c_closed}</Typography>
+                                </CardContent>
+                            </Card>
+                        </Grid>
+                        <Grid item xs={12} sm={6} md={3}>
+                            <Card className="dashboard-card">
+                                <CardContent sx={{ textAlign: 'center' }}>
+                                    <FcDonate size={40} color="#" />
+
+                                    <Typography variant="h6">Donations Received</Typography>
+                                    <Typography variant="h4">{cards.c_donations}</Typography>
                                 </CardContent>
                             </Card>
                         </Grid>

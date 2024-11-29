@@ -1,6 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
 import { Container, Grid, Card, CardContent, Typography, Avatar, Box } from '@mui/material';
 import { AiOutlineFundProjectionScreen, AiOutlineCheckCircle, AiOutlineDollarCircle, AiOutlineTrophy } from 'react-icons/ai';
+import { LiaDonateSolid } from "react-icons/lia";
+import { BiSolidDonateHeart } from "react-icons/bi";
+
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
@@ -125,7 +128,7 @@ function Dashboard(){
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineFundProjectionScreen size={40} color="#FF6347" />
+                                    <BiSolidDonateHeart size={40} color="#FF6347" />
                                     <Typography variant="h6">Number of Listings</Typography>
                                     <Typography variant="h4">{cards.c_lst}</Typography>
                                 </CardContent>
@@ -134,7 +137,7 @@ function Dashboard(){
                         <Grid item xs={12} sm={6} md={3}>
                             <Card className="dashboard-card">
                                 <CardContent sx={{ textAlign: 'center' }}>
-                                    <AiOutlineCheckCircle size={40} color="#FFA500" />
+                                    <LiaDonateSolid size={40} color="#FFA500" />
                                     <Typography variant="h6">Completed Donations</Typography>
                                     <Typography variant="h4">{cards.c_com}</Typography>
                                 </CardContent>

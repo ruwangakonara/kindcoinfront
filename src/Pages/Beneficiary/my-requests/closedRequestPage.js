@@ -241,7 +241,10 @@ function BeneficiaryOwnClosedRequestPage(){
                                         <Icon name="flag" color="red" size="large"/><h4 style={{color: "red"}}>Not Verified</h4>
                                     </div>
                                 )}
-                                <h2>Raised {requestDetails.raised} LKR</h2>
+                                <h2>Raised </h2>
+
+                                <h2>{requestDetails.raised} LKR</h2>
+
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>

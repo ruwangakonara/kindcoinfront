@@ -25,7 +25,7 @@ function NotVerified() {
         <div className="not-verified-container">
             <div className="not-verified-content">
                 {/* Token Image */}
-                <img src="/token.png" alt="Token" className="token-image" />
+                <img src="/token.png" alt="Token" className="token-image2" />
 
                 <h1 className="not-verified-title">Hello {details?.name || 'there'}!</h1>
                 <h2 className="not-verified-subtitle">{userTypeMessage}</h2>

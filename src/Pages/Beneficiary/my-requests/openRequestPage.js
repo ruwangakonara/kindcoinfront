@@ -363,7 +363,9 @@ function OpenRequestPage(){
                                         <Button color="blue" onClick={handleEditButtonClick}>Edit</Button>
                                     </div>
                                 )}
-                                <h2>Raised {requestDetails.raised} LKR</h2>
+                                <h2>Raised </h2>
+
+                                    <h2>{requestDetails.raised} LKR</h2>
 
                                 <Button color="red" onClick={handleCloseRequest}>Close</Button>
 
