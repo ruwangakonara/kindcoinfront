@@ -1,4 +1,4 @@
-.crew-showicon{
+.showicon{
     position: absolute;
     display: flex !important;
     right: 0;
@@ -13,6 +13,6 @@
     width: 38px !important;
 }
 
-.crew-showicon:hover{
+.showicon:hover{
     color: #111;
 }

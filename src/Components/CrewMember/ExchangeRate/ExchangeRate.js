@@ -31,18 +31,18 @@ const ExchangeRate = () => {
   };
 
   return (
-    <div className="crew-exchange-rate">
-      <div className="crew-rate-display">
+    <div className="exchange-rate">
+      <div className="rate-display">
         {error ? (
-          <div className="crew-error-message">{error}</div>
+          <div className="error-message">{error}</div>
         ) : (
           <>
-            <div className="crew-rate-text">Ethereum Exchange Rate:</div>
-            <div className="crew-rate-value">{exchangeRate ? `${exchangeRate} ${currency}` : 'Loading...'}</div>
+            <div className="rate-text">Ethereum Exchange Rate:</div>
+            <div className="rate-value">{exchangeRate ? `${exchangeRate} ${currency}` : 'Loading...'}</div>
           </>
         )}
       </div>
-      <div className="crew-currency-selector">
+      <div className="currency-selector">
         <label htmlFor="currency">Currency:</label>
         <select id="currency" value={currency} onChange={handleCurrencyChange}>
           <option value="LKR">LKR</option>

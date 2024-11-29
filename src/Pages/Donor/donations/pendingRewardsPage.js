@@ -307,7 +307,7 @@ const PendingRewardsPage = () => {
                                 </Grid.Column>
                                 <Grid.Column width={8}>
                                     <Header as="h3">Tokens</Header>
-                                    <p>{donation.tokens}</p>
+                                    <p>{donation.token_amount ? donation.token_amount : "Pending"}</p>
                                 </Grid.Column>
                             </Grid>
                         </Segment>

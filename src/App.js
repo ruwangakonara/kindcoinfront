@@ -142,16 +142,17 @@ import BeneficiaryNotificationList from "./Pages/Beneficiary/notification/notifi
 
 
 
-import AdminAccountPg from "./Pages/Admin/AdminAccount/AdminAccountPg";
-import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg";
-import AdminBeneficiaryListPg from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg";
-import ViewComplaintsPg from "./Pages/Admin/Complaints/ViewComplaintsPg";
-import ViewCrewMemberTransactionListPg from "./Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg";
-import AdminDonorListPg from "./Pages/Admin/DonorListView/AdminDonorListPg";
-import AdminDashBoardPg from "./Pages/Admin/home/AdminDashBoardPg";
+import AdminAccountPg from './Pages/Admin/AdminAccount/AdminAccountPg';
+import AssignCrewMemberPg from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg';
+import AdminBeneficiaryListPg from './Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg';
+import ViewComplaintsPg from './Pages/Admin/Complaints/ViewComplaintsPg';
+import ViewCrewMemberTransactionListPg from './Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg';
+import AdminDonorListPg from './Pages/Admin/DonorListView/AdminDonorListPg';
+import AdminDashBoardPg from './Pages/Admin/home/AdminDashBoardPg';
 // import RegisterCrewMemberPg from './Pages/Admin/RegisterCrewMember/RegisterCrewMemberPg';
-import AdminSettingsPg from "./Pages/Admin/Settings/AdminSettingsPg";
-import OverallStatisticsPg from "./Pages/Admin/Statistics/OverallStatisticsPg";
+import AdminSettingsPg from './Pages/Admin/Settings/AdminSettingsPg';
+import OverallStatisticsPg from './Pages/Admin/Statistics/OverallStatisticsPg';
+
 
 import AdminBeneficiaryEditFormPg from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryEditFormPg";
 import AdminBeneficiaryDetailsPg from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryDetailsPg";
@@ -162,33 +163,19 @@ import RegisterCrewMemFormPg from "./Pages/Admin/RegisterCrewMember/RegisterCrew
 import AnnouncementsPg from "./Pages/Admin/Announcements/AnnouncementsPg";
 import RaisedTicketsPg from "./Pages/Admin/RaisedTickets/RaisedTicketsPg";
 
-// import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
-// import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
-// import AdminSettings from './Pages/Admin/Settings/Settings';
 
-import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
-// import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
+// import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 
 import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
-// import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
+import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
-
-//Crew Member
-import CrewMemberDashboard from "./Pages/CrewMember/Dashboard/CrewMemberDashboard";
-import VerifyRequests from "./Pages/CrewMember/VerifyRequests/VerifyRequests";
-import VerifyDonationProofs from "./Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs";
-import VerifyRecipients from "./Pages/CrewMember/VerifyRecipients/VerifyRecipients";
-import TokenTransfer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
-// import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
-// import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
-
 
 function App() {
 
@@ -298,108 +285,108 @@ function App() {
             {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}
 
 
-                {/* Admin Routes */}
-                {/*<Route path="/admin/account" element={<AdminAccountPg/>}/>*/}
-                {/*<Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>*/}
-                {/*<Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>*/}
-                {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
-                {/*<Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>*/}
-                {/*<Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>*/}
-                {/*<Route path="/admin/home" element={<AdminDashBoardPg/>}/>*/}
-                {/*<Route path="/admin/register/crew_member" element={<RegisterCrewMemberPg/>}/>*/}
-                {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
-                {/*<Route path='/admin/overall_stats' element={<OverallStatisticsPg/>}/>*/}
+            {/* Admin Routes */}
+            {/*<Route path="/admin/account" element={<AdminAccountPg/>}/>*/}
+            {/*<Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>*/}
+            {/*<Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>*/}
+            {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
+            {/*<Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>*/}
+            {/*<Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>*/}
+            {/*<Route path="/admin/home" element={<AdminDashBoardPg/>}/>*/}
+            {/*<Route path="/admin/register/crew_member" element={<RegisterCrewMemberPg/>}/>*/}
+            {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
+            {/*<Route path='/admin/overall_stats' element={<OverallStatisticsPg/>}/>*/}
 
-                {/*<Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>*/}
-                {/*<Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>*/}
-                {/*/!* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> *!/*/}
-                {/*/!* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> *!/*/}
-                {/*/!* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> *!/*/}
-                {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
-                {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
 
-                <Route path="/admin/account" element={<AdminAccountPg />} />
-                <Route
-                    path="/admin/assign/crew_member"
-                    element={<AssignCrewMemberPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries"
-                    element={<AdminBeneficiaryListPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/edit/:Beneficiary_Id"
-                    element={<AdminBeneficiaryEditFormPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id"
-                    element={<AdminBeneficiaryDetailsPg />}
-                />
-                <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
-                <Route
-                    path="/admin/view/crew_members/:crew_member_id/accepted_transactions"
-                    element={<ViewCrewMemberTransactionListPg />}
-                />
-                <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg />} />
-                <Route
-                    path="/admin/Donor_List/Donors/edit/:user_id"
-                    element={<AdminDonorEditFormPg />}
-                />
-                <Route
-                    path="/admin/Donor_List/Donors/:user_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route path="/admin/home" element={<AdminDashBoardPg />} />
-                <Route path="/admin/view/crew_member" element={<ViewCrewMembersPg />} />
-                {/* <Route path="/admin/view/crew_member/:Crew_Mem_Id" element={</>}/> */}
-                <Route
-                    path="/admin/register/crew_member"
-                    element={<RegisterCrewMemFormPg />}
-                />
-                <Route path="/admin/settings" element={<AdminSettingsPg />} />
-                <Route path="/admin/overall_stats" element={<OverallStatisticsPg />} />
-                <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
-                <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
 
-                {/** =============================================================== */}
 
-                <Route
-                    path="/admin/Donor_List/Donors/:donor_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
-                    element={<AdminBeneficiary />}
-                />
-                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
-                <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
-                <Route path="/admin/settings" element={<AdminSettingsPg />} />
 
-                {/** =============================================================== */}
+            {/*<Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>*/}
+            {/*<Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>*/}
+            {/*/!* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> *!/*/}
+            {/*/!* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> *!/*/}
+            {/*/!* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> *!/*/}
+            {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
+            {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
 
-                <Route
-                    path="/admin/Donor_List/Donors/:donor_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
-                    element={<AdminBeneficiary />}
-                />
-                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+            <Route path="/admin/account" element={<AdminAccountPg />} />
+            <Route
+                path="/admin/assign/crew_member"
+                element={<AssignCrewMemberPg />}
+            />
+            <Route
+                path="/admin/Beneficiary_List/Beneficiaries"
+                element={<AdminBeneficiaryListPg />}
+            />
+            <Route
+                path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id/edit"
+                element={<AdminBeneficiaryEditFormPg />}
+            />
+            <Route
+                path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id"
+                element={<AdminBeneficiaryDetailsPg />}
+            />
+            <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
+            <Route
+                path="/admin/view/crew_members/:crew_member_id/accepted_transactions"
+                element={<ViewCrewMemberTransactionListPg />}
+            />
+            <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg />} />
+            <Route
+                path="/admin/Donor_List/Donors/:Donor_Id/edit"
+                element={<AdminDonorEditFormPg />}
+            />
+            <Route
+                path="/admin/Donor_List/Donors/:Donor_Id"
+                element={<AdminDonorDetailsPg />}
+            />
+            <Route path="/admin/home" element={<AdminDashBoardPg />} />
+            <Route path="/admin/view/crew_member" element={<ViewCrewMembersPg />} />
+            {/* <Route path="/admin/view/crew_member/:Crew_Mem_Id" element={</>}/> */}
+            <Route
+                path="/admin/register/crew_member"
+                element={<RegisterCrewMemFormPg />}
+            />
+            <Route path="/admin/settings" element={<AdminSettingsPg />} />
+            <Route path="/admin/overall_stats" element={<OverallStatisticsPg />} />
+            <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
+            <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
+
+            {/** =============================================================== */}
+
+            <Route
+                path="/admin/Donor_List/Donors/:donor_id"
+                element={<AdminDonorDetailsPg />}
+            />
+            <Route
+                path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
+                element={<AdminBeneficiary />}
+            />
+            {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+            {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+            {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+            <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
+            <Route path="/admin/settings" element={<AdminSettingsPg />} />
+
+            {/** =============================================================== */}
+
+            <Route
+                path="/admin/Donor_List/Donors/:donor_id"
+                element={<AdminDonorDetailsPg />}
+            />
+            <Route
+                path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
+                element={<AdminBeneficiary />}
+            />
+            {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+            {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+            {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+
 
 
             {/* Crew Member Routes */}
-            <Route path="/crew/home" element={<CrewMemberDashboard />} />
-            <Route path="/crew/requests" element={<VerifyRequests />} />
-            <Route path="/crew/recipients" element={<VerifyRecipients />} />
-            <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
-            <Route path="/crew/token_transfer" element={<TokenTransfer />} />
-            {/* <Route path="/crew/settings" element={<CrewSettings />} />
-      <Route path="/crew/profile" element={<CrewProfile />} /> */}
+            <Route path='/crew/home' element={<CrewMemberDashboard/>}/>
+
         </Routes>
         // </UserProvider>
 

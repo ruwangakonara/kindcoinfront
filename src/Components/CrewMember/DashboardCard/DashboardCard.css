@@ -1,4 +1,4 @@
-.crew-dashboard-card {
+.dashboard-card {
     border: 1px solid #bdc3c7;
     padding: 20px;
     margin: 10px;
@@ -13,7 +13,7 @@
     
   }
 
-  .crew-dashboard-card img {
+  .dashboard-card img {
     width: 100%; 
     height: 50%;
   }
@@ -24,15 +24,15 @@
   }
 
   
-  .crew-dashboard-card h3 {
+  .dashboard-card h3 {
     margin-bottom: 10px;
   }
   
-  .crew-dashboard-card p {
+  .dashboard-card p {
     margin-bottom: 20px;
   }
   
-  .crew-dashboard-card button {
+  .dashboard-card button {
     padding: 10px 20px;
     border: none;
     background-color: #2980b9;
@@ -40,7 +40,7 @@
     cursor: pointer;
   }
   
-  .crew-dashboard-card button:hover {
+  .dashboard-card button:hover {
     background-color: #3498db;
   }
 

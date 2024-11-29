@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Comforter&family=Dongle:wght@300;400;700&family=Kaushan+Script&family=Mochiy+Pop+P+One&family=Open+Sans:wght@300;400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,500;1,700&family=Varela+Round&display=swap');
 
-.crew-brand {
+.brand {
   top: 10px;
   width: 70px;
   height: 60px;
@@ -10,7 +10,7 @@
   margin-left: 15px;
 }
 
-.crew-top {
+.top {
   top: 0;
   width: 100vw;
   height: 75px;
@@ -23,7 +23,7 @@
   left: 0 !important;
 }
 
-.crew-navbar {
+.navbar {
   width: fit-content;
   display: inline-flex;
   position: absolute;
@@ -37,7 +37,7 @@
   right: 200px;
 }
 
-.crew-temp {
+.temp {
   width: 40vw;
   height: 55px;
   display: flex;
@@ -49,7 +49,7 @@
   justify-content: flex-end;
 }
 
-.crew-navbar a {
+.navbar a {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,13 +63,13 @@
   z-index: 100;
 }
 
-.crew-navbar a:hover {
+.navbar a:hover {
   background-color: #afaeaa;
   border-radius: 5px;
   color: white;
 }
 
-.crew-brandlogin {
+.brandlogin {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@
   outline: none;
 }
 
-.crew-brandlogin:hover {
+.brandlogin:hover {
   color: black;
 }
 
@@ -123,11 +123,11 @@
     z-index: 100;
   }
 
-  .crew-sidebar {
+  .sidebar {
     display: flex !important;
   }
 
-  .crew-navbar a {
+  .navbar a {
     width: 90vw;
     align-items: center;
     justify-content: center;
@@ -137,12 +137,12 @@
 }
 
 @media screen and (min-width: 621px) {
-  .crew-navbar {
+  .navbar {
     display: flex !important;
   }
 }
 
-.crew-sidebar {
+.sidebar {
   color: rgb(134, 134, 134);
   position: absolute;
   display: none;
@@ -155,10 +155,10 @@
   cursor: pointer;
 }
 
-.crew-sidebar .icons {
+.sidebar .icons {
   height: 30px;
 }
 
-.crew-sidebar:hover {
+.sidebar:hover {
   color: black;
 }
