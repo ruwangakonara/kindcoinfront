@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import SidebarrNew from "./SBar";
 import Header from "./Header";
-import "./DashboardLayout.css"; // Custom styles
+// import "./DashboardLayout.css"; // Custom styles
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 
 const DashboardLayout = ({ children }) => {

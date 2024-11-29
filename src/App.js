@@ -485,7 +485,7 @@ function App() {
       <Route path="/crew/token_transfer" element={<TokenTransfer />} />
       {/* <Route path="/crew/settings" element={<CrewSettings />} />
       <Route path="/crew/profile" element={<CrewProfile />} /> */}
-      <Route path="/admin/layouts" element={<DashboardLayout />} />
+      {/* <Route path="/admin/layouts" element={<DashboardLayout />} /> */}
     </Routes>
     // </UserProvider>
   );
