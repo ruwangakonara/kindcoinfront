@@ -382,7 +382,7 @@ function App() {
         element={<AdminBeneficiaryListPg />}
       />
       <Route
-        path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id/edit"
+        path="/admin/Beneficiary_List/Beneficiaries/edit/:Beneficiary_Id"
         element={<AdminBeneficiaryEditFormPg />}
       />
       <Route
@@ -396,11 +396,11 @@ function App() {
       />
       <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg />} />
       <Route
-        path="/admin/Donor_List/Donors/:Donor_Id/edit"
+        path="/admin/Donor_List/Donors/edit/:user_id"
         element={<AdminDonorEditFormPg />}
       />
       <Route
-        path="/admin/Donor_List/Donors/:Donor_Id"
+        path="/admin/Donor_List/Donors/:user_id"
         element={<AdminDonorDetailsPg />}
       />
       <Route path="/admin/home" element={<AdminDashBoardPg />} />

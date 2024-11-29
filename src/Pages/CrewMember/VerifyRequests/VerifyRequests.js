@@ -3,13 +3,12 @@ import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyRequestsTable from "../../../Components/CrewMember/VerifyRequests/VerifyRequestsTable";
 import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
-import './VerifyRequests.css';
+import "./VerifyRequests.css";
 
 const VerifyRequests = () => {
-
-    const handleSearch = (query) => {
-        console.log('Search query:', query);
-      };
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+  };
 
     return (
         <div className="app-container">
@@ -23,6 +22,6 @@ const VerifyRequests = () => {
             </div>
         </div>
     );
-}
+};
 
 export default VerifyRequests;

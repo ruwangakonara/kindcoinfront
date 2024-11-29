@@ -4,18 +4,16 @@ import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyDonationProofsTable from "../../../Components/CrewMember/VerifyDonationProofs/VerifyDonationProofsTable";
 import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import Filter from "../../../Components/CrewMember/VerifyDonationProofs/Filter";
-import './VerifyDonationProofs.css';
+import "./VerifyDonationProofs.css";
 
 const VerifyDonationProofs = () => {
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+  };
 
-    const handleSearch = (query) => {
-        console.log('Search query:', query);
-    };
-
-
-    const handleFilterChange = (status) => {
-        console.log('Selected status:', status);
-    };
+  const handleFilterChange = (status) => {
+    console.log("Selected status:", status);
+  };
 
     return (
         <div className="app-container">

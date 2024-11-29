@@ -3,14 +3,13 @@ import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable";
 import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
-import './VerifyRecipients.css';
+import "./VerifyRecipients.css";
 
 
 const VerifyRecipients = () => {
-
-    const handleSearch = (query) => {
-        console.log('Search query:', query);
-      };
+  const handleSearch = (query) => {
+    console.log("Search query:", query);
+  };
 
     return (
         <div className="app-container">
@@ -24,6 +23,6 @@ const VerifyRecipients = () => {
             </div>
         </div>
     );
-}
+};
 
 export default VerifyRecipients;

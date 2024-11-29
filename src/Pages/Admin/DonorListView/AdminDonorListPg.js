@@ -3,19 +3,20 @@ import AdminDonorListCmp from "../../../Components/Admin/DonorDetails/AdminDonor
 import classes from "./AdminDonorListPg.module.css";
 import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
+// import TableExamplePagination from "../../../Components/Admin/DonorDetails/DummyTable";
 
 const AdminDonorListPg = () => {
+  return (
+    <div className={classes.mainContainer}>
+      <HeaderCmp />
+      <SidebarAdminCmp visible={true} />
+      <DefaultDashCmp>
+        <h1 style={{ textAlign: "center" }}>Donors List</h1>
+        <AdminDonorListCmp />
+        {/* <TableExamplePagination /> */}
+      </DefaultDashCmp>
+    </div>
+  );
+};
 
-    return (
-        <div className={classes.mainContainer}>
-            <HeaderCmp/>
-            <SidebarAdminCmp visible={true}/>
-            <DefaultDashCmp>
-                <h1 style={{textAlign: "center"}}>Donors List</h1>
-                <AdminDonorListCmp/>
-            </DefaultDashCmp>
-        </div>
-    );
-}
-
-export default AdminDonorListPg
+export default AdminDonorListPg;
