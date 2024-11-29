@@ -1,9 +1,13 @@
-.mainContainer{
+/*
+use admin_ as a prefix for the custom class names
+*/
+
+.admin_mainContainer{
     margin-top: 40px !important;
     margin: 20px;
 }
 
-.buttonStyles{
+.admin_buttonStyles{
     display: flex;
     justify-content: center;
     align-items: center;

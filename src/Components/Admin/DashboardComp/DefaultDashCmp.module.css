@@ -1,4 +1,8 @@
-.dashboard{
+/*
+use admin_ as a prefix for the custom class names
+*/
+
+.admin_dashboard{
     width: 85%;
     justify-content: right;
     align-items:flex-end;

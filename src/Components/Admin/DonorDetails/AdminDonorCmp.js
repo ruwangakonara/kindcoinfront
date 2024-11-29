@@ -34,8 +34,8 @@ const AdminDonorCmp = ({ donorDetails }) => {
   } = donorDetails;
 
   return (
-    <div className={classes.mainContainer}>
-      <div className={classes.subContainer}>
+    <div className={classes.admin_mainContainer}>
+      <div className={classes.admin_subContainer}>
         <Card
           className={classes.donorCardStylings}
           fluid={true}
@@ -59,7 +59,7 @@ const AdminDonorCmp = ({ donorDetails }) => {
               </span>
             </CardMeta>
             <CardDescription textAlign="left">
-              <div className={classes.cardDescription}>
+              <div className={classes.admin_cardDescription}>
                 <p>
                   <strong>User ID:</strong> {user_id}
                 </p>

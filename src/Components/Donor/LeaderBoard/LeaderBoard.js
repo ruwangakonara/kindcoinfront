@@ -5,7 +5,7 @@ import './leaderboard.css';
 import { UserContext } from '../../Home/UserConext/UserContext';
 
 
-function LeaderBoard({ name, type, image, rank, id }){
+function LeaderBoard({ name, type, image, rank, id, leaderboard_anonymous, anonymous_id }){
 
     const { user, userDetails } = useContext(UserContext);
     const donor = userDetails;
@@ -20,7 +20,7 @@ function LeaderBoard({ name, type, image, rank, id }){
                 </Grid.Column>
                 <Grid.Column width={8} className="content-column">
                     <div className="card-content">
-                        <div className="card-header">{name + ((donor._id == id) ? " (You)" : "") }</div>
+                        <div className="card-header">{(donor._id != id) ? (!leaderboard_anonymous ? name : ("Anonymous" + anonymous_id)) : (name + "(You)")}</div>
                         <div className="card-meta">{type}</div>
                         <div className="card-description">
                             <h2 className="rank">Rank: {rank}</h2>

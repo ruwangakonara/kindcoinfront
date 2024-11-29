@@ -1,4 +1,8 @@
-.mainContainer{
+/*
+use admin_ as a prefix for the custom class names
+*/
+
+.admin_mainContainer{
     display: flex;
     flex-direction: column;
     align-items: center;

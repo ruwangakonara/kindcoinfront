@@ -9,44 +9,43 @@
     z-index: 1000;
     font-family: 'Arial', sans-serif;
   }
-  
+
   .crew-rate-display {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 5px;
   }
-  
+
   .crew-rate-text {
     font-weight: bold;
     color: #333;
   }
-  
+
   .crew-rate-value {
     font-size: 18px;
     color: #2a9d8f;
   }
-  
+
   .crew-currency-selector {
     display: flex;
     align-items: center;
     margin-top: 5px;
   }
-  
+
   .crew-currency-selector label {
     margin-right: 5px;
     font-weight: bold;
     color: #333;
   }
-  
+
   .crew-currency-selector select {
     padding: 2px 5px;
     border-radius: 3px;
     border: 1px solid #ccc;
   }
-  
+
   .crew-error-message {
     color: red;
     font-weight: bold;
   }
-  

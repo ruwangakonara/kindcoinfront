@@ -6,6 +6,7 @@ import axios from 'axios';
 import './donationPage.css';
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import CryptoJS from 'crypto-js';
+import {wait} from "@testing-library/user-event/dist/utils";
 
 const DonationPage = () => {
     const { user, userDetails } = useContext(UserContext);
@@ -71,12 +72,16 @@ const DonationPage = () => {
 
     const handlePaymentCompleted = async (orderId) => {
         console.log('Payment completed. OrderID:', orderId);
+        // await console.log(donationAmount)
+        wait(1000)
         try {
+            const money = donationAmount
+            // console.log(donationAmount)
             const response = await axios.post('http://localhost:9013/donor/maintenance_done', {
                 donor_id: donor._id,
                 user_id: user._id,
                 name: donor.name,
-                amount: donationAmount, // Ensure the donationAmount is passed correctly
+                amount: money, // Ensure the donationAmount is passed correctly
                 orderId: orderId,
             }, { withCredentials: true });
 
@@ -84,6 +89,7 @@ const DonationPage = () => {
 
             if (response.status === 200) {
                 setModalMessage('Donation successful!');
+                setDonationAmount("")
                 fetchMaintenances(); // Fetch maintenances after a successful donation
             } else {
                 setModalMessage('Donation failed. Please try again.');
@@ -187,7 +193,7 @@ const DonationPage = () => {
                                                     type='number'
                                                     placeholder='Enter amount'
                                                     value={donationAmount}
-                                                    onChange={(e) => setDonationAmount(e.target.value)}
+                                                    onChange={(e) => {setDonationAmount(e.target.value); console.log(donationAmount);}}
                                                     required
                                                     style={{ padding: '10px', borderRadius: '5px', borderColor: '#1E90FF', width: '100%' }}
                                                 />

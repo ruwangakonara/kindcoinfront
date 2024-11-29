@@ -3,12 +3,12 @@
     justify-content: flex-end;
     padding: 20px;
   }
-  
+
   .ui.input {
     width: 100%;
-    max-width: 400px; 
+    max-width: 400px;
   }
-  
+
   .ui.input input {
     border-radius: 4px;
   }

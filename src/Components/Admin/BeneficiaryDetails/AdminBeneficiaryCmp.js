@@ -43,8 +43,8 @@ const AdminBeneficiaryCmp = () => {
   };
 
   return (
-    <div className={classes.mainContainer}>
-      <div className={classes.subContainer}>
+    <div className={classes.admin_mainContainer}>
+      <div className={classes.admin_subContainer}>
         <Card
           className={classes.donorCardStylings}
           fluid={true}
@@ -62,7 +62,7 @@ const AdminBeneficiaryCmp = () => {
               <span className="date">Joined in 2012</span>
             </CardMeta>
             <CardDescription textAlign="left">
-              <div className={classes.cardDescription}>
+              <div className={classes.admin_cardDescription}>
                 Daniel is a Janiter in Bangladesh.
                 <p>
                   <strong>User ID:</strong> {donorDetails.userId}
