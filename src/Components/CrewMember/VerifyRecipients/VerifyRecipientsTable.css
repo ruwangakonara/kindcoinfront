@@ -58,3 +58,14 @@
     color: #ffffff !important;
     border-radius: 4px;
   }
+
+  .crew-link-button {
+    background: none;
+    border: none;
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 5px;
+    font-size: 14px;
+  }
+    

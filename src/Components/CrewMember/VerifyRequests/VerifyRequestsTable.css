@@ -68,4 +68,14 @@
 .ui.celled.table tbody td:nth-child(6) {
   width: 25%; /* Adjust as needed for description */
 }
+
+.crew-link-button {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
   
