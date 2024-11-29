@@ -1,4 +1,4 @@
-.donation-proofs-header {
+.crew-donation-proofs-header {
     margin-left: 16%;
     margin-top: 7.5%;
     padding-right: 15px;
@@ -7,7 +7,7 @@
     gap: 35%;
   }
 
-  .donation-proofs-table-container {
+  .crew-donation-proofs-table-container {
     margin-left: 10%;
     margin-top: 2%; 
     overflow-x: auto; 

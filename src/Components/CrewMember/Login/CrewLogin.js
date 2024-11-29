@@ -138,7 +138,7 @@ const CrewLogin = () => {
                   name={icon}
                   link
                   onClick={togglePassword}
-                  className='showicon'
+                  className='crew-showicon'
                   style={{
                     position: 'absolute',
                     top: '103px',

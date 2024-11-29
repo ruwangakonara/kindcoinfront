@@ -49,7 +49,7 @@ const CrewMemberDashboard = () => {
           <div className="main-container">
             <Sidebar />
     
-            <div className="dashboard-grid-container">
+            <div className="crew-dashboard-grid-container">
               <Grid columns={2} doubling className="grid">
                 {cardData.map((card, index) => (
                   <Grid.Column key={index}>

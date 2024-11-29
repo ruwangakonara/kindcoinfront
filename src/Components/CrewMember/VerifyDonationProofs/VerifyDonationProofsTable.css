@@ -1,4 +1,4 @@
-.verify-requests-container {
+.crew-verify-requests-container {
     margin-left: 10%; 
     margin-top: 5%;
     overflow-x: auto;
@@ -57,15 +57,15 @@
 
 
   
-  .document-preview {
+  .crew-document-preview {
     margin-bottom: 20px;
   }
   
-  .document-preview img {
+  .crew-document-preview img {
     max-width: 100%;
   }
   
-  .document-preview .react-pdf__Page {
+  .crew-document-preview .react-pdf__Page {
     width: 100%;
   }
   
