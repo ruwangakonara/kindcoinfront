@@ -553,7 +553,7 @@ const MyLeaderboardPage = () => {
                                             id="image5Upload"
                                             accept="image/*"
                                             hidden
-                                            onChange={(e) => handleFileChange(e, 'image5')}
+                                            onChange={(e) => handleFileChange(e, 'image')}
                                         />
                                         </Grid.Column>
                                     </Grid.Row>

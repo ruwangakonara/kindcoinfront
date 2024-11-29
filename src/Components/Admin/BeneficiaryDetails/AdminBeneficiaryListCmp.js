@@ -1,6 +1,7 @@
 import classes from "./AdminBeneficiaryListCmp.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -15,13 +16,23 @@ import {
   Image,
   Input,
   Button,
+  IconGroup,
 } from "semantic-ui-react";
 
 const AdminBeneficiaryListCmp = () => {
   const navigate = useNavigate();
-
-  const [selectedUser, setSelectedUser] = useState(null);
+  const [beneficiaries, setBeneficiaries] = useState([]); // Store the fetched beneficiaries here
   const [activeRows, setActiveRows] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 5; // Number of rows per page
+
+  // Calculate total pages
+  const totalPages = Math.ceil(beneficiaries.length / rowsPerPage);
+
+  // Determine the rows to display on the current page
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = beneficiaries.slice(indexOfFirstRow, indexOfLastRow);
 
   /**
    * Fields to be included
@@ -41,129 +52,34 @@ const AdminBeneficiaryListCmp = () => {
    * PhoneNo
    */
 
-  const rows = [
-    {
-      userId: "1",
-      userName: "alex_jones99",
-      name: "Alex Jones",
-      image: "https://via.placeholder.com/150",
-      district: "Colombo",
-      stellarAddress: "stellar123abc",
-      address: "No: 5 Main Street, Colombo",
-      contact: "0771234567",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "2",
-      userName: "rose_marie",
-      name: "Rose Marie Trust",
-      image: "https://via.placeholder.com/150",
-      district: "Kandy",
-      stellarAddress: "stellar456def",
-      address: "No: 23 Hilltop Avenue, Kandy",
-      contact: "0777654321",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "3",
-      userName: "samwilliams",
-      name: "Sam Williams",
-      image: "https://via.placeholder.com/150",
-      district: "Galle",
-      stellarAddress: "stellar789ghi",
-      address: "No: 10 Lighthouse Road, Galle",
-      contact: "0779876543",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "4",
-      userName: "greenearth_org",
-      name: "Green Earth Foundation",
-      image: "https://via.placeholder.com/150",
-      district: "Jaffna",
-      stellarAddress: "stellar012jkl",
-      address: "No: 1 North Lane, Jaffna",
-      contact: "0773456789",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "5",
-      userName: "emily_clark",
-      name: "Emily Clark",
-      image: "https://via.placeholder.com/150",
-      district: "Matara",
-      stellarAddress: "stellar345mno",
-      address: "No: 45 Beach Road, Matara",
-      contact: "0776543210",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "6",
-      userName: "happy_kids_home",
-      name: "Happy Kids Home",
-      image: "https://via.placeholder.com/150",
-      district: "Badulla",
-      stellarAddress: "stellar678pqr",
-      address: "No: 9 Sunrise Boulevard, Badulla",
-      contact: "0778765432",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "7",
-      userName: "john_doe",
-      name: "John Doe",
-      image: "https://via.placeholder.com/150",
-      district: "Anuradhapura",
-      stellarAddress: "stellar901stu",
-      address: "No: 11 Sacred City, Anuradhapura",
-      contact: "0772345678",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "8",
-      userName: "blue_ocean",
-      name: "Blue Ocean Society",
-      image: "https://via.placeholder.com/150",
-      district: "Trincomalee",
-      stellarAddress: "stellar234vwx",
-      address: "No: 7 Marine Drive, Trincomalee",
-      contact: "0775432109",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "9",
-      userName: "rachel_green",
-      name: "Rachel Green",
-      image: "https://via.placeholder.com/150",
-      district: "Ratnapura",
-      stellarAddress: "stellar567yz",
-      address: "No: 3 Gem Street, Ratnapura",
-      contact: "0776789012",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "10",
-      userName: "nature_lovers",
-      name: "Nature Lovers Group",
-      image: "https://via.placeholder.com/150",
-      district: "Nuwara Eliya",
-      stellarAddress: "stellar890abc",
-      address: "No: 8 Misty Hills, Nuwara Eliya",
-      contact: "0779012345",
-      beneficiaryType: "Organization",
-    },
-  ];
+  // Fetch data from the backend
+  useEffect(() => {
+    const fetchBeneficiaries = async () => {
+      try {
+        const token = localStorage.getItem("authToken"); // Retrieve token (if stored in localStorage)
+        console.log(token);
+        const response = await axios.get(
+          "http://localhost:9013/admin/Beneficiary_List/Beneficiaries",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        ); // Make the API request
+        setBeneficiaries(response.data); // Set the fetched donors
+        console.log(response.data);
+      } catch (error) {
+        console.error("Error fetching donor data:", error);
+      }
+    };
 
-  //   const handleRowClick = (user) => {
-  //     setSelectedUser(user);
-  //   };
+    fetchBeneficiaries(); // Call the function when the component is mounted
+  }, []); // Empty dependency array means this runs once on component mount
 
-  //   const toggleActivation = (index) => {
-  //     setActiveRows(prevState => ({
-  //         ...prevState,
-  //         [index]: !prevState[index],
-  //     }));
-  // };
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const InputExampleIconPosition = () => (
     <Input
@@ -180,7 +96,26 @@ const AdminBeneficiaryListCmp = () => {
 
   const handleEditClick = (e, userId) => {
     e.stopPropagation(); // Prevent the row click event
-    navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}/edit`);
+    navigate(`/admin/Beneficiary_List/Beneficiaries/edit/${userId}`);
+  };
+
+  const handleDeleteClick = async (e, user_id) => {
+    e.stopPropagation(); // Prevent the row click event
+    if (window.confirm("Are you sure you want to delete this donor?")) {
+      try {
+        const response = await axios.delete(
+          `http://localhost:9013/admin/Beneficiary_List/Beneficiaries/${user_id}`
+        );
+        console.log("Response for delete:", response);
+        if (response.status === 200 || response.status === 204) {
+          console.log("User deleted successfully:", response);
+          navigate("/admin/Donor_List/Donors");
+        }
+      } catch (error) {
+        console.error("Error deleting donor:", error);
+        alert("There was an issue deleting the donor.");
+      }
+    }
   };
 
   const toggleActivation = (index) => {
@@ -208,9 +143,8 @@ const AdminBeneficiaryListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               District
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
             <TableHeaderCell className={classes.customFont}>
-              Address
+              Date Of Birth
             </TableHeaderCell>
             <TableHeaderCell className={classes.customFont}>
               Contact No.
@@ -218,12 +152,12 @@ const AdminBeneficiaryListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               Action
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}>Beneficiary Type</TableHeaderCell> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row, index) => {
+          {beneficiaries.map((row, index) => {
             const isActive = activeRows[index] ?? true;
+            const userId = row.user_id?._id || "N/A"; // Safe access for user_id._id
             return (
               <TableRow
                 key={index}
@@ -232,8 +166,8 @@ const AdminBeneficiaryListCmp = () => {
                 }`}
                 onClick={() => handleRowClick(row.userId)}
               >
-                <TableCell>{row.userId}</TableCell>
-                <TableCell>{row.userName}</TableCell>
+                <TableCell>{userId}</TableCell>
+
                 <TableCell>
                   <div className={classes.userNameContainer}>
                     <Image
@@ -244,35 +178,42 @@ const AdminBeneficiaryListCmp = () => {
                     <span className={classes.truncatedText}>{row.name}</span>
                   </div>
                 </TableCell>
+                <TableCell>{row.username}</TableCell>
                 <TableCell>{row.district}</TableCell>
-                {/* <TableCell>{row.address}</TableCell> */}
-                <TableCell>{row.stellarAddress}</TableCell>
-                <TableCell>{row.contact}</TableCell>
+                <TableCell>{row.date_of_birth}</TableCell>
+                <TableCell>{row.phoneNo}</TableCell>
                 <TableCell className={classes.actionStylings}>
                   <div className={classes.actionContainerDiv}>
-                    <Button
-                      color="primary"
-                      onClick={(e) => handleEditClick(e, row.userId)}
-                    >
-                      Edit
-                    </Button>
                     <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleActivation(index);
+                        // have to include the logic in order to change the user_id.isEthical to be false.
                       }}
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
+                    <IconGroup size="large" className={classes.iconContainer}>
+                      <Icon
+                        name="edit"
+                        onClick={(e) => handleEditClick(e, row.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                      <Icon
+                        name="user delete"
+                        onClick={(e) => handleDeleteClick(e, row.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </IconGroup>
+                    {/* </div> */}
                   </div>
                 </TableCell>
-                {/* <TableCell>{row.beneficiaryType}</TableCell> */}
               </TableRow>
             );
           })}
         </TableBody>
-        <TableFooter>
+        {/* <TableFooter>
           <TableRow>
             <TableHeaderCell colSpan="7">
               <Menu floated="right" pagination>
@@ -284,6 +225,40 @@ const AdminBeneficiaryListCmp = () => {
                 <MenuItem as="a">3</MenuItem>
                 <MenuItem as="a">4</MenuItem>
                 <MenuItem as="a" icon>
+                  <Icon name="chevron right" />
+                </MenuItem>
+              </Menu>
+            </TableHeaderCell>
+          </TableRow>
+        </TableFooter> */}
+        <TableFooter>
+          <TableRow>
+            <TableHeaderCell colSpan="7">
+              <Menu floated="right" pagination>
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  <Icon name="chevron left" />
+                </MenuItem>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <MenuItem
+                    key={i + 1}
+                    as="a"
+                    active={currentPage === i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                  >
+                    {i + 1}
+                  </MenuItem>
+                ))}
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
                   <Icon name="chevron right" />
                 </MenuItem>
               </Menu>

@@ -33,6 +33,12 @@
     gap: 15px; 
   }
 
+.iconContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
   .userNameContainer{
     display: flex;
     align-items: center;

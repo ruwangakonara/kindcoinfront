@@ -19,7 +19,6 @@ const axiosInstance = axios.create({
         try{
             const response =  await axiosInstance.get('/donor/get_announcements');
             setAnnouncements(response.data.announcements)
-            console.log(announcements)
         } catch(error){
             console.log(error);
         }

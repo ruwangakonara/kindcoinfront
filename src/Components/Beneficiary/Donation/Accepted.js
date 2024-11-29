@@ -19,7 +19,7 @@ const Accepted = ({ donorImage, amount, type, donationTitle , id, accepted, dono
                         <Card.Description style = {{marginBottom: "10px"}} className="donation-amount">Donor: {donorName}</Card.Description>
 
                         <Card.Meta className="donation-type">{type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}</Card.Meta>
-                        <Card.Description className="donation-amount">Amount: {(type === "goods" ) ? (amount ? amount: "Pending") : amount}</Card.Description>
+                        <Card.Description className="donation-amount">Amount: {amount}</Card.Description>
                         {accepted && (
                             <Label style = {{marginTop: '10px'}} color='green' className='not-accepted-label'>Accepted</Label>
                         )}

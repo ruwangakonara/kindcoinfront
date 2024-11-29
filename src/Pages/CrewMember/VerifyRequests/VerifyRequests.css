@@ -1,0 +1,38 @@
+.crew-verify-requests-container {
+    margin-left: 5%;
+    margin-top: 5%;
+    overflow-x: auto; 
+    overflow-y: auto;
+    max-height: calc(100vh - 10%);
+    padding-right: 15px;
+  }
+  
+ 
+  .ui.table {
+    min-width: 700px;
+    border: 1px solid #ddd;
+  }
+  
+  .ui.table thead th {
+    background-color: #f7f7f7;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .table-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+  }
+  
+  .ui.label.ribbon {
+    margin-left: -1em;
+  }
+  
+  .ui.menu.pagination {
+    margin: 0; 
+    background-color: #fff;
+  }
+  

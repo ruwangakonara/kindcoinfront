@@ -1,6 +1,7 @@
 import classes from "./AdminDonorListCmp.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -10,6 +11,7 @@ import {
   TableBody,
   MenuItem,
   Icon,
+  IconGroup,
   Menu,
   Table,
   Image,
@@ -18,157 +20,48 @@ import {
 } from "semantic-ui-react";
 
 const AdminDonorListCmp = () => {
-  const [selectedUser, setSelectedUser] = useState(null);
   const [donors, setDonors] = useState([]); // Store the fetched donors here
   const [activeRows, setActiveRows] = useState({});
+  const [currentPage, setCurrentPage] = useState(1);
+  const rowsPerPage = 5; // Number of rows per page
   const navigate = useNavigate();
 
   // Fetch data from the backend
   useEffect(() => {
     const fetchDonors = async () => {
       try {
-        //
-        const response = await fetch("http://localhost:5000/api/donors"); // Make the API request
-        const data = await response.json(); // Parse the JSON response
-        setDonors(data); // Set the data in state
+        const token = localStorage.getItem("authToken"); // Retrieve token (if stored in localStorage)
+        console.log(token);
+        const response = await axios.get(
+          "http://localhost:9013/admin/Donor_List/Donors",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+            },
+          }
+        ); // Make the API request
+        setDonors(response.data); // Set the fetched donors
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching donor data:", error);
       }
     };
 
-    fetchDonors(); // Call the function
+    fetchDonors(); // Call the function when the component is mounted
   }, []); // Empty dependency array means this runs once on component mount
 
-  /**
-   * Fields to be included
-   *
-   * userId
-   * Name
-   * UserName
-   * Address
-   * Images
-   * ProfileImage
-   * Description
-   * Type
-   * DateOfBirth
-   * StellarAddress
-   * District
-   * CreatedAt
-   * PhoneNo
-   */
+  // Calculate total pages
+  const totalPages = Math.ceil(donors.length / rowsPerPage);
 
-  const rows = [
-    {
-      userId: "1",
-      userName: "michael_scott",
-      name: "Michael Scott",
-      image: "https://via.placeholder.com/150",
-      district: "Kegalle",
-      stellarAddress: "stellar123abc1",
-      address: "No: 18 Forest Avenue, Kegalle",
-      contact: "0771122334",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "2",
-      userName: "abc_children_home",
-      name: "ABC Children's Home",
-      image: "https://via.placeholder.com/150",
-      district: "Puttalam",
-      stellarAddress: "stellar456def2",
-      address: "No: 2 Lake View Road, Puttalam",
-      contact: "0772233445",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "3",
-      userName: "linda_smith",
-      name: "Linda Smith",
-      image: "https://via.placeholder.com/150",
-      district: "Hambantota",
-      stellarAddress: "stellar789ghi3",
-      address: "No: 8 Harbor Lane, Hambantota",
-      contact: "0773344556",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "4",
-      userName: "wildlife_org",
-      name: "Wildlife Conservation",
-      image: "https://via.placeholder.com/150",
-      district: "Polonnaruwa",
-      stellarAddress: "stellar012jkl4",
-      address: "No: 19 Jungle Road, Polonnaruwa",
-      contact: "0774455667",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "5",
-      userName: "daniel_james",
-      name: "Daniel James",
-      image: "https://via.placeholder.com/150",
-      district: "Kandy",
-      stellarAddress: "stellar345mno5",
-      address: "No: 6 Temple Street, Kandy",
-      contact: "0775566778",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "6",
-      userName: "bright_future",
-      name: "Bright Future Foundation",
-      image: "https://via.placeholder.com/150",
-      district: "Kurunegala",
-      stellarAddress: "stellar678pqr6",
-      address: "No: 10 Hope Avenue, Kurunegala",
-      contact: "0776677889",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "7",
-      userName: "jane_doe",
-      name: "Jane Doe",
-      image: "https://via.placeholder.com/150",
-      district: "Ampara",
-      stellarAddress: "stellar901stu7",
-      address: "No: 22 Peace Street, Ampara",
-      contact: "0777788990",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "8",
-      userName: "save_earth",
-      name: "Save the Earth",
-      image: "https://via.placeholder.com/150",
-      district: "Batticaloa",
-      stellarAddress: "stellar234vwx8",
-      address: "No: 3 Lagoon View, Batticaloa",
-      contact: "0778899001",
-      beneficiaryType: "Organization",
-    },
-    {
-      userId: "9",
-      userName: "mark_evans",
-      name: "Mark Evans",
-      image: "https://via.placeholder.com/150",
-      district: "Mannar",
-      stellarAddress: "stellar567yz9",
-      address: "No: 5 Sea Breeze Lane, Mannar",
-      contact: "0779900112",
-      beneficiaryType: "Individual",
-    },
-    {
-      userId: "10",
-      userName: "forest_guardians",
-      name: "Forest Guardians",
-      image: "https://via.placeholder.com/150",
-      district: "Monaragala",
-      stellarAddress: "stellar890abc10",
-      address: "No: 7 Green Street, Monaragala",
-      contact: "0770011223",
-      beneficiaryType: "Organization",
-    },
-  ];
+  // Determine the rows to display on the current page
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = donors.slice(indexOfFirstRow, indexOfLastRow);
+
+  // Handle page change
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   const InputExampleIconPosition = () => (
     <Input
@@ -179,13 +72,38 @@ const AdminDonorListCmp = () => {
     />
   );
 
-  const handleRowClick = (userId) => {
-    navigate(`/admin/Donor_List/Donors/${userId}`);
+  const handleRowClick = (user_id) => {
+    navigate(`/admin/Donor_List/Donors/${user_id._id}`);
   };
 
-  const handleEditClick = (e, userId) => {
+  const handleEditClick = (e, user_id) => {
+    console.log(user_id);
     e.stopPropagation(); // Prevent the row click event
-    navigate(`/admin/Donor_List/Donors/${userId}/edit`);
+    navigate(`/admin/Donor_List/Donors/edit/${user_id._id}`);
+  };
+
+  const handleDeleteClick = async (e, user_id) => {
+    e.stopPropagation(); // Prevent the row click event
+
+    if (window.confirm("Are you sure you want to delete this donor?")) {
+      try {
+        // Send DELETE request to the server
+        const response = await axios.delete(
+          `http://localhost:9013/admin/Donor_List/Donors/${user_id}`
+        );
+        console.log("Response for delete:", response);
+
+        // Check if the response is successful (status code 200 or 204)
+        if (response.status === 200 || response.status === 204) {
+          console.log("User deleted successfully:", response);
+          // Redirect to the Donors List after a successful deletion
+          navigate("/admin/Donor_List/Donors");
+        }
+      } catch (error) {
+        console.error("Error deleting donor:", error);
+        alert("There was an issue deleting the donor.");
+      }
+    }
   };
 
   const toggleActivation = (index) => {
@@ -202,7 +120,7 @@ const AdminDonorListCmp = () => {
         <TableHeader>
           <TableRow>
             <TableHeaderCell className={classes.customFont}>
-              UserId
+              user_id
             </TableHeaderCell>
             <TableHeaderCell className={classes.customFont}>
               Name
@@ -213,7 +131,6 @@ const AdminDonorListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               District
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
             <TableHeaderCell className={classes.customFont}>
               Address
             </TableHeaderCell>
@@ -223,61 +140,71 @@ const AdminDonorListCmp = () => {
             <TableHeaderCell className={classes.customFont}>
               Action
             </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}>Beneficiary Type</TableHeaderCell> */}
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows.map((row, index) => {
+          {donors.map((donor, index) => {
             const isActive = activeRows[index] ?? true;
+            const userId = donor.user_id?._id || "N/A"; // Safe access for user_id._id
+
             return (
               <TableRow
-                key={index}
+                key={userId}
                 className={`${classes.dataRow} ${
                   !isActive && classes.deactivatedRow
                 }`}
-                onClick={() => handleRowClick(row.userId)}
+                onClick={() => {
+                  console.log(donor.user_id);
+                  handleRowClick(donor.user_id);
+                }}
               >
-                <TableCell>{row.userId}</TableCell>
-                <TableCell>{row.userName}</TableCell>
+                <TableCell>{userId}</TableCell>
                 <TableCell>
                   <div className={classes.userNameContainer}>
                     <Image
-                      src={row.image}
+                      src={donor.profile_image}
                       circular
                       className={classes.imageStylings}
                     ></Image>
-                    <span className={classes.truncatedText}>{row.name}</span>
+                    <span className={classes.truncatedText}>{donor.name}</span>
                   </div>
                 </TableCell>
-                <TableCell>{row.district}</TableCell>
-                {/* <TableCell>{row.address}</TableCell> */}
-                <TableCell>{row.stellarAddress}</TableCell>
-                <TableCell>{row.contact}</TableCell>
+                <TableCell>{donor.username}</TableCell>
+                <TableCell>{donor.district}</TableCell>
+                <TableCell>{donor.stellar_address}</TableCell>
+                <TableCell>{donor.phoneNo}</TableCell>
                 <TableCell className={classes.actionStylings}>
                   <div className={classes.actionContainerDiv}>
-                    <Button
-                      color="primary"
-                      onClick={(e) => handleEditClick(e, row.userId)}
-                    >
-                      Edit
-                    </Button>
                     <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {
                         e.stopPropagation();
                         toggleActivation(index);
+                        // have to include the logic in order to change the user_id.isEthical to be false.
                       }}
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
+                    <IconGroup size="large" className={classes.iconContainer}>
+                      <Icon
+                        name="edit"
+                        onClick={(e) => handleEditClick(e, donor.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                      <Icon
+                        name="user delete"
+                        onClick={(e) => handleDeleteClick(e, donor.user_id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </IconGroup>
+                    {/* </div> */}
                   </div>
                 </TableCell>
-                {/* <TableCell>{row.beneficiaryType}</TableCell> */}
               </TableRow>
             );
           })}
         </TableBody>
-        <TableFooter>
+        {/* <TableFooter>
           <TableRow>
             <TableHeaderCell colSpan="7">
               <Menu floated="right" pagination>
@@ -289,6 +216,41 @@ const AdminDonorListCmp = () => {
                 <MenuItem as="a">3</MenuItem>
                 <MenuItem as="a">4</MenuItem>
                 <MenuItem as="a" icon>
+                  <Icon name="chevron right" />
+                </MenuItem>
+              </Menu>
+            </TableHeaderCell>
+          </TableRow>
+        </TableFooter> */}
+
+        <TableFooter>
+          <TableRow>
+            <TableHeaderCell colSpan="7">
+              <Menu floated="right" pagination>
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === 1}
+                  onClick={() => handlePageChange(currentPage - 1)}
+                >
+                  <Icon name="chevron left" />
+                </MenuItem>
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <MenuItem
+                    key={i + 1}
+                    as="a"
+                    active={currentPage === i + 1}
+                    onClick={() => handlePageChange(i + 1)}
+                  >
+                    {i + 1}
+                  </MenuItem>
+                ))}
+                <MenuItem
+                  as="a"
+                  icon
+                  disabled={currentPage === totalPages}
+                  onClick={() => handlePageChange(currentPage + 1)}
+                >
                   <Icon name="chevron right" />
                 </MenuItem>
               </Menu>
