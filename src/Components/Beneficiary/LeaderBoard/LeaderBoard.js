@@ -3,7 +3,7 @@ import { Container, Grid, Image, Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import './leaderboard.css';
 
-const BeneLeaderBoard = ({ name, type, image, rank, id }) => (
+const BeneLeaderBoard = ({ name, type, image, rank, id, leaderboard_anonymous, anonymous_id }) => (
     <Container className="leaderboard-card">
         <Grid>
             <Grid.Column width={4} className="image-column">
@@ -13,7 +13,7 @@ const BeneLeaderBoard = ({ name, type, image, rank, id }) => (
             </Grid.Column>
             <Grid.Column width={8} className="content-column">
                 <div className="card-content">
-                    <div className="card-header">{name}</div>
+                    <div className="card-header">{!leaderboard_anonymous ? name: ("Anonymous" + anonymous_id)}</div>
                     <div className="card-meta">{type}</div>
                     <div className="card-description">
                         <h2 className="rank">Rank: {rank}</h2>

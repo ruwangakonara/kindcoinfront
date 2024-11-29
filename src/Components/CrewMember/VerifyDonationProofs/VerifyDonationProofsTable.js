@@ -99,7 +99,7 @@ const VerifyRequestsTable = () => {
   };
 
   return (
-    <div className="verify-requests-container">
+    <div className='crew-verify-requests-container'>
       <Table celled>
         <TableHeader>
           <TableRow>
@@ -171,7 +171,7 @@ const VerifyRequestsTable = () => {
         <Modal.Header>Document Preview</Modal.Header>
         <Modal.Content>
           {selectedDocuments.map((docUrl, index) => (
-            <div key={index} className="document-preview">
+            <div key={index} className='crew-document-preview'>
               {renderDocumentPreview(docUrl)}
             </div>
           ))}
@@ -206,7 +206,7 @@ export default VerifyRequestsTable;
 //   };
 
 //   return (
-//     <div className="filter-container">
+//     <div className="crew-filter-container">
 //       <Form>
 //         <Form.Group inline>
 //           <label>Status:</label>

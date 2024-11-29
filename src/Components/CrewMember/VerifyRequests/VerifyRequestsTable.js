@@ -75,7 +75,7 @@ const VerifyRequestsTable = () => {
     };
 
     return (
-        <div className='verify-requests-container'>
+        <div className='crew-verify-requests-container'>
                 <table className='ui clelled table'>
                     <thead>
                         <tr>

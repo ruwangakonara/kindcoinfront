@@ -1,4 +1,4 @@
-.filter-container {
+.crew-filter-container {
     display: flex;
     align-items: center;
     margin-left: 5%;
@@ -10,11 +10,11 @@
     width: fit-content;
 }
 
-.filter-container .ui.form .grouped.fields .field {
+.crew-filter-container .ui.form .grouped.fields .field {
     margin-right: 20px;
 }
 
-.filter-container label {
+.crew-filter-container label {
     margin-right: 10px;
     font-weight: bold;
 }

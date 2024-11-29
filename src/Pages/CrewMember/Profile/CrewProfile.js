@@ -10,7 +10,7 @@ const CrewProfile = () => {
             <HeaderCrew />
             <div className="main-container">
                 <SidebarCrew />
-                <div className="verify-recipients-container">
+                <div className="crew-verify-recipients-container">
                     <CrewMemberForm />
                 </div>
             </div>

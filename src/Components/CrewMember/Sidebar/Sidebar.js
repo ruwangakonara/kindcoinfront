@@ -19,7 +19,8 @@ const SidebarCrew = () => (
     style={{ minHeight: '100vh' }}
 
   >
-    <MenuItem as={Link} to='/crew/home' className='home'>
+    {/* Check semantic */}
+    <MenuItem as={Link} to='/crew/home' className='home'> 
       <Icon name='home' />
       Home
     </MenuItem>

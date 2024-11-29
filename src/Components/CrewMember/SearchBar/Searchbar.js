@@ -22,7 +22,7 @@ const SearchBar = ({ placeholder = "Search...", onSearch }) => {
   };
 
   return (
-    <div className="search-bar-container">
+    <div className="crew-search-bar-container">
       <Input
         icon="search"
         placeholder={placeholder}

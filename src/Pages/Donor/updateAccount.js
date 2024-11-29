@@ -19,6 +19,7 @@ const UpdateAccount = () => {
     const initialFormData = {
         name: donor.name,
         anonymous: donor.anonymous,
+        leaderboard_anonymous: donor.leaderboard_anonymous,
         address: donor.address || '', // Handle null values gracefully
         description: donor.description || '', // Handle null values gracefully
         username: donor.username,
@@ -118,6 +119,15 @@ const UpdateAccount = () => {
                             name="anonymous"
                             checked={formData.anonymous}
                             onChange={(e) => handleChange(e, { name: 'anonymous', value: e.target.checked })}
+                        />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Anonymous</label>
+                        <input
+                            type="checkbox"
+                            name="leaderboard_anonymous"
+                            checked={formData.leaderboard_anonymous}
+                            onChange={(e) => handleChange(e, { name: 'leaderboard_anonymous', value: e.target.checked })}
                         />
                     </Form.Field>
                     <Form.TextArea

@@ -73,12 +73,19 @@ import { Routes, Route } from "react-router-dom";
 import Org from "./Components/Home/Auth/Org";
 import People from "./Components/Home/Auth/People";
 import useform, { validate } from "./Components/Home/function/formhandle";
+import useform2, { validate2 } from "./Components/Home/function/formhandle2";
+import useform3, { validate3 } from "./Components/Home/function/formhandle3";
+import useform4, { validate4 } from "./Components/Home/function/formhandle4";
 // import Olog from './Components/Home/Login/Olog'
 import OSignup from "./Components/Home/Signup/OSignup";
 import Login from "./Components/Home/Login/Login";
 import Signup from "./Components/Home/Signup/Signup";
 import Forgot from "./Components/Home/Forgot/Forgot";
 import Main from "./Pages/Home/Main";
+import Contact from "./Pages/Home/contact";
+import NotVerified from "./Pages/Home/verified/not_verified";
+import Verified from "./Pages/Home/verified/verified";
+import Forgot2 from "./Components/Home/Forgot/Forgot2";
 
 import DonorHome from "./Pages/Donor/home/dhome";
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
@@ -125,6 +132,12 @@ import PendingRewardsPage from "./Pages/Donor/donations/pendingRewardsPage";
 import CompletedDonationPage from "./Pages/Donor/donations/completedDonationPage";
 import BeneficiaryDonorLeaderboards from "./Pages/Beneficiary/leaderboard/leaderboards";
 import BeneficiaryDonorLeaderboardPage from "./Pages/Beneficiary/leaderboard/leaderboard";
+import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
+import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
+import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
+import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
+import DonorNotificationList from "./Pages/Donor/notification/notificationsPage";
+import BeneficiaryNotificationList from "./Pages/Beneficiary/notification/notificationsPage";
 
 import AdminAccountPg from "./Pages/Admin/AdminAccount/AdminAccountPg";
 import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg";
@@ -150,14 +163,16 @@ import RaisedTicketsPg from "./Pages/Admin/RaisedTickets/RaisedTicketsPg";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
 // import AdminSettings from './Pages/Admin/Settings/Settings';
 
+// import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
+// import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
+// import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
+// import AdminSettings from './Pages/Admin/Settings/Settings';
+
 import AdminDonor from "./Components/Admin/DonorDetails/AdminDonorCmp";
 import AdminBeneficiary from "./Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
 // import ViewCrewMember from './Pages/Admin/CrewMemberDets/ViewCrewMember';
+// import CrewMemberDashboard from './Pages/CrewMember/Dashboard/CrewMemberDashboard';
 // import AdminSettings from './Pages/Admin/Settings/Settings';
-import DonorTicketsPage from "./Pages/Donor/tickets/tickets";
-import UnaccceptedDonation from "./Pages/Beneficiary/donations/unaccceptedDonation";
-import AcceptedDonation from "./Pages/Beneficiary/donations/acceptedDonation2";
-import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonation";
 
 // import AssignCrewMember from './Pages/Admin/AssignCrewMemToDonations/AssignCrewMember';
 
@@ -166,7 +181,7 @@ import CrewMemberDashboard from "./Pages/CrewMember/Dashboard/CrewMemberDashboar
 import VerifyRequests from "./Pages/CrewMember/VerifyRequests/VerifyRequests";
 import VerifyDonationProofs from "./Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs";
 import VerifyRecipients from "./Pages/CrewMember/VerifyRecipients/VerifyRecipients";
-import TokenTranafer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
+import TokenTransfer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
 import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
@@ -176,6 +191,10 @@ function App() {
     // <UserProvider>
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route
+        path="/contact"
+        element={<Contact form={useform2()} validate={validate2} />}
+      />
       <Route path="beneficiary_registration" element={<Org />}>
         {/*    <Route path="login" element={<Olog form={useform()} validate={validate}/>} />*/}
         <Route
@@ -192,12 +211,19 @@ function App() {
       </Route>
       <Route
         path="forgot"
-        element={<Forgot form={useform()} validate={validate} />}
+        element={<Forgot form={useform3()} validate={validate3} />}
+      ></Route>
+      <Route
+        path="forgot2/:token"
+        element={<Forgot2 form={useform4()} validate={validate4} />}
       ></Route>
       <Route path="main" element={<Main />} />
 
       <Route path="leaderboards" element={<Leaderboards />} />
       <Route path="leaderboard/:id/:rank" element={<LeaderboardPage />} />
+
+      <Route path="not_verified" element={<NotVerified />} />
+      <Route path="verify/:token" element={<Verified />} />
 
       {/*Donor Routes*/}
 
@@ -256,6 +282,7 @@ function App() {
       <Route path="/donor/tickets" element={<DonorTicketsPage />} />
 
       <Route path="/donor/leaderboards" element={<DonorLeaderboards />} />
+      <Route path="/donor/notifications" element={<DonorNotificationList />} />
       <Route path="/donor/leaderboard/:rank" element={<MyLeaderboardPage />} />
       <Route
         path="/donor/leaderboard/:id/:rank"
@@ -315,6 +342,10 @@ function App() {
       <Route
         path="/beneficiary/announcements"
         element={<BeneficiaryAnnouncementList />}
+      />
+      <Route
+        path="/beneficiary/notifications"
+        element={<BeneficiaryNotificationList />}
       />
 
       <Route path="/beneficiary/account" element={<BeneficiaryOwnAccount />} />
@@ -451,9 +482,9 @@ function App() {
       <Route path="/crew/requests" element={<VerifyRequests />} />
       <Route path="/crew/recipients" element={<VerifyRecipients />} />
       <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
+      <Route path="/crew/token_transfer" element={<TokenTransfer />} />
       {/* <Route path="/crew/settings" element={<CrewSettings />} />
       <Route path="/crew/profile" element={<CrewProfile />} /> */}
-
       <Route path="/admin/layouts" element={<DashboardLayout />} />
     </Routes>
     // </UserProvider>

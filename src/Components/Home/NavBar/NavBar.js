@@ -56,10 +56,11 @@ export default function Navbar() {
                     <a href="#about" onClick={(e) => click(e, 'about')}>About</a>
                     <a href="/leaderboards" onClick={(e) => click(e)}>Leaders</a>
                     {/*<a href="#skills" onClick={click}>Skills</a>*/}
-                    <a href="#contact" onClick={(e) => click(e, "footer")}>Contact</a>
+                    {/*<a href="#contact" onClick={(e) => click(e, "footer")}>Contact</a>*/}
+                    <a href="/contact" >Contact</a>
                 </nav>
                 <div className="sidebar" id="sidebar" ref={sidebar} onClick={show}>
-                    <Icon name="ellipsis vertical" />
+                <Icon name="ellipsis vertical" />
                 </div>
             </div>
             {/*//  ):(*/}

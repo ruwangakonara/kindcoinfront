@@ -16,7 +16,7 @@ const CrewDashboardCard = ({ title, description, imageSrc, buttonLabel, buttonPa
   };
 
   return (
-    <Card className='dashboard-card'>
+    <Card className='crew-dashboard-card'>
       <Image src={imageSrc} />
       <CardContent>
         <CardHeader>{title}</CardHeader>

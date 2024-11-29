@@ -44,12 +44,22 @@ const Login = () => {
         setUser(user); // Save user in global state
 
         if (donor) {
-          setUserDetails(donor); // Save donor details in global state
+          console.log(donor)
+          setUserDetails(donor);// Save donor details in global state
+          if(!donor?.email_verified) {
+            navigate("/not_verified")
+            return
+          }
         } else if (beneficiary) {
           setUserDetails(beneficiary); // Save beneficiary details in global state
+          if(!beneficiary?.email_verified) {
+            navigate("/not_verified")
+            return
+          }
         } else {
           setUserDetails(null);
         }
+
 
         switch (user.status) {
           case 'admin':
