@@ -108,88 +108,102 @@ const AdminBeneficiaryEditFormCmp = ({ beneficiaryDetails }) => {
   };
 
   return (
-    // <div className={classes.admin_mainContainer}>
-    <Form onSubmit={handleSubmit} size="big">
-      <FormGroup widths="equal">
-        <Form.Field
-          label="User ID"
-          control={Input}
-          name="userId"
-          type="text"
-          value={formData.userId}
-          readOnly
-        />
-        <Form.Field
-          required={true}
-          label="User Name"
-          control={Input}
-          placeholder="User Name"
-          name="userName"
-          type="text"
-          value={formData.userName}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      {/* <Form.Field>
-        <label>User ID</label>
-        <input name="userId" value={formData.userId} readOnly />
-      </Form.Field> */}
-      {/* <Form.Field>
-        <label>User Name</label>
-        <input
-          name="userName"
-          value={formData.userName}
-          onChange={handleChange}
-        />
-      </Form.Field> */}
-      <Form.Field>
-        <label>Name</label>
-        <input name="name" value={formData.name} onChange={handleChange} />
-      </Form.Field>
-      <Form.Field>
-        <label>District</label>
-        <input
-          name="district"
-          value={formData.district}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Address</label>
-        <input
-          name="address"
-          value={formData.address}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Contact</label>
-        <input
-          name="contact"
-          value={formData.contact}
-          onChange={handleChange}
-        />
-      </Form.Field>
-      <Form.Field>
-        <label>Profile Image</label>
-        <Image src={formData.image} size="small" />
-        <input
-          type="file"
-          name="image"
-          onChange={handleChange} // Adjust this for image file uploads
-        />
-      </Form.Field>
-      <Button type="submit" secondary>
-        Save
-      </Button>
-      <Button
-        type="button"
-        onClick={() => navigate("/admin/Beneficiary_List/Beneficiaries")}
-      >
-        Cancel
-      </Button>
-    </Form>
-    // </div>
+    <>
+      <div className={classes.admin_formContainer}>
+        <div className={classes.formContent}>
+          <Form onSubmit={handleSubmit} size="medium" style={{ border: "2px" }}>
+            <FormGroup widths="equal">
+              <Form.Field
+                label="User ID"
+                control={Input}
+                name="userId"
+                type="text"
+                value={formData.userId}
+                readOnly
+              />
+              <Form.Field
+                required={true}
+                label="User Name"
+                control={Input}
+                placeholder="User Name"
+                name="userName"
+                type="text"
+                value={formData.userName}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            {/* <Form.Field>
+            <label>User ID</label>
+            <input name="userId" value={formData.userId} readOnly />
+            </Form.Field> */}
+            {/* <Form.Field>
+              <label>User Name</label>
+              <input
+                name="userName"
+                value={formData.userName}
+                onChange={handleChange}
+              />
+            </Form.Field> */}
+            <FormGroup widths="equal">
+              <Form.Field>
+                <label>Name</label>
+                <input
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>District</label>
+                <input
+                  name="district"
+                  value={formData.district}
+                  onChange={handleChange}
+                />
+              </Form.Field>
+            </FormGroup>
+            <FormGroup widths="equal">
+              <Form.Field>
+                <label>Address</label>
+                <input
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+              </Form.Field>
+              <Form.Field>
+                <label>Contact</label>
+                <input
+                  name="contact"
+                  value={formData.contact}
+                  onChange={handleChange}
+                />
+              </Form.Field>
+            </FormGroup>
+            {/* <Form.Field>
+              <label>Profile Image</label>
+              <Image src={formData.image} size="small" />
+              <input
+                type="file"
+                name="image"
+                onChange={handleChange} // Adjust this for image file uploads
+              />
+            </Form.Field> */}
+            <Form.Group>
+              <Form.Button type="submit" content="Update" positive />
+              <Form.Button
+                type="button"
+                onClick={() =>
+                  navigate("/admin/Beneficiary_List/Beneficiaries")
+                }
+                content="Cancel"
+                negative
+              />
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
+    </>
   );
 };
 

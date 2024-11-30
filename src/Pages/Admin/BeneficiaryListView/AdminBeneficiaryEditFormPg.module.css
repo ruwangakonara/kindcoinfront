@@ -1,5 +1,49 @@
-.editForm{
+/* .editForm{
     width: 70%;
     margin-left: 15%;
     margin-right: 50px;
+} */
+
+body {
+    margin: 0;
 }
+
+.mainContainer{
+    /* display: flex; */
+    /* height: 100vh; */
+    flex-direction: row;
+    z-index: 110;
+    transition: margin-left 0.5s ease-in-out; 
+    overflow: auto;
+}
+
+/* .content {
+    flex-grow: 1;
+    padding: 20px 50px; 
+    overflow-y: auto;
+    box-sizing: border-box;
+  } */
+
+  .content {
+    /* flex-grow: 1; */
+    padding: 20px;
+    overflow-y: auto;
+    width: calc(100% - 50px); /* Full width minus padding */
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: width 0.5s;
+  }
+
+  .withSidebar .content {
+    width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
+}
+
+.noSidebar .content {
+    width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
+}
+
+/* .editForm{
+    width: 100%;
+    margin-left: 15%;
+    margin-right: 50px;
+} */

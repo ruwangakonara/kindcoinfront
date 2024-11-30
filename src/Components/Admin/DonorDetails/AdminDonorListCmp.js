@@ -187,7 +187,6 @@ const AdminDonorListCmp = () => {
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
-                    {/* <IconGroup size="large" className={classes.iconContainer}> */}
                     <IconGroup
                       size="large"
                       style={{
@@ -207,7 +206,6 @@ const AdminDonorListCmp = () => {
                         style={{ cursor: "pointer" }}
                       />
                     </IconGroup>
-                    {/* </div> */}
                   </div>
                 </TableCell>
               </TableRow>

@@ -30,7 +30,7 @@ export default function AdminSideBarCmp() {
       path: "/admin/assign/crew_member",
       icon: "gavel",
     },
-    { name: "Complaints", path: "/admin/view/complaints", icon: "compose" },
+    { name: "Tickets", path: "/admin/view/complaints", icon: "compose" },
     { name: "Statistics", path: "/admin/overall_stats", icon: "chart line" },
     { name: "Settings", path: "/admin/settings", icon: "settings" },
   ];
