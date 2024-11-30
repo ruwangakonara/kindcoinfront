@@ -1,46 +1,46 @@
-/*.crew-dashboard-card {*/
-/*    border: 1px solid #bdc3c7;*/
-/*    padding: 20px;*/
-/*    margin: 10px;*/
-/*    text-align: center;*/
-/*    width: 400px;*/
-/*    height: 300px;*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
+.crew-dashboard-card {
+   border: 1px solid #bdc3c7;
+   padding: 20px;
+   margin: 10px;
+   text-align: center;
+   width: 400px;
+   height: 300px;
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
 
 
-/*  }*/
+ }
 
-/*  .crew-dashboard-card img {*/
-/*    width: 100%;*/
-/*    height: 50%;*/
-/*  }*/
+ .crew-dashboard-card img {
+   width: 100%;
+   height: 50%;
+ }
 
-/*  .ui.card{*/
-/*    width: 80%;*/
-/*    border:#044b7a 1px solid;*/
-/*  }*/
+ .ui.card{
+   width: 80%;
+   border:#044b7a 1px solid;
+ }
 
 
-/*  .crew-dashboard-card h3 {*/
-/*    margin-bottom: 10px;*/
-/*  }*/
+ .crew-dashboard-card h3 {
+   margin-bottom: 10px;
+ }
 
-/*  .crew-dashboard-card p {*/
-/*    margin-bottom: 20px;*/
-/*  }*/
+ .crew-dashboard-card p {
+   margin-bottom: 20px;
+ }
 
-/*  .crew-dashboard-card button {*/
-/*    padding: 10px 20px;*/
-/*    border: none;*/
-/*    background-color: #2980b9;*/
-/*    color: white;*/
-/*    cursor: pointer;*/
-/*  }*/
+ .crew-dashboard-card button {
+   padding: 10px 20px;
+   border: none;
+   background-color: #2980b9;
+   color: white;
+   cursor: pointer;
+ }
 
-/*  .crew-dashboard-card button:hover {*/
-/*    background-color: #3498db;*/
-/*  }*/
+ .crew-dashboard-card button:hover {
+   background-color: #3498db;
+ }
 

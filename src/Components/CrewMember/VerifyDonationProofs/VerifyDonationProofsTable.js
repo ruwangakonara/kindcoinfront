@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import {
   TableRow,
   TableHeaderCell,
@@ -13,9 +14,11 @@ import {
   Dropdown,
   Button,
   Modal,
+  Select,
 } from "semantic-ui-react";
 import { Document, Page } from "react-pdf";
 import "./VerifyDonationProofsTable.css";
+import SearchBar from './Searchbar';
 
 const data = [
   {
@@ -47,15 +50,44 @@ const statusOptions = [
 ];
 
 const VerifyRequestsTable = () => {
+  const [proofs, setProof] = useState([]);
   const [status, setStatus] = useState({});
+  const [filterDonations, setFilterDonations] = useState([]);
   const [selectedDocuments, setSelectedDocuments] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [noResultsFound, setNoResultsFound] = useState(false);
 
-  const handleStatusChange = (index, value) => {
-    setStatus((prevState) => ({
-      ...prevState,
-      [index]: value,
-    }));
+  useEffect(() => {
+    const fetchProof = async () => {
+      try {
+        const response = await axios.get('http://localhost:9013/crew/get_donation_proof'); // Ensure this URL is correct
+        setProof(response.data.donations); // Adjust to the correct response structure
+        setFilterDonations(response.data.donations);
+      } catch (error) {
+        console.error('Error fetching recipients:', error);
+      }
+    };
+
+    fetchProof();
+  }, []);
+
+  const handleSearch = (event) => {
+    console.log('Search query:', event.target.value);
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filteredData = proofs.filter((proof) => {
+      const searchString = `${proof.name} 
+            ${proof.user_id?.username} ${proof._id}
+             ${proof.donor_id?.email} ${proof.donor_id?.phoneNo}
+             ${proof.benificiary_id?.name} ${proof.request_id}
+              ${proof.request_id?.description} ${proof.doc_verified}`.toLowerCase();
+      return searchString.includes(query.toLowerCase());
+    });
+    console.log('Filtered data:', filteredData);
+    setFilterDonations(filteredData);
+    setNoResultsFound(filteredData.length === 0);
   };
 
   const handleSubmit = () => {
@@ -98,15 +130,47 @@ const VerifyRequestsTable = () => {
     }
   };
 
+  const handleVerify = async (docId, docStatus) => {
+    try {
+      await axios.put('http://localhost:9013/crew/update_donation_status', {
+        docId,
+        status: docStatus,
+      });
+
+      setProof((prevRecipients) =>
+        prevRecipients.map((donation) =>
+          donation._id === docId ? { ...donation, status: docStatus } : donation
+        )
+      );
+
+      alert('Recipient updated successfully!');
+    } catch (error) {
+      console.error('Error updating recipient:', error);
+      alert('Failed to update the recipient. Please try again.');
+    }
+  };
+
+  const openModal = (documents) => {
+    setSelectedDocuments(documents);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedDocuments(null);
+    setModalOpen(false);
+  };
+
+
   return (
     <div className='crew-verify-requests-container'>
+      <SearchBar searchQuery={searchQuery} onSearchChange={handleSearch} />
       <Table celled>
         <TableHeader>
           <TableRow>
             <TableHeaderCell>Donor Name</TableHeaderCell>
             <TableHeaderCell>Donation ID</TableHeaderCell>
             <TableHeaderCell>Request ID</TableHeaderCell>
-            <TableHeaderCell>Benficiary ID</TableHeaderCell>
+            <TableHeaderCell>Beneficiary ID</TableHeaderCell>
             <TableHeaderCell>Email</TableHeaderCell>
             <TableHeaderCell>Telephone Number</TableHeaderCell>
             <TableHeaderCell>Description</TableHeaderCell>
@@ -116,52 +180,56 @@ const VerifyRequestsTable = () => {
           </TableRow>
         </TableHeader>
 
+        {noResultsFound && (
+          <div className="crew-no-results-message">
+            No matching records available.
+          </div>
+        )}
+
         <TableBody>
-          {data.map((row, index) => (
-            <TableRow key={index} onClick={() => handleRowClick(row.documents)}>
-              <TableCell>{row.name}</TableCell>
-              <TableCell>{row.registrationNo}</TableCell>
-              <TableCell>{row.requestNo}</TableCell>
-              <TableCell>{row.email}</TableCell>
-              <TableCell>{row.telephone}</TableCell>
-              <TableCell data-tooltip={row.description}>
-                {row.description}
-              </TableCell>
-              <TableCell>{renderDocumentPreview(row.documents[0])}</TableCell>
+          {filterDonations.map((donation, index) => (
+            <TableRow key={donation.donationId} onClick={() => openModal(donation.documents)}>
+              <TableCell>{donation.donorName || 'N/A'}</TableCell>
+              <TableCell>{donation.donationId}</TableCell>
+              <TableCell>{donation.requestId || 'N/A'}</TableCell>
+              <TableCell>{donation.beneficiaryId || 'N/A'}</TableCell>
+              <TableCell>{donation.email || 'N/A'}</TableCell>
+              <TableCell>{donation.phone || 'N/A'}</TableCell>
+              <TableCell data-tooltip={donation.description}>{donation.description || 'No Description'}</TableCell>
               <TableCell>
-                <Dropdown
-                  selection
-                  options={statusOptions}
-                  value={status[index] || row.status}
-                  onChange={(e, { value }) => handleStatusChange(index, value)}
-                />
+                {donation.documents.length > 0 ? (
+                  <button onClick={() => openModal(donation.documents)} className="crew-link-button">
+                    View Document
+                  </button>
+                ) : (
+                  'No Documents'
+                )}
               </TableCell>
               <TableCell>
-                <Button onClick={handleSubmit}>Submit</Button>
+                <Select
+                  value={donation.status}
+                  onChange={(e) =>
+                      setProof((prevRequests) =>
+                          prevRequests.map((r) =>
+                              r._id === donation._id
+                                  ? { ...r, status: e.target.value }
+                                  : r
+                          )
+                      )
+                  }
+                  >
+                  <option value="Verified">Verified</option>
+                  <option value="Unverified">Not Verified</option>
+                  </Select>
+              </TableCell>
+              <TableCell>
+                <Button onClick={() => handleVerify(donation._id, donation.status)}>Submit</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
-
-        <TableFooter>
-          <TableRow>
-            <TableHeaderCell colSpan="8">
-              <Menu floated="right" pagination>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron left" />
-                </MenuItem>
-                <MenuItem as="a">1</MenuItem>
-                <MenuItem as="a">2</MenuItem>
-                <MenuItem as="a">3</MenuItem>
-                <MenuItem as="a">4</MenuItem>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron right" />
-                </MenuItem>
-              </Menu>
-            </TableHeaderCell>
-          </TableRow>
-        </TableFooter>
       </Table>
+
 
       <Modal
         open={modalOpen}
