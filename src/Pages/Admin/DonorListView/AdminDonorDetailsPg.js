@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import classes from "./AdminDonorDetailsPg.module.css";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
+// import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminDonorCmp from "../../../Components/Admin/DonorDetails/AdminDonorCmp";
-
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 const AdminDonorDetailsPg = () => {
   const { user_id } = useParams();
 
@@ -45,7 +45,8 @@ const AdminDonorDetailsPg = () => {
     return (
       <div className={classes.mainContainer}>
         <HeaderCmp />
-        <SidebarAdminCmp visible={true} />
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
         <DefaultDashCmp>
           <div>Loading...</div>
         </DefaultDashCmp>
@@ -58,7 +59,8 @@ const AdminDonorDetailsPg = () => {
     return (
       <div className={classes.mainContainer}>
         <HeaderCmp />
-        <SidebarAdminCmp visible={true} />
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
         <DefaultDashCmp>
           <div>Error: {error}</div>
         </DefaultDashCmp>
@@ -69,7 +71,8 @@ const AdminDonorDetailsPg = () => {
   return (
     <div className={classes.mainContainer}>
       <HeaderCmp />
-      <SidebarAdminCmp visible={true} />
+      {/* <SidebarAdminCmp visible={true} /> */}
+      <AdminSideBarCmp />
       <DefaultDashCmp>
         <h1 style={{ textAlign: "center" }}>Donor Details</h1>
         {/* Pass the donor details to AdminDonorCmp */}

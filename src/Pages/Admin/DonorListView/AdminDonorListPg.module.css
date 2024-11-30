@@ -1,5 +1,20 @@
-.mainContainer{
-    /* display: flex;
-    flex-direction: column; */
-    height: 100vh;
+body {
+    margin: 0;
 }
+
+.mainContainer{
+    display: flex;
+    height: 100vh;
+    z-index: 100;
+    transition: margin-left 0.5s ease-in-out; 
+    overflow: hidden;
+    
+}
+
+.content {
+    flex-grow: 1; /*Allows the content area to take the remaining space  */
+    padding: 20px 50px; /* Optional: Add padding to the content */
+    overflow-y: auto; /* Enables scrolling if content overflows */
+    /* width: 100%; */
+    box-sizing: border-box;
+  }
