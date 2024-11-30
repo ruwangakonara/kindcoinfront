@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Comforter&family=Dongle:wght@300;400;700&family=Kaushan+Script&family=Mochiy+Pop+P+One&family=Open+Sans:wght@300;400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,700;1,300;1,500;1,700&family=Varela+Round&display=swap');
 
+/*
+use admin_ as a prefix for the custom class names
+*/
+
 .brand{
     top: 10px;
     width: 70px;

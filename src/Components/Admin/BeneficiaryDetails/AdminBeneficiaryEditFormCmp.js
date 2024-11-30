@@ -108,7 +108,7 @@ const AdminBeneficiaryEditFormCmp = ({ beneficiaryDetails }) => {
   };
 
   return (
-    // <div className={classes.mainContainer}>
+    // <div className={classes.admin_mainContainer}>
     <Form onSubmit={handleSubmit} size="big">
       <FormGroup widths="equal">
         <Form.Field
