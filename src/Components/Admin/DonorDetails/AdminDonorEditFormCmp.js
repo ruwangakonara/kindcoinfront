@@ -97,72 +97,75 @@ const AdminDonorEditFormCmp = ({ donorDetails }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} size="big">
-      <FormGroup widths="equal">
-        <Form.Field
-          label="User ID"
-          control={Input}
-          name="userId"
-          type="text"
-          value={formData.userId}
-          readOnly
-        />
-        <Form.Field
-          required={true}
-          label="User Name"
-          control={Input}
-          placeholder="User Name"
-          name="userName"
-          type="text"
-          value={formData.userName}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup widths="equal">
-        <Form.Field
-          required={true}
-          label="Name"
-          control={Input}
-          placeholder="Name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        <Form.Field
-          required={true}
-          label="District"
-          control={Input}
-          placeholder="District"
-          name="district"
-          type="text"
-          value={formData.district}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <FormGroup widths="equal">
-        <Form.Field
-          //   required={true}
-          label="Stellar Address"
-          control={Input}
-          placeholder="Stellar Address"
-          name="stellarAddress"
-          type="text"
-          value={formData.stellarAddress}
-          onChange={handleChange}
-        />
-        <Form.Field
-          required={true}
-          label="Contact"
-          control={Input}
-          placeholder="Contact"
-          name="contact"
-          type="text"
-          value={formData.contact}
-          onChange={handleChange}
-        />
-      </FormGroup>
-      <Form.Field>
+    <>
+      <div className={classes.admin_formContainer}>
+        <div className={classes.formContent}>
+          <Form onSubmit={handleSubmit} size="medium" style={{ border: "2px" }}>
+            <FormGroup widths="equal">
+              <Form.Field
+                label="User ID"
+                control={Input}
+                name="userId"
+                type="text"
+                value={formData.userId}
+                readOnly
+              />
+              <Form.Field
+                required={true}
+                label="User Name"
+                control={Input}
+                placeholder="User Name"
+                name="userName"
+                type="text"
+                value={formData.userName}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup widths="equal">
+              <Form.Field
+                required={true}
+                label="Name"
+                control={Input}
+                placeholder="Name"
+                name="name"
+                type="text"
+                value={formData.name}
+                onChange={handleChange}
+              />
+              <Form.Field
+                required={true}
+                label="District"
+                control={Input}
+                placeholder="District"
+                name="district"
+                type="text"
+                value={formData.district}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            <FormGroup widths="equal">
+              <Form.Field
+                //   required={true}
+                label="Stellar Address"
+                control={Input}
+                placeholder="Stellar Address"
+                name="stellarAddress"
+                type="text"
+                value={formData.stellarAddress}
+                onChange={handleChange}
+              />
+              <Form.Field
+                required={true}
+                label="Contact"
+                control={Input}
+                placeholder="Contact"
+                name="contact"
+                type="text"
+                value={formData.contact}
+                onChange={handleChange}
+              />
+            </FormGroup>
+            {/* <Form.Field>
         <label>Profile Image</label>
         <Image src={formData.profileImage} size="small" />
         <input
@@ -170,17 +173,20 @@ const AdminDonorEditFormCmp = ({ donorDetails }) => {
           name="profileImage"
           onChange={handleChange} // Adjust this for image file uploads
         />
-      </Form.Field>
-      <Form.Group>
-        <Form.Button type="submit" content="Update" positive />
-        <Form.Button
-          type="button"
-          onClick={() => navigate("/admin/Donor_List/Donors")}
-          content="Cancel"
-          negative
-        />
-      </Form.Group>
-    </Form>
+      </Form.Field> */}
+            <Form.Group>
+              <Form.Button type="submit" content="Update" positive />
+              <Form.Button
+                type="button"
+                onClick={() => navigate("/admin/Donor_List/Donors")}
+                content="Cancel"
+                negative
+              />
+            </Form.Group>
+          </Form>
+        </div>
+      </div>
+    </>
   );
 };
 

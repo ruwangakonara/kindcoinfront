@@ -158,7 +158,7 @@ const CrewMemberTableCmp = () => {
 
   return (
     <div className={classes.admin_mainContainer}>
-      <InputExampleIconPosition />
+      {/* <InputExampleIconPosition /> */}
       <Table celled compact definition>
         <TableHeader fullWidth>
           <TableRow>
@@ -167,8 +167,8 @@ const CrewMemberTableCmp = () => {
             <TableHeaderCell>Registration Date</TableHeaderCell>
             <TableHeaderCell>E-mail address</TableHeaderCell>
             <TableHeaderCell>Town</TableHeaderCell>
-            <TableHeaderCell>No of Operations Doing</TableHeaderCell>
-            <TableHeaderCell></TableHeaderCell>
+            <TableHeaderCell>Action</TableHeaderCell>
+            {/* <TableHeaderCell></TableHeaderCell> */}
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -179,12 +179,12 @@ const CrewMemberTableCmp = () => {
               <TableCell>{row.registrationDate}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell>{row.town}</TableCell>
-              <TableCell>{row.NoOfOps}</TableCell>
-              <TableCell className={classes.admin_buttonStyles}>
+              <TableCell>Edit & Delete</TableCell>
+              {/* <TableCell className={classes.admin_buttonStyles}>
                 <Button color="red" floated="center">
                   Assign New Task
                 </Button>
-              </TableCell>
+              </TableCell> */}
             </TableRow>
           ))}
         </TableBody>

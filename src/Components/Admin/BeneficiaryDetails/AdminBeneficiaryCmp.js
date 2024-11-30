@@ -27,8 +27,9 @@ import {
 //     return donors.find(donor => donor.userId === userId);
 // };
 
+// const AdminBeneficiaryCmp = ({beneficiaryDetails}) => {
 const AdminBeneficiaryCmp = () => {
-  const { userId } = useParams();
+  // const { userId } = useParams();
 
   const donorDetails = {
     userId: "1",
@@ -45,57 +46,75 @@ const AdminBeneficiaryCmp = () => {
   return (
     <div className={classes.admin_mainContainer}>
       <div className={classes.admin_subContainer}>
-        <Card
-          className={classes.donorCardStylings}
-          fluid={true}
-          centered={true}
-          raised
-        >
-          <Image
+        <div className={classes.admin_cardWrapper}>
+          <Card
+            className={{
+              display: "flex",
+              flexDirection: "row",
+              width: "600px",
+            }}
+            fluid={true}
+            centered={true}
+            raised
+          >
+            {/* <Image
             src="https://react.semantic-ui.com/images/avatar/large/daniel.jpg"
             wrapped
             ui={false}
-          />
-          <CardContent>
-            <CardHeader>Daniel</CardHeader>
-            <CardMeta>
-              <span className="date">Joined in 2012</span>
-            </CardMeta>
-            <CardDescription textAlign="left">
-              <div className={classes.admin_cardDescription}>
-                Daniel is a Janiter in Bangladesh.
-                <p>
-                  <strong>User ID:</strong> {donorDetails.userId}
-                </p>
-                <p>
-                  <strong>Name:</strong> {donorDetails.name}
-                </p>
-                <p>
-                  <strong>UserName:</strong> {donorDetails.userName}
-                </p>
-                <p>
-                  <strong>District:</strong> {donorDetails.district}
-                </p>
-                <p>
-                  <strong>Address:</strong> {donorDetails.address}
-                </p>
-                <p>
-                  <strong>Contact No.:</strong> {donorDetails.contact}
-                </p>
-                <p>
-                  <strong>Stellar Address:</strong>{" "}
-                  {donorDetails.stellarAddress}
-                </p>
-              </div>
-            </CardDescription>
-          </CardContent>
-          <CardContent extra>
-            {/* <a>
+          /> */}
+            <CardContent>
+              {/* <CardHeader>{anonymous ? "Anonymous Donor" : name}</CardHeader> */}
+              <CardHeader>Daniel</CardHeader>
+              <CardMeta>
+                {/* <span className="date">Joined in {new Date(created_at).toLocaleDateString()}</span> */}
+                <span className="date">Joined in 2012</span>
+              </CardMeta>
+              <CardDescription textAlign="left">
+                <div className={classes.admin_cardDescription}>
+                  Daniel is a Janiter in Bangladesh.
+                  <p>
+                    <strong>User ID:</strong> {donorDetails.userId}
+                  </p>
+                  <p>
+                    <strong>Name:</strong> {donorDetails.name}
+                  </p>
+                  <p>
+                    <strong>UserName:</strong> {donorDetails.userName}
+                  </p>
+                  <p>
+                    <strong>District:</strong> {donorDetails.district}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {donorDetails.address}
+                  </p>
+                  <p>
+                    <strong>Contact No.:</strong> {donorDetails.contact}
+                  </p>
+                  <p>
+                    <strong>Stellar Address:</strong>{" "}
+                    {donorDetails.stellarAddress}
+                  </p>
+                </div>
+              </CardDescription>
+            </CardContent>
+            <Image
+              className={classes.admin_image}
+              style={{ width: "200px", height: "200px" }}
+              src={
+                // profile_image ||
+                "https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              }
+              wrapped
+              ui={false}
+            />
+            <CardContent extra>
+              {/* <a>
                             <Icon name='user' />
                             22 Friends
                         </a> */}
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );

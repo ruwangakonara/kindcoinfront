@@ -3,5 +3,26 @@ body{
 }
 
 .mainContainer{
-    /* height: 100vh; */
+    display: flex; /* This makes the sidebar and content align horizontally */
+    height: 100vh;
+    z-index: 100; /* For the sidebar */
+    transition: margin-left 0.5s, width 0.5s; /* Smooth transition */
+    overflow: hidden; /* Ensure scrolling if content overflows */
+}
+ 
+.content {
+    padding: 20px;
+    overflow-y: auto;
+    width: calc(100% - 50px); /* Full width minus padding */
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: width 0.5s;
+  }
+
+  .withSidebar .content {
+    width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
+}
+
+.noSidebar .content {
+    width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
 }

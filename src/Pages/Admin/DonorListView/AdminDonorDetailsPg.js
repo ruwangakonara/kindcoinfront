@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import classes from "./AdminDonorDetailsPg.module.css";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
+// import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminDonorCmp from "../../../Components/Admin/DonorDetails/AdminDonorCmp";
-
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 const AdminDonorDetailsPg = () => {
   const { user_id } = useParams();
 
@@ -43,39 +43,54 @@ const AdminDonorDetailsPg = () => {
 
   if (loading) {
     return (
-      <div className={classes.mainContainer}>
+      <>
         <HeaderCmp />
-        <SidebarAdminCmp visible={true} />
-        <DefaultDashCmp>
-          <div>Loading...</div>
-        </DefaultDashCmp>
-      </div>
+        <div className={classes.mainContainer}>
+          {/* <SidebarAdminCmp visible={true} /> */}
+          <AdminSideBarCmp />
+          <div className={classes.content}>
+            <DefaultDashCmp>
+              <div>Loading...</div>
+            </DefaultDashCmp>
+          </div>
+        </div>
+      </>
     );
   }
 
   if (error) {
     // Show an error message
     return (
-      <div className={classes.mainContainer}>
+      <>
         <HeaderCmp />
-        <SidebarAdminCmp visible={true} />
-        <DefaultDashCmp>
-          <div>Error: {error}</div>
-        </DefaultDashCmp>
-      </div>
+        <div className={classes.mainContainer}>
+          {/* <SidebarAdminCmp visible={true} /> */}
+          <AdminSideBarCmp />
+          <div className={classes.content}>
+            <DefaultDashCmp>
+              <div>Error: {error}</div>
+            </DefaultDashCmp>
+          </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className={classes.mainContainer}>
+    <>
       <HeaderCmp />
-      <SidebarAdminCmp visible={true} />
-      <DefaultDashCmp>
-        <h1 style={{ textAlign: "center" }}>Donor Details</h1>
-        {/* Pass the donor details to AdminDonorCmp */}
-        <AdminDonorCmp donorDetails={donorDetails} />
-      </DefaultDashCmp>
-    </div>
+      <div className={classes.mainContainer}>
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
+        <div className={classes.content}>
+          <DefaultDashCmp>
+            <h1 style={{ textAlign: "center" }}>Donor Details</h1>
+            {/* Pass the donor details to AdminDonorCmp */}
+            <AdminDonorCmp donorDetails={donorDetails} />
+          </DefaultDashCmp>
+        </div>
+      </div>
+    </>
   );
 };
 
