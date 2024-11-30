@@ -1,87 +1,128 @@
-/*.crew-verify-requests-container {*/
-/*    margin-left: 10%; */
-/*    margin-top: 5%;*/
-/*    overflow-x: auto;*/
-/*    overflow-y: auto;*/
-/*    max-height: calc(100vh - 10%);*/
-/*    padding-right: 15px;*/
-/*  }*/
-/*  */
-/*  .ui.celled.table {*/
-/*    min-width: 700px;*/
-/*    border: 1px solid #ddd;*/
-/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);*/
-/*  }*/
-/*  */
+.crew-verify-requests-container {
+   margin-left: 10%;
+   margin-top: 5%;
+   overflow-x: auto;
+   overflow-y: auto;
+   max-height: calc(100vh - 10%);
+   padding-right: 15px;
+ }
 
-/*  .ui.celled.table thead th {*/
-/*    background-color: #1e3a5f;*/
-/*    color: #ffffff;*/
-/*    position: sticky; */
-/*    top: 0; */
-/*    z-index: 1; */
-/*    border-bottom: 2px solid #fff; */
-/*  }*/
-/*  */
-/*  .ui.celled.table tbody td {*/
-/*    vertical-align: middle; */
-/*    text-align: center;*/
-/*  }*/
-/*  */
-
-/*  .ui.label.ribbon {*/
-/*    margin-left: -1em;*/
-/*  }*/
-/*  */
-/*  */
-/*  .ui.celled.table tfoot .pagination {*/
-/*    margin: 0;  */
-/*    background-color: #ffffff;  */
-/*  }*/
-/*  */
-/*  .ui.menu.pagination .item {*/
-/*    color: #1e3a5f !important;*/
-/*    !* background-color: transparent !important;   *!*/
-/*  }*/
-/*  */
-/*  .ui.menu.pagination .item:hover {*/
-/*    background-color: #f1f1f1;*/
-/*    color: #ffffff !important;  */
-/*  }*/
-/*  */
-/*  .ui.menu.pagination .item.active {*/
-/*    background-color: #1e3a5f; */
-/*    color: #ffffff !important;*/
-/*    border-radius: 4px;*/
-/*  }*/
+ .ui.celled.table {
+   min-width: 700px;
+   border: 1px solid #ddd;
+   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
 
 
-/*  */
-/*  .crew-document-preview {*/
-/*    margin-bottom: 20px;*/
-/*  }*/
-/*  */
-/*  .crew-document-preview img {*/
-/*    max-width: 100%;*/
-/*  }*/
-/*  */
-/*  .crew-document-preview .react-pdf__Page {*/
-/*    width: 100%;*/
-/*  }*/
-/*  */
-/*  .ui.modal {*/
-/*    max-height: 80vh;*/
-/*    overflow-y: auto;*/
-/*  }*/
-/*  */
-/*  .ui.modal .header {*/
-/*    text-align: center;*/
-/*  }*/
+ .ui.celled.table thead th {
+   background-color: #1e3a5f;
+   color: #ffffff;
+   position: sticky;
+   top: 0;
+   z-index: 1;
+   border-bottom: 2px solid #fff;
+ }
 
-/*  .ui.modal .close {*/
-/*    top: 10px;*/
-/*    right: 10px;*/
-/*    color: #1e3a5f;*/
-/*  }*/
-/*  */
-/**/
+ .ui.celled.table tbody td {
+   vertical-align: middle;
+   text-align: center;
+ }
+
+
+ .ui.label.ribbon {
+   margin-left: -1em;
+ }
+
+
+ .ui.celled.table tfoot .pagination {
+   margin: 0; 
+   background-color: #ffffff;  
+ }
+
+ .ui.menu.pagination .item {
+   color: #1e3a5f !important;
+    background-color: transparent !important;  
+ }
+
+ .ui.menu.pagination .item:hover {
+   background-color: #f1f1f1;
+   color: #ffffff !important; 
+ }
+
+ .ui.menu.pagination .item.active {
+   background-color: #1e3a5f;
+   color: #ffffff !important;
+   border-radius: 4px;
+ }
+
+
+
+ .crew-document-preview {
+   margin-bottom: 20px;
+ }
+
+ .crew-document-preview img {
+   max-width: 100%;
+ }
+
+ .crew-document-preview .react-pdf__Page {
+   width: 100%;
+ }
+
+ .ui.modal {
+   max-height: 80vh;
+   overflow-y: auto;
+ }
+
+ .ui.modal .header {
+   text-align: center;
+ }
+
+ .ui.modal .close {
+   top: 10px;
+   right: 10px;
+   color: #1e3a5f;
+ }
+
+ .crew-link-button {
+  background: none;
+  border: none;
+  color: blue;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.verification-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.verification-badge.verified {
+  background-color: #28a745;
+  color: white;
+}
+
+.verification-badge.unverified {
+  background-color: #dc3545;
+  color: white;
+}
+
+.verify-toggle-btn {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.verify-toggle-btn.btn-verify {
+  background-color: #28a745;
+  color: white;
+}
+
+.verify-toggle-btn.btn-unverify {
+  background-color: #dc3545;
+  color: white;
+}

@@ -2,12 +2,18 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Document, Page } from 'react-pdf';
 import Modal from 'react-modal';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Swal from 'sweetalert2';
 import './VerifyRequestsTable.css';
 import SearchBar from './Searchbar';
+import Filter from './Filter';
 
-Modal.setAppElement('#root'); // Set the app element for accessibility
+// Set modal accessibility
+Modal.setAppElement('#root');
 
 const VerifyRequestsTable = () => {
+    // State management
     const [requests, setRequests] = useState([]);
     const [filterRequests, setFilterRequests] = useState([]);
     const [selectedDocument, setSelectedDocument] = useState([]);
@@ -15,78 +21,146 @@ const VerifyRequestsTable = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [noResultsFound, setNoResultsFound] = useState(false);
 
+    // Fetch requests on component mount
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:9013/crew/get_request'); // Ensure this URL is correct
-                setRequests(response.data.requests); // Ensure the correct path to the data
-                setFilterRequests(response.data.requests);
+                const response = await axios.get('http://localhost:9013/crew/get_request');
+
+                // Validate response data
+                if (response.data && response.data.requests) {
+                    setRequests(response.data.requests);
+                    setFilterRequests(response.data.requests);
+                } else {
+                    throw new Error('Invalid response structure');
+                }
             } catch (error) {
                 console.error('Error fetching requests:', error);
+                toast.error('Failed to fetch requests. Please try again later.');
             }
         };
 
         fetchRequests();
     }, []);
 
-    const handleStatusChange = (event, requestId) => {
-        const newStatus = event.target.value;
+    const handleStatusChange = async (requestId, newStatus) => {
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: `Do you want to change the status to ${newStatus}?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, change it!'
+        });
 
-        // Update the status in the backend
-        axios.put(`http://localhost:9013/crew/update_request_status`, { requestId, status: newStatus }) // Ensure this URL is correct
-            .then(response => {
-                console.log('Status updated:', response.data);
-                // Optionally, update the local state to reflect the change
-                setRequests(prevRequests => prevRequests.map(request =>
-                    request._id === requestId ? { ...request, status: newStatus } : request
-                ));
-            })
-            .catch(error => {
+        if (result.isConfirmed) {
+            try {
+                const validStatuses = ['Pending', 'Published', 'Rejected'];
+                if (!validStatuses.includes(newStatus)) {
+                    throw new Error('Invalid status');
+                }
+
+                const response = await axios.put('http://localhost:9013/crew/update_request_status', {
+                    requestId,
+                    status: newStatus
+                });
+
+                const updatedRequests = requests.map(request =>
+                    request._id === requestId
+                        ? { ...request, status: newStatus }
+                        : request
+                );
+
+                setRequests(updatedRequests);
+                setFilterRequests(updatedRequests);
+
+                toast.success('Status updated successfully');
+            } catch (error) {
                 console.error('Error updating status:', error);
-            });
+
+                toast.error('Failed to update status. Please try again.');
+            }
+        }
     };
 
+    // Search functionality
     const handleSearch = (event) => {
-        console.log('Search query:', event.target.value);
         const query = event.target.value;
         setSearchQuery(query);
 
         const filteredData = requests.filter((request) => {
-            const searchString = `${request.beneficiary_id?.name} 
-                ${request.user_id?.username} ${request._id}
-                 ${request.beneficiary_id?.email} ${request.beneficiary_id?.phoneNo}
-                  ${request.description} ${request.status}`.toLowerCase();
+            const searchString = `
+                ${request.beneficiary_id?.name || ''} 
+                ${request.user_id?.username || ''} 
+                ${request._id || ''} 
+                ${request.beneficiary_id?.email || ''} 
+                ${request.beneficiary_id?.phoneNo || ''}
+                ${request.description || ''} 
+                ${request.status || ''}
+            `.toLowerCase();
+
             return searchString.includes(query.toLowerCase());
         });
-        console.log('Filtered data:', filteredData);
+
         setFilterRequests(filteredData);
         setNoResultsFound(filteredData.length === 0);
     };
 
-
-    const handleVerify = async (requestId, newStatus) => {
-        try {
-            // Send the single update request to the backend
-            await axios.put('http://localhost:9013/crew/update_request_status', {
-                requestId,
-                status: newStatus,
+    const handleFilterChange = (selectedStatuses) => {
+        if (selectedStatuses.length === 0) {
+            setFilterRequests([]); // Show no records if nothing is selected
+        } else {
+            const filtered = requests.filter(request => {
+                // Map the request status to match the checkbox options
+                let currentStatus;
+                if (request.status === 'Published') {
+                    currentStatus = 'Published';
+                } else if (request.status === 'Rejected') {
+                    currentStatus = 'Rejected';
+                } else {
+                    currentStatus = 'Pending';
+                }
+                // Return true if current status is in selected statuses array
+                return selectedStatuses.includes(currentStatus);
             });
-
-            // Update the UI by modifying the status of the specific request locally
-            setRequests((prevRequests) =>
-                prevRequests.map((request) =>
-                    request._id === requestId ? { ...request, status: newStatus } : request
-                )
-            );
-
-            alert('Request updated successfully!');
-        } catch (error) {
-            console.error('Error updating request:', error);
-            alert('Failed to update the request. Please try again.');
+            setFilterRequests(filtered);
+            // setNoResultsFound(filtered.length === 0);
         }
     };
 
+    const getFileName = (url) => {
+        return url.substring(url.lastIndexOf("/") + 1);
+    };
 
+    const renderDocumentPreview = (url) => {
+        if (url.endsWith(".pdf")) {
+            return (
+                <div style={{ maxWidth: "200px", marginBottom: "10px" }}>
+                    <Document file={url}>
+                        <Page pageNumber={1} />
+                    </Document>
+                </div>
+            );
+        } else if (url.match(/\.(jpg|jpeg|png)$/)) {
+            return (
+                <img
+                    src={url}
+                    alt="Document preview"
+                    style={{ maxWidth: "200px", marginBottom: "10px" }}
+                />
+            );
+        } else {
+            const fileName = getFileName(url);
+            return (
+                <a href={url} download>
+                    {fileName}
+                </a>
+            );
+        }
+    };
+
+    // Document modal handlers
     const openModal = (documents) => {
         setSelectedDocument(documents);
         setModalIsOpen(true);
@@ -99,9 +173,27 @@ const VerifyRequestsTable = () => {
 
     return (
         <div className='crew-verify-requests-container'>
-            <SearchBar searchQuery={searchQuery} onSearchChange={handleSearch} />
+            {/* Toast Notification Container */}
+            <ToastContainer
+                position="top-right"
+                autoClose={3000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <div className='crew-filter-search'>
+            <Filter onFilterChange={handleFilterChange} />
+            <SearchBar
+                searchQuery={searchQuery}
+                onSearchChange={handleSearch}
+            />
+            </div>
 
-            <table className='ui clelled table'>
+            <table className='ui celled table' id='crew-request-table'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -112,15 +204,18 @@ const VerifyRequestsTable = () => {
                         <th>Description</th>
                         <th>Documents</th>
                         <th>Status</th>
-                        <th>Actions</th>
                     </tr>
                 </thead>
 
                 {noResultsFound && (
-                    <div className="crew-no-results-message">
-                        No matching records available.
-                    </div>
-                )}
+        <tbody>
+            <tr>
+                <td colSpan="8" className="crew-no-results-message">
+                    No matching records available.
+                </td>
+            </tr>
+        </tbody>
+    )}
 
                 <tbody>
                     {filterRequests.map(request => (
@@ -132,20 +227,18 @@ const VerifyRequestsTable = () => {
                             <td>{request.beneficiary_id?.phoneNo || 'N/A'}</td>
                             <td>{request.description || 'No Description'}</td>
                             <td>
-                                <button href="#" onClick={() => openModal(request.documents)} className='crew-link-button'>View Document</button>
+                            {request.documents.length > 0 ? (
+                                <button onClick={() => openModal(request.documents)} className="crew-link-button">
+                                    View Document
+                                </button>
+                            ) : (
+                                'No Documents'
+                            )}
                             </td>
                             <td>
                                 <select
                                     value={request.status}
-                                    onChange={(e) =>
-                                        setRequests((prevRequests) =>
-                                            prevRequests.map((r) =>
-                                                r._id === request._id
-                                                    ? { ...r, status: e.target.value }
-                                                    : r
-                                            )
-                                        )
-                                    }
+                                    onChange={(e) => handleStatusChange(request._id, e.target.value)}
                                 >
                                     <option value="Pending">Pending</option>
                                     <option value="Published">Published</option>
@@ -153,31 +246,26 @@ const VerifyRequestsTable = () => {
                                 </select>
                             </td>
                             <td>
-                                <button
-                                    type="button"
-                                    onClick={() => handleVerify(request._id, request.status)}
-                                >
-                                    Verify
-                                </button>
                             </td>
                         </tr>
                     ))}
                 </tbody>
             </table>
 
-            <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Document Viewer">
-                <button onClick={closeModal}>Close</button>
-                {Array.isArray(selectedDocument) && selectedDocument.length > 0 && selectedDocument.map((doc, index) => (
-                    <div key={index}>
-                        {doc.endsWith('.pdf') ? (
-                            <Document file={doc}>
-                                <Page pageNumber={1} />
-                            </Document>
-                        ) : (
-                            <img src={doc} alt={`Document ${index + 1}`} style={{ width: '100%' }} />
-                        )}
-                    </div>
-                ))}
+            <Modal
+                open={modalIsOpen}
+                onClose={() => setModalIsOpen(false)}
+                size="large"
+                closeIcon
+            >
+                <Modal.Header>Document Preview</Modal.Header>
+                <Modal.Content>
+                    {selectedDocument.map((docUrl, index) => (
+                        <div key={index} className='crew-document-preview'>
+                            {renderDocumentPreview(docUrl)}
+                        </div>
+                    ))}
+                </Modal.Content>
             </Modal>
         </div>
     );
