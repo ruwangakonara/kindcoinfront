@@ -40,7 +40,7 @@ const Login = () => {
       const response = await axiosInstance.post('/signin', data);
 
       if (response.status === 200) {
-        const { user, donor, beneficiary } = response.data;
+        const { user, donor, beneficiary, member, admin } = response.data;
         setUser(user); // Save user in global state
 
         if (donor) {
@@ -56,7 +56,13 @@ const Login = () => {
             navigate("/not_verified")
             return
           }
-        } else {
+        } else if (member) {
+          setUserDetails(member); // Save beneficiary details in global state
+
+        }  else if (admin) {
+          setUserDetails(admin); // Save beneficiary details in global state
+
+        }else {
           setUserDetails(null);
         }
 

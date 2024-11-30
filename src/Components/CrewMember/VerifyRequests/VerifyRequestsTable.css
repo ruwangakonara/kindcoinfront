@@ -1,60 +1,60 @@
 .crew-verify-requests-container {
-    margin-left: 5%; 
+    margin-left: 5%;
     margin-top: 5%;
     overflow-x: auto;
     overflow-y: auto;
     max-height: calc(100vh - 10%);
     padding-right: 15px;
   }
-  
+
   .ui.celled.table {
     min-width: 700px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
 
-  .ui.celled.table tr:hover{
-    background-color: #0f52a9;
-  }
-  
+  /*.ui.celled.table tr:hover{*/
+  /*  background-color: #0f52a9;*/
+  /*}*/
 
-  .ui.celled.table thead th {
-    background-color: #1e3a5f;
-    color: #ffffff;
-    position: sticky; 
-    top: 0; 
-    z-index: 1; 
-    border-bottom: 2px solid #fff; 
-  }
-  
+
+  /*.ui.celled.table thead th {*/
+  /*  background-color: #1e3a5f;*/
+  /*  color: #ffffff;*/
+  /*  position: sticky;*/
+  /*  top: 0;*/
+  /*  z-index: 1;*/
+  /*  border-bottom: 2px solid #fff;*/
+  /*}*/
+
   .ui.celled.table tbody td {
-    vertical-align: middle; 
+    vertical-align: middle;
     text-align: center;
   }
-  
+
 
   .ui.label.ribbon {
     margin-left: -1em;
   }
-  
-  
+
+
   .ui.celled.table tfoot .pagination {
-    margin: 0;  
-    background-color: #ffffff;  
+    margin: 0;
+    background-color: #ffffff;
   }
-  
+
   .ui.menu.pagination .item {
     color: #1e3a5f !important;
     /* background-color: transparent !important;   */
   }
-  
+
   .ui.menu.pagination .item:hover {
     background-color: #f1f1f1;
-    color: #ffffff !important;  
+    color: #ffffff !important;
   }
-  
+
   .ui.menu.pagination .item.active {
-    background-color: #1e3a5f; 
+    background-color: #1e3a5f;
     color: #ffffff !important;
     border-radius: 4px;
   }

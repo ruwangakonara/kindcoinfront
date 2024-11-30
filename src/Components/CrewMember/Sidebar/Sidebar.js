@@ -20,7 +20,7 @@ const SidebarCrew = () => (
 
   >
     {/* Check semantic */}
-    <MenuItem as={Link} to='/crew/home' className='home'> 
+    <MenuItem as={Link} to='/crew/home' className='home'>
       <Icon name='home' />
       Home
     </MenuItem>
@@ -39,6 +39,14 @@ const SidebarCrew = () => (
     <MenuItem as={Link} to='/crew/token_transfer'>
       <Icon name='credit card' />
       Token Transfer
+    </MenuItem>
+    <MenuItem as={Link} to='/crew/doc_verify'>
+      <Icon name='dochub' />
+      Attestation Fee
+    </MenuItem>
+    <MenuItem as={Link} to='/crew/dispatch'>
+      <Icon name='money' />
+      Token Batch
     </MenuItem>
     <MenuItem as={Link} to='/crew/settings' className='settings'>
       <Icon name='settings' />

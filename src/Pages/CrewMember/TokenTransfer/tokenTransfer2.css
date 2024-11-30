@@ -1,0 +1,70 @@
+/*.donation-list {*/
+/*    padding: 20px;*/
+/*}*/
+
+/*.donation-card {*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 8px;*/
+/*    padding: 15px;*/
+/*    margin-bottom: 15px;*/
+/*}*/
+
+/*.token-transfer-btn {*/
+/*    background-color: #28a745;*/
+/*    color: white;*/
+/*    border: none;*/
+/*    padding: 10px 15px;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.token-transfer-btn:hover {*/
+/*    background-color: #218838;*/
+/*}*/
+
+/*.modal {*/
+/*    background: white;*/
+/*    padding: 20px;*/
+/*    border-radius: 10px;*/
+/*    width: 400px;*/
+/*    margin: auto;*/
+/*    text-align: center;*/
+/*}*/
+
+/*.modal-overlay {*/
+/*    background: rgba(0, 0, 0, 0.5);*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    bottom: 0;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.confirm-btn, .cancel-btn, .close-btn {*/
+/*    padding: 10px 15px;*/
+/*    margin: 10px;*/
+/*    border: none;*/
+/*    border-radius: 5px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.confirm-btn {*/
+/*    background-color: #007bff;*/
+/*    color: white;*/
+/*}*/
+
+/*.confirm-btn:hover {*/
+/*    background-color: #0056b3;*/
+/*}*/
+
+/*.cancel-btn, .close-btn {*/
+/*    background-color: #dc3545;*/
+/*    color: white;*/
+/*}*/
+
+/*.cancel-btn:hover, .close-btn:hover {*/
+/*    background-color: #c82333;*/
+/*}*/
