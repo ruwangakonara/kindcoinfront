@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function AdminSideBarCmp() {
   const [activeItem, setActiveItem] = useState("Home");
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
   const [icon, setIcon] = useState("angle right");
   //   const { setUser } = useContext(UserContext);
   const navigate = useNavigate();

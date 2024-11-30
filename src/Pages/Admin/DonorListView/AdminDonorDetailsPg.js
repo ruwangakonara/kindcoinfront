@@ -43,42 +43,54 @@ const AdminDonorDetailsPg = () => {
 
   if (loading) {
     return (
-      <div className={classes.mainContainer}>
+      <>
         <HeaderCmp />
-        {/* <SidebarAdminCmp visible={true} /> */}
-        <AdminSideBarCmp />
-        <DefaultDashCmp>
-          <div>Loading...</div>
-        </DefaultDashCmp>
-      </div>
+        <div className={classes.mainContainer}>
+          {/* <SidebarAdminCmp visible={true} /> */}
+          <AdminSideBarCmp />
+          <div className={classes.content}>
+            <DefaultDashCmp>
+              <div>Loading...</div>
+            </DefaultDashCmp>
+          </div>
+        </div>
+      </>
     );
   }
 
   if (error) {
     // Show an error message
     return (
-      <div className={classes.mainContainer}>
+      <>
         <HeaderCmp />
-        {/* <SidebarAdminCmp visible={true} /> */}
-        <AdminSideBarCmp />
-        <DefaultDashCmp>
-          <div>Error: {error}</div>
-        </DefaultDashCmp>
-      </div>
+        <div className={classes.mainContainer}>
+          {/* <SidebarAdminCmp visible={true} /> */}
+          <AdminSideBarCmp />
+          <div className={classes.content}>
+            <DefaultDashCmp>
+              <div>Error: {error}</div>
+            </DefaultDashCmp>
+          </div>
+        </div>
+      </>
     );
   }
 
   return (
-    <div className={classes.mainContainer}>
+    <>
       <HeaderCmp />
-      {/* <SidebarAdminCmp visible={true} /> */}
-      <AdminSideBarCmp />
-      <DefaultDashCmp>
-        <h1 style={{ textAlign: "center" }}>Donor Details</h1>
-        {/* Pass the donor details to AdminDonorCmp */}
-        <AdminDonorCmp donorDetails={donorDetails} />
-      </DefaultDashCmp>
-    </div>
+      <div className={classes.mainContainer}>
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
+        <div className={classes.content}>
+          <DefaultDashCmp>
+            <h1 style={{ textAlign: "center" }}>Donor Details</h1>
+            {/* Pass the donor details to AdminDonorCmp */}
+            <AdminDonorCmp donorDetails={donorDetails} />
+          </DefaultDashCmp>
+        </div>
+      </div>
+    </>
   );
 };
 

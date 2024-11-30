@@ -37,10 +37,10 @@ use admin_ as a prefix for the custom class names
     gap: 15px; 
   }
 
-.admin_iconContainer{
+.iconContainer{
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  gap: 50px;
 }
 
   .admin_userNameContainer{

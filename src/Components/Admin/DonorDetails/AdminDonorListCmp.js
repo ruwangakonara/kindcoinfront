@@ -187,9 +187,14 @@ const AdminDonorListCmp = () => {
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
+                    {/* <IconGroup size="large" className={classes.iconContainer}> */}
                     <IconGroup
                       size="large"
-                      className={classes.admin_iconContainer}
+                      style={{
+                        display: "flex",
+                        alignItems: "space-between",
+                        gap: "40px",
+                      }}
                     >
                       <Icon
                         name="edit"

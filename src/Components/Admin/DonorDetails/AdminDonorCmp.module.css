@@ -4,17 +4,40 @@ use admin_ as a prefix for the custom class names
 
 .admin_mainContainer{
     /* height: 100vh; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin: 25px;
     margin-top: 40px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 .admin_subContainer{
-    width: 500px;
+    /* width: 500px; */
+    display: flex;
+    align-items: stretch; /* Align both the Image and Card to have equal height */
+    gap: 20px; /* Optional: Add some spacing between the Image and the Card */
+    width: 100%;
+    max-width: 1000px; /* Adjust based on your layout preferences */
 }
 
 .admin_cardDescription p{
     size: 25px;
 }
+
+.admin_imageWrapper {
+    flex: 1; /* Let the image take up available space proportionally */
+  }
+  
+  .admin_cardWrapper {
+    flex: 2; /* Let the card take up more space compared to the image */
+  }
+  
+  .admin_cardDescription {
+    text-align: left; /* Optional: Align the text in the card */
+  }
+
+  .admin_image {
+    width: 400px;
+    height: 400px;
+  }

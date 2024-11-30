@@ -11,10 +11,26 @@ body {
     
 }
 
-.content {
-    flex-grow: 1; /*Allows the content area to take the remaining space  */
-    padding: 20px 50px; /* Optional: Add padding to the content */
-    overflow-y: auto; /* Enables scrolling if content overflows */
-    /* width: 100%; */
+/* .content {
+    flex-grow: 1;
+    padding: 20px 50px; 
+    overflow-y: auto;
     box-sizing: border-box;
+  } */
+
+  .content {
+    padding: 20px;
+    overflow-y: auto;
+    width: calc(100% - 50px); /* Full width minus padding */
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: width 0.5s;
   }
+
+  .withSidebar .content {
+    width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
+}
+
+.noSidebar .content {
+    width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
+}

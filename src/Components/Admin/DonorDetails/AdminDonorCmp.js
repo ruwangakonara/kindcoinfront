@@ -36,14 +36,11 @@ const AdminDonorCmp = ({ donorDetails }) => {
   return (
     <div className={classes.admin_mainContainer}>
       <div className={classes.admin_subContainer}>
-        <Card
-          className={classes.donorCardStylings}
-          fluid={true}
-          centered={true}
-          raised
-        >
-          {/* Profile Image */}
+        {/* Profile Image */}
+        {/* <div className={classes.admin_imageWrapper}>
           <Image
+            className={classes.admin_image}
+            style={{ width: "200px", height: "200px" }}
             src={
               profile_image ||
               "https://react.semantic-ui.com/images/avatar/large/matthew.png"
@@ -51,55 +48,73 @@ const AdminDonorCmp = ({ donorDetails }) => {
             wrapped
             ui={false}
           />
-          <CardContent>
-            <CardHeader>{anonymous ? "Anonymous Donor" : name}</CardHeader>
-            <CardMeta>
-              <span className="date">
-                Joined on {new Date(created_at).toLocaleDateString()}
-              </span>
-            </CardMeta>
-            <CardDescription textAlign="left">
-              <div className={classes.admin_cardDescription}>
-                <p>
-                  <strong>User ID:</strong> {user_id}
-                </p>
-                <p>
-                  <strong>Email (Username):</strong> {username}
-                </p>
-                <p>
-                  <strong>District:</strong> {district}
-                </p>
-                <p>
-                  <strong>Phone Number:</strong> {phoneNo}
-                </p>
-                <p>
-                  <strong>Date of Birth:</strong>{" "}
-                  {new Date(date_of_birth).toLocaleDateString()}
-                </p>
-                <p>
-                  <strong>Stellar Address:</strong> {stellar_address}
-                </p>
-                <p>
-                  <strong>Type:</strong> {type}
-                </p>
-                <p>
-                  <strong>No. of Donations:</strong> {no_donations}
-                </p>
-                <p>
-                  <strong>Total Donated:</strong> {donated}
-                </p>
-                <p>
-                  <strong>Tokens Remaining:</strong> {tokens}
-                </p>
-                <p>
-                  <strong>Description:</strong> {description || "N/A"}
-                </p>
-              </div>
-            </CardDescription>
-          </CardContent>
+        </div> */}
+        <div className={classes.admin_cardWrapper}>
+          <Card
+            fluid={true}
+            centered={true}
+            raised
+            style={{ display: "flex", flexDirection: "row", width: "600px" }}
+          >
+            <CardContent>
+              <CardHeader>{anonymous ? "Anonymous Donor" : name}</CardHeader>
+              <CardMeta>
+                <span className="date">
+                  Joined on {new Date(created_at).toLocaleDateString()}
+                </span>
+              </CardMeta>
+              <CardDescription textAlign="left">
+                <div className={classes.admin_cardDescription}>
+                  <p>
+                    <strong>User ID:</strong> {user_id}
+                  </p>
+                  <p>
+                    <strong>Email (Username):</strong> {username}
+                  </p>
+                  <p>
+                    <strong>District:</strong> {district}
+                  </p>
+                  <p>
+                    <strong>Phone Number:</strong> {phoneNo}
+                  </p>
+                  <p>
+                    <strong>Date of Birth:</strong>{" "}
+                    {new Date(date_of_birth).toLocaleDateString()}
+                  </p>
+                  <p>
+                    <strong>Stellar Address:</strong> {stellar_address}
+                  </p>
+                  <p>
+                    <strong>Type:</strong> {type}
+                  </p>
+                  <p>
+                    <strong>No. of Donations:</strong> {no_donations}
+                  </p>
+                  <p>
+                    <strong>Total Donated:</strong> {donated}
+                  </p>
+                  <p>
+                    <strong>Tokens Remaining:</strong> {tokens}
+                  </p>
+                  <p>
+                    <strong>Description:</strong> {description || "N/A"}
+                  </p>
+                </div>
+              </CardDescription>
+            </CardContent>
+            <Image
+              className={classes.admin_image}
+              style={{ width: "200px", height: "200px" }}
+              src={
+                profile_image ||
+                "https://react.semantic-ui.com/images/avatar/large/matthew.png"
+              }
+              wrapped
+              ui={false}
+            />
 
-          {/* Images Section */}
-          {/* <CardContent>
+            {/* Images Section */}
+            {/* <CardContent>
             <h3>Images</h3>
             <div className={classes.imagesContainer}>
               {image1 && <Image src={image1} size="small" />}
@@ -109,7 +124,8 @@ const AdminDonorCmp = ({ donorDetails }) => {
               {image5 && <Image src={image5} size="small" />}
             </div>
           </CardContent> */}
-        </Card>
+          </Card>
+        </div>
       </div>
     </div>
   );
