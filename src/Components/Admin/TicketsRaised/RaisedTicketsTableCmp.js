@@ -175,103 +175,110 @@ const RaisedTicketsTableCmp = () => {
   };
 
   return (
-    <div className={classes.mainContainer}>
-      <InputExampleIconPosition />
-      <Table celled>
-        <TableHeader>
-          <TableRow>
-            <TableHeaderCell className={classes.customFont}>
-              TicketId
-            </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
-              UserId
-            </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
-              UserType
-            </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
-              District
-            </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
-            <TableHeaderCell className={classes.customFont}>
-              Address
-            </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
-              Contact No.
-            </TableHeaderCell>
-            <TableHeaderCell className={classes.customFont}>
-              Action
-            </TableHeaderCell>
-            {/* <TableHeaderCell className={classes.customFont}>Beneficiary Type</TableHeaderCell> */}
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {rows.map((row, index) => {
-            const isActive = activeRows[index] ?? true;
-            return (
-              <TableRow
-                key={index}
-                className={`${classes.dataRow} ${
-                  !isActive && classes.deactivatedRow
-                }`}
-                onClick={() => handleRowClick(row.userId)}
-              >
-                <TableCell>{row.userId}</TableCell>
-                <TableCell>{row.userName}</TableCell>
-                <TableCell>
-                  <div className={classes.userNameContainer}>
-                    {/* <Image src={row.image} circular className={classes.imageStylings}></Image> */}
-                    {/* <span className={classes.truncatedText}>{row.name}</span> */}
-                  </div>
-                </TableCell>
-                <TableCell>{row.district}</TableCell>
-                {/* <TableCell>{row.address}</TableCell> */}
-                <TableCell>{row.stellarAddress}</TableCell>
-                <TableCell>{row.contact}</TableCell>
-                <TableCell className={classes.actionStylings}>
-                  <div className={classes.actionContainerDiv}>
-                    <Button
-                      color="primary"
-                      onClick={(e) => handleEditClick(e, row.userId)}
-                    >
-                      View Detail
-                    </Button>
-                    <Button
-                      color={isActive ? "red" : "green"}
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleActivation(index);
-                      }}
-                    >
-                      {isActive ? "Open" : "Resolved"}
-                    </Button>
-                  </div>
-                </TableCell>
-                {/* <TableCell>{row.beneficiaryType}</TableCell> */}
+    <>
+      {/* <div className={classes.admin_mainContainer}> */}
+      <div className={classes.admin_formContainer}>
+        <div className={classes.formContent}>
+          {/* <div className={classes.mainContainer}> */}
+          {/* <InputExampleIconPosition /> */}
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHeaderCell className={classes.customFont}>
+                  TicketId
+                </TableHeaderCell>
+                <TableHeaderCell className={classes.customFont}>
+                  UserId
+                </TableHeaderCell>
+                <TableHeaderCell className={classes.customFont}>
+                  UserType
+                </TableHeaderCell>
+                <TableHeaderCell className={classes.customFont}>
+                  District
+                </TableHeaderCell>
+                {/* <TableHeaderCell className={classes.customFont}> Address</TableHeaderCell> */}
+                <TableHeaderCell className={classes.customFont}>
+                  Address
+                </TableHeaderCell>
+                <TableHeaderCell className={classes.customFont}>
+                  Contact No.
+                </TableHeaderCell>
+                <TableHeaderCell className={classes.customFont}>
+                  Action
+                </TableHeaderCell>
+                {/* <TableHeaderCell className={classes.customFont}>Beneficiary Type</TableHeaderCell> */}
               </TableRow>
-            );
-          })}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableHeaderCell colSpan="7">
-              <Menu floated="right" pagination>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron left" />
-                </MenuItem>
-                <MenuItem as="a">1</MenuItem>
-                <MenuItem as="a">2</MenuItem>
-                <MenuItem as="a">3</MenuItem>
-                <MenuItem as="a">4</MenuItem>
-                <MenuItem as="a" icon>
-                  <Icon name="chevron right" />
-                </MenuItem>
-              </Menu>
-            </TableHeaderCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </div>
+            </TableHeader>
+            <TableBody>
+              {rows.map((row, index) => {
+                const isActive = activeRows[index] ?? true;
+                return (
+                  <TableRow
+                    key={index}
+                    className={`${classes.dataRow} ${
+                      !isActive && classes.deactivatedRow
+                    }`}
+                    onClick={() => handleRowClick(row.userId)}
+                  >
+                    <TableCell>{row.userId}</TableCell>
+                    <TableCell>{row.userName}</TableCell>
+                    <TableCell>
+                      <div className={classes.userNameContainer}>
+                        {/* <Image src={row.image} circular className={classes.imageStylings}></Image> */}
+                        {/* <span className={classes.truncatedText}>{row.name}</span> */}
+                      </div>
+                    </TableCell>
+                    <TableCell>{row.district}</TableCell>
+                    {/* <TableCell>{row.address}</TableCell> */}
+                    <TableCell>{row.stellarAddress}</TableCell>
+                    <TableCell>{row.contact}</TableCell>
+                    <TableCell className={classes.actionStylings}>
+                      <div className={classes.actionContainerDiv}>
+                        {/* <Button
+                          color="primary"
+                          onClick={(e) => handleEditClick(e, row.userId)}
+                        >
+                          View Detail
+                        </Button> */}
+                        <Button
+                          color={isActive ? "red" : "green"}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            toggleActivation(index);
+                          }}
+                        >
+                          {isActive ? "Open" : "Resolved"}
+                        </Button>
+                      </div>
+                    </TableCell>
+                    {/* <TableCell>{row.beneficiaryType}</TableCell> */}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+            <TableFooter>
+              <TableRow>
+                <TableHeaderCell colSpan="7">
+                  <Menu floated="right" pagination>
+                    <MenuItem as="a" icon>
+                      <Icon name="chevron left" />
+                    </MenuItem>
+                    <MenuItem as="a">1</MenuItem>
+                    <MenuItem as="a">2</MenuItem>
+                    <MenuItem as="a">3</MenuItem>
+                    <MenuItem as="a">4</MenuItem>
+                    <MenuItem as="a" icon>
+                      <Icon name="chevron right" />
+                    </MenuItem>
+                  </Menu>
+                </TableHeaderCell>
+              </TableRow>
+            </TableFooter>
+          </Table>
+        </div>
+      </div>
+      {/* </div> */}
+    </>
   );
 };
 

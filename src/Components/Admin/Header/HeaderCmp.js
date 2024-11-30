@@ -115,13 +115,13 @@ const HeaderCmp = ({ toggleSidebar }) => {
               <Icon size="large" name="user" />
             </div>
           </Link>
-          <Link to={"/admin/handle/announcements"}>
+          {/* <Link to={"/admin/handle/announcements"}>
             <ButtonToggle children={"Announcements"} />
-          </Link>
-          <Link to={"/admin/view/tickets"}>
+          </Link> */}
+          {/* <Link to={"/admin/view/tickets"}>
             <ButtonToggle children={"Tickets"} />
-          </Link>
-          <LogoutButton children={"Logout"} />
+          </Link> */}
+          {/* <LogoutButton children={"Logout"} /> */}
           {/* <div className="brandlogin">
           </div> */}
         </div>

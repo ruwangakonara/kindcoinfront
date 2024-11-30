@@ -1,18 +1,22 @@
 import React from "react";
 import classes from "./RaisedTicketsPg.module.css";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import GeneralDashCmp from "../../../Components/Admin/DashboardComp/GeneralDashCmp";
+// import GeneralDashCmp from "../../../Components/Admin/DashboardComp/GeneralDashCmp";
 import RaisedTicketsTableCmp from "../../../Components/Admin/TicketsRaised/RaisedTicketsTableCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 
 const RaisedTicketsPg = () => {
   return (
     <>
+      <HeaderCmp />
       <div className={classes.mainContainer}>
-        <HeaderCmp />
-        <GeneralDashCmp>
-          Tickets Related Content Component is here.
-          <RaisedTicketsTableCmp />
-        </GeneralDashCmp>
+        <AdminSideBarCmp />
+        <div className={classes.content}>
+          <DefaultDashCmp>
+            <RaisedTicketsTableCmp />
+          </DefaultDashCmp>
+        </div>
       </div>
     </>
   );
