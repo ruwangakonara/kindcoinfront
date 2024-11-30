@@ -3,19 +3,24 @@ import axios from 'axios';
 import { Document, Page } from 'react-pdf';
 import Modal from 'react-modal';
 import './VerifyRecipientsTable.css';
+import SearchBar from './Searchbar';
 
 Modal.setAppElement('#root'); // Set the app element for accessibility
 
 const VerifyRecipientsTable = () => {
     const [recipients, setRecipients] = useState([]);
-    const [selectedDocument, setSelectedDocument] = useState(null);
+    const [filterRecipients, setFilterRecipients] = useState([]);
+    const [selectedDocument, setSelectedDocument] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [noResultsFound, setNoResultsFound] = useState(false);
 
     useEffect(() => {
         const fetchRecipients = async () => {
             try {
                 const response = await axios.get('http://localhost:9013/crew/get_recepient'); // Ensure this URL is correct
                 setRecipients(response.data.benificiaries); // Adjust to the correct response structure
+                setFilterRecipients(response.data.benificiaries);
             } catch (error) {
                 console.error('Error fetching recipients:', error);
             }
@@ -40,6 +45,23 @@ const VerifyRecipientsTable = () => {
             });
     };
 
+    const handleSearch = (event) => {
+        console.log('Search query:', event.target.value);
+        const query = event.target.value;
+        setSearchQuery(query);
+
+        const filteredData = recipients.filter((recipient) => {
+            const searchString = `${recipient.name} 
+                ${recipient.user_id?.username} ${recipient._id}
+                 ${recipient.email} ${recipient.phoneNo}
+                  ${recipient.description} ${recipient.status}`.toLowerCase();
+            return searchString.includes(query.toLowerCase());
+        });
+        console.log('Filtered data:', filteredData);
+        setFilterRecipients(filteredData);
+        setNoResultsFound(filteredData.length === 0);
+    };
+
     const handleVerify = async (recipientId, newStatus) => {
         try {
             await axios.put('http://localhost:9013/crew/update_recepient_status', {
@@ -60,8 +82,8 @@ const VerifyRecipientsTable = () => {
         }
     };
 
-    const openModal = (document) => {
-        setSelectedDocument(document);
+    const openModal = (documents) => {
+        setSelectedDocument(documents);
         setModalIsOpen(true);
     };
 
@@ -72,6 +94,7 @@ const VerifyRecipientsTable = () => {
 
     return (
         <div className='crew-verify-recipients-container'>
+            <SearchBar searchQuery={searchQuery} onSearchChange={handleSearch} />
             <table className='ui celled table'>
                 <thead>
                     <tr>
@@ -85,16 +108,23 @@ const VerifyRecipientsTable = () => {
                         <th>Actions</th>
                     </tr>
                 </thead>
+
+                {noResultsFound && (
+                    <div className="crew-no-results-message">
+                        No matching records available.
+                    </div>
+                )}
+
                 <tbody>
-                    {recipients.map(recipient => (
+                    {filterRecipients.map(recipient => (
                         <tr key={recipient._id}>
-                            <td>{recipient.user_id?.name || 'N/A'}</td>
+                            <td>{recipient.name || 'N/A'}</td>
                             <td>{recipient.user_id?.username || 'N/A'}</td>
-                            <td>{recipient.user_id?.email || 'N/A'}</td>
-                            <td>{recipient.user_id?.phoneNo || 'N/A'}</td>
+                            <td>{recipient.email || 'N/A'}</td>
+                            <td>{recipient.phoneNo || 'N/A'}</td>
                             <td>{recipient.description || 'No Description'}</td>
                             <td>
-                                <a href="#" onClick={() => openModal(recipient.documents)}>View Document</a>
+                            <button href="#" onClick={() => openModal(recipient.documents)} className='crew-link-button'>View Document</button>
                             </td>
                             <td>
                                 <select
@@ -129,13 +159,17 @@ const VerifyRecipientsTable = () => {
 
             <Modal isOpen={modalIsOpen} onRequestClose={closeModal} contentLabel="Document Viewer">
                 <button onClick={closeModal}>Close</button>
-                {selectedDocument && selectedDocument.endsWith('.pdf') ? (
-                    <Document file={selectedDocument}>
-                        <Page pageNumber={1} />
-                    </Document>
-                ) : (
-                    <img src={selectedDocument} alt="Document" style={{ width: '100%' }} />
-                )}
+                {selectedDocument.length > 0 && selectedDocument.map((doc, index) => (
+                    <div key={index}>
+                        {doc.endsWith('.pdf') ? (
+                            <Document file={doc}>
+                                <Page pageNumber={1} />
+                            </Document>
+                        ) : (
+                            <img src={doc} alt={`Document ${index + 1}`} style={{ width: '100%' }} />
+                        )}
+                    </div>
+                ))}
             </Modal>
         </div>
     );

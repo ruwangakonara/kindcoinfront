@@ -2,7 +2,7 @@ import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyDonationProofsTable from "../../../Components/CrewMember/VerifyDonationProofs/VerifyDonationProofsTable";
-import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
+// import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import Filter from "../../../Components/CrewMember/VerifyDonationProofs/Filter";
 import "./VerifyDonationProofs.css";
 
@@ -22,7 +22,7 @@ const VerifyDonationProofs = () => {
                 <Sidebar />
                 <div className="crew-donation-proofs-header">
                     <Filter onFilterChange={handleFilterChange} />
-                    <SearchBar onSearch={handleSearch} />
+                    {/* <SearchBar onSearch={handleSearch} /> */}
                 </div>
                 <div className="crew-donation-proofs-table-container">
                     <VerifyDonationProofsTable />
