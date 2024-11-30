@@ -57,7 +57,7 @@ const Login = () => {
             return
           }
         } else if (member) {
-          setUserDetails(beneficiary); // Save beneficiary details in global state
+          setUserDetails(member); // Save beneficiary details in global state
 
         }  else if (admin) {
           setUserDetails(admin); // Save beneficiary details in global state
