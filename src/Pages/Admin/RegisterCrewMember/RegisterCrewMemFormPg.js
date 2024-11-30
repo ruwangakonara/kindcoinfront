@@ -2,7 +2,8 @@ import classes from "./RegisterCrewMemFormPg.module.css";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
-import { useState } from "react";
+import { useState,  } from "react";
+import {useNavigate} from "react-router-dom";
 import {
   FormField,
   Button,
@@ -21,6 +22,9 @@ const axiosInstance = axios.create({
 });
 
 const RegisterCrewMemFormPg = () => {
+
+  const navigate = useNavigate()
+
   // do a similar logic to post endpoint.
   // const [announcements, setAnnouncements] = useState([]);
 
@@ -35,18 +39,21 @@ const RegisterCrewMemFormPg = () => {
 
   //   }
 
+
+
+
   const [formData, setFormData] = useState({
     name: "",
     userName: "",
-    stellarId: "",
-    town: "",
-    profileImage: "",
-    certificateImage: "",
-    email: "",
+    // stellarId: "",
+    // town: "",
+    // profileImage: "",
+    // certificateImage: "",
+    // email: "",
     phoneNo: "",
-    noOfOperations: 0,
+    // noOfOperations: 0,
     passWord: "",
-    status: "crewmember",
+    status: "crew_member",
   });
 
   const [formState, setFormState] = useState(false);
@@ -56,12 +63,16 @@ const RegisterCrewMemFormPg = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission, e.g., send data to a server
-    handleFormState();
+  const handleSubmit = async () => {
+    try {
+      console.log(formData);
+      await axiosInstance.post('/admin/register/crew_member', formData);
+      // setOpen(false);
+      navigate('/admin/view/crew_member');
+    } catch (error) {
+      console.log(error);
+    }
   };
-
   const handleFormState = (e) => {
     setFormState(!formState);
   };
@@ -86,60 +97,60 @@ const RegisterCrewMemFormPg = () => {
                 value={formData.name}
                 onChange={handleChange}
               />
-              <FormField
-                required={true}
-                label="No Of Operations"
-                control={Input}
-                placeholder="No Of Operations"
-                name="noOfOperations"
-                type="text"
-                value={formData.noOfOperations}
-                onChange={handleChange}
-              />
+              {/*<FormField*/}
+              {/*  required={true}*/}
+              {/*  label="No Of Operations"*/}
+              {/*  control={Input}*/}
+              {/*  placeholder="No Of Operations"*/}
+              {/*  name="noOfOperations"*/}
+              {/*  type="text"*/}
+              {/*  value={formData.noOfOperations}*/}
+              {/*  onChange={handleChange}*/}
+              {/*/>*/}
             </FormGroup>
             <FormGroup widths="equal">
-              <FormField
-                required={true}
-                label="Stellar Id"
-                control={Input}
-                placeholder="Stellar Id"
-                name="stellarId"
-                type="text"
-                value={formData.stellarId}
-                onChange={handleChange}
-              />
-              <FormField
-                required={true}
-                label="Town"
-                control={Input}
-                placeholder="Town"
-                name="town"
-                type="text"
-                value={formData.town}
-                onChange={handleChange}
-              />
+              {/*<FormField*/}
+              {/*  required={true}*/}
+              {/*  label="Stellar Id"*/}
+              {/*  control={Input}*/}
+              {/*  placeholder="Stellar Id"*/}
+              {/*  name="stellarId"*/}
+              {/*  type="text"*/}
+              {/*  value={formData.stellarId}*/}
+              {/*  onChange={handleChange}*/}
+              {/*/>*/}
+              {/*<FormField*/}
+              {/*  required={true}*/}
+              {/*  label="Town"*/}
+              {/*  control={Input}*/}
+              {/*  placeholder="Town"*/}
+              {/*  name="town"*/}
+              {/*  type="text"*/}
+              {/*  value={formData.town}*/}
+              {/*  onChange={handleChange}*/}
+              {/*/>*/}
             </FormGroup>
             <FormGroup widths="equal">
-              <FormField
-                required={true}
-                label="ProfileImage"
-                control={Input}
-                placeholder="ProfileImage"
-                name="profileImage"
-                type="text"
-                value={formData.profileImage}
-                onChange={handleChange}
-              />
-              <FormField
-                required={true}
-                label="CertificateImage"
-                control={Input}
-                placeholder="CertificateImage"
-                name="CertificateImage"
-                type="text"
-                value={formData.certificateImage}
-                onChange={handleChange}
-              />
+              {/*<FormField*/}
+              {/*  required={true}*/}
+              {/*  label="ProfileImage"*/}
+              {/*  control={Input}*/}
+              {/*  placeholder="ProfileImage"*/}
+              {/*  name="profileImage"*/}
+              {/*  type="text"*/}
+              {/*  value={formData.profileImage}*/}
+              {/*  onChange={handleChange}*/}
+              {/*/>*/}
+              {/*<FormField*/}
+              {/*  required={true}*/}
+              {/*  label="CertificateImage"*/}
+              {/*  control={Input}*/}
+              {/*  placeholder="CertificateImage"*/}
+              {/*  name="CertificateImage"*/}
+              {/*  type="text"*/}
+              {/*  value={formData.certificateImage}*/}
+              {/*  onChange={handleChange}*/}
+              {/*/>*/}
             </FormGroup>
             <FormGroup widths="equal">
               {/* <FormField
@@ -201,6 +212,7 @@ const RegisterCrewMemFormPg = () => {
               content="Confirm"
               label="Confirmation"
               type="submit"
+              onClick={handleSubmit}
             />
             <Message
               success

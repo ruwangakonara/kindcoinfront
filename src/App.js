@@ -188,7 +188,9 @@ import CrewMemberDashboard from "./Pages/CrewMember/Dashboard/CrewMemberDashboar
 import VerifyRequests from "./Pages/CrewMember/VerifyRequests/VerifyRequests";
 import VerifyDonationProofs from "./Pages/CrewMember/VerifyDonationProofs/VerifyDonationProofs";
 import VerifyRecipients from "./Pages/CrewMember/VerifyRecipients/VerifyRecipients";
-import TokenTransfer from "./Pages/CrewMember/TokenTransfer/TokenTransfer";
+import TokenTransfer from "./Pages/CrewMember/TokenTransfer/TokenTransfer2";
+import Dispatcher from "./Pages/CrewMember/TokenTransfer/dispatch";
+import DocVerification from "./Pages/CrewMember/TokenTransfer/docVerify";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
 
@@ -395,7 +397,9 @@ function App() {
 
             {/* Crew Member Routes */}
             <Route path="/crew/home" element={<CrewMemberDashboard />} />
-            <Route path="/crew/requests" element={<VerifyRequests />} />
+                <Route path="/crew/requests" element={<VerifyRequests />} />
+                <Route path="/crew/dispatch" element={<Dispatcher />} />
+                <Route path="/crew/doc_verify" element={<DocVerification />} />
             <Route path="/crew/recipients" element={<VerifyRecipients />} />
             <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
             <Route path="/crew/token_transfer" element={<TokenTransfer />} />
