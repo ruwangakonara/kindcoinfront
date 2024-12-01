@@ -3,13 +3,9 @@
 import React, { useEffect, useState } from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
-import {Container, Grid, Segment, Button, Modal, Header} from "semantic-ui-react";
+import {Container, Button, Modal, Table} from "semantic-ui-react";
 import './tokenTransfer2.css';
 import axios from "axios";
-import Sidebar3 from "../../../Components/Donor/Sidebar/Sidebar3";
-import Navbar2 from "../../../Components/Donor/NavBar/NavBar2";
-import MyListing from "../../../Components/Donor/Donation/MyListing";
-import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -64,52 +60,55 @@ const TokenTransfer = () => {
     return (
         <div style={{display: 'flex', width: '100%'}}>
             <Sidebar/>
-            <div style={{flex: '1'}}>
+            <div style={{ flex: '1' }}>
+            <HeaderCrew />
+            {/* <div className="crew-verify-requests-container"> */}
+            <Container style={{ padding: '20px', top: "100px", position: 'relative' }}>
+                <h2 className="crew-page-header">Donations</h2>
+                <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Donation ID</Table.HeaderCell>
+                            <Table.HeaderCell>Donation Title</Table.HeaderCell>
+                            <Table.HeaderCell>Value</Table.HeaderCell>
+                            <Table.HeaderCell>Request</Table.HeaderCell>
+                            <Table.HeaderCell>Donor</Table.HeaderCell>
+                            <Table.HeaderCell>Beneficiary</Table.HeaderCell>
+                            <Table.HeaderCell>Actions</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
 
-            <HeaderCrew/>
+                    <Table.Body>
+                        {donations?.length > 0 ? (
+                            donations.map((donation) => (
+                                <Table.Row key={donation?.donationDetails?._id}>
+                                    <Table.Cell>{donation?.donationDetails?._id}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.title}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.value}</Table.Cell>
+                                    <Table.Cell>{donation?.requestDetails?.title}</Table.Cell>
+                                    <Table.Cell>{donation?.donorDetails?.name}</Table.Cell>
+                                    <Table.Cell>{donation?.beneficiaryDetails?.name}</Table.Cell>
+                                    <Table.Cell>
+                                        <Button
+                                            primary
+                                            onClick={() => openConfirmationModal(donation)}
+                                        >
+                                            Transfer Tokens
+                                        </Button>
+                                    </Table.Cell>
+                                </Table.Row>
+                            ))
+                        ) : (
+                            <Table.Row>
+                                <Table.Cell colSpan="7" textAlign="center">
+                                    No donations available.
+                                </Table.Cell>
+                            </Table.Row>
+                        )}
+                    </Table.Body>
+                </Table>
 
-                <Container style={{padding: '20px', top: "100px", position: 'relative'}}>
-
-            <Grid>
-                {/* Sidebar */}
-                <Grid.Column width={4}>
-                </Grid.Column>
-
-                {/* Main Content */}
-                <Grid.Column width={12}>
-                    <Segment>
-                        <h2>Donations</h2>
-                        <Grid stackable columns={3}>
-                            {donations?.length > 0 ? (
-                                donations?.map((donation) => (
-                                    <Grid.Column key={donation?.donationDetails?._id}>
-                                        <Segment>
-                                            <p><strong>Donation ID:</strong> {donation?.donationDetails?._id}</p>
-                                            <p><strong>Donation:</strong> {donation?.donationDetails?.title}</p>
-                                            <p><strong>Value:</strong> {donation?.donationDetails?.value}</p>
-                                            <p><strong>Request:</strong> {donation?.requestDetails?.title}</p>
-                                            <p><strong>Donor:</strong> {donation?.donorDetails?.name}</p>
-                                            <p><strong>Beneficiary:</strong> {donation?.beneficiaryDetails?.name}</p>
-                                            <Button
-                                                primary
-                                                onClick={() => openConfirmationModal(donation)}
-                                            >
-                                                Transfer Tokens
-                                            </Button>
-                                        </Segment>
-                                    </Grid.Column>
-                                ))
-                            ) : (
-                                <Grid.Row>
-                                    <Grid.Column>
-                                        <Segment>No donations available.</Segment>
-                                    </Grid.Column>
-                                </Grid.Row>
-                            )}
-                        </Grid>
-                    </Segment>
-                </Grid.Column>
-            </Grid>
+                {/* Keep existing modals */}
 
             {/* Confirmation Modal */}
             <Modal
@@ -155,7 +154,9 @@ const TokenTransfer = () => {
             </Modal>
         </Container>
         </div>
+        {/* </div> */}
     </div>
+                
     // <div style={{display: 'flex', width: '100%'}}>
     //     <Sidebar3/>
     //     <div style={{flex: '1'}}>

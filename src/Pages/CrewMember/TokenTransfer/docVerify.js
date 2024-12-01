@@ -1,7 +1,7 @@
 //Attestation Fee Verification Page for Crew Members
 
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Segment, Button, Modal } from "semantic-ui-react";
+import { Container, Button, Modal, Table } from "semantic-ui-react";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import axios from "axios";
@@ -85,67 +85,62 @@ const DocVerification = () => {
         <div style={{ display: "flex", width: "100%" }}>
             <Sidebar />
             <div style={{ flex: "1" }}>
-                <HeaderCrew />
-                <Container style={{ padding: "20px", top: "100px", position: "relative" }}>
-                    <Grid>
-                        <Grid.Column width={12}>
-                            <Segment>
-                                <h2>Donation Attestation Fee Verification</h2>
-                                <Grid stackable columns={3}>
-                                    {donations?.length > 0 ? (
-                                        donations.map((donation) => (
-                                            <Grid.Column key={donation?.donationDetails?._id}>
-                                                <Segment>
-                                                    <p>
-                                                        <strong>Donation ID:</strong> {donation?.donationDetails?._id}
-                                                    </p>
-                                                    <p>
-                                                        <strong>Donation:</strong> {donation?.donationDetails?.title}
-                                                    </p>
-                                                    <p>
-                                                        <strong>Value:</strong> {donation?.donationDetails?.value}
-                                                    </p>
-                                                    <p><strong>Request:</strong> {donation?.requestDetails?.title}</p>
-                                                    <p><strong>Donor:</strong> {donation?.donorDetails?.name}</p>
-                                                    <p>
-                                                        <strong>Beneficiary:</strong> {donation?.beneficiaryDetails?.name}
-                                                    </p>
-                                                    <p>
-                                                        <strong>Reward:</strong> {donation?.donationDetails?.token_amount} KindCoin
-                                                    </p>
-                                                    <p>
-                                                        <strong>Attestation
-                                                            Fee:</strong> {donation?.donationDetails?.attestation_fee} KindCoin
-                                                    </p>
-                                                    <p>
-                                                        <strong>Attestation Fee Transac ID:</strong> {donation?.donationDetails?.doc_transac_id}
-                                                    </p>
-                                                    <Button
-                                                        primary
-                                                        onClick={() =>
-                                                            fetchTransactionDetails(
-                                                                donation?.donationDetails?.doc_transac_id,
-                                                                donation
-                                                            )
-                                                        }
-                                                    >
-                                                        View Transaction
-                                                    </Button>
-                                                </Segment>
-                                            </Grid.Column>
-                                        ))
-                                    ) : (
-                                        <Grid.Row>
-                                            <Grid.Column>
-                                                <Segment>No donations available.</Segment>
-                                            </Grid.Column>
-                                        </Grid.Row>
-                                    )}
-                                </Grid>
-                            </Segment>
-                        </Grid.Column>
-                    </Grid>
+            <HeaderCrew />
+            <Container style={{ padding: "20px", top: "100px", position: "relative" }}>
+                <h2>Donation Attestation Fee Verification</h2>
+                <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Donation ID</Table.HeaderCell>
+                            <Table.HeaderCell>Donation Title</Table.HeaderCell>
+                            <Table.HeaderCell>Value</Table.HeaderCell>
+                            <Table.HeaderCell>Request</Table.HeaderCell>
+                            <Table.HeaderCell>Donor</Table.HeaderCell>
+                            <Table.HeaderCell>Beneficiary</Table.HeaderCell>
+                            <Table.HeaderCell>Reward (KindCoin)</Table.HeaderCell>
+                            <Table.HeaderCell>Attestation Fee (KindCoin)</Table.HeaderCell>
+                            <Table.HeaderCell>Attestation Fee Transac ID</Table.HeaderCell>
+                            <Table.HeaderCell>Actions</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
 
+                    <Table.Body>
+                        {donations?.length > 0 ? (
+                            donations.map((donation) => (
+                                <Table.Row key={donation?.donationDetails?._id}>
+                                    <Table.Cell>{donation?.donationDetails?._id}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.title}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.value}</Table.Cell>
+                                    <Table.Cell>{donation?.requestDetails?.title}</Table.Cell>
+                                    <Table.Cell>{donation?.donorDetails?.name}</Table.Cell>
+                                    <Table.Cell>{donation?.beneficiaryDetails?.name}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.token_amount}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.attestation_fee}</Table.Cell>
+                                    <Table.Cell>{donation?.donationDetails?.doc_transac_id}</Table.Cell>
+                                    <Table.Cell>
+                                        <Button
+                                            primary
+                                            onClick={() =>
+                                                fetchTransactionDetails(
+                                                    donation?.donationDetails?.doc_transac_id,
+                                                    donation
+                                                )
+                                            }
+                                        >
+                                            View Transaction
+                                        </Button>
+                                    </Table.Cell>
+                                </Table.Row>
+                            ))
+                        ) : (
+                            <Table.Row>
+                                <Table.Cell colSpan="10" textAlign="center">
+                                    No donations available.
+                                </Table.Cell>
+                            </Table.Row>
+                        )}
+                    </Table.Body>
+                </Table>
                     {/* Transaction Modal */}
                     <Modal open={isModalOpen} onClose={() => setIsModalOpen(false)} size="small">
                         <Modal.Header>Transaction Details</Modal.Header>
