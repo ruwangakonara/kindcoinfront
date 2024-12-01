@@ -124,6 +124,10 @@ function OpenRequestPage() {
                                         <List.Header>Telephone</List.Header>
                                         {request.requestDetails?.phone}
                                     </List.Item>
+                                    <List.Item>
+                                        <List.Header>Posted at</List.Header>
+                                        {request.requestDetails?.created.slice(0,10) + " @ " + request.requestDetails?.created.slice(11,16)}
+                                    </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={3}>

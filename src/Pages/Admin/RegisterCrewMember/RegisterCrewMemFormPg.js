@@ -63,7 +63,9 @@ const RegisterCrewMemFormPg = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault(); // Prevent default form submission
+
     try {
       console.log(formData);
       await axiosInstance.post('/admin/register/crew_member', formData);
@@ -207,12 +209,11 @@ const RegisterCrewMemFormPg = () => {
               required={true}
             />
             <FormField
-              id="form-button-control-public"
-              control={Button}
-              content="Confirm"
-              label="Confirmation"
-              type="submit"
-              onClick={handleSubmit}
+                id="form-button-control-public"
+                control={Button}
+                content="Confirm"
+                label="Confirmation"
+                type="submit"
             />
             <Message
               success

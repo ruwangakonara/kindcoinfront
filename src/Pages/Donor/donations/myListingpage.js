@@ -195,6 +195,10 @@ function MyListingPage(){
                                                     {donation?.value}
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                         {!donation?.accepted && (
                                             <Label color='red' className='not-accepted-label'>

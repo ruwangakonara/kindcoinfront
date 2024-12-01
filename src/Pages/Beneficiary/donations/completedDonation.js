@@ -135,6 +135,10 @@ function CompletedDonationBene(){
 
                                             </List.Item>
                                             <List.Item>
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation?.description}
+                                            </List.Item>
+                                            <List.Item>
                                                 <List.Header>Request Title</List.Header>
                                                 {request.open ?
                                                     <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
@@ -147,7 +151,7 @@ function CompletedDonationBene(){
                                                 {request.description}
                                             </List.Item>
                                             <List.Item>
-                                                <List.Header>Recipient Phone</List.Header>
+                                                <List.Header>Your(Request) Phone</List.Header>
                                                 {request?.phone}
                                             </List.Item>
                                             <List.Item>
@@ -174,6 +178,10 @@ function CompletedDonationBene(){
                                                     {donation.value}
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                     </Grid.Column>
                                 </Grid.Row>
@@ -284,17 +292,46 @@ function CompletedDonationBene(){
                             </Segment>
 
                         }
+                        {/*<Segment>*/}
+                        {/*    /!*<Header as="h2">Donation Statistics</Header>*!/*/}
+                        {/*    <Grid>*/}
+                        {/*        <Grid.Column width={8}>*/}
+                        {/*            <Header as="h3">Amount</Header>*/}
+                        {/*            <p>{donation?.amount}</p>*/}
+                        {/*        </Grid.Column>*/}
+                        {/*        <Grid.Column width={8}>*/}
+                        {/*            <Header as="h3">Tokens</Header>*/}
+                        {/*            <p>{donation?.tokens}</p>*/}
+                        {/*        </Grid.Column>*/}
+                        {/*    </Grid>*/}
+                        {/*</Segment>*/}
                         <Segment>
-                            {/*<Header as="h2">Donation Statistics</Header>*/}
                             <Grid>
-                                <Grid.Column width={8}>
-                                    <Header as="h3">Amount</Header>
-                                    <p>{donation?.amount}</p>
-                                </Grid.Column>
-                                <Grid.Column width={8}>
-                                    <Header as="h3">Tokens</Header>
-                                    <p>{donation?.tokens}</p>
-                                </Grid.Column>
+                                <Grid.Row>
+                                    <Grid.Column width={8}>
+                                        <Header as="h3">Amount LKR</Header>
+                                        <p>{donation.value}</p>
+                                    </Grid.Column>
+                                    <Grid.Column width={8}>
+                                        <Header as="h3">KINDCOIN</Header>
+                                        <Grid.Row style={{ display: 'flex', flexDirection: 'row' }}>
+                                            <p>{donation.token_amount} </p>
+                                            <Image src="/tag.png"  mini style = {{height: "25px"}} />
+                                        </Grid.Row>
+                                    </Grid.Column>
+                                    {/*<Grid.Column width={4}>*/}
+                                    {/*    <Header as="h3">Attestation Fee</Header>*/}
+                                    {/*    <Grid.Row style={{ display: 'flex', flexDirection: 'row' }}>*/}
+                                    {/*        <p>{donation.attestation_fee}</p>*/}
+                                    {/*        <Image src="/token.png" circular className="token-image" />*/}
+                                    {/*    </Grid.Row>*/}
+                                    {/*</Grid.Column>*/}
+                                    {/*{donation.doc_verified ? (*/}
+                                    {/*    <h4 style={{ marginBottom: "10px", marginLeft: "12px" }}>Attestation Fee <Label style={{ marginTop: '10px' }} color='green' className='not-accepted-label'>Verified</Label>. Attestation Available</h4>*/}
+                                    {/*) : (*/}
+                                    {/*    <h4 style={{ marginBottom: "10px",marginLeft: "12px"  }}>Attestation Fee Verification <Label style={{ marginTop: '10px' }} color='orange' className='not-accepted-label'>Pending</Label>. Attestation Unavailable</h4>*/}
+                                    {/*)}*/}
+                                </Grid.Row>
                             </Grid>
                         </Segment>
                     </Container>
