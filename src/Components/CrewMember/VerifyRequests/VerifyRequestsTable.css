@@ -7,6 +7,10 @@
     padding-right: 15px;
   }
 
+  .crew-filter-search{
+    margin-bottom: 5%;
+  }
+
   .ui.celled.table {
     min-width: 700px;
     border: 1px solid #ddd;

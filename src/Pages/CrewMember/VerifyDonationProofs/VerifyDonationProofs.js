@@ -21,7 +21,7 @@ const VerifyDonationProofs = () => {
             <div className="main-container">
                 <Sidebar />
                 <div className="crew-donation-proofs-header">
-                    <Filter onFilterChange={handleFilterChange} />
+                    {/* <Filter onFilterChange={handleFilterChange} /> */}
                     {/* <SearchBar onSearch={handleSearch} /> */}
                 </div>
                 <div className="crew-donation-proofs-table-container">

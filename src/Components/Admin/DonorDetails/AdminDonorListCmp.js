@@ -189,7 +189,11 @@ const AdminDonorListCmp = () => {
                     </Button>
                     <IconGroup
                       size="large"
-                      className={classes.admin_iconContainer}
+                      style={{
+                        display: "flex",
+                        alignItems: "space-between",
+                        gap: "40px",
+                      }}
                     >
                       <Icon
                         name="edit"
@@ -202,7 +206,6 @@ const AdminDonorListCmp = () => {
                         style={{ cursor: "pointer" }}
                       />
                     </IconGroup>
-                    {/* </div> */}
                   </div>
                 </TableCell>
               </TableRow>

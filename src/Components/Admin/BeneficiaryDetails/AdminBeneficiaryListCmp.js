@@ -196,7 +196,14 @@ const AdminBeneficiaryListCmp = () => {
                     >
                       {isActive ? "Deactivate" : "Activate"}
                     </Button>
-                    <IconGroup size="large" className={classes.iconContainer}>
+                    <IconGroup
+                      size="large"
+                      style={{
+                        display: "flex",
+                        alignItems: "space-between",
+                        gap: "40px",
+                      }}
+                    >
                       <Icon
                         name="edit"
                         onClick={(e) => handleEditClick(e, row.user_id)}

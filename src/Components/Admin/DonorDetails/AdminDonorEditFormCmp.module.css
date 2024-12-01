@@ -10,3 +10,22 @@ use admin_ as a prefix for the custom class names
     margin: 25px;
     margin-top: 40px !important;
 }
+
+.admin_formContainer {
+    border: 2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Full width of the container */
+  }
+  
+  .formContent {
+    max-width: 800px; /* Limit the form width */
+    width: 100%; /* Full width within the max-width */
+    padding: 20px; /* Add some padding for better aesthetics */
+    background-color: white; /* Add background color if needed */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a light shadow for emphasis */
+    border-radius: 8px; /* Optional: Add rounded corners */
+  }
+  
