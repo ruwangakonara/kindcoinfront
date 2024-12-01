@@ -9,7 +9,7 @@ import AdminDonorCmp from "../../../Components/Admin/DonorDetails/AdminDonorCmp"
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 const AdminDonorDetailsPg = () => {
   const { user_id } = useParams();
-
+  console.log(user_id);
   const [donorDetails, setDonorDetails] = useState(null); // Store donor details
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state

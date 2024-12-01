@@ -19,10 +19,10 @@ const AnnouncementsPg = () => {
             <h1 style={{ textAlign: "center" }}>Announcements</h1>
           </DefaultDashCmp>
           <GeneralDashCmp>
-            Announcements Related Content Component is here.
             <AnnouncementTable />
-            <AnnouncementContent />
-            <AnnouncementForm />
+            Announcements Related Content Component is here.
+            {/* <AnnouncementContent />
+            <AnnouncementForm /> */}
           </GeneralDashCmp>
         </div>
       </div>

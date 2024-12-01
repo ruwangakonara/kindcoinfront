@@ -1,28 +1,36 @@
 body {
-    margin: 0;
+  margin: 0;
 }
 
 .mainContainer{
-    display: flex;
-    height: 100vh;
-    z-index: 100;
-    transition: margin-left 0.5s ease-in-out; 
-    overflow-y: auto;
+  display: flex;
+  height: 100vh;
+  z-index: 100;
+  transition: margin-left 0.5s ease-in-out; 
+  overflow: hidden;
+  
 }
 
-  .content {
-    padding: 20px;
-    overflow-y: hidden;
-    width: calc(100% - 50px); /* Full width minus padding */
-    padding-left: 50px;
-    padding-right: 50px;
-    transition: width 0.5s;
-  }
+/* .content {
+  flex-grow: 1;
+  padding: 20px 50px; 
+  overflow-y: auto;
+  box-sizing: border-box;
+} */
 
-  .withSidebar .content {
-    width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
+.content {
+  padding: 20px;
+  overflow-y: auto;
+  width: calc(100% - 50px); /* Full width minus padding */
+  padding-left: 50px;
+  padding-right: 50px;
+  transition: width 0.5s;
+}
+
+.withSidebar .content {
+  width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
 }
 
 .noSidebar .content {
-    width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
+  width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
 }
