@@ -1,9 +1,10 @@
 import classes from "./RegisterCrewMemFormPg.module.css";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
-import { useState,  } from "react";
-import {useNavigate} from "react-router-dom";
+// import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormField,
   Button,
@@ -22,8 +23,7 @@ const axiosInstance = axios.create({
 });
 
 const RegisterCrewMemFormPg = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // do a similar logic to post endpoint.
   // const [announcements, setAnnouncements] = useState([]);
@@ -38,9 +38,6 @@ const RegisterCrewMemFormPg = () => {
   //       }
 
   //   }
-
-
-
 
   const [formData, setFormData] = useState({
     name: "",
@@ -68,9 +65,9 @@ const RegisterCrewMemFormPg = () => {
 
     try {
       console.log(formData);
-      await axiosInstance.post('/admin/register/crew_member', formData);
+      await axiosInstance.post("/admin/register/crew_member", formData);
       // setOpen(false);
-      navigate('/admin/view/crew_member');
+      navigate("/admin/view/crew_member");
     } catch (error) {
       console.log(error);
     }
@@ -80,13 +77,14 @@ const RegisterCrewMemFormPg = () => {
   };
 
   return (
-    <div className={classes.mainContainer}>
+    <div className={classes.admin_mainContainer}>
       <HeaderCmp />
-      <SidebarAdminCmp visible={true} />
+      <AdminSideBarCmp />
+      {/* <SidebarAdminCmp visible={true} /> */}
       <DefaultDashCmp>
         <h1 style={{ textAlign: "center" }}>Register page</h1>
 
-        <div className={classes.registerForm}>
+        <div className={classes.admin_formContainer}>
           <Form onSubmit={handleSubmit} success={formState}>
             <FormGroup widths="equal">
               <FormField
@@ -209,11 +207,11 @@ const RegisterCrewMemFormPg = () => {
               required={true}
             />
             <FormField
-                id="form-button-control-public"
-                control={Button}
-                content="Confirm"
-                label="Confirmation"
-                type="submit"
+              id="form-button-control-public"
+              control={Button}
+              content="Confirm"
+              label="Confirmation"
+              type="submit"
             />
             <Message
               success

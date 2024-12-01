@@ -66,29 +66,28 @@
 //
 // export default App;
 
-import React from 'react';
-import './App.css';
-import Home from './Pages/Home/home'
-import {  Routes, Route } from "react-router-dom";
-import Org from './Components/Home/Auth/Org'
-import People from './Components/Home/Auth/People'
-import useform ,{validate} from './Components/Home/function/formhandle'
-import useform2 ,{validate2} from './Components/Home/function/formhandle2'
-import useform3 ,{validate3} from './Components/Home/function/formhandle3'
-import useform4 ,{validate4} from './Components/Home/function/formhandle4'
+import React from "react";
+import "./App.css";
+import Home from "./Pages/Home/home";
+import { Routes, Route } from "react-router-dom";
+import Org from "./Components/Home/Auth/Org";
+import People from "./Components/Home/Auth/People";
+import useform, { validate } from "./Components/Home/function/formhandle";
+import useform2, { validate2 } from "./Components/Home/function/formhandle2";
+import useform3, { validate3 } from "./Components/Home/function/formhandle3";
+import useform4, { validate4 } from "./Components/Home/function/formhandle4";
 // import Olog from './Components/Home/Login/Olog'
-import OSignup from './Components/Home/Signup/OSignup'
-import Login from './Components/Home/Login/Login'
-import Signup from './Components/Home/Signup/Signup'
-import Forgot from './Components/Home/Forgot/Forgot'
-import Main from './Pages/Home/Main'
-import Contact from './Pages/Home/contact'
+import OSignup from "./Components/Home/Signup/OSignup";
+import Login from "./Components/Home/Login/Login";
+import Signup from "./Components/Home/Signup/Signup";
+import Forgot from "./Components/Home/Forgot/Forgot";
+import Main from "./Pages/Home/Main";
+import Contact from "./Pages/Home/contact";
 import NotVerified from "./Pages/Home/verified/not_verified";
 import Verified from "./Pages/Home/verified/verified";
 import Forgot2 from "./Components/Home/Forgot/Forgot2";
 
-
-import DonorHome from './Pages/Donor/home/dhome'
+import DonorHome from "./Pages/Donor/home/dhome";
 import BeneficiaryList from "./Pages/Donor/beneficiaries";
 import DonationList from "./Pages/Donor/donations/onGoingDonations";
 import PendingRewards from "./Pages/Donor/pendingRewards";
@@ -140,10 +139,9 @@ import CompletedDonationBene from "./Pages/Beneficiary/donations/completedDonati
 import DonorNotificationList from "./Pages/Donor/notification/notificationsPage";
 import BeneficiaryNotificationList from "./Pages/Beneficiary/notification/notificationsPage";
 
-
-
 import AdminAccountPg from "./Pages/Admin/AdminAccount/AdminAccountPg";
-import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg2";
+import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg";
+import AssignCrewMemberPg2 from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg2";
 import AdminBeneficiaryListPg from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg";
 import ViewComplaintsPg from "./Pages/Admin/Complaints/ViewComplaintsPg";
 import ViewCrewMemberTransactionListPg from "./Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg";
@@ -188,228 +186,323 @@ import TokenTransfer from "./Pages/CrewMember/TokenTransfer/TokenTransfer2";
 import Dispatcher from "./Pages/CrewMember/TokenTransfer/dispatch";
 import DocVerification from "./Pages/CrewMember/TokenTransfer/docVerify";
 import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
+import TicketDiscussionCmp from "./Components/Admin/TicketsRaised/TicketDiscussion";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
 
 function App() {
+  return (
+    // <UserProvider>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route
+        path="/contact"
+        element={<Contact form={useform2()} validate={validate2} />}
+      />
+      <Route path="beneficiary_registration" element={<Org />}>
+        {/*    <Route path="login" element={<Olog form={useform()} validate={validate}/>} />*/}
+        <Route
+          path=""
+          element={<OSignup form={useform()} validate={validate} />}
+        />
+      </Route>
+      <Route path="login" element={<People />}>
+        <Route path="login" element={<Login />} />
+        <Route
+          path="signup"
+          element={<Signup form={useform()} validate={validate} />}
+        />
+      </Route>
+      <Route
+        path="forgot"
+        element={<Forgot form={useform3()} validate={validate3} />}
+      ></Route>
+      <Route
+        path="forgot2/:token"
+        element={<Forgot2 form={useform4()} validate={validate4} />}
+      ></Route>
+      <Route path="main" element={<Main />} />
 
-    return (
+      <Route path="leaderboards" element={<Leaderboards />} />
+      <Route path="leaderboard/:id/:rank" element={<LeaderboardPage />} />
 
-        // <UserProvider>
-        <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/contact" element={<Contact form={useform2()} validate={validate2} />} />
-            <Route path="beneficiary_registration" element={<Org/>}>
-                {/*    <Route path="login" element={<Olog form={useform()} validate={validate}/>} />*/}
-                <Route path="" element={<OSignup  form={useform()} validate={validate}/>} />
-            </Route>
-            <Route path="login" element={<People/>}>
-                <Route path="login" element={<Login/>} />
-                <Route path="signup" element={<Signup  form={useform()} validate={validate}/>} />
-            </Route>
-                <Route path="forgot" element={<Forgot form={useform3()} validate={validate3}/>}></Route>
-                <Route path="forgot2/:token" element={<Forgot2 form={useform4()} validate={validate4}/>}></Route>
-            <Route path="main" element={<Main/>}/>
+      <Route path="not_verified" element={<NotVerified />} />
+      <Route path="verify/:token" element={<Verified />} />
 
+      {/*Donor Routes*/}
 
-            <Route path = "leaderboards" element = {<Leaderboards/>}/>
-            <Route path = "leaderboard/:id/:rank" element = {<LeaderboardPage/>}/>
+      <Route path="/donor/home" element={<DonorHome />} />
+      <Route path="/donor/maintenance" element={<Maintenance />} />
+      {/*<Route path="/donor/leaderboard" element={<DonorHome/>}/>*/}
+      <Route path="/donor/beneficiaries" element={<BeneficiaryList />} />
+      <Route
+        path="/donor/beneficiaries/:beneficiary_id"
+        element={<BeneficiaryAccount />}
+      />
 
-                <Route path = "not_verified" element = {<NotVerified/>}/>
-                <Route path = "verify/:token" element = {<Verified/>}/>
+      <Route path="/donor/ongoing-donations" element={<DonationList />} />
+      <Route
+        path="/donor/ongoing-donations/:donation_id"
+        element={<OnGoingDonationPage />}
+      />
+      <Route path="/donor/pending-rewards" element={<PendingRewards />} />
+      <Route
+        path="/donor/pending-rewards/:donation_id"
+        element={<PendingRewardsPage />}
+      />
+      <Route
+        path="/donor/completed-donations"
+        element={<CompletedDonations />}
+      />
+      <Route
+        path="/donor/completed-donations/:donation_id"
+        element={<CompletedDonationPage />}
+      />
 
-            {/*Donor Routes*/}
+      <Route path="/donor/donors" element={<DonorList />} />
+      <Route path="/donor/donors/:donor_id" element={<DonorAccount />} />
+      <Route path="/donor/account" element={<Account />} />
+      <Route path="/donor/update-account" element={<UpdateAccount />} />
 
-            <Route path="/donor/home" element={<DonorHome/>}/>
-            <Route path="/donor/maintenance" element={<Maintenance/>}/>
-            {/*<Route path="/donor/leaderboard" element={<DonorHome/>}/>*/}
-            <Route path = "/donor/beneficiaries" element={<BeneficiaryList/>}/>
-            <Route path = "/donor/beneficiaries/:beneficiary_id" element={<BeneficiaryAccount/>}/>
+      <Route path="/donor/open-requests" element={<OpenRequestList3 />} />
+      <Route
+        path="/donor/open-requests/:request_id"
+        element={<OpenRequestPage />}
+      />
 
-            <Route path = "/donor/ongoing-donations" element={<DonationList/>}/>
-            <Route path = "/donor/ongoing-donations/:donation_id" element={<OnGoingDonationPage/>}/>
-            <Route path = "/donor/pending-rewards" element={<PendingRewards/>}/>
-            <Route path = "/donor/pending-rewards/:donation_id" element={<PendingRewardsPage/>}/>
-            <Route path = "/donor/completed-donations" element={<CompletedDonations/>}/>
-            <Route path = "/donor/completed-donations/:donation_id" element={<CompletedDonationPage/>}/>
+      <Route path="/donor/closed-requests" element={<ClosedRequestList />} />
+      <Route
+        path="/donor/closed-requests/:request_id"
+        element={<ClosedRequestPage />}
+      />
 
-            <Route path = "/donor/donors" element={<DonorList/>}/>
-            <Route path = "/donor/donors/:donor_id" element={<DonorAccount/>}/>
-            <Route path = "/donor/account" element={<Account/>}/>
-            <Route path = "/donor/update-account" element={<UpdateAccount/>}/>
+      <Route path="/donor/my-listings" element={<MyListingsList />} />
+      <Route
+        path="/donor/my-listings/:donation_id"
+        element={<MyListingPage />}
+      />
 
-            <Route path = "/donor/open-requests" element={<OpenRequestList3/>}/>
-            <Route path = "/donor/open-requests/:request_id" element={<OpenRequestPage/>}/>
+      <Route path="/donor/announcements" element={<AnnouncementList />} />
+      <Route path="/donor/tickets" element={<DonorTicketsPage />} />
 
-            <Route path = "/donor/closed-requests" element={<ClosedRequestList/>}/>
-            <Route path = "/donor/closed-requests/:request_id" element={<ClosedRequestPage/>}/>
+      <Route path="/donor/leaderboards" element={<DonorLeaderboards />} />
+      <Route path="/donor/notifications" element={<DonorNotificationList />} />
+      <Route path="/donor/leaderboard/:rank" element={<MyLeaderboardPage />} />
+      <Route
+        path="/donor/leaderboard/:id/:rank"
+        element={<DonorOtherLeaderboardPage />}
+      />
 
-            <Route path = "/donor/my-listings" element={<MyListingsList/>}/>
-            <Route path = "/donor/my-listings/:donation_id" element={<MyListingPage/>}/>
+      {/*Beneficiary Routes*/}
+      <Route path="/beneficiary/home" element={<BeneficiaryDashboard />} />
+      <Route path="/beneficiary/tickets" element={<TicketsPage />} />
 
-            <Route path = "/donor/announcements" element={<AnnouncementList/>}/>
-            <Route path="/donor/tickets" element={<DonorTicketsPage/>}/>
+      <Route
+        path="/beneficiary/open-requests"
+        element={<BeneficiaryOwnOpenRequestList />}
+      />
+      <Route
+        path="/beneficiary/open-requests/:request_id"
+        element={<BeneficiaryOwnOpenRequestPage />}
+      />
 
+      <Route
+        path="/beneficiary/closed-requests"
+        element={<BeneficiaryOwnClosedRequestList />}
+      />
+      <Route
+        path="/beneficiary/closed-requests/:request_id"
+        element={<BeneficiaryOwnClosedRequestPage />}
+      />
 
-                <Route path = "/donor/leaderboards" element = {<DonorLeaderboards/>}/>
-                <Route path = "/donor/notifications" element = {<DonorNotificationList/>}/>
-            <Route path = "/donor/leaderboard/:rank" element = {<MyLeaderboardPage/>}/>
-            <Route path = "/donor/leaderboard/:id/:rank" element = {<DonorOtherLeaderboardPage/>}/>
+      <Route
+        path="/beneficiary/unaccepted-donation/:donation_id"
+        element={<UnaccceptedDonation />}
+      />
+      <Route
+        path="/beneficiary/accepted-donation/:donation_id"
+        element={<AcceptedDonation />}
+      />
+      <Route
+        path="/beneficiary/completed-donation/:donation_id"
+        element={<CompletedDonationBene />}
+      />
 
+      <Route path="/beneficiary/donors" element={<BeneficiaryDonorList />} />
+      <Route
+        path="/beneficiary/donors/:donor_id"
+        element={<BeneficiaryDonorAccount />}
+      />
 
+      <Route
+        path="/beneficiary/beneficiaries"
+        element={<BeneficiaryOtherBeneficiaryList />}
+      />
+      <Route
+        path="/beneficiary/beneficiaries/:beneficiary_id"
+        element={<BeneficiaryOtherBeneficiaryAccount />}
+      />
 
-            {/*Beneficiary Routes*/}
-            <Route path="/beneficiary/home" element={<BeneficiaryDashboard/>}/>
-            <Route path="/beneficiary/tickets" element={<TicketsPage/>}/>
+      <Route
+        path="/beneficiary/announcements"
+        element={<BeneficiaryAnnouncementList />}
+      />
+      <Route
+        path="/beneficiary/notifications"
+        element={<BeneficiaryNotificationList />}
+      />
 
-            <Route path = "/beneficiary/open-requests" element={<BeneficiaryOwnOpenRequestList/>}/>
-            <Route path = "/beneficiary/open-requests/:request_id" element={<BeneficiaryOwnOpenRequestPage/>}/>
+      <Route path="/beneficiary/account" element={<BeneficiaryOwnAccount />} />
+      <Route
+        path="/beneficiary/update-account"
+        element={<BeneficiaryUpdateAccount />}
+      />
 
-            <Route path = "/beneficiary/closed-requests" element={<BeneficiaryOwnClosedRequestList/>}/>
-            <Route path = "/beneficiary/closed-requests/:request_id" element={<BeneficiaryOwnClosedRequestPage/>}/>
+      <Route
+        path="/beneficiary/other-open-requests"
+        element={<BeneficiaryOtherOpenRequestList />}
+      />
+      <Route
+        path="/beneficiary/other-open-requests/:request_id"
+        element={<BeneficiaryOtherOpenRequestPage />}
+      />
 
-            <Route path = "/beneficiary/unaccepted-donation/:donation_id" element={<UnaccceptedDonation/>}/>
-            <Route path = "/beneficiary/accepted-donation/:donation_id" element={<AcceptedDonation/>}/>
-            <Route path = "/beneficiary/completed-donation/:donation_id" element={<CompletedDonationBene/>}/>
+      <Route
+        path="/beneficiary/other-closed-requests"
+        element={<BeneficiaryOtherClosedRequestList />}
+      />
+      <Route
+        path="/beneficiary/other-closed-requests/:request_id"
+        element={<BeneficiaryOtherClosedRequestPage />}
+      />
 
+      <Route
+        path="/beneficiary/leaderboards"
+        element={<BeneficiaryDonorLeaderboards />}
+      />
+      <Route
+        path="/beneficiary/leaderboard/:id/:rank"
+        element={<BeneficiaryDonorLeaderboardPage />}
+      />
 
-            <Route path = "/beneficiary/donors" element={<BeneficiaryDonorList/>}/>
-            <Route path = "/beneficiary/donors/:donor_id" element={<BeneficiaryDonorAccount/>}/>
+      {/* Crew Member Routes */}
+      {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}
 
-            <Route path = "/beneficiary/beneficiaries" element={<BeneficiaryOtherBeneficiaryList/>}/>
-            <Route path = "/beneficiary/beneficiaries/:beneficiary_id" element={<BeneficiaryOtherBeneficiaryAccount/>}/>
+      {/* Admin Routes */}
+      {/*<Route path="/admin/account" element={<AdminAccountPg/>}/>*/}
+      {/*<Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>*/}
+      {/*<Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>*/}
+      {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
+      {/*<Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>*/}
+      {/*<Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>*/}
+      {/*<Route path="/admin/home" element={<AdminDashBoardPg/>}/>*/}
+      {/*<Route path="/admin/register/crew_member" element={<RegisterCrewMemberPg/>}/>*/}
+      {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
+      {/*<Route path='/admin/overall_stats' element={<OverallStatisticsPg/>}/>*/}
 
-                <Route path = "/beneficiary/announcements" element={<BeneficiaryAnnouncementList/>}/>
-                <Route path = "/beneficiary/notifications" element={<BeneficiaryNotificationList/>}/>
+      {/*<Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>*/}
+      {/*<Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>*/}
+      {/*/!* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> *!/*/}
+      {/*/!* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> *!/*/}
+      {/*/!* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> *!/*/}
+      {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
+      {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
 
-            <Route path = "/beneficiary/account" element={<BeneficiaryOwnAccount/>}/>
-            <Route path = "/beneficiary/update-account" element={<BeneficiaryUpdateAccount/>}/>
-
-            <Route path = "/beneficiary/other-open-requests" element={<BeneficiaryOtherOpenRequestList/>}/>
-            <Route path = "/beneficiary/other-open-requests/:request_id" element={<BeneficiaryOtherOpenRequestPage/>}/>
-
-            <Route path = "/beneficiary/other-closed-requests" element={<BeneficiaryOtherClosedRequestList/>}/>
-            <Route path = "/beneficiary/other-closed-requests/:request_id" element={<BeneficiaryOtherClosedRequestPage/>}/>
-
-            <Route path = "/beneficiary/leaderboards" element = {<BeneficiaryDonorLeaderboards/>}/>
-            <Route path = "/beneficiary/leaderboard/:id/:rank" element = {<BeneficiaryDonorLeaderboardPage/>}/>
-
-
-            {/* Crew Member Routes */}
-            {/* <Route path="/crew_member/home" element={<CrewMemberHome/>}/> */}
-
-
-                {/* Admin Routes */}
-                {/*<Route path="/admin/account" element={<AdminAccountPg/>}/>*/}
-                {/*<Route path='/admin/assign/crew_member' element={<AssignCrewMemberPg/>}/>*/}
-                {/*<Route path='/admin/Beneficiary_List/Beneficiaries' element={<AdminBeneficiaryListPg/>}/>*/}
-                {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
-                {/*<Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions' element={<ViewCrewMemberTransactionListPg/>}/>*/}
-                {/*<Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg/>}/>*/}
-                {/*<Route path="/admin/home" element={<AdminDashBoardPg/>}/>*/}
-                {/*<Route path="/admin/register/crew_member" element={<RegisterCrewMemberPg/>}/>*/}
-                {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
-                {/*<Route path='/admin/overall_stats' element={<OverallStatisticsPg/>}/>*/}
-
-                {/*<Route path="/admin/Donor_List/Donors/:donor_id" element={<AdminDonor/>}/>*/}
-                {/*<Route path='/admin/Beneficiary_List/Beneficiaries/:beneficiary_id' element={<AdminBeneficiary/>}/>*/}
-                {/*/!* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> *!/*/}
-                {/*/!* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> *!/*/}
-                {/*/!* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> *!/*/}
-                {/*<Route path='/admin/view/complaints' element={<ViewComplaintsPg/>}/>*/}
-                {/*<Route path='/admin/settings' element={<AdminSettingsPg/>}/>*/}
-
-                <Route path="/admin/account" element={<AdminAccountPg />} />
-                <Route
+      <Route path="/admin/account" element={<AdminAccountPg />} />
+      {/* <Route
                     path="/admin/assign/crew_member"
                     element={<AssignCrewMemberPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries"
-                    element={<AdminBeneficiaryListPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/edit/:Beneficiary_Id"
-                    element={<AdminBeneficiaryEditFormPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id"
-                    element={<AdminBeneficiaryDetailsPg />}
-                />
-                <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
-                <Route
-                    path="/admin/view/crew_members/:crew_member_id/accepted_transactions"
-                    element={<ViewCrewMemberTransactionListPg />}
-                />
-                <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg />} />
-                <Route
-                    path="/admin/Donor_List/Donors/edit/:user_id"
-                    element={<AdminDonorEditFormPg />}
-                />
-                <Route
-                    path="/admin/Donor_List/Donors/:user_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route path="/admin/home" element={<AdminDashBoardPg />} />
-                <Route path="/admin/view/crew_member" element={<ViewCrewMembersPg />} />
-                {/* <Route path="/admin/view/crew_member/:Crew_Mem_Id" element={</>}/> */}
-                <Route
-                    path="/admin/register/crew_member"
-                    element={<RegisterCrewMemFormPg />}
-                />
-                <Route path="/admin/settings" element={<AdminSettingsPg />} />
-                <Route path="/admin/overall_stats" element={<OverallStatisticsPg />} />
-                <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
-                <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
+                /> */}
+      <Route
+        path="/admin/assign/crew_member"
+        element={<AssignCrewMemberPg2 />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries"
+        element={<AdminBeneficiaryListPg />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries/edit/:Beneficiary_Id"
+        element={<AdminBeneficiaryEditFormPg />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries/:Beneficiary_Id"
+        element={<AdminBeneficiaryDetailsPg />}
+      />
+      <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
+      <Route
+        path="/admin/view/crew_members/:crew_member_id/accepted_transactions"
+        element={<ViewCrewMemberTransactionListPg />}
+      />
+      <Route path="/admin/Donor_List/Donors" element={<AdminDonorListPg />} />
+      <Route
+        path="/admin/Donor_List/Donors/edit/:user_id"
+        element={<AdminDonorEditFormPg />}
+      />
+      <Route
+        path="/admin/Donor_List/Donors/:user_id"
+        element={<AdminDonorDetailsPg />}
+      />
+      <Route path="/admin/home" element={<AdminDashBoardPg />} />
+      <Route path="/admin/view/crew_member" element={<ViewCrewMembersPg />} />
+      {/* <Route path="/admin/view/crew_member/:Crew_Mem_Id" element={</>}/> */}
+      <Route
+        path="/admin/register/crew_member"
+        element={<RegisterCrewMemFormPg />}
+      />
+      <Route path="/admin/settings" element={<AdminSettingsPg />} />
+      <Route path="/admin/overall_stats" element={<OverallStatisticsPg />} />
+      <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
+      <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
+      <Route
+        path="/admin/view/tickets/:ticket_id"
+        element={<TicketDiscussionCmp />}
+      />
 
-                {/** =============================================================== */}
+      {/** =============================================================== */}
 
-                <Route
-                    path="/admin/Donor_List/Donors/:donor_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
-                    element={<AdminBeneficiary />}
-                />
-                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
-                <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
-                <Route path="/admin/settings" element={<AdminSettingsPg />} />
+      <Route
+        path="/admin/Donor_List/Donors/:donor_id"
+        element={<AdminDonorDetailsPg />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
+        element={<AdminBeneficiary />}
+      />
+      {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+      <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
+      <Route path="/admin/settings" element={<AdminSettingsPg />} />
 
-                {/** =============================================================== */}
+      {/** =============================================================== */}
 
-                <Route
-                    path="/admin/Donor_List/Donors/:donor_id"
-                    element={<AdminDonorDetailsPg />}
-                />
-                <Route
-                    path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
-                    element={<AdminBeneficiary />}
-                />
-                {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
-                {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
+      <Route
+        path="/admin/Donor_List/Donors/:donor_id"
+        element={<AdminDonorDetailsPg />}
+      />
+      <Route
+        path="/admin/Beneficiary_List/Beneficiaries/:beneficiary_id"
+        element={<AdminBeneficiary />}
+      />
+      {/* <Route path='/admin/view/crew_members' element={<ViewCrewMembers/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
+      {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
 
-            {/* Crew Member Routes */}
-            <Route path="/crew/home" element={<CrewMemberDashboard />} />
-                <Route path="/crew/requests" element={<VerifyRequests />} />
-                <Route path="/crew/dispatch" element={<Dispatcher />} />
-                <Route path="/crew/doc_verify" element={<DocVerification />} />
-            <Route path="/crew/recipients" element={<VerifyRecipients />} />
-            <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
-            <Route path="/crew/token_transfer" element={<TokenTransfer />} />
-            {/* <Route path="/crew/settings" element={<CrewSettings />} />
+      {/* Crew Member Routes */}
+      <Route path="/crew/home" element={<CrewMemberDashboard />} />
+      <Route path="/crew/requests" element={<VerifyRequests />} />
+      <Route path="/crew/dispatch" element={<Dispatcher />} />
+      <Route path="/crew/doc_verify" element={<DocVerification />} />
+      <Route path="/crew/recipients" element={<VerifyRecipients />} />
+      <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
+      <Route path="/crew/token_transfer" element={<TokenTransfer />} />
+      {/* <Route path="/crew/settings" element={<CrewSettings />} />
       <Route path="/crew/profile" element={<CrewProfile />} /> */}
-                {/* <Route path="/admin/layouts" element={<DashboardLayout />} /> */}
-        </Routes>
-        // </UserProvider>
-
-
-
-
-    );
+      {/* <Route path="/admin/layouts" element={<DashboardLayout />} /> */}
+    </Routes>
+    // </UserProvider>
+  );
 }
 
 export default App;
