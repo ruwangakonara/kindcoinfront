@@ -2,7 +2,7 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminBeneficiaryCmp from "../../../Components/Admin/BeneficiaryDetails/AdminBeneficiaryCmp";
-import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSIdeBarCmp";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
