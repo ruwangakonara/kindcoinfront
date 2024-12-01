@@ -143,7 +143,7 @@ import BeneficiaryNotificationList from "./Pages/Beneficiary/notification/notifi
 
 
 import AdminAccountPg from "./Pages/Admin/AdminAccount/AdminAccountPg";
-import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg";
+import AssignCrewMemberPg from "./Pages/Admin/AssignCrewMemToDonations/AssignCrewMemberPg2";
 import AdminBeneficiaryListPg from "./Pages/Admin/BeneficiaryListView/AdminBeneficiaryListPg";
 import ViewComplaintsPg from "./Pages/Admin/Complaints/ViewComplaintsPg";
 import ViewCrewMemberTransactionListPg from "./Pages/Admin/CrewMemberDets/ViewCrewMemberTransactionListPg";

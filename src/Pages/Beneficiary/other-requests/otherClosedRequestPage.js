@@ -104,6 +104,10 @@ function BeneficiaryOtherClosedRequestPage(){
                                         <List.Header>Telephone</List.Header>
                                         {request.requestDetails?.phone}
                                     </List.Item>
+                                    <List.Item>
+                                        <List.Header>Posted at</List.Header>
+                                        {String(request.requestDetails.created).slice(0,10) + " @ " + String(request.requestDetails.created).slice(11,16)}
+                                    </List.Item>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={3}>

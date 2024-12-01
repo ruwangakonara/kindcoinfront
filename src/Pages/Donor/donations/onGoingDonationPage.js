@@ -211,6 +211,10 @@ function OnGoingDonationPage(){
                                                 )}
                                             </List.Item>
                                             <List.Item>
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation.description}
+                                            </List.Item>
+                                            <List.Item>
                                                 <List.Header>Request Title</List.Header>
                                                 {request.open ?
                                                     <a href={`http://localhost:3000/donor/open-requests/${request?._id}`}>{request?.title}</a>
@@ -256,6 +260,10 @@ function OnGoingDonationPage(){
                                                     }
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                     </Grid.Column>
                                 </Grid.Row>
