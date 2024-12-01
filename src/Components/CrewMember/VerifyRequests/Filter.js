@@ -3,7 +3,7 @@ import { Form, Checkbox } from 'semantic-ui-react';
 import './Filter.css';
 
 const Filter = ({ onFilterChange }) => {
-  const options = ['Verified', 'Not Verified'];
+  const options = ['Pending', 'Published', 'Rejected'];
   const [selectedValues, setSelectedValues] = useState(options); // Initialize with all options
 
   useEffect(() => {

@@ -176,6 +176,12 @@ function CompletedDonationPage(){
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {donation.title}
+
+                                            </List.Item>
+
+                                            <List.Item>
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation.description}
                                             </List.Item>
                                             <List.Item>
                                                 <List.Header>Request Title</List.Header>
@@ -217,6 +223,18 @@ function CompletedDonationPage(){
                                                     {donation.value}
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>XLM to LKR</List.Header>
+                                                {donation.xlmToLkrRate}
+                                            </List.Item>
+                                            <List.Item>
+                                                <List.Header>KINDCOIN to XLM</List.Header>
+                                                {donation.tokenToXlmRate}
+                                            </List.Item>
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                     </Grid.Column>
                                 </Grid.Row>
@@ -315,7 +333,7 @@ function CompletedDonationPage(){
                                                     </List.Item>
                                                     <List.Item>
                                                         <List.Header>Member Email</List.Header>
-                                                        {member?.email}
+                                                        {member?.username}
                                                     </List.Item>
 
                                                 </List>
@@ -429,64 +447,148 @@ function CompletedDonationPage(){
             <Modal size='large' open={attestationModalOpen} onClose={handleAttestationModalClose}>
                 <Modal.Header>Donation Attestation</Modal.Header>
                 <Modal.Content>
-                    <div style={{ textAlign: 'right', display: "flex", marginBottom: "70px" }}>
-                        <Image src="/charitylogo.png" size="medium" style={{ textAlign: 'right', display: "flex" }} />
+                    <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+                        <Image src="/charitylogo.png" size="medium" />
                     </div>
                     <p>We hereby attest that the following donation has been received:</p>
-                    <List>
-                        <List.Item>
-                            <List.Header>Donor Name</List.Header>
-                            {donation.name}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Recipient Name</List.Header>
-                            {beneficiary.name}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Donation Title</List.Header>
-                            {donation.title}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Donation Description</List.Header>
-                            {donation.description}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Donation Type</List.Header>
-                            {donation.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
-                        </List.Item>
-                        {donation.type === 'goods' && (
-                            <List.Item>
-                                <List.Header>Goods List</List.Header>
+                    <Grid columns={2} divided>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Header>Donor</Header>
                                 <List>
-                                    {donation.goods.map((goods, index) => (
-                                        <List.Item key={index}>{goods.item}: {goods.amount}</List.Item>
-                                    ))}
+                                    <List.Item>
+                                        <List.Header>Donor Name</List.Header>
+                                        {donor.name}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donor Description</List.Header>
+                                        {donor.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donor Address</List.Header>
+                                        {donor.address}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donor Phone</List.Header>
+                                        {donor.phoneNo}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donor Email</List.Header>
+                                        {donor.username}
+                                    </List.Item>
                                 </List>
-                            </List.Item>
-                        )}
-                        {/*{donation.type === 'monetary' && (*/}
-                        {/*    <List.Item>*/}
-                        {/*        <List.Header>Amount</List.Header>*/}
-                        {/*        {donation.value}*/}
-                        {/*    </List.Item>*/}
-                        {/*)}*/}
-                        <List.Item>
-                            <List.Header>Recipient Phone</List.Header>
-                            {request.phone}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Donation Phone</List.Header>
-                            {donation.phone}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Amount</List.Header>
-                            {donation.value}
-                        </List.Item>
-                        <List.Item>
-                            <List.Header>Tokens</List.Header>
-                            {donation.token_amount}
-                        </List.Item>
-                    </List>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Header>Donation</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header>Donation Title</List.Header>
+                                        {donation.title}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donation Description</List.Header>
+                                        {donation.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Donation Type</List.Header>
+                                        {donation.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
+                                    </List.Item>
+                                    {donation.type === 'goods' && (
+                                        <List.Item>
+                                            <List.Header>Goods List</List.Header>
+                                            <List>
+                                                {donation.goods.map((goods, index) => (
+                                                    <List.Item key={index}>
+                                                        {goods.item}: {goods.amount}
+                                                    </List.Item>
+                                                ))}
+                                            </List>
+                                        </List.Item>
+                                    )}
+                                    <List.Item>
+                                        <List.Header>Donation Phone</List.Header>
+                                        {donation.phone}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Amount</List.Header>
+                                        {donation.value}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Tokens</List.Header>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            {donation.token_amount}
+
+                                            <Image
+                                                src="/tag.png"
+                                                size="small"
+                                                style={{ marginRight: '10px' }}
+                                            />
+                                        </div>
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>XLM to LKR</List.Header>
+                                        {donation.xlmToLkrRate}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>KINDCOIN to XLM</List.Header>
+                                        {donation.tokenToXlmRate}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Header>Beneficiary</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header>Recipient Name</List.Header>
+                                        {beneficiary.name}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Recipient Description</List.Header>
+                                        {beneficiary.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Recipient Phone</List.Header>
+                                        {beneficiary.phoneNo}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Recipient Email</List.Header>
+                                        {beneficiary.username}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Recipient Address</List.Header>
+                                        {beneficiary.address}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Header>Request</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header>Request Title</List.Header>
+                                        {request.title}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Request Description</List.Header>
+                                        {request.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Request Phone</List.Header>
+                                        {request.phone}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Request Email</List.Header>
+                                        {request.email}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header>Request Address</List.Header>
+                                        {request.address}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
                     <p>Thank you for your generous contribution.</p>
                     <p>Sincerely,</p>
                     <p style={{ fontStyle: "italic" }}>KindCoin Org</p>
@@ -496,6 +598,7 @@ function CompletedDonationPage(){
                     <Button color='grey' onClick={handleAttestationModalClose}>Close</Button>
                 </Modal.Actions>
             </Modal>
+
         </div>
     );
 };

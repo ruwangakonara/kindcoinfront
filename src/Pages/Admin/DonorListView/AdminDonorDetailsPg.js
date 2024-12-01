@@ -6,7 +6,7 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminDonorCmp from "../../../Components/Admin/DonorDetails/AdminDonorCmp";
-import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSIdeBarCmp";
 const AdminDonorDetailsPg = () => {
   const { user_id } = useParams();
   console.log(user_id);

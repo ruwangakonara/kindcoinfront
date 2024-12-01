@@ -120,6 +120,10 @@ function UnacceptedDonation(){
                                                 {donation?.title}
                                             </List.Item>
                                             <List.Item>
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation?.description}
+                                            </List.Item>
+                                            <List.Item>
                                                 <List.Header>Request Title</List.Header>
                                                 {request.open ?
                                                     <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
@@ -133,7 +137,7 @@ function UnacceptedDonation(){
                                                 {request?.description}
                                             </List.Item>
                                             <List.Item>
-                                                <List.Header>Recipient(Request) Phone</List.Header>
+                                                <List.Header>Your(Request) Phone</List.Header>
                                                 {request?.phone}
                                             </List.Item>
                                             <List.Item>
@@ -160,6 +164,10 @@ function UnacceptedDonation(){
                                                     {donation.value}
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                         {!donation?.accepted && (
                                             <Label color='red' className='not-accepted-label'>

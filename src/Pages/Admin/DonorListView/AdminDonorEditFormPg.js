@@ -1,7 +1,7 @@
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminDonorEditFormCmp from "../../../Components/Admin/DonorDetails/AdminDonorEditFormCmp";
-import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSIdeBarCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

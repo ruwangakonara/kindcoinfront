@@ -174,8 +174,8 @@ function OnGoingDonationPage(){
                                             <List.Item>
                                                 <List.Header>Donation Title</List.Header>
                                                 {donation.title}
-                                                <List.Header>Donation</List.Header>
-                                                {donation.description}
+                                                {/*<List.Header>Donation</List.Header>*/}
+                                                {/*{donation.description}*/}
                                                 <div style={{textAlign: "right", marginBottom: "5px"}}>
                                                     {!donation.verified && (
                                                         <Label color='red' className='status-label'>
@@ -190,6 +190,10 @@ function OnGoingDonationPage(){
                                                 {/*)}*/}
                                             </List.Item>
                                             <List.Item>
+                                                <List.Header>Donation Description</List.Header>
+                                                {donation?.description}
+                                            </List.Item>
+                                            <List.Item>
                                                 <List.Header>Request Title</List.Header>
                                                 {request.open ?
                                                     <a href={`http://localhost:3000/beneficiary/open-requests/${request?._id}`}>{request?.title}</a>
@@ -202,7 +206,7 @@ function OnGoingDonationPage(){
                                                 {request?.description}
                                             </List.Item>
                                             <List.Item>
-                                                <List.Header>Recipient(Request) Phone</List.Header>
+                                                <List.Header>Your(Request) Phone</List.Header>
                                                 {request?.phone}
                                             </List.Item>
                                             <List.Item>
@@ -235,6 +239,10 @@ function OnGoingDonationPage(){
                                                     }
                                                 </List.Item>
                                             )}
+                                            <List.Item>
+                                                <List.Header>Listed at</List.Header>
+                                                {String(donation.created).slice(0,10) + " @ " + String(donation.created).slice(11,16)}
+                                            </List.Item>
                                         </List>
                                     </Grid.Column>
                                 </Grid.Row>
@@ -317,7 +325,7 @@ function OnGoingDonationPage(){
                                                     </List.Item>
                                                     <List.Item>
                                                         <List.Header>Member Email</List.Header>
-                                                        {member?.email}
+                                                        {member?.username}
                                                     </List.Item>
 
                                                 </List>
