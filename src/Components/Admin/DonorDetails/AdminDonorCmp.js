@@ -11,39 +11,46 @@ import {
   Image,
 } from "semantic-ui-react";
 
-const AdminDonorCmp = ({ donorDetails }) => {
-  // const { id } = useParams(); // 'id' will come from the URL
-  // console.log("parameter", id);
-  // const [donorDetails, setDonorDetails] = useState(null); // State to store the donor data
-  // const [loading, setLoading] = useState(true); // State to handle loading
-  // const [error, setError] = useState(null); // State to handle errors
+const AdminDonorCmp = () => {
+  const { user_id } = useParams(); // 'id' will come from the URL
+  console.log("parameter", user_id);
+  const [donorDetails, setDonorDetails] = useState(null); // State to store the donor data
+  const [loading, setLoading] = useState(true); // State to handle loading
+  const [error, setError] = useState(null); // State to handle errors
 
-  // useEffect(() => {
-  //   // Function to fetch donor details
-  //   const fetchDonorDetails = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         `http://localhost:9013/admin/Donor_List/Donors/${id}`
-  //       );
-  //       setDonorDetails(response.data); // Assuming API response returns the donor data
-  //       setLoading(false); // Stop loading once data is fetched
-  //     } catch (error) {
-  //       console.error("Error fetching donor details:", error);
-  //       setError(error);
-  //       setLoading(false);
-  //     }
-  //   };
+  useEffect(() => {
+    // Function to fetch donor details
+    const fetchDonorDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9013/admin/Donor_List/Donors/${user_id}`
+        );
+        setDonorDetails(response.data); // Assuming API response returns the donor data
+        setLoading(false); // Stop loading once data is fetched
+      } catch (error) {
+        console.error("Error fetching donor details:", error);
+        setError(error);
+        setLoading(false);
+      }
+    };
+    if (user_id) {
+      fetchDonorDetails();
+    }
 
-  //   fetchDonorDetails();
-  // }, [id]); // Fetch data whenever the 'id' changes
+    // fetchDonorDetails();
+  }, [user_id]); // Fetch data whenever the 'id' changes
 
-  // if (loading) {
-  //   return <div>Loading...</div>;
-  // }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-  // if (error && id === undefined) {
-  //   return <div>Error fetching donor details</div>;
-  // }
+  if (error) {
+    return <div>Error fetching donor details</div>;
+  }
+
+  if (!donorDetails) {
+    return <div>No donor details found</div>;
+  }
 
   // return donorDetails ? (
   //   <AdminDonorCmp donorDetails={donorDetails} />
@@ -53,7 +60,7 @@ const AdminDonorCmp = ({ donorDetails }) => {
 
   // Destructure the donor details
   const {
-    user_id,
+    user_id: userId,
     name,
     username,
     profile_image,
@@ -108,7 +115,7 @@ const AdminDonorCmp = ({ donorDetails }) => {
               <CardDescription textAlign="left">
                 <div className={classes.admin_cardDescription}>
                   <p>
-                    <strong>User ID:</strong> {user_id}
+                    <strong>User ID:</strong> {userId}
                   </p>
                   <p>
                     <strong>Email (Username):</strong> {username}

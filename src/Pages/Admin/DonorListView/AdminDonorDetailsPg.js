@@ -39,7 +39,7 @@ const AdminDonorDetailsPg = () => {
 
     // Example: Fetch donor details using the user_id
     // fetchDonorDetails(user_id);
-  }, [user_id]);
+  }, []);
 
   if (loading) {
     return (
@@ -86,7 +86,8 @@ const AdminDonorDetailsPg = () => {
           <DefaultDashCmp>
             <h1 style={{ textAlign: "center" }}>Donor Details</h1>
             {/* Pass the donor details to AdminDonorCmp */}
-            <AdminDonorCmp donorDetails={donorDetails} />
+            {/* <AdminDonorCmp donorDetails={donorDetails} /> */}
+            <AdminDonorCmp />
           </DefaultDashCmp>
         </div>
       </div>

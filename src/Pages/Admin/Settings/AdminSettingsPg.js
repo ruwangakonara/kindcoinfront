@@ -13,7 +13,7 @@ const AdminSettingsPg = () => {
         {/* <SidebarAdminCmp visible={true} /> */}
         <div className={classes.content}>
           <DefaultDashCmp>
-            <h1 style={{ textAlign: "center" }}>Settings</h1>
+            <h1 style={{}}>Reports</h1>
           </DefaultDashCmp>
         </div>
       </div>
