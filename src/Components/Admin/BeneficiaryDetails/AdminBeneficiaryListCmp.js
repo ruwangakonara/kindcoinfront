@@ -90,6 +90,27 @@ const AdminBeneficiaryListCmp = () => {
     />
   );
 
+  const handleView = (id) => {
+    navigate(`/view/crew_member/${id}`);
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/edit/crew_member/${id}`);
+  };
+
+  // const handleDelete = (id) => {
+  //   axios
+  //     .delete(`http://localhost:9013/admin/delete/crew_member/${id}`)
+  //     .then(() => {
+  //       // Remove the deleted member from the table by filtering out the deleted member
+  //       setRows(rows.filter((row) => row._id !== id));
+  //       console.log("Crew member deleted successfully");
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error deleting crew member:", error);
+  //     });
+  // };
+
   const handleRowClick = (userId) => {
     navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}`);
   };
@@ -127,7 +148,7 @@ const AdminBeneficiaryListCmp = () => {
 
   return (
     <div className={classes.admin_mainContainer}>
-      <InputExampleIconPosition />
+      {/* <InputExampleIconPosition /> */}
       <Table celled>
         <TableHeader>
           <TableRow>
@@ -204,7 +225,22 @@ const AdminBeneficiaryListCmp = () => {
                         gap: "40px",
                       }}
                     >
-                      <Icon
+                      <Button icon onClick={() => handleView(row._id)}>
+                        <Icon name="eye" color="blue" />
+                      </Button>
+                      <Button icon onClick={() => handleEdit(row._id)}>
+                        <Icon name="pencil" color="green" />
+                      </Button>
+                      {/* <Button icon onClick={() => handleDelete(row._id)}>
+                        <Icon name="trash" color="red" />
+                      </Button> */}
+                      <Button
+                        icon
+                        onClick={(e) => handleDeleteClick(e, row._id)}
+                      >
+                        <Icon name="trash" color="red" />
+                      </Button>
+                      {/* <Icon
                         name="edit"
                         onClick={(e) => handleEditClick(e, row.user_id)}
                         style={{ cursor: "pointer" }}
@@ -213,7 +249,7 @@ const AdminBeneficiaryListCmp = () => {
                         name="user delete"
                         onClick={(e) => handleDeleteClick(e, row.user_id)}
                         style={{ cursor: "pointer" }}
-                      />
+                      /> */}
                     </IconGroup>
                     {/* </div> */}
                   </div>

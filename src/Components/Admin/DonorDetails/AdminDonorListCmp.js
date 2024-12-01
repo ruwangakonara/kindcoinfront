@@ -72,7 +72,9 @@ const AdminDonorListCmp = () => {
     />
   );
 
-  const handleRowClick = (user_id) => {
+  const handleRowClick = (e, user_id) => {
+    console.log(user_id);
+    e.stopPropagation(); // Prevent the row click event
     navigate(`/admin/Donor_List/Donors/${user_id._id}`);
   };
 
@@ -115,7 +117,7 @@ const AdminDonorListCmp = () => {
 
   return (
     <div className={classes.admin_mainContainer}>
-      <InputExampleIconPosition />
+      {/* <InputExampleIconPosition /> */}
       <Table celled>
         <TableHeader>
           <TableRow>
@@ -153,9 +155,10 @@ const AdminDonorListCmp = () => {
                 className={`${classes.admin_dataRow} ${
                   !isActive && classes.admin_deactivatedRow
                 }`}
-                onClick={() => {
+                onClick={(e) => {
                   console.log(donor.user_id);
-                  handleRowClick(donor.user_id);
+                  // handleRowClick(donor.user_id);
+                  handleRowClick(e, donor.user_id);
                 }}
               >
                 <TableCell>{userId}</TableCell>

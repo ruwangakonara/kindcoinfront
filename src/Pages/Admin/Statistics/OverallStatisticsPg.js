@@ -5,24 +5,29 @@ import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import ChartACmp from "../../../Components/Admin/Charts/ChartACmp";
 import ChartBCmp from "../../../Components/Admin/Charts/ChartBCmp";
 import ChartCCmp from "../../../Components/Admin/Charts/ChartCCmp";
-import classes from "./OverallStatisticsPg.module.css"
-
+import classes from "./OverallStatisticsPg.module.css";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 
 const OverallStatisticsPg = () => {
-    return(
-        <div className={classes.mainContainer}>
-            <HeaderCmp/>
-            <SidebarAdminCmp visible={true}/>
-            <DefaultDashCmp>
-                <h1 style={{textAlign: "center"}}>Statistics</h1>
-            </DefaultDashCmp>
-            <GridTypeDashCmp>
-                <ChartACmp />
-                <ChartBCmp />
-                <ChartCCmp />
-            </GridTypeDashCmp>
+  return (
+    <>
+      <HeaderCmp />
+      <div className={classes.mainContainer}>
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
+        <div className={classes.content}>
+          <DefaultDashCmp>
+            <h1 style={{ textAlign: "center" }}>Statistics</h1>
+          </DefaultDashCmp>
+          <GridTypeDashCmp>
+            <ChartACmp />
+            <ChartBCmp />
+            <ChartCCmp />
+          </GridTypeDashCmp>
         </div>
-    )
+      </div>
+    </>
+  );
 };
 
-export default OverallStatisticsPg
+export default OverallStatisticsPg;

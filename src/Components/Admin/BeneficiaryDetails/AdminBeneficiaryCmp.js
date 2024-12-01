@@ -107,12 +107,12 @@ const AdminBeneficiaryCmp = () => {
               wrapped
               ui={false}
             />
-            <CardContent extra>
-              {/* <a>
+            {/* <CardContent extra>
+              <a>
                             <Icon name='user' />
                             22 Friends
-                        </a> */}
-            </CardContent>
+                        </a>
+            </CardContent> */}
           </Card>
         </div>
       </div>
