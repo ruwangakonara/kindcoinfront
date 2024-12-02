@@ -6,6 +6,7 @@ import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import {Container, Button, Modal, Table} from "semantic-ui-react";
 import './tokenTransfer2.css';
 import axios from "axios";
+import SearchBar from "../../../Components/CrewMember/VerifyRequests/Searchbar";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -14,9 +15,12 @@ const axiosInstance = axios.create({
 
 const TokenTransfer = () => {
     const [donations, setDonations] = useState([]);
+    const [filterDonations, setFilterDonations] = useState([]);
     const [selectedDonation, setSelectedDonation] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalMessage, setModalMessage] = useState("");
+    const [searchQuery, setSearchQuery] = useState('');
+    const [noResultsFound, setNoResultsFound] = useState(false);
 
     useEffect(() => {
         getDonations();
@@ -26,6 +30,7 @@ const TokenTransfer = () => {
         try {
             const response = await axiosInstance.post('/crew/get_donations', { verified: true, rewarded: false });
             setDonations(response.data.donations);
+            setFilterDonations(response.data.donations);
         } catch (error) {
             console.error("Error fetching donations:", error);
         }
@@ -47,6 +52,27 @@ const TokenTransfer = () => {
         }
     };
 
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+
+        const filteredData = donations.filter((donation) => {
+            const searchString = `
+                ${donation?.donationDetails?._id || ''} 
+                ${donation?.donationDetails?.title || ''} 
+                ${donation?.donationDetails?.value || ''} 
+                ${donation?.requestDetails?.title || ''} 
+                ${donation?.donorDetails?.name || ''}
+                ${donation?.beneficiaryDetails?.name || ''} 
+            `.toLowerCase();
+
+            return searchString.includes(query.toLowerCase());
+        });
+
+        setFilterDonations(filteredData);
+        setNoResultsFound(filteredData.length === 0);
+    };
+
     const openConfirmationModal = (donation) => {
         setSelectedDonation(donation);
         setIsModalOpen(true);
@@ -62,9 +88,12 @@ const TokenTransfer = () => {
             <Sidebar/>
             <div style={{ flex: '1' }}>
             <HeaderCrew />
-            {/* <div className="crew-verify-requests-container"> */}
-            <Container style={{ padding: '20px', top: "100px", position: 'relative' }}>
-                <h2 className="crew-page-header">Donations</h2>
+            <div className="crew-token-requests-container">
+            <SearchBar
+                searchQuery={searchQuery}
+                onSearchChange={handleSearch}
+            />
+            <Container style={{ padding: '20px', position: 'relative' }}>
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -79,8 +108,8 @@ const TokenTransfer = () => {
                     </Table.Header>
 
                     <Table.Body>
-                        {donations?.length > 0 ? (
-                            donations.map((donation) => (
+                        {filterDonations?.length > 0 ? (
+                            filterDonations.map((donation) => (
                                 <Table.Row key={donation?.donationDetails?._id}>
                                     <Table.Cell>{donation?.donationDetails?._id}</Table.Cell>
                                     <Table.Cell>{donation?.donationDetails?.title}</Table.Cell>
@@ -154,7 +183,7 @@ const TokenTransfer = () => {
             </Modal>
         </Container>
         </div>
-        {/* </div> */}
+        </div>
     </div>
                 
     // <div style={{display: 'flex', width: '100%'}}>

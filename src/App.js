@@ -189,6 +189,7 @@ import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
 import TicketDiscussionCmp from "./Components/Admin/TicketsRaised/TicketDiscussion";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
+import GoodsMemberDonations from "./Pages/CrewMember/GoodsDonation/GoodsDonation";
 
 function App() {
   return (
@@ -497,6 +498,7 @@ function App() {
       <Route path="/crew/recipients" element={<VerifyRecipients />} />
       <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
       <Route path="/crew/token_transfer" element={<TokenTransfer />} />
+      <Route path="/crew/goods_donations" element={<GoodsMemberDonations />} />
       {/* <Route path="/crew/settings" element={<CrewSettings />} />
       <Route path="/crew/profile" element={<CrewProfile />} /> */}
       {/* <Route path="/admin/layouts" element={<DashboardLayout />} /> */}
