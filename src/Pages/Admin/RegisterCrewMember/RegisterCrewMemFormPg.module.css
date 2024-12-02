@@ -35,3 +35,46 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a light shadow for emphasis */
     border-radius: 8px; /* Optional: Add rounded corners */
   }
+
+  body {
+    margin: 0;
+}
+
+.mainContainer{
+    display: flex;
+    height: 100vh;
+    z-index: 100;
+    transition: margin-left 0.5s ease-in-out; 
+    overflow: hidden;
+    
+}
+
+/* .content {
+    flex-grow: 1;
+    padding: 20px 50px; 
+    overflow-y: auto;
+    box-sizing: border-box;
+  } */
+
+  .content {
+    padding: 20px;
+    overflow-y: hidden;
+    width: calc(100% - 50px); /* Full width minus padding */
+    padding-left: 50px;
+    padding-right: 50px;
+    transition: width 0.5s;
+  }
+
+  .withSidebar .content {
+    width: calc(100% - 280px); /* Adjust width when sidebar is visible (230px sidebar + 50px padding) */
+}
+
+.noSidebar .content {
+    width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
+}
+
+/* .editForm{
+    width: 100%;
+    margin-left: 15%;
+    margin-right: 50px;
+} */

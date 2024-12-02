@@ -17,6 +17,8 @@
     "chart.js": "^4.4.6",
     "crypto-js": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "kindcoinfront": "file:",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",

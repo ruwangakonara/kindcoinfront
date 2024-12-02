@@ -187,6 +187,8 @@ import Dispatcher from "./Pages/CrewMember/TokenTransfer/dispatch";
 import DocVerification from "./Pages/CrewMember/TokenTransfer/docVerify";
 import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
 import TicketDiscussionCmp from "./Components/Admin/TicketsRaised/TicketDiscussion";
+import ReportsPg from "./Pages/Admin/Reports/ReportsPg";
+import RaisedTicketsTableCmp from "./Components/Admin/TicketsRaised/RaisedTicketsTableCmp";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
 import GoodsMemberDonations from "./Pages/CrewMember/GoodsDonation/GoodsDonation";
@@ -451,10 +453,12 @@ function App() {
         path="/admin/register/crew_member"
         element={<RegisterCrewMemFormPg />}
       />
-      <Route path="/admin/settings" element={<AdminSettingsPg />} />
+      {/* <Route path="/admin/settings" element={<AdminSettingsPg />} /> */}
       <Route path="/admin/overall_stats" element={<OverallStatisticsPg />} />
       <Route path="/admin/handle/announcements" element={<AnnouncementsPg />} />
       <Route path="/admin/view/tickets" element={<RaisedTicketsPg />} />
+      <Route path="/admin/view/reports" element={<ReportsPg />} />
+      {/* <Route path="/admin/view/summary" element={<ReportsPg />} /> */}
       <Route
         path="/admin/view/tickets/:ticket_id"
         element={<TicketDiscussionCmp />}
@@ -474,7 +478,7 @@ function App() {
       {/* <Route path='/admin/view/crew_members/:crew_member_id' element={<ViewCrewMember/>}/> */}
       {/* <Route path='/admin/view/crew_members/:crew_member_id/accepted_transactions/:transaction_id' element={<ViewCrewMemberTransaction/>}/> */}
       <Route path="/admin/view/complaints" element={<ViewComplaintsPg />} />
-      <Route path="/admin/settings" element={<AdminSettingsPg />} />
+      {/* <Route path="/admin/reports" element={<AdminSettingsPg />} /> */}
 
       {/** =============================================================== */}
 

@@ -14,6 +14,7 @@ const RaisedTicketsPg = () => {
         <AdminSideBarCmp />
         <div className={classes.content}>
           <DefaultDashCmp>
+            {/* <div>User Report</div> */}
             <RaisedTicketsTableCmp />
           </DefaultDashCmp>
         </div>

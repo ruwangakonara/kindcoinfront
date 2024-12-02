@@ -185,7 +185,7 @@ const AdminBeneficiaryListCmp = () => {
                 className={`${classes.admin_dataRow} ${
                   !isActive && classes.admin_deactivatedRow
                 }`}
-                onClick={() => handleRowClick(row.userId)}
+                onClick={() => handleRowClick(userId)}
               >
                 <TableCell>{userId}</TableCell>
 
@@ -225,7 +225,7 @@ const AdminBeneficiaryListCmp = () => {
                         gap: "40px",
                       }}
                     >
-                      <Button icon onClick={() => handleView(row._id)}>
+                      <Button icon onClick={() => handleView(userId)}>
                         <Icon name="eye" color="blue" />
                       </Button>
                       <Button icon onClick={() => handleEdit(row._id)}>
