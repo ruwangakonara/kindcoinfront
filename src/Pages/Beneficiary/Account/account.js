@@ -127,7 +127,7 @@ function BeneficiaryOwnAccount() {
                     <Grid>
                         <Grid.Column width={8}>
                             <Header as="h3">Raised Amount</Header>
-                            <p>{beneficiary?.raised_amount}</p>
+                            <p>{beneficiary?.raisedAmount}</p>
                         </Grid.Column>
                     </Grid>
                 </Segment>

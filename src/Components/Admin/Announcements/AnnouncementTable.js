@@ -2,7 +2,7 @@ import classes from "./AnnouncementTable.module.css";
 
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
-import AdminSideBarCmp from "../Sidebar/AdminSideBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import AdminDonorListCmp from "../../../Components/Admin/DonorDetails/AdminDonorListCmp";
 
 const AnnouncementTable = () => {
