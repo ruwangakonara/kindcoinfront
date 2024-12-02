@@ -32,6 +32,7 @@ export default function AdminSideBarCmp() {
     },
     { name: "Tickets", path: "/admin/view/complaints", icon: "compose" },
     { name: "Statistics", path: "/admin/overall_stats", icon: "chart line" },
+    { name: "Reports", path: "/admin/reports", icon: "dochub" },
     { name: "Settings", path: "/admin/settings", icon: "settings" },
   ];
 
