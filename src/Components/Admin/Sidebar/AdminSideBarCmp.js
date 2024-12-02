@@ -33,11 +33,11 @@ export default function AdminSideBarCmp() {
     { name: "Tickets", path: "/admin/view/tickets", icon: "compose" },
     { name: "Statistics", path: "/admin/overall_stats", icon: "chart line" },
     { name: "Reports", path: "/admin/view/reports", icon: "book" },
-    // {
-    //   name: "Notices",
-    //   path: "/admin/handle/announcements",
-    //   icon: "announcement",
-    // },
+    {
+      name: "Notices",
+      path: "/admin/handle/announcements",
+      icon: "announcement",
+    },
   ];
 
   const axiosInstance = axios.create({
