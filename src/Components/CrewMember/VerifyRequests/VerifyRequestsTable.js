@@ -172,7 +172,7 @@ const VerifyRequestsTable = () => {
     };
 
     return (
-        <div className='crew-verify-requests-container'>
+        <div className='crew-verify-request-container'>
             {/* Toast Notification Container */}
             <ToastContainer
                 position="top-right"
@@ -193,7 +193,7 @@ const VerifyRequestsTable = () => {
             />
             </div>
 
-            <table className='ui celled table' id='crew-request-table'>
+            <table className='ui celled table'>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -244,8 +244,6 @@ const VerifyRequestsTable = () => {
                                     <option value="Published">Published</option>
                                     <option value="Rejected">Rejected</option>
                                 </select>
-                            </td>
-                            <td>
                             </td>
                         </tr>
                     ))}

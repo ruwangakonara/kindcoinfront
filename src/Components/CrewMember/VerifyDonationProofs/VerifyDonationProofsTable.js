@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {
   TableRow,
@@ -104,15 +104,15 @@ const VerifyRequestsTable = () => {
 
   const handleFilterChange = (selectedStatuses) => {
     if (selectedStatuses.length === 0) {
-        setFilterDonations([]); // Show no records if nothing is selected
+      setFilterDonations([]); // Show no records if nothing is selected
     } else {
-        const filtered = proofs.filter(proof => {
-            const status = proof.verified ? 'Verified' : 'Not Verified';
-            return selectedStatuses.includes(status);
-        });
-        setFilterDonations(filtered);
+      const filtered = proofs.filter(proof => {
+        const status = proof.verified ? 'Verified' : 'Not Verified';
+        return selectedStatuses.includes(status);
+      });
+      setFilterDonations(filtered);
     }
-};
+  };
 
 
 
@@ -129,20 +129,13 @@ const VerifyRequestsTable = () => {
           </Document>
         </div>
       );
-    } else if (url.match(/\.(jpg|jpeg|png)$/)) {
+    } else {
       return (
         <img
           src={url}
           alt="Document preview"
           style={{ maxWidth: "200px", marginBottom: "10px" }}
         />
-      );
-    } else {
-      const fileName = getFileName(url);
-      return (
-        <a href={url} download>
-          {fileName}
-        </a>
       );
     }
   };
@@ -182,14 +175,14 @@ const VerifyRequestsTable = () => {
 
       // If user confirms
       if (result.isConfirmed) {
-        console.log('Updating verification status for donation:', donationId," : ", currentVerifiedStatus);
+        console.log('Updating verification status for donation:', donationId, " : ", currentVerifiedStatus);
         const response = await axios.put('http://localhost:9013/crew/update_donation_status', {
           docId: donationId // Changed from requestId to donationId
         });
 
         // Update local state with the correct property
         const updatedProofs = proofs.map(proof =>
-          proof._id === donationId 
+          proof._id === donationId
             ? { ...proof, verified: response.data.donation.verified }
             : proof
         );
