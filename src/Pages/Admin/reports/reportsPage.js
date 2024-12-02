@@ -2,7 +2,7 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import GridTypeDashCmp from "../../../Components/Admin/DashboardComp/GridTypeDashCmp";
 import CardCmp from "../../../Components/Admin/NavigationCard/CardCmp";
-import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSIdeBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 // import Footer from "../../../Components/Admin/Footer/FooterCmp";
 import classes from "./AdminDashBoardPg.module.css";
