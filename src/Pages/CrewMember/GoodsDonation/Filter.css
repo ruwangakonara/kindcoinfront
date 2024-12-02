@@ -1,0 +1,27 @@
+.crew-filter-container {
+    position: fixed;
+    float: left;
+    top: 90px;
+    align-items: center;
+    margin-left: 0;
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    width: fit-content;
+    z-index: 100;
+}
+
+.crew-filter-container .ui.form .grouped.fields .field {
+    margin-right: 20px;
+}
+
+.crew-filter-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.ui.radio.checkbox label {
+    font-weight: normal;
+}
