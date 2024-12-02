@@ -10,6 +10,14 @@ import jsPDF from "jspdf";
 import "jspdf-autotable"; // For tables
 // import generateUserPDF from "./GenerativeFunctions";
 
+/**
+ *
+ * Data for reports
+ * All donations should be displayed as a table. end of it have to have a report button.
+ *
+ *
+ */
+
 const ReportsPg = () => {
   // const [users, setUsers] = useState([]);
   // const [reportData, setReportData] = useState(null);
@@ -17,6 +25,23 @@ const ReportsPg = () => {
   // const [beneficiaryData, setBeneficiaryData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const fetchDonations = () => {
+    axios
+      .get("http://localhost:9013/admin/view/reports/donationSummary")
+      .then((response) => {
+        setDonationData(response.data);
+        console.log(setDonationData(response.data));
+        // console.log(response.data); //
+        console.log(donationData);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching data");
+        setError("Error fetching the user report");
+        setLoading(false);
+      });
+  };
 
   // Fetch data from the backend
   // useEffect(() => {
@@ -53,36 +78,37 @@ const ReportsPg = () => {
     //   "http://localhost:9013/admin/Donor_List/Donors"
     // );
 
-    const fetchDonationSummary = axios.get(
-      "http://localhost:9013/admin/view/reports/donationSummary"
-    );
+    // const fetchDonationSummary = axios.get(
+    //   "http://localhost:9013/admin/view/reports/donationSummary"
+    // );
 
-    Promise.all([
-      // fetchUsers,
-      // fetchReportSummary,
-      // fetchDonors,
-      // fetchBeneficiaries,
-      fetchDonationSummary,
-    ])
-      .then(
-        ([
-          // usersResponse,
-          // reportResponse,
-          // beneficiariesResponse,
-          donationsResponse,
-        ]) => {
-          // setUsers(usersResponse.data);
-          // setReportData(reportResponse.data);
-          setDonationData(donationsResponse.data);
-          // setBeneficiaryData(beneficiariesResponse.data);
-          setLoading(false);
-        }
-      )
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-        setError("Error fetching the user report and summary");
-        setLoading(false);
-      });
+    // Promise.all([
+    //   // fetchUsers,
+    //   // fetchReportSummary,
+    //   // fetchDonors,
+    //   // fetchBeneficiaries,
+    //   fetchDonationSummary,
+    // ])
+    //   .then(
+    //     ([
+    //       // usersResponse,
+    //       // reportResponse,
+    //       // beneficiariesResponse,
+    //       donationsResponse,
+    //     ]) => {
+    //       // setUsers(usersResponse.data);
+    //       // setReportData(reportResponse.data);
+    //       setDonationData(donationsResponse.data);
+    //       // setBeneficiaryData(beneficiariesResponse.data);
+    //       setLoading(false);
+    //     }
+    //   )
+    //   .catch((error) => {
+    //     console.error("Error fetching data:", error);
+    //     setError("Error fetching the user report and summary");
+    //     setLoading(false);
+    //   });
+    fetchDonations();
   }, []);
 
   // const generateSummary = () => {
