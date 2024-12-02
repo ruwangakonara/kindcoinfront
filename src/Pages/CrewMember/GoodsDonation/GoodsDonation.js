@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Modal} from 'semantic-ui-react';
 import {Document, Page} from 'react-pdf';
 import HeaderCrew from '../../../Components/CrewMember/Header/HeaderCrew';
@@ -9,8 +9,14 @@ import './GoodsDonation.css';
 import Swal from 'sweetalert2';
 import SearchBar from './Searchbar';
 import Filter from './Filter';
+import { UserContext } from '../../../Components/Home/UserConext/UserContext';
+
 
 const GoodsMemberDonations = () => {
+
+    const { user, userDetails } = useContext(UserContext);
+    const member = userDetails;
+
     const [donations, setDonations] = useState([]);
     
     const [selectedDocument, setSelectedDocument] = useState([]);
@@ -23,12 +29,12 @@ const GoodsMemberDonations = () => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await axios.get('http://localhost:9013/crew/goods_donations');
+                const response = await axios.post('http://localhost:9013/crew/goods_donations', {member_id: member._id});
 
                 // Validate response data
-                if (response.data && response.data.requests) {
-                    setDonations(response.data.requests);
-                    setFilterRequests(response.data.requests);
+                if (response.data && response.data.donations) {
+                    setDonations(response.data.donations);
+                    setFilterRequests(response.data.donations);
                 } else {
                     throw new Error('Invalid response structure');
                 }
