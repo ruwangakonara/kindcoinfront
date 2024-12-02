@@ -83,31 +83,7 @@ const Notification = ({ notification, onClick }) => {
                 has received KINDCOIN.
             </>
         );
-    } else if (notification?.notificationDetails?.title === "Donation Usage Details Changed") {
-        description = (
-            <>
-                Usage Details for your Donation{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/donor/completed-donations/${notification?.donationDetails?._id}`}>
-                        {notification?.donationDetails?.title}
-                    </a>
-                </em></strong>{" "}
-                to Request{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/donor/${notification?.requestDetails?.open ? "open-requests" : "closed-requests"}/${notification?.requestDetails?._id}`}>
-                        {notification?.requestDetails?.title}
-                    </a>
-                </em></strong>{" "}
-                by{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/donor/beneficiaries/${notification?.beneficiaryDetails?._id}`}>
-                        {notification?.beneficiaryDetails?.name}
-                    </a>
-                </em></strong>{" "}
-                has been modified by the Beneficiary since you had reported them unsatisfactory.
-            </>
-        );
-    }else {
+    } else {
         description = (
             <>
                 Your Donation{" "}

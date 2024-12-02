@@ -60,57 +60,55 @@ const Notification = ({ notification, onClick }) => {
             </>
         );
     }
-    else if (notification?.notificationDetails?.title === "Donation Usage Reported Unsatisfactory") {
-        description = (
-            <>
-                The evident usage of the Donation{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/completed-donations/${notification?.donationDetails?._id}`}>
-                        {notification?.donationDetails?.title}
-                    </a>
-                </em></strong>{" "}
-                by{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/donors/${notification?.donorDetails?._id}`}>
-                        {notification?.donorDetails?.name}
-                    </a>
-                </em></strong>{" "}
-                to Your Request{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/${notification?.requestDetails?.open ? "open-requests" : "closed-requests"}/${notification?.requestDetails?._id}`}>
-                        {notification?.requestDetails?.title}
-                    </a>
-                </em></strong>{" "}
-
-                has been raised as unsatisfactory by the donor. Change Usage Details.
-            </>
-        );
-    } else {
-        description = (
-            <>
-                The evident usage of the Donation{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/completed-donations/${notification?.donationDetails?._id}`}>
-                        {notification?.donationDetails?.title}
-                    </a>
-                </em></strong>{" "}
-                by{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/donors/${notification?.donorDetails?._id}`}>
-                        {notification?.donorDetails?.name}
-                    </a>
-                </em></strong>{" "}
-                to Your Request{" "}
-                <strong><em>
-                    <a href={`http://localhost:3000/beneficiary/${notification?.requestDetails?.open ? "open-requests" : "closed-requests"}/${notification?.requestDetails?._id}`}>
-                        {notification?.requestDetails?.title}
-                    </a>
-                </em></strong>{" "}
-
-                had been raised as unsatisfactory by the donor. They have revoked that report.
-            </>
-        );
-    }
+    // else if (notification?.notificationDetails?.title === "KINDCOIN Transferred") {
+    //     description = (
+    //         <>
+    //             Your Donation{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/completed-donations/${notification?.donationDetails?._id}`}>
+    //                     {notification?.donationDetails?.title}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             to Request{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/${notification?.requestDetails?.open ? "open-requests" : "closed-requests"}/${notification?.requestDetails?._id}`}>
+    //                     {notification?.requestDetails?.title}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             by{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/beneficiaries/${notification?.beneficiaryDetails?._id}`}>
+    //                     {notification?.beneficiaryDetails?.name}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             has received KINDCOIN.
+    //         </>
+    //     );
+    // } else {
+    //     description = (
+    //         <>
+    //             Your Donation{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/completed-donations/${notification?.donationDetails?._id}`}>
+    //                     {notification?.donationDetails?.title}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             to Request{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/${notification?.requestDetails?.open ? "open-requests" : "closed-requests"}/${notification?.requestDetails?._id}`}>
+    //                     {notification?.requestDetails?.title}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             by{" "}
+    //             <strong><em>
+    //                 <a href={`http://localhost:3000/donor/beneficiaries/${notification?.beneficiaryDetails?._id}`}>
+    //                     {notification?.beneficiaryDetails?.name}
+    //                 </a>
+    //             </em></strong>{" "}
+    //             has received verification for its donation attestation fee.
+    //         </>
+    //     );
+    // }
 
 
     console.log(description);
