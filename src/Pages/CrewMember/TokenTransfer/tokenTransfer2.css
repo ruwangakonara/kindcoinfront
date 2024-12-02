@@ -70,9 +70,9 @@
 /*}*/
 
 /* Common table styling for DocVerify and TokenTransfer2 */
-.crew-verify-requests-container {
-    margin-left: 10%;
-    margin-top: 5%;
+.crew-token-requests-container {
+    margin-left: 12.5%;
+    margin-top: 10%;
     overflow-x: auto;
     overflow-y: auto;
     max-height: calc(100vh - 10%);
@@ -83,6 +83,8 @@
     min-width: 700px;
     border: 1px solid #ddd;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+    overflow-y: auto;
   }
  
  

@@ -6,6 +6,7 @@ import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import axios from "axios";
 import "./tokenTransfer2.css";
+import SearchBar from "../../../Components/CrewMember/VerifyRequests/Searchbar";
 
 const axiosInstance = axios.create({
     baseURL: "http://localhost:9013",
@@ -19,6 +20,9 @@ const DocVerification = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [errorModalMessage, setErrorModalMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const [filterDonations, setFilterDonations] = useState([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [noResultsFound, setNoResultsFound] = useState(false);
 
     useEffect(() => {
         getDonations();
@@ -31,6 +35,7 @@ const DocVerification = () => {
                 rewarded: true,
             });
             setDonations(response.data.donations);
+            setFilterDonations(response.data.donations);
         } catch (error) {
             console.error("Error fetching donations:", error);
         }
@@ -57,6 +62,30 @@ const DocVerification = () => {
             console.error("Error fetching transaction details:", error);
             setErrorModalMessage("An error occurred while fetching the transaction.");
         }
+    };
+
+    const handleSearch = (event) => {
+        const query = event.target.value;
+        setSearchQuery(query);
+
+        const filteredData = donations.filter((donation) => {
+            const searchString = `
+                ${donation?.donationDetails?._id || ''} 
+                ${donation?.donationDetails?.title || ''} 
+                ${donation?.donationDetails?.value || ''} 
+                ${donation?.requestDetails?.title || ''} 
+                ${donation?.donorDetails?.name || ''}
+                ${donation?.beneficiaryDetails?.name || ''} 
+                ${donation?.donationDetails?.token_amount || ''}
+                ${donation?.donationDetails?.attestation_fee || ''}
+                ${donation?.donationDetails?.doc_transac_id || ''}
+            `.toLowerCase();
+
+            return searchString.includes(query.toLowerCase());
+        });
+
+        setFilterDonations(filteredData);
+        setNoResultsFound(filteredData.length === 0);
     };
 
     const handleVerifyTransaction = async (donationId) => {
@@ -86,8 +115,12 @@ const DocVerification = () => {
             <Sidebar />
             <div style={{ flex: "1" }}>
             <HeaderCrew />
-            <Container style={{ padding: "20px", top: "100px", position: "relative" }}>
-                <h2>Donation Attestation Fee Verification</h2>
+            <div className="crew-token-requests-container">
+            <SearchBar
+                searchQuery={searchQuery}
+                onSearchChange={handleSearch}
+            />
+            <Container style={{ padding: "20px",  position: "relative" }}>
                 <Table celled>
                     <Table.Header>
                         <Table.Row>
@@ -105,8 +138,8 @@ const DocVerification = () => {
                     </Table.Header>
 
                     <Table.Body>
-                        {donations?.length > 0 ? (
-                            donations.map((donation) => (
+                        {filterDonations?.length > 0 ? (
+                            filterDonations.map((donation) => (
                                 <Table.Row key={donation?.donationDetails?._id}>
                                     <Table.Cell>{donation?.donationDetails?._id}</Table.Cell>
                                     <Table.Cell>{donation?.donationDetails?.title}</Table.Cell>
@@ -211,6 +244,7 @@ const DocVerification = () => {
                         </Modal.Actions>
                     </Modal>
                 </Container>
+            </div>
             </div>
         </div>
     );
