@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, useRef} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Container, Grid, Header, Image, List, Segment, Button, Modal, Form, Icon, Label, TextArea, Checkbox} from 'semantic-ui-react';
 import Navbar2 from '../../../Components/Donor/NavBar/NavBar2';
 import Sidebar2 from '../../../Components/Donor/Sidebar/Sidebar2';
@@ -107,68 +107,35 @@ function CompletedDonationPage(){
     // };
 
 
-    // const handlePDFExport = () => {
-    //     // Wait a little to make sure the modal content is rendered
-    //     setTimeout(() => {
-    //         const modalContent = document.getElementById('attestation'); // Get modal content
-    //
-    //         if (!modalContent) {
-    //             console.error('Modal content not found!');
-    //             return;
-    //         }
-    //
-    //         const options = {
-    //             margin: 10,
-    //             filename: 'attestation.pdf',
-    //             html2canvas: { scale: 2 }, // Improve image rendering quality
-    //             jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-    //         };
-    //
-    //         html2pdf().from(modalContent).set(options).save(); // Export the content as PDF
-    //     }, 1000); // Delay to ensure rendering
-    // };
-    //
-    //     useEffect(() => {
-    //         // Check if the modal is open and content is rendered
-    //         if (attestationModalOpen) {
-    //             console.log('Modal is open and ready for export!');
-    //         }
-    //     }, [attestationModalOpen]);
+    const handlePDFExport = () => {
+        // Wait a little to make sure the modal content is rendered
+        setTimeout(() => {
+            const modalContent = document.getElementById('attestation'); // Get modal content
 
-    const componentRef = useRef(null);
-
-    const handlePrint = useReactToPrint({
-        content: () => {
-            // Ensure we're returning a valid DOM element
-            if (componentRef.current) {
-                return componentRef.current;
+            if (!modalContent) {
+                console.error('Modal content not found!');
+                return;
             }
-            console.error('Print ref is null');
-            return null;
-        },
-        documentTitle: 'Donation Attestation',
-        pageStyle: `
-      @media print {
-        body * {
-          visibility: hidden;
-        }
-        .print-container {
-          visibility: visible !important;
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-        }
-      }
-    `
-    });
 
-    // Prevent print if modal is not open
-    const safePrint = () => {
-        if (attestationModalOpen) {
-            handlePrint();
-        }
+            const options = {
+                margin: 10,
+                filename: 'attestation.pdf',
+                html2canvas: { scale: 2 }, // Improve image rendering quality
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+            };
+
+            html2pdf().from(modalContent).set(options).save(); // Export the content as PDF
+        }, 1000); // Delay to ensure rendering
     };
+
+        useEffect(() => {
+            // Check if the modal is open and content is rendered
+            if (attestationModalOpen) {
+                console.log('Modal is open and ready for export!');
+            }
+        }, [attestationModalOpen]);
+
+
     const handleUpdateDocTransacId = () => {
         if(donation.doc_transac_id !== "Not Entered Yet"){
             setDocTransacId(donation.doc_transac_id);
@@ -717,173 +684,157 @@ function CompletedDonationPage(){
                 </Modal.Actions>
             </Modal>
             {/* Attestation Modal */}
-            <Modal
-                id="attestation"
-                size='large'
-                open={attestationModalOpen}
-                onClose={handleAttestationModalClose}
-            >
+            <Modal id = "attestation" size='large' open={attestationModalOpen} onClose={handleAttestationModalClose}>
                 <Modal.Header>Donation Attestation</Modal.Header>
                 <Modal.Content>
-                    <div
-                        ref={componentRef}
-                        className="print-container"
-                        style={{
-                            padding: '20px',
-                            backgroundColor: 'white',
-                            width: '100%',
-                            maxWidth: '800px',
-                            margin: '0 auto'
-                        }}
-                    >
-                        <div style={{ textAlign: 'right', marginBottom: '20px' }}>
-                            <Image src="/charitylogo.png" size="medium" />
-                        </div>
-                        <p>We hereby attest that the following donation has been received:</p>
-                        <Grid columns={2} divided>
-                            <Grid.Row>
-                                <Grid.Column>
-                                    <Header>Donor</Header>
-                                    <List>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donor Name</List.Header>
-                                            {donor.name}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donor Description</List.Header>
-                                            {donor.description}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donor Address</List.Header>
-                                            {donor.address}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donor Phone</List.Header>
-                                            {donor.phoneNo}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donor Email</List.Header>
-                                            {donor.username}
-                                        </List.Item>
-                                    </List>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    <Header>Donation</Header>
-                                    <List>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donation Title</List.Header>
-                                            {donation.title}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donation Description</List.Header>
-                                            {donation.description}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donation Type</List.Header>
-                                            {donation.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
-                                        </List.Item>
-                                        {donation.type === 'goods' && (
-                                            <List.Item>
-                                                <List.Header style={{textAlign: "left"}}>Goods List</List.Header>
-                                                <List>
-                                                    {donation.goods?.map((goods, index) => (
-                                                        <List.Item key={index}>
-                                                            {goods.item}: {goods.amount}
-                                                        </List.Item>
-                                                    ))}
-                                                </List>
-                                            </List.Item>
-                                        )}
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Donation Phone</List.Header>
-                                            {donation.phone}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Amount</List.Header>
-                                            {donation.value}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Tokens</List.Header>
-                                            <div style={{ display: 'flex', alignItems: 'center' }}>
-                                                {donation.token_amount}
-                                                <Image
-                                                    src="/tag.png"
-                                                    size="small"
-                                                    style={{ marginRight: '10px' }}
-                                                />
-                                            </div>
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>XLM to LKR</List.Header>
-                                            {donation.xlmToLkrRate}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>KINDCOIN to XLM</List.Header>
-                                            {donation.tokenToXlmRate}
-                                        </List.Item>
-                                    </List>
-                                </Grid.Column>
-                            </Grid.Row>
-                            <Grid.Row>
-                                <Grid.Column>
-                                    <Header>Beneficiary</Header>
-                                    <List>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Recipient Name</List.Header>
-                                            {beneficiary.name}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Recipient Description</List.Header>
-                                            {beneficiary.description}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Recipient Phone</List.Header>
-                                            {beneficiary.phoneNo}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Recipient Email</List.Header>
-                                            {beneficiary.username}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Recipient Address</List.Header>
-                                            {beneficiary.address}
-                                        </List.Item>
-                                    </List>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    <Header>Request</Header>
-                                    <List>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Request Title</List.Header>
-                                            {request.title}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Request Description</List.Header>
-                                            {request.description}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Request Phone</List.Header>
-                                            {request.phone}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Request Email</List.Header>
-                                            {request.email}
-                                        </List.Item>
-                                        <List.Item>
-                                            <List.Header style={{textAlign: "left"}}>Request Address</List.Header>
-                                            {request.address}
-                                        </List.Item>
-                                    </List>
-                                </Grid.Column>
-                            </Grid.Row>
-                        </Grid>
-                        <p>Thank you for your generous contribution.</p>
-                        <p>Sincerely,</p>
-                        <p style={{ fontStyle: "italic" }}>KindCoin Org</p>
+                    <div style={{ textAlign: 'right', marginBottom: '20px' }}>
+                        <Image src="/charitylogo.png" size="medium" />
                     </div>
+                    <p>We hereby attest that the following donation has been received:</p>
+                    <Grid columns={2} divided>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Header>Donor</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donor Name</List.Header>
+                                        {donor.name}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donor Description</List.Header>
+                                        {donor.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donor Address</List.Header>
+                                        {donor.address}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donor Phone</List.Header>
+                                        {donor.phoneNo}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donor Email</List.Header>
+                                        {donor.username}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Header>Donation</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donation Title</List.Header>
+                                        {donation.title}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donation Description</List.Header>
+                                        {donation.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donation Type</List.Header>
+                                        {donation.type === 'monetary' ? 'Monetary Donation' : 'Goods Donation'}
+                                    </List.Item>
+                                    {donation.type === 'goods' && (
+                                        <List.Item>
+                                            <List.Header style = {{textAlign: "left"}}>Goods List</List.Header>
+                                            <List>
+                                                {donation.goods.map((goods, index) => (
+                                                    <List.Item key={index}>
+                                                        {goods.item}: {goods.amount}
+                                                    </List.Item>
+                                                ))}
+                                            </List>
+                                        </List.Item>
+                                    )}
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Donation Phone</List.Header>
+                                        {donation.phone}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Amount</List.Header>
+                                        {donation.value}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Tokens</List.Header>
+                                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                                            {donation.token_amount}
+
+                                            <Image
+                                                src="/tag.png"
+                                                size="small"
+                                                style={{ marginRight: '10px' }}
+                                            />
+                                        </div>
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>XLM to LKR</List.Header>
+                                        {donation.xlmToLkrRate}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>KINDCOIN to XLM</List.Header>
+                                        {donation.tokenToXlmRate}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid.Row>
+                        <Grid.Row>
+                            <Grid.Column>
+                                <Header>Beneficiary</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Recipient Name</List.Header>
+                                        {beneficiary.name}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Recipient Description</List.Header>
+                                        {beneficiary.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Recipient Phone</List.Header>
+                                        {beneficiary.phoneNo}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Recipient Email</List.Header>
+                                        {beneficiary.username}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Recipient Address</List.Header>
+                                        {beneficiary.address}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Header>Request</Header>
+                                <List>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Request Title</List.Header>
+                                        {request.title}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Request Description</List.Header>
+                                        {request.description}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Request Phone</List.Header>
+                                        {request.phone}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Request Email</List.Header>
+                                        {request.email}
+                                    </List.Item>
+                                    <List.Item>
+                                        <List.Header style = {{textAlign: "left"}}>Request Address</List.Header>
+                                        {request.address}
+                                    </List.Item>
+                                </List>
+                            </Grid.Column>
+                        </Grid.Row>
+                    </Grid>
+                    <p>Thank you for your generous contribution.</p>
+                    <p>Sincerely,</p>
+                    <p style={{ fontStyle: "italic" }}>KindCoin Org</p>
                 </Modal.Content>
                 <Modal.Actions>
-                    <Button color='blue' onClick={safePrint}>Print Attestation</Button>
+                    <Button color='blue' onClick={handlePDFExport}>Print Attestation</Button>
                     <Button color='grey' onClick={handleAttestationModalClose}>Close</Button>
                 </Modal.Actions>
             </Modal>
@@ -891,5 +842,5 @@ function CompletedDonationPage(){
         </div>
     );
 };
-//
+
 export default CompletedDonationPage;
