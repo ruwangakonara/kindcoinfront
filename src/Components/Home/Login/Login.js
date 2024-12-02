@@ -58,7 +58,7 @@ const Login = () => {
           }
         } else if (member) {
           setUserDetails(member); // Save beneficiary details in global state
-
+          console.log(member)
         }  else if (admin) {
           setUserDetails(admin); // Save beneficiary details in global state
 
