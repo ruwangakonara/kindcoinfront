@@ -187,7 +187,7 @@ import Dispatcher from "./Pages/CrewMember/TokenTransfer/dispatch";
 import DocVerification from "./Pages/CrewMember/TokenTransfer/docVerify";
 import DashboardLayout from "./Pages/Admin/Testings/DashboardLayout";
 import TicketDiscussionCmp from "./Components/Admin/TicketsRaised/TicketDiscussion";
-import ReportsPg from "./Pages/Admin/Reports/ReportsPg";
+import ReportsPg from "./Pages/Admin/reports/ReportsPg";
 import RaisedTicketsTableCmp from "./Components/Admin/TicketsRaised/RaisedTicketsTableCmp";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
 // import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
