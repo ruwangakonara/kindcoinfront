@@ -1,9 +1,10 @@
 import classes from "./RegisterCrewMemFormPg.module.css";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
-import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
-import { useState,  } from "react";
-import {useNavigate} from "react-router-dom";
+// import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormField,
   Button,
@@ -22,8 +23,7 @@ const axiosInstance = axios.create({
 });
 
 const RegisterCrewMemFormPg = () => {
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   // do a similar logic to post endpoint.
   // const [announcements, setAnnouncements] = useState([]);
@@ -38,9 +38,6 @@ const RegisterCrewMemFormPg = () => {
   //       }
 
   //   }
-
-
-
 
   const [formData, setFormData] = useState({
     name: "",
@@ -68,9 +65,9 @@ const RegisterCrewMemFormPg = () => {
 
     try {
       console.log(formData);
-      await axiosInstance.post('/admin/register/crew_member', formData);
+      await axiosInstance.post("/admin/register/crew_member", formData);
       // setOpen(false);
-      navigate('/admin/view/crew_member');
+      navigate("/admin/view/crew_member");
     } catch (error) {
       console.log(error);
     }
@@ -82,80 +79,83 @@ const RegisterCrewMemFormPg = () => {
   return (
     <div className={classes.mainContainer}>
       <HeaderCmp />
-      <SidebarAdminCmp visible={true} />
-      <DefaultDashCmp>
-        <h1 style={{ textAlign: "center" }}>Register page</h1>
+      <AdminSideBarCmp />
+      <div className={classes.content}>
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <DefaultDashCmp>
+          <h1 style={{ textAlign: "center" }}>Register page</h1>
 
-        <div className={classes.registerForm}>
-          <Form onSubmit={handleSubmit} success={formState}>
-            <FormGroup widths="equal">
-              <FormField
-                required={true}
-                label="Name"
-                control={Input}
-                placeholder="Name"
-                name="name"
-                type="text"
-                value={formData.name}
-                onChange={handleChange}
-              />
-              {/*<FormField*/}
-              {/*  required={true}*/}
-              {/*  label="No Of Operations"*/}
-              {/*  control={Input}*/}
-              {/*  placeholder="No Of Operations"*/}
-              {/*  name="noOfOperations"*/}
-              {/*  type="text"*/}
-              {/*  value={formData.noOfOperations}*/}
-              {/*  onChange={handleChange}*/}
-              {/*/>*/}
-            </FormGroup>
-            <FormGroup widths="equal">
-              {/*<FormField*/}
-              {/*  required={true}*/}
-              {/*  label="Stellar Id"*/}
-              {/*  control={Input}*/}
-              {/*  placeholder="Stellar Id"*/}
-              {/*  name="stellarId"*/}
-              {/*  type="text"*/}
-              {/*  value={formData.stellarId}*/}
-              {/*  onChange={handleChange}*/}
-              {/*/>*/}
-              {/*<FormField*/}
-              {/*  required={true}*/}
-              {/*  label="Town"*/}
-              {/*  control={Input}*/}
-              {/*  placeholder="Town"*/}
-              {/*  name="town"*/}
-              {/*  type="text"*/}
-              {/*  value={formData.town}*/}
-              {/*  onChange={handleChange}*/}
-              {/*/>*/}
-            </FormGroup>
-            <FormGroup widths="equal">
-              {/*<FormField*/}
-              {/*  required={true}*/}
-              {/*  label="ProfileImage"*/}
-              {/*  control={Input}*/}
-              {/*  placeholder="ProfileImage"*/}
-              {/*  name="profileImage"*/}
-              {/*  type="text"*/}
-              {/*  value={formData.profileImage}*/}
-              {/*  onChange={handleChange}*/}
-              {/*/>*/}
-              {/*<FormField*/}
-              {/*  required={true}*/}
-              {/*  label="CertificateImage"*/}
-              {/*  control={Input}*/}
-              {/*  placeholder="CertificateImage"*/}
-              {/*  name="CertificateImage"*/}
-              {/*  type="text"*/}
-              {/*  value={formData.certificateImage}*/}
-              {/*  onChange={handleChange}*/}
-              {/*/>*/}
-            </FormGroup>
-            <FormGroup widths="equal">
-              {/* <FormField
+          <div className={classes.admin_formContainer}>
+            <div className={classes.formContent}>
+              <Form onSubmit={handleSubmit} success={formState}>
+                <FormGroup widths="equal">
+                  <FormField
+                    required={true}
+                    label="Name"
+                    control={Input}
+                    placeholder="Name"
+                    name="name"
+                    type="text"
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                  {/*<FormField*/}
+                  {/*  required={true}*/}
+                  {/*  label="No Of Operations"*/}
+                  {/*  control={Input}*/}
+                  {/*  placeholder="No Of Operations"*/}
+                  {/*  name="noOfOperations"*/}
+                  {/*  type="text"*/}
+                  {/*  value={formData.noOfOperations}*/}
+                  {/*  onChange={handleChange}*/}
+                  {/*/>*/}
+                </FormGroup>
+                <FormGroup widths="equal">
+                  {/*<FormField*/}
+                  {/*  required={true}*/}
+                  {/*  label="Stellar Id"*/}
+                  {/*  control={Input}*/}
+                  {/*  placeholder="Stellar Id"*/}
+                  {/*  name="stellarId"*/}
+                  {/*  type="text"*/}
+                  {/*  value={formData.stellarId}*/}
+                  {/*  onChange={handleChange}*/}
+                  {/*/>*/}
+                  {/*<FormField*/}
+                  {/*  required={true}*/}
+                  {/*  label="Town"*/}
+                  {/*  control={Input}*/}
+                  {/*  placeholder="Town"*/}
+                  {/*  name="town"*/}
+                  {/*  type="text"*/}
+                  {/*  value={formData.town}*/}
+                  {/*  onChange={handleChange}*/}
+                  {/*/>*/}
+                </FormGroup>
+                <FormGroup widths="equal">
+                  {/*<FormField*/}
+                  {/*  required={true}*/}
+                  {/*  label="ProfileImage"*/}
+                  {/*  control={Input}*/}
+                  {/*  placeholder="ProfileImage"*/}
+                  {/*  name="profileImage"*/}
+                  {/*  type="text"*/}
+                  {/*  value={formData.profileImage}*/}
+                  {/*  onChange={handleChange}*/}
+                  {/*/>*/}
+                  {/*<FormField*/}
+                  {/*  required={true}*/}
+                  {/*  label="CertificateImage"*/}
+                  {/*  control={Input}*/}
+                  {/*  placeholder="CertificateImage"*/}
+                  {/*  name="CertificateImage"*/}
+                  {/*  type="text"*/}
+                  {/*  value={formData.certificateImage}*/}
+                  {/*  onChange={handleChange}*/}
+                  {/*/>*/}
+                </FormGroup>
+                <FormGroup widths="equal">
+                  {/* <FormField
                 required={true}
                 label="Email"
                 control={Input}
@@ -170,59 +170,61 @@ const RegisterCrewMemFormPg = () => {
                 value={formData.email}
                 onChange={handleChange}
               /> */}
-              <FormField
-                required={true}
-                label="PhoneNo"
-                control={Input}
-                placeholder="PhoneNo"
-                name="phoneNo"
-                type="text"
-                value={formData.phoneNo}
-                onChange={handleChange}
-              />
-            </FormGroup>
-            <FormGroup widths="equal">
-              <FormField
-                required={true}
-                label="User Name (Email)"
-                control={Input}
-                placeholder="UserName (Email)"
-                name="userName"
-                type="text"
-                value={formData.userName}
-                onChange={handleChange}
-              />
-              <FormField
-                required={true}
-                label="PassWord"
-                control={Input}
-                placeholder="PassWord"
-                name="passWord"
-                type="text"
-                value={formData.passWord}
-                onChange={handleChange}
-              />
-            </FormGroup>
-            <FormField
-              control={Checkbox}
-              label={"I agree to the Terms and Conditions"}
-              required={true}
-            />
-            <FormField
-                id="form-button-control-public"
-                control={Button}
-                content="Confirm"
-                label="Confirmation"
-                type="submit"
-            />
-            <Message
-              success
-              header="Registration Completed"
-              content="Successfully Registered the Crew Member"
-            />
-          </Form>
-        </div>
-      </DefaultDashCmp>
+                  <FormField
+                    required={true}
+                    label="PhoneNo"
+                    control={Input}
+                    placeholder="PhoneNo"
+                    name="phoneNo"
+                    type="text"
+                    value={formData.phoneNo}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormGroup widths="equal">
+                  <FormField
+                    required={true}
+                    label="User Name (Email)"
+                    control={Input}
+                    placeholder="UserName (Email)"
+                    name="userName"
+                    type="text"
+                    value={formData.userName}
+                    onChange={handleChange}
+                  />
+                  <FormField
+                    required={true}
+                    label="PassWord"
+                    control={Input}
+                    placeholder="PassWord"
+                    name="passWord"
+                    type="text"
+                    value={formData.passWord}
+                    onChange={handleChange}
+                  />
+                </FormGroup>
+                <FormField
+                  control={Checkbox}
+                  label={"I agree to the Terms and Conditions"}
+                  required={true}
+                />
+                <FormField
+                  id="form-button-control-public"
+                  control={Button}
+                  content="Confirm"
+                  label="Confirmation"
+                  type="submit"
+                />
+                <Message
+                  success
+                  header="Registration Completed"
+                  content="Successfully Registered the Crew Member"
+                />
+              </Form>
+            </div>
+          </div>
+        </DefaultDashCmp>
+      </div>
     </div>
   );
 };

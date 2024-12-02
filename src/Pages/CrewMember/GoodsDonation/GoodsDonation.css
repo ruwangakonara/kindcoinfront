@@ -1,0 +1,30 @@
+/* MemberDonations.css */
+.crew-table-container {
+    margin-left: 10%;
+    margin-top: 2%;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: calc(100vh - 10%);
+    padding-right: 15px;
+}
+
+.crew-page-header {
+    margin-left: 10%;
+    margin-top: 7.5%;
+    padding-right: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.ui.celled.table {
+    min-width: 700px;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.ui.table thead th {
+    background-color: #f7f7f7;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}

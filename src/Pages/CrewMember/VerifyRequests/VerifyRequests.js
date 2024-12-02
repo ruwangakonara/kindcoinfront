@@ -11,7 +11,7 @@ const VerifyRequests = () => {
             <HeaderCrew />
             <div className="main-container">
                 <Sidebar />
-                <div className="crew-verify-requests-container">
+                <div className="crew-verify-request-container">
                     <VerifyRequestsTable />
                 </div>
             </div>

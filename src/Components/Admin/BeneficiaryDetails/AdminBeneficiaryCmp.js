@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import classes from "./AdminBeneficiaryCmp.module.css";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 import {
   CardMeta,
   CardHeader,
@@ -29,19 +30,74 @@ import {
 
 // const AdminBeneficiaryCmp = ({beneficiaryDetails}) => {
 const AdminBeneficiaryCmp = () => {
-  // const { userId } = useParams();
+  const { userId } = useParams();
+  console.log(userId);
+  const [beneficiary, setBeneficiary] = useState(null); // State to store the fetched beneficiary data
+  const [loading, setLoading] = useState(true); // State to handle loading state
+  const [error, setError] = useState(null); // State to handle errors
 
-  const donorDetails = {
-    userId: "1",
-    userName: "michael_scott",
-    name: "Michael Scott",
-    image: "https://via.placeholder.com/150",
-    district: "Kegalle",
-    stellarAddress: "stellar123abc1",
-    address: "No: 18 Forest Avenue, Kegalle",
-    contact: "0771122334",
-    beneficiaryType: "Individual",
-  };
+  // Fetch beneficiary data based on userId
+  useEffect(() => {
+    const fetchBeneficiaryDetails = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:9013/Beneficiary_List/Beneficiary/${userId}`
+        );
+        setBeneficiary(response.data); // Assuming the response contains the beneficiary data
+        setLoading(false); // Stop loading once the data is fetched
+      } catch (error) {
+        console.error("Error fetching beneficiary details:", error);
+        setError("Error fetching beneficiary details.");
+        setLoading(false);
+      }
+    };
+
+    if (userId) {
+      fetchBeneficiaryDetails(); // Fetch the data when the component is mounted or userId changes
+    }
+  }, [userId]); // Dependency array ensures the effect runs when the userId changes
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  if (!beneficiary) {
+    return <div>No beneficiary details found</div>;
+  }
+
+  const {
+    user_id,
+    name,
+    username,
+    profile_image,
+    district,
+    phoneNo,
+    stellar_address,
+    type,
+    date_of_birth,
+    description,
+    anonymous,
+    no_donations,
+    donated,
+    tokens,
+    created_at,
+  } = beneficiary;
+
+  // const donorDetails = {
+  //   userId: "1",
+  //   userName: "michael_scott",
+  //   name: "Michael Scott",
+  //   image: "https://via.placeholder.com/150",
+  //   district: "Kegalle",
+  //   stellarAddress: "stellar123abc1",
+  //   address: "No: 18 Forest Avenue, Kegalle",
+  //   contact: "0771122334",
+  //   beneficiaryType: "Individual",
+  // };
 
   return (
     <div className={classes.admin_mainContainer}>
@@ -64,36 +120,40 @@ const AdminBeneficiaryCmp = () => {
           /> */}
             <CardContent>
               {/* <CardHeader>{anonymous ? "Anonymous Donor" : name}</CardHeader> */}
-              <CardHeader>Daniel</CardHeader>
+              <CardHeader>
+                {anonymous ? "Anonymous Beneficiary" : name}
+              </CardHeader>
               <CardMeta>
                 {/* <span className="date">Joined in {new Date(created_at).toLocaleDateString()}</span> */}
-                <span className="date">Joined in 2012</span>
+                <span className="date">
+                  Joined on {new Date(created_at).toLocaleDateString()}
+                </span>
               </CardMeta>
               <CardDescription textAlign="left">
                 <div className={classes.admin_cardDescription}>
-                  Daniel is a Janiter in Bangladesh.
+                  {/* Daniel is a Janiter in Bangladesh. */}
                   <p>
-                    <strong>User ID:</strong> {donorDetails.userId}
+                    <strong>User ID:</strong> {user_id}
                   </p>
-                  <p>
+                  {/* <p>
                     <strong>Name:</strong> {donorDetails.name}
+                  </p> */}
+                  <p>
+                    <strong>UserName:</strong> {username}
                   </p>
                   <p>
-                    <strong>UserName:</strong> {donorDetails.userName}
+                    <strong>District:</strong> {district}
                   </p>
                   <p>
-                    <strong>District:</strong> {donorDetails.district}
+                    <strong>Address:</strong> {stellar_address}
                   </p>
                   <p>
-                    <strong>Address:</strong> {donorDetails.address}
+                    <strong>Contact No.:</strong> {phoneNo}
                   </p>
-                  <p>
-                    <strong>Contact No.:</strong> {donorDetails.contact}
-                  </p>
-                  <p>
+                  {/* <p>
                     <strong>Stellar Address:</strong>{" "}
                     {donorDetails.stellarAddress}
-                  </p>
+                  </p> */}
                 </div>
               </CardDescription>
             </CardContent>
@@ -107,12 +167,12 @@ const AdminBeneficiaryCmp = () => {
               wrapped
               ui={false}
             />
-            <CardContent extra>
-              {/* <a>
+            {/* <CardContent extra>
+              <a>
                             <Icon name='user' />
                             22 Friends
-                        </a> */}
-            </CardContent>
+                        </a>
+            </CardContent> */}
           </Card>
         </div>
       </div>

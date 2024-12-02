@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-.customFont {
+/* .customFont {
     font-family: 'YourCustomFont', Arial, sans-serif;
-    font-size: 20px; /* Adjust the font size as needed */
-    color: #333; /* Adjust the color as needed */
+    font-size: 20px;
+    color: #333;
     text-align: center;
 }
 
@@ -37,16 +37,45 @@
     display: flex;
     align-items: center;
     gap: 10px;
-  }
+  } */
 
   .truncatedText {
-    display: inline-block; /* Required for applying the text truncation */
-    max-width: 150px; /* Set the maximum width for the cell content */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide the overflowing text */
-    text-overflow: ellipsis; /* Add an ellipsis (...) at the end of the truncated text */
+    display: inline-block; 
+    max-width: 150px; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
   }
 
   .deactivatedRow {
     background-color: #b3d9df; /* Light red background for deactivated rows */
   }
+
+
+  
+.admin_mainContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 25px;
+  margin-top: 40px !important;
+}
+
+.admin_formContainer {
+  border: 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%; 
+}
+
+.formContent {
+  max-width: 800px;
+  width: 100%; 
+  padding: 20px;
+  background-color: white; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  border-radius: 8px;
+}

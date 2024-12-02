@@ -15,7 +15,7 @@ const AssignCrewMemberPg = () => {
         <div className={classes.content}>
           <DefaultDashCmp>
             <h1 style={{ textAlign: "center" }}>
-              Assign Crew Member For Operations
+              View Goods Donations and Assign Crew Members
             </h1>
           </DefaultDashCmp>
         </div>

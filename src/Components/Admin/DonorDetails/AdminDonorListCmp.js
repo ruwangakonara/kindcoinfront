@@ -72,14 +72,16 @@ const AdminDonorListCmp = () => {
     />
   );
 
-  const handleRowClick = (user_id) => {
-    navigate(`/admin/Donor_List/Donors/${user_id._id}`);
+  const handleRowClick = (e, user_id) => {
+    console.log(user_id);
+    e.stopPropagation(); // Prevent the row click event
+    navigate(`/admin/Donor_List/Donors/${user_id}`);
   };
 
   const handleEditClick = (e, user_id) => {
     console.log(user_id);
     e.stopPropagation(); // Prevent the row click event
-    navigate(`/admin/Donor_List/Donors/edit/${user_id._id}`);
+    navigate(`/admin/Donor_List/Donors/edit/${user_id}`);
   };
 
   const handleDeleteClick = async (e, user_id) => {
@@ -115,7 +117,7 @@ const AdminDonorListCmp = () => {
 
   return (
     <div className={classes.admin_mainContainer}>
-      <InputExampleIconPosition />
+      {/* <InputExampleIconPosition /> */}
       <Table celled>
         <TableHeader>
           <TableRow>
@@ -146,16 +148,18 @@ const AdminDonorListCmp = () => {
           {donors.map((donor, index) => {
             const isActive = activeRows[index] ?? true;
             const userId = donor.user_id?._id || "N/A"; // Safe access for user_id._id
-
+            console.log("console with donor details", donor);
+            console.log(userId);
             return (
               <TableRow
                 key={userId}
                 className={`${classes.admin_dataRow} ${
                   !isActive && classes.admin_deactivatedRow
                 }`}
-                onClick={() => {
+                onClick={(e) => {
                   console.log(donor.user_id);
-                  handleRowClick(donor.user_id);
+                  // handleRowClick(donor.user_id);
+                  handleRowClick(e, userId);
                 }}
               >
                 <TableCell>{userId}</TableCell>
@@ -197,7 +201,7 @@ const AdminDonorListCmp = () => {
                     >
                       <Icon
                         name="edit"
-                        onClick={(e) => handleEditClick(e, donor.user_id)}
+                        onClick={(e) => handleEditClick(e, userId)}
                         style={{ cursor: "pointer" }}
                       />
                       <Icon

@@ -1,6 +1,6 @@
-.crew-verify-requests-container {
-    margin-left: 5%;
-    margin-top: 5%;
+.crew-verify-request-container {
+    margin-left: 7.5%;
+    margin-top: 7.5%;
     overflow-x: auto; 
     overflow-y: auto;
     max-height: calc(100vh - 10%);

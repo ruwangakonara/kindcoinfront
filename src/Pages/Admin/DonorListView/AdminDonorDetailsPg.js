@@ -6,10 +6,10 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import DefaultDashCmp from "../../../Components/Admin/DashboardComp/DefaultDashCmp";
 import AdminDonorCmp from "../../../Components/Admin/DonorDetails/AdminDonorCmp";
-import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSIdeBarCmp";
+import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 const AdminDonorDetailsPg = () => {
   const { user_id } = useParams();
-
+  console.log(user_id);
   const [donorDetails, setDonorDetails] = useState(null); // Store donor details
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
@@ -39,7 +39,7 @@ const AdminDonorDetailsPg = () => {
 
     // Example: Fetch donor details using the user_id
     // fetchDonorDetails(user_id);
-  }, [user_id]);
+  }, []);
 
   if (loading) {
     return (
@@ -86,7 +86,8 @@ const AdminDonorDetailsPg = () => {
           <DefaultDashCmp>
             <h1 style={{ textAlign: "center" }}>Donor Details</h1>
             {/* Pass the donor details to AdminDonorCmp */}
-            <AdminDonorCmp donorDetails={donorDetails} />
+            {/* <AdminDonorCmp donorDetails={donorDetails} /> */}
+            <AdminDonorCmp />
           </DefaultDashCmp>
         </div>
       </div>
