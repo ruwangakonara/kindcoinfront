@@ -28,6 +28,9 @@ const GoodsMemberDonations = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [noResultsFound, setNoResultsFound] = useState(false);
     const [filterRequests, setFilterRequests] = useState([]);
+    const [value, setValue] = useState('');
+    const [selectedGoods, setSelectedGoods] = useState([]);
+    const [goodsModalIsOpen, setGoodsModalIsOpen] = useState(false);
 
 
     useEffect(() => {
@@ -75,7 +78,8 @@ const GoodsMemberDonations = () => {
                 const response = await axios.put('http://localhost:9013/crew/update-donation-status', {
                     withCredentials: true,
                     requestId,
-                    status: newStatus
+                    status: newStatus,
+                    goods: selectedGoods
                 });
 
                 const updatedRequests = donations.map(request =>
@@ -183,6 +187,23 @@ const GoodsMemberDonations = () => {
         setModalIsOpen(false);
     };
 
+    const openGoodsModal = (goods) => {
+        setSelectedGoods(goods);
+        setGoodsModalIsOpen(true);
+    };
+
+    const closeGoodsModal = () => {
+        setSelectedGoods([]);
+        setGoodsModalIsOpen(false);
+    };
+
+    const handleGoodsValueChange = (index, value) => {
+        const updatedGoods = [...selectedGoods];
+        updatedGoods[index].value = value;
+        setSelectedGoods(updatedGoods);
+    };
+
+
 
 
     return (
@@ -219,6 +240,7 @@ const GoodsMemberDonations = () => {
                         <th>Email</th>
                         <th>Telephone Number</th>
                         <th>Description</th>
+                        <th>Goods</th>
                         <th>Documents</th>
                         <th>Status</th>
                     </tr>
@@ -244,7 +266,11 @@ const GoodsMemberDonations = () => {
                         <td>{request.beneficiaryDetails?.email || 'N/A'}</td> {/* Access beneficiary email */}
                         <td>{request.beneficiaryDetails?.phoneNo || 'N/A'}</td> {/* Access beneficiary phone number */}
                         <td>{request.donationDetails.description || 'No Description'}</td> {/* Access donation description */}
-                        
+                        <td>
+                                            <button onClick={() => openGoodsModal(request.donationDetails.goods)} className="crew-link-button">
+                                                View Goods
+                                            </button>
+                                        </td>
                         <td>
                           {request.documents?.length > 0 ? (
                             <button onClick={() => openModal(request.documents)} className="crew-link-button">
@@ -286,6 +312,40 @@ const GoodsMemberDonations = () => {
                     ))}
                 </Modal.Content>
             </Modal>
+            <Modal
+                        open={goodsModalIsOpen}
+                        onClose={closeGoodsModal}
+                        size="large"
+                        closeIcon
+                    >
+                        <Modal.Header>Goods Details</Modal.Header>
+                        <Modal.Content>
+                            <table className='ui celled table'>
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th>Amount</th>
+                                        <th>Value</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {selectedGoods.map((good, index) => (
+                                        <tr key={good._id}>
+                                            <td>{good.item}</td>
+                                            <td>{good.amount}</td>
+                                            <td>
+                                                <input
+                                                    type="number"
+                                                    value={good.value}
+                                                    onChange={(e) => handleGoodsValueChange(index, e.target.value)}
+                                                />
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </Modal.Content>
+                    </Modal>
         </div>
         </div>
         </div>
