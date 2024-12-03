@@ -28,6 +28,7 @@ import {
   View,
   StyleSheet,
 } from "@react-pdf/renderer";
+import { Button } from "semantic-ui-react";
 
 ChartJS.register(
   CategoryScale,
@@ -672,9 +673,9 @@ const ReportsPg = () => {
   return (
     <>
       <HeaderCmp />
-      <div className={classes.mainContainer}>
+      <div className={classes.admin_mainContainer}>
         <AdminSideBarCmp />
-        <div className={classes.content}>
+        <div className={classes.admin_content}>
           <DefaultDashCmp>
             <h1 style={{ textAlign: "center" }}>Generated Reports</h1>
             {/* <button
@@ -687,8 +688,8 @@ const ReportsPg = () => {
             >
               Get User Report
             </button> */}
-            <div className={classes.buttonContainer}>
-              <button
+            <div className={classes.admin_buttonContainer}>
+              <Button
                 onClick={generateUserReport}
                 style={{
                   display: "flex",
@@ -696,9 +697,9 @@ const ReportsPg = () => {
                   alignItems: "center",
                 }}
               >
-                Get User Report
-              </button>
-              <button
+                User Report
+              </Button>
+              <Button
                 onClick={generateDonationsPDF}
                 style={{
                   display: "flex",
@@ -706,9 +707,19 @@ const ReportsPg = () => {
                   alignItems: "center",
                 }}
               >
-                Get Donations Report
-              </button>
-              <button
+                Donations Report
+              </Button>
+              <Button
+                onClick={generatePdfBeneficiary}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                Beneficiary Report
+              </Button>
+              {/* <button
                 onClick={generatePdfBeneficiary}
                 style={{
                   display: "flex",
@@ -717,7 +728,7 @@ const ReportsPg = () => {
                 }}
               >
                 Get Beneficiaries Report
-              </button>
+              </button> */}
             </div>
             {/* <PDFDownloadLink
                 document={<MyDocument />}

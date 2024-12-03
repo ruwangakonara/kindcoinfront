@@ -2,22 +2,22 @@
 /*    margin: 0;*/
 /*}*/
 
-/*.mainContainer{*/
-/*    display: flex;*/
-/*    height: 100vh;*/
-/*    z-index: 100;*/
-/*    transition: margin-left 0.5s ease-in-out;*/
-/*    overflow-y: auto;*/
-/*}*/
+.admin_mainContainer{
+   display: flex;
+   height: 100vh;
+   z-index: 100;
+   transition: margin-left 0.5s ease-in-out;
+   overflow-y: auto;
+}
 
-/*  .content {*/
-/*    padding: 20px;*/
-/*    overflow-y: hidden;*/
-/*    width: calc(100% - 50px); !* Full width minus padding *!*/
-/*    padding-left: 50px;*/
-/*    padding-right: 50px;*/
-/*    transition: width 0.5s;*/
-/*  }*/
+ .admin_content {
+   padding: 20px;
+   overflow-y: auto;
+   width: calc(100% - 50px);
+   padding-left: 50px;
+   padding-right: 50px;
+   transition: width 0.5s;
+ }
 
 /*  .withSidebar .content {*/
 /*    width: calc(100% - 280px); !* Adjust width when sidebar is visible (230px sidebar + 50px padding) *!*/
@@ -27,14 +27,15 @@
 /*    width: calc(100% - 50px); !* Full width minus padding when sidebar is hidden *!*/
 /*}*/
 
-/*.buttonContainer{*/
-/*  display: flex;*/
-/*  justify-content: center;*/
-/*  align-items: center;*/
-/*  flex-direction: column;*/
-/*  margin-top: 50px;*/
-/*  gap: 10px;*/
-/*}*/
+.admin_buttonContainer{
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ flex-direction: row;
+ margin-top: 50px;
+ margin-bottom: 50px;
+ gap: 10px;
+}
 
 /*button{*/
 /*  height: 60px;*/
