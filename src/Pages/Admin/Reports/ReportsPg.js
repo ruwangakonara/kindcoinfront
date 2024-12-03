@@ -4,10 +4,31 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import CardCmp from "../../../Components/Admin/NavigationCard/CardCmp";
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import classes from "./ReportsPg.module.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { jsPDF } from "jspdf";
 import "jspdf-autotable"; // For tables
+import { Bar } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import html2canvas from "html2canvas";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
 // import generateUserPDF from "./GenerativeFunctions";
 
 /**
@@ -25,6 +46,12 @@ const ReportsPg = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   // const [reportData, setReportData] = useState(null);
+  const [reportData, setReportData] = useState([
+    { _id: "1", totalDonations: 5000, totalBeneficiaries: 3500 },
+    { _id: "2", totalDonations: 7000, totalBeneficiaries: 4000 },
+    { _id: "3", totalDonations: 3000, totalBeneficiaries: 2000 },
+  ]);
+  const chartRef = useRef(null);
 
   useEffect(() => {
     // fetchDonations();
@@ -536,8 +563,6 @@ const ReportsPg = () => {
     doc.save("donations_report.pdf");
   };
 
-  const generateFinancialReport = () => {};
-
   //   if (loading) return <div>Loading report...</div>;
   //   if (error) return <div>{error}</div>;
   return (
@@ -590,7 +615,7 @@ const ReportsPg = () => {
                 Get Beneficiaries Report
               </button>
               <button
-                onClick={generateFinancialReport}
+                // onClick={generateFinancialReport}
                 style={{
                   display: "flex",
                   justifyContent: "center",

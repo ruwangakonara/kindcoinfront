@@ -153,16 +153,20 @@ const AdminDonorListCmp = () => {
             return (
               <TableRow
                 key={userId}
-                className={`${classes.admin_dataRow} ${
-                  !isActive && classes.admin_deactivatedRow
-                }`}
-                onClick={(e) => {
-                  console.log(donor.user_id);
-                  // handleRowClick(donor.user_id);
-                  handleRowClick(e, userId);
-                }}
+                // className={`${classes.admin_dataRow} ${
+                //   !isActive && classes.admin_deactivatedRow
+                // }`}
               >
-                <TableCell>{userId}</TableCell>
+                <TableCell
+                  onClick={(e) => {
+                    console.log(donor.user_id);
+                    // handleRowClick(donor.user_id);
+                    handleRowClick(e, userId);
+                  }}
+                  style={{ cursor: "pointer" }}
+                >
+                  {userId}
+                </TableCell>
                 <TableCell>
                   <div className={classes.admin_userNameContainer}>
                     <Image
@@ -181,7 +185,7 @@ const AdminDonorListCmp = () => {
                 <TableCell>{donor.phoneNo}</TableCell>
                 <TableCell className={classes.admin_actionStylings}>
                   <div className={classes.admin_actionContainerDiv}>
-                    <Button
+                    {/* <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -190,13 +194,13 @@ const AdminDonorListCmp = () => {
                       }}
                     >
                       {isActive ? "Deactivate" : "Activate"}
-                    </Button>
+                    </Button> */}
                     <IconGroup
                       size="large"
                       style={{
                         display: "flex",
                         alignItems: "space-between",
-                        gap: "40px",
+                        gap: "70px",
                       }}
                     >
                       <Icon
