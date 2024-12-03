@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Document, Page } from 'react-pdf';
-import Modal from 'react-modal';
+import {Modal} from 'semantic-ui-react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Swal from 'sweetalert2';
@@ -10,8 +10,7 @@ import SearchBar from './Searchbar';
 import Filter from './Filter';
 import { useAuthCheck } from '../../../hooks/useAuthHook';
 
-// Set modal accessibility
-Modal.setAppElement('#root');
+
 
 // const axiosInstance = axios.create({
 //     baseURL: 'http://localhost:9013',
@@ -186,6 +185,7 @@ const VerifyRequestsTable = () => {
 
     // Document modal handlers
     const openModal = (documents) => {
+        console.log('Opening modal with documents:', documents);
         setSelectedDocument(documents);
         setModalIsOpen(true);
     };
@@ -210,11 +210,11 @@ const VerifyRequestsTable = () => {
                 pauseOnHover
             />
             <div className='crew-filter-search'>
-            <Filter onFilterChange={handleFilterChange} />
-            <SearchBar
-                searchQuery={searchQuery}
-                onSearchChange={handleSearch}
-            />
+                <Filter onFilterChange={handleFilterChange} />
+                <SearchBar
+                    searchQuery={searchQuery}
+                    onSearchChange={handleSearch}
+                />
             </div>
 
             <table className='ui celled table'>
@@ -232,14 +232,14 @@ const VerifyRequestsTable = () => {
                 </thead>
 
                 {noResultsFound && (
-        <tbody>
-            <tr>
-                <td colSpan="8" className="crew-no-results-message">
-                    No matching records available.
-                </td>
-            </tr>
-        </tbody>
-    )}
+                    <tbody>
+                        <tr>
+                            <td colSpan="8" className="crew-no-results-message">
+                                No matching records available.
+                            </td>
+                        </tr>
+                    </tbody>
+                )}
 
                 <tbody>
                     {filterRequests.map(request => (
@@ -251,13 +251,13 @@ const VerifyRequestsTable = () => {
                             <td>{request.beneficiary_id?.phoneNo || 'N/A'}</td>
                             <td>{request.description || 'No Description'}</td>
                             <td>
-                            {request.documents.length > 0 ? (
-                                <button onClick={() => openModal(request.documents)} className="crew-link-button">
-                                    View Document
-                                </button>
-                            ) : (
-                                'No Documents'
-                            )}
+                                {request.documents.length > 0 ? (
+                                    <button onClick={() => openModal(request.documents)} className="crew-link-button">
+                                        View Document
+                                    </button>
+                                ) : (
+                                    'No Documents'
+                                )}
                             </td>
                             <td>
                                 <select
@@ -275,20 +275,20 @@ const VerifyRequestsTable = () => {
             </table>
 
             <Modal
-                open={modalIsOpen}
-                onClose={() => setModalIsOpen(false)}
-                size="large"
-                closeIcon
-            >
-                <Modal.Header>Document Preview</Modal.Header>
-                <Modal.Content>
-                    {selectedDocument.map((docUrl, index) => (
-                        <div key={index} className='crew-document-preview'>
-                            {renderDocumentPreview(docUrl)}
-                        </div>
-                    ))}
-                </Modal.Content>
-            </Modal>
+        open={modalIsOpen}
+        onClose={() => setModalIsOpen(false)}
+        size="large"
+        closeIcon
+      >
+        <Modal.Header>Document Preview</Modal.Header>
+        <Modal.Content>
+          {selectedDocument.map((docUrl, index) => (
+            <div key={index} className='crew-document-preview'>
+              {renderDocumentPreview(docUrl)}
+            </div>
+          ))}
+        </Modal.Content>
+      </Modal>
         </div>
     );
 };

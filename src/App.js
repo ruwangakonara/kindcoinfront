@@ -190,7 +190,7 @@ import TicketDiscussionCmp from "./Components/Admin/TicketsRaised/TicketDiscussi
 import ReportsPg from "./Pages/Admin/Reports/ReportsPg";
 import RaisedTicketsTableCmp from "./Components/Admin/TicketsRaised/RaisedTicketsTableCmp";
 // import CrewSettings from "./Pages/CrewMember/CrewSettings/CrewSettings";
-// import CrewProfile from "./Pages/CrewMember/CrewProfile/CrewProfile";
+import CrewProfile from "./Pages/CrewMember/Profile/CrewProfile";
 import GoodsMemberDonations from "./Pages/CrewMember/GoodsDonation/GoodsDonation";
 
 function App() {
@@ -503,8 +503,8 @@ function App() {
       <Route path="/crew/proofs" element={<VerifyDonationProofs />} />
       <Route path="/crew/token_transfer" element={<TokenTransfer />} />
       <Route path="/crew/goods_donations" element={<GoodsMemberDonations />} />
+      <Route path="/crew/profile" element={<CrewProfile />} />
       {/* <Route path="/crew/settings" element={<CrewSettings />} />
-      <Route path="/crew/profile" element={<CrewProfile />} /> */}
       {/* <Route path="/admin/layouts" element={<DashboardLayout />} /> */}
     </Routes>
     // </UserProvider>
