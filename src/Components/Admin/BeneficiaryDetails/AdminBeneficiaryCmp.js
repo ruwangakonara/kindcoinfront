@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classes from "./AdminBeneficiaryCmp.module.css";
 import { useParams } from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
 import {
   CardMeta,
   CardHeader,

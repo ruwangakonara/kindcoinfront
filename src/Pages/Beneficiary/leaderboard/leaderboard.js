@@ -3,7 +3,7 @@ import { Container, Header, Grid, List, Image, Icon, Segment, Label, Form, Butto
 import Navbar from '../../../Components/Beneficiary/NavBar/NavBar';
 import './leaderboard.css';
 import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
-import axios from "axios";
+import axios from 'axios';
 import {useParams} from "react-router-dom";
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import {Typography} from "@mui/material"

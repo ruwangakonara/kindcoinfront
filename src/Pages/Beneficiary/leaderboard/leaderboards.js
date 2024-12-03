@@ -3,7 +3,7 @@ import { Container, Grid } from 'semantic-ui-react';
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 import BeneLeaderBoard from "../../../Components/Beneficiary/LeaderBoard/LeaderBoard";
 // import Sidebar4 from "../../../Components/B/Sidebar/Sidebar4";
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',

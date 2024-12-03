@@ -16,7 +16,15 @@ const CrewDashboardCard = ({ title, description, imageSrc, buttonLabel, buttonPa
   };
 
   return (
-    <Card className='crew-dashboard-card'>
+    <Card
+      className='crew-dashboard-card'
+      style={{
+        height: '400px', // Fixed card height
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '1rem'
+      }}
+    >
       <Image src={imageSrc} />
       <CardContent>
         <CardHeader>{title}</CardHeader>
