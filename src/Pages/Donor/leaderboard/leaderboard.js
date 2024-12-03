@@ -5,7 +5,7 @@ import './leaderboard.css';
 import Donatenow from "../../../Components/Donor/Donatenow/Donatenow";
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import {useParams} from "react-router-dom";
-import axios from "axios";
+import axios from 'axios';
 import {Typography} from "@mui/material"
 
 

@@ -2,7 +2,7 @@ import { Icon, Menu } from "semantic-ui-react";
 import React, { useEffect, useRef, useState } from "react";
 import "./NavBar.css";
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',

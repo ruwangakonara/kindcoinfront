@@ -5,7 +5,7 @@ import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 import CrewMemberTableCmp from "../../../Components/Admin/CrewMemberDets/CrewMemberTableCmp2";
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:9013",

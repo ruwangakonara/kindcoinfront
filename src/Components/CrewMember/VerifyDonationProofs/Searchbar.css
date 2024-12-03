@@ -5,7 +5,7 @@
   display: flex;
   justify-content: flex-end;
   padding: 20px;
-  z-index: 1000; /* Ensure it stays on top of other elements */
+  /* z-index: 1000; */
   height: 80px;
 }
 
