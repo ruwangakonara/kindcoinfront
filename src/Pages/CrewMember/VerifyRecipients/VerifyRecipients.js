@@ -4,9 +4,11 @@ import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable";
 // import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import "./VerifyRecipients.css";
+import { useAuthCheck } from "../../../hooks/useAuthHook";
 
 
 const VerifyRecipients = () => {
+    // useAuthCheck();
   const handleSearch = (query) => {
     console.log("Search query:", query);
   };

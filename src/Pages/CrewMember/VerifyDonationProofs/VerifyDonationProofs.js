@@ -5,8 +5,10 @@ import VerifyDonationProofsTable from "../../../Components/CrewMember/VerifyDona
 // import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import Filter from "../../../Components/CrewMember/VerifyDonationProofs/Filter";
 import "./VerifyDonationProofs.css";
+import { useAuthCheck } from "../../../hooks/useAuthHook";
 
 const VerifyDonationProofs = () => {
+  // useAuthCheck();
   const handleSearch = (query) => {
     console.log("Search query:", query);
   };

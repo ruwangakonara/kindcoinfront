@@ -8,11 +8,20 @@ import Swal from 'sweetalert2';
 import './VerifyRequestsTable.css';
 import SearchBar from './Searchbar';
 import Filter from './Filter';
+import { useAuthCheck } from '../../../hooks/useAuthHook';
 
 // Set modal accessibility
 Modal.setAppElement('#root');
 
+// const axiosInstance = axios.create({
+//     baseURL: 'http://localhost:9013',
+//     withCredentials: true
+// });
+
+
 const VerifyRequestsTable = () => {
+    // useAuthCheck();
+    console.log('Component rendering');
     // State management
     const [requests, setRequests] = useState([]);
     const [filterRequests, setFilterRequests] = useState([]);
@@ -23,9 +32,16 @@ const VerifyRequestsTable = () => {
 
     // Fetch requests on component mount
     useEffect(() => {
+        console.log('Useeffect Fetching requests Triggered');
         const fetchRequests = async () => {
             try {
+                console.log('Starting to fetch requests...');
+
+                const token = document.cookie.includes('Authorization');
+                console.log('Auth token exists:', token);
+
                 const response = await axios.get('http://localhost:9013/crew/get_request');
+                console.log('Request data:', response.data);
 
                 // Validate response data
                 if (response.data && response.data.requests) {
@@ -35,11 +51,19 @@ const VerifyRequestsTable = () => {
                     throw new Error('Invalid response structure');
                 }
             } catch (error) {
-                console.error('Error fetching requests:', error);
+                console.error('Error details:', {
+                    message: error.message,
+                    response: error.response,
+                    status: error.response?.status
+                });
                 toast.error('Failed to fetch requests. Please try again later.');
             }
         };
 
+        // const token = document.cookie.includes('Authorization');
+        // if (token) {
+        //     fetchRequests();
+        // }
         fetchRequests();
     }, []);
 
