@@ -1,6 +1,6 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
-import SidebarCrew from "../../../Components/CrewMember/Sidebar/SidebarCrew";
+import SidebarCrew from "../../../Components/CrewMember/Sidebar/Sidebar";
 import CrewMemberForm from "../../../Components/CrewMember/Profile/CrewProfileForm";
 import { useAuthCheck } from '../../../hooks/useAuthHook';
 
