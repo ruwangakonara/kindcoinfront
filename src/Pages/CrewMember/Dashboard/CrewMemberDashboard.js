@@ -2,6 +2,7 @@ import React from "react";
 import { Grid } from "semantic-ui-react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
+import SidebarCrewCmp from "../../../Components/CrewMember/Sidebar/NewSidebarCrew";
 import DashboardCard from "../../../Components/CrewMember/DashboardCard/DashboardCard";
 import './CrewMemberDashboard.css';
 import { useAuthCheck } from '../../../hooks/useAuthHook';

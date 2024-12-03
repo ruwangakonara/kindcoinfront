@@ -11,7 +11,7 @@ import Donatenow from '../../../Components/Donor/Donatenow/Donatenow';
 import RotatingBanner from '../../../Components/Donor/RotatingBanner/RotatingBanner'; // Import the banner component
 import './Dashboard.css';
 
-import axios from "axios";
+import axios from 'axios';
 import {Image} from "semantic-ui-react";
 
 const axiosInstance = axios.create({

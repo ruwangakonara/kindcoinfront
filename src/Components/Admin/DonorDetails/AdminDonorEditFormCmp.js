@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Form, Image, FormGroup, Input } from "semantic-ui-react";
 import { useNavigate } from "react-router-dom";
 import classes from "./AdminDonorEditFormCmp.module.css";
-import axios from "axios";
+import axios from 'axios';
 
 const AdminDonorEditFormCmp = ({ donorDetails }) => {
   const navigate = useNavigate();

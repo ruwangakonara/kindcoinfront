@@ -16,7 +16,7 @@ const SidebarCrew = () => (
     vertical
     visible
     width='thin'
-    style={{ minHeight: '100vh' }}
+    style={{ minHeight: '100vh', backgroundColor: '#0f1d29' }}
 
   >
     {/* Check semantic */}
@@ -48,9 +48,9 @@ const SidebarCrew = () => (
       <Icon name='money' />
       Token Batch
     </MenuItem>
-    <MenuItem as={Link} to='/crew/settings' className='settings'>
-      <Icon name='settings' />
-      Settings
+    <MenuItem as={Link} to='/crew/goods_donations' className='goods'>
+      <Icon name='food' />
+      Goods Donations
     </MenuItem>
   </Sidebar>
 )

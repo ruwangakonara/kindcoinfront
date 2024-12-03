@@ -4,7 +4,7 @@ import './announcementsPage.css';
 import Announcement from "../../../Components/Beneficiary/Announcement/Annnouncement";
 import Navbar from "../../../Components/Beneficiary/NavBar/NavBar";
 // import Donatenow from "../../Components/Donor/Donatenow/Donatenow";
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Container, Header, Grid, List, Image, Icon, Segment, Label, Form, Button, Comment, Modal } from 'semantic-ui-react';
 import Navbar from '../../../Components/Home/NavBar/NavBar';
 import './leaderboard.css';
-import axios from "axios";
+import axios from 'axios';
 import {useParams} from "react-router-dom";
 import {Typography} from "@mui/material"
 
