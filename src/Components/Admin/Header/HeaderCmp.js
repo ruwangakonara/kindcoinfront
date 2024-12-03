@@ -1,6 +1,6 @@
 import "./HeaderCmp.css";
 import { Icon, Dropdown, Menu, Image, Button } from "semantic-ui-react";
-import React, { useRef, useContext, useState } from "react";
+import React, {useRef, useContext, useState, useEffect} from "react";
 import { UserContext } from "../../../Components/Home/UserConext/UserContext.jsx";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
@@ -22,6 +22,17 @@ const ButtonToggle = ({ children }) => {
 // export default ButtonToggle
 
 const HeaderCmp = ({ toggleSidebar }) => {
+
+  const { user, userDetails } = useContext(UserContext);
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if(user.status !==  "admin"){
+      navigate("/login/login")
+    }
+  }, []);
+
   const navbar = useRef(null);
   const sidebar = useRef(null);
   let i = 0,
@@ -49,9 +60,9 @@ const HeaderCmp = ({ toggleSidebar }) => {
   };
 
   const location = useLocation();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
-  const { user, userDetails } = useContext(UserContext);
+  // const { user, userDetails } = useContext(UserContext);
   const admin = userDetails;
 
   const axiosInstance = axios.create({

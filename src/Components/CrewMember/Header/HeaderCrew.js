@@ -1,9 +1,25 @@
 import { Icon, Dropdown, Menu } from "semantic-ui-react";
-import React, { useRef } from "react";
+import React, {useContext, useEffect, useRef} from "react";
 import "./HeaderCrew.css";
 import { Link, useLocation } from 'react-router-dom';
 
+import {UserContext} from "../../Home/UserConext/UserContext";
+import {useNavigate} from "react-router-dom";
+
+
+
 export default function HeaderCrew() {
+
+    const { user, userDetails } = useContext(UserContext);
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(user.status !==  "crew_member"){
+            navigate("/login/login")
+        }
+    }, []);
+
     const navbar = useRef(null);
     const sidebar = useRef(null);
     let i = 0, f = 0;

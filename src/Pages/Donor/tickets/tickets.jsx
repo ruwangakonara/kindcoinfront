@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Table, Label, Header, Grid, Button, Modal, Form } from 'semantic-ui-react';
-import Navbar from "../../../Components/Beneficiary/NavBar/NavBar"
+import Navbar from "../../../Components/Donor/NavBar/NavBar2"
 import Sidebar from '../../../Components/Donor/Sidebar/Sidebar';
 import './tickets.css';
 import { UserContext } from '../../../Components/Home/UserConext/UserContext';

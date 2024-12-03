@@ -1,7 +1,8 @@
 .crew-search-bar-container {
+  right: 10%;
   position: fixed;
   top: 80px; /* Align to the top */
-  right: 0; /* Align to the right */
+  /*right: 0; !* Align to the right *!*/
   display: flex;
   justify-content: flex-end;
   padding: 20px;

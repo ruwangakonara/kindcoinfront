@@ -21,7 +21,7 @@ const OpenRequest = ({ request , image, beneficiary}) => {
                     ui={false}
                     className="request-image"
                 />
-                <Card.Header>{request.title}</Card.Header>
+                <Card.Header style = {{marginTop: "15px"}}>{request.title}</Card.Header>
                 <Card.Meta>{beneficiary.name}</Card.Meta>
                 <Card.Description>
                     {request.verified ? (

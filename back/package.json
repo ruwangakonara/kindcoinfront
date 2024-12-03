@@ -18,6 +18,8 @@
     "crypto-js": "^4.2.0",
     "html2pdf.js": "^0.10.2",
     "jsonwebtoken": "^9.0.2",
+    "jspdf": "^2.5.2",
+    "jspdf-autotable": "^3.8.4",
     "kindcoinfront": "file:",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
