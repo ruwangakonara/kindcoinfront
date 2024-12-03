@@ -29,35 +29,37 @@ const VerifyRequestsTable = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [noResultsFound, setNoResultsFound] = useState(false);
 
+
+    const fetchRequests = async () => {
+        try {
+            console.log('Starting to fetch requests...');
+
+            const token = document.cookie.includes('Authorization');
+            console.log('Auth token exists:', token);
+
+            const response = await axios.get('http://localhost:9013/crew/get_request');
+            console.log('Request data:', response.data);
+
+            // Validate response data
+            if (response.data && response.data.requests) {
+                setRequests(response.data.requests);
+                setFilterRequests(response.data.requests);
+            } else {
+                throw new Error('Invalid response structure');
+            }
+        } catch (error) {
+            console.error('Error details:', {
+                message: error.message,
+                response: error.response,
+                status: error.response?.status
+            });
+            toast.error('Failed to fetch requests. Please try again later.');
+        }
+    };
     // Fetch requests on component mount
     useEffect(() => {
         console.log('Useeffect Fetching requests Triggered');
-        const fetchRequests = async () => {
-            try {
-                console.log('Starting to fetch requests...');
 
-                const token = document.cookie.includes('Authorization');
-                console.log('Auth token exists:', token);
-
-                const response = await axios.get('http://localhost:9013/crew/get_request');
-                console.log('Request data:', response.data);
-
-                // Validate response data
-                if (response.data && response.data.requests) {
-                    setRequests(response.data.requests);
-                    setFilterRequests(response.data.requests);
-                } else {
-                    throw new Error('Invalid response structure');
-                }
-            } catch (error) {
-                console.error('Error details:', {
-                    message: error.message,
-                    response: error.response,
-                    status: error.response?.status
-                });
-                toast.error('Failed to fetch requests. Please try again later.');
-            }
-        };
 
         // const token = document.cookie.includes('Authorization');
         // if (token) {
@@ -99,6 +101,7 @@ const VerifyRequestsTable = () => {
                 setFilterRequests(updatedRequests);
 
                 toast.success('Status updated successfully');
+                fetchRequests()
             } catch (error) {
                 console.error('Error updating status:', error);
 
@@ -261,7 +264,7 @@ const VerifyRequestsTable = () => {
                             </td>
                             <td>
                                 <select
-                                    value={request.status}
+                                    value={(request.verified) ? "Published" : "Pending"}
                                     onChange={(e) => handleStatusChange(request._id, e.target.value)}
                                 >
                                     <option value="Pending">Pending</option>

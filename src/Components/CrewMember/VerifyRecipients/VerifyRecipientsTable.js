@@ -18,16 +18,18 @@ const VerifyRecipientsTable = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [noResultsFound, setNoResultsFound] = useState(false);
 
+    const fetchRecipients = async () => {
+        try {
+            const response = await axios.get('http://localhost:9013/crew/get_recepient'); // Ensure this URL is correct
+            setRecipients(response.data.benificiaries); // Adjust to the correct response structure
+            setFilterRecipients(response.data.benificiaries);
+        } catch (error) {
+            console.error('Error fetching recipients:', error);
+        }
+    };
+
     useEffect(() => {
-        const fetchRecipients = async () => {
-            try {
-                const response = await axios.get('http://localhost:9013/crew/get_recepient'); // Ensure this URL is correct
-                setRecipients(response.data.benificiaries); // Adjust to the correct response structure
-                setFilterRecipients(response.data.benificiaries);
-            } catch (error) {
-                console.error('Error fetching recipients:', error);
-            }
-        };
+
 
         fetchRecipients();
     }, []);
@@ -65,6 +67,7 @@ const VerifyRecipientsTable = () => {
                 setFilterRecipients(updatedRecipient);
 
                 toast.success('Status updated successfully');
+                fetchRecipients()
             } catch (error) {
                 console.error('Error updating status:', error);
 
@@ -235,7 +238,7 @@ const VerifyRecipientsTable = () => {
                             </td>
                             <td>
                                 <select
-                                    value={recipient.status}
+                                    value={(recipient.verified) ? "Approved" : "Pending"}
                                     onChange={(e) => handleStatusChange(recipient._id, e.target.value)}
                                 >
                                     <option value="Pending">Pending</option>

@@ -26,21 +26,23 @@ const VerifyRequestsTable = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [noResultsFound, setNoResultsFound] = useState(false);
 
-  useEffect(() => {
-    const fetchProof = async () => {
-      try {
-        const response = await axios.get('http://localhost:9013/crew/get_donation_proof');
-        if (response.data && response.data.donations) {
-          setProof(response.data.donations);
-          setFilterDonations(response.data.donations);
-        } else {
-          throw new Error('Invalid response structure');
-        }
-      } catch (error) {
-        console.error('Error fetching recipients:', error);
-        toast.error('Failed to fetch recipients. Please try again later.');
+  const fetchProof = async () => {
+    try {
+      const response = await axios.get('http://localhost:9013/crew/get_donation_proof');
+      if (response.data && response.data.donations) {
+        setProof(response.data.donations);
+        setFilterDonations(response.data.donations);
+      } else {
+        throw new Error('Invalid response structure');
       }
-    };
+    } catch (error) {
+      console.error('Error fetching recipients:', error);
+      toast.error('Failed to fetch recipients. Please try again later.');
+    }
+  };
+
+  useEffect(() => {
+
 
     fetchProof();
   }, []);
@@ -191,6 +193,7 @@ const VerifyRequestsTable = () => {
         setFilterDonations(updatedProofs);
 
         toast.success("Verification status updated successfully");
+        fetchProof()
 
       }
     } catch (error) {

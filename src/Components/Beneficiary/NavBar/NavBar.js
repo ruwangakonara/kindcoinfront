@@ -1,8 +1,10 @@
 import { Icon, Dropdown, Menu } from "semantic-ui-react";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useRef, useState} from "react";
 import "./NavBar.css";
 import { useLocation } from 'react-router-dom';
 import axios from "axios";
+import {UserContext} from "../../Home/UserConext/UserContext";
+import {useNavigate} from "react-router-dom";
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -10,6 +12,15 @@ const axiosInstance = axios.create({
 });
 
 export default function Navbar() {
+    const { user, userDetails } = useContext(UserContext);
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(user.status !==  "beneficiary"){
+            navigate("/login/login")
+        }
+    }, []);
 
     const [notificationsa, setNotificationsa] = useState([]);
     const [hasUnread, setHasUnread] = useState(false); // State to track unread notifications
