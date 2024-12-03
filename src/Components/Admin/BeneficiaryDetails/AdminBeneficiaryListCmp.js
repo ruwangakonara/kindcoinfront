@@ -91,11 +91,11 @@ const AdminBeneficiaryListCmp = () => {
   );
 
   const handleView = (id) => {
-    navigate(`/view/crew_member/${id}`);
+    navigate(`/view/beneficiaries/${id}`);
   };
 
   const handleEdit = (id) => {
-    navigate(`/edit/crew_member/${id}`);
+    navigate(`/edit/beneficiaries/${id}`);
   };
 
   // const handleDelete = (id) => {
@@ -185,9 +185,14 @@ const AdminBeneficiaryListCmp = () => {
                 className={`${classes.admin_dataRow} ${
                   !isActive && classes.admin_deactivatedRow
                 }`}
-                onClick={() => handleRowClick(userId)}
+                // onClick={() => handleRowClick(userId)}
               >
-                <TableCell>{userId}</TableCell>
+                <TableCell
+                  onClick={() => handleRowClick(userId)}
+                  style={{ cursor: "pointer" }}
+                >
+                  {userId}
+                </TableCell>
 
                 <TableCell>
                   <div className={classes.admin_userNameContainer}>
@@ -205,7 +210,12 @@ const AdminBeneficiaryListCmp = () => {
                 <TableCell>{row.district}</TableCell>
                 <TableCell>{row.date_of_birth}</TableCell>
                 <TableCell>{row.phoneNo}</TableCell>
-                <TableCell className={classes.admin_actionStylings}>
+                {/* <TableCell className={classes.admin_actionStylings}> */}
+                <TableCell
+                  style={{
+                    gap: "40px",
+                  }}
+                >
                   <div className={classes.admin_actionContainerDiv}>
                     {/* <Button
                       color={isActive ? "red" : "green"}
@@ -221,25 +231,40 @@ const AdminBeneficiaryListCmp = () => {
                       size="large"
                       style={{
                         display: "flex",
-                        alignItems: "space-between",
-                        gap: "40px",
+                        alignItems: "space-around",
+                        // justifiedContent: "",
+                        gap: "50px",
                       }}
                     >
-                      <Button icon onClick={() => handleView(userId)}>
-                        <Icon name="eye" color="blue" />
-                      </Button>
-                      <Button icon onClick={() => handleEdit(row._id)}>
-                        <Icon name="pencil" color="green" />
-                      </Button>
+                      {/* <Button icon onClick={() => handleView(userId)}> */}
+                      {/* <Icon
+                        name="eye"
+                        color="blue"
+                        onClick={() => handleView(userId)}
+                      /> */}
+                      {/* </Button> */}
+                      {/* <Button icon onClick={() => handleEdit(row._id)}> */}
+                      <Icon
+                        style={{ cursor: "pointer" }}
+                        name="pencil"
+                        color="green"
+                        onClick={() => handleEdit(row._id)}
+                      />
+                      {/* </Button> */}
                       {/* <Button icon onClick={() => handleDelete(row._id)}>
                         <Icon name="trash" color="red" />
                       </Button> */}
-                      <Button
+                      {/* <Button
                         icon
                         onClick={(e) => handleDeleteClick(e, row._id)}
-                      >
-                        <Icon name="trash" color="red" />
-                      </Button>
+                      > */}
+                      <Icon
+                        style={{ cursor: "pointer" }}
+                        name="trash"
+                        color="red"
+                        onClick={(e) => handleDeleteClick(e, row._id)}
+                      />
+                      {/* </Button> */}
                       {/* <Icon
                         name="edit"
                         onClick={(e) => handleEditClick(e, row.user_id)}

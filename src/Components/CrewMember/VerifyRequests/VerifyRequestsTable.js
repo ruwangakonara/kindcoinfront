@@ -264,7 +264,7 @@ const VerifyRequestsTable = () => {
                             </td>
                             <td>
                                 <select
-                                    value={(request.verified) ? "Published" : "Pending"}
+                                    value={request.status}
                                     onChange={(e) => handleStatusChange(request._id, e.target.value)}
                                 >
                                     <option value="Pending">Pending</option>
