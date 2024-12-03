@@ -5,6 +5,8 @@ use admin_ as a prefix for the custom class names
 .admin_mainContainer{
     margin-top: 40px !important;
     margin: 20px;
+    overflow-y: auto;
+    overflow: auto;
 }
 
 .admin_buttonStyles{

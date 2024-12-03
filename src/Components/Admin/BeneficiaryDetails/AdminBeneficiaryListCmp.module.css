@@ -17,7 +17,7 @@ use admin_ as a prefix for the custom class names
 
 .admin_dataRow{
     font-size: 15px;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 .admin_imageStylings{
@@ -26,14 +26,18 @@ use admin_ as a prefix for the custom class names
 }
 
 .admin_actionStylings{
-    flex-direction: column;
+    /* flex-direction: column; */
     cursor: auto;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: row;
 }
 
 .admin_actionContainerDiv {
   display: flex;
+  justify-content: space-evenly;
   flex-direction: column;
-  gap: 15px; 
+  gap: 35px; 
 }
 
 .admin_userNameContainer{
