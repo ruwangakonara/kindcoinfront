@@ -28,15 +28,19 @@ const ViewCrewMembersPg = () => {
   };
 
   return (
-    <div className={classes.mainContainer}>
+    <>
       <HeaderCmp />
-      {/* <SidebarAdminCmp visible={true} /> */}
-      <AdminSideBarCmp />
-      <DefaultDashCmp>
-        <h1 style={{ textAlign: "center" }}>Crew Members</h1>
-        <CrewMemberTableCmp members={members} />
-      </DefaultDashCmp>
-    </div>
+      <div className={classes.mainContainer}>
+        {/* <SidebarAdminCmp visible={true} /> */}
+        <AdminSideBarCmp />
+        <div className={classes.content}>
+          <DefaultDashCmp>
+            <h1 style={{ textAlign: "center" }}>Crew Members</h1>
+            <CrewMemberTableCmp members={members} />
+          </DefaultDashCmp>
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -7,6 +7,8 @@ import ChartBCmp from "../../../Components/Admin/Charts/ChartBCmp";
 import ChartCCmp from "../../../Components/Admin/Charts/ChartCCmp";
 import classes from "./OverallStatisticsPg.module.css";
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
+import { Grid, GridColumn, GridRow } from "semantic-ui-react";
+import React from "react";
 
 const OverallStatisticsPg = () => {
   return (
@@ -18,12 +20,16 @@ const OverallStatisticsPg = () => {
         <div className={classes.content}>
           <DefaultDashCmp>
             <h1 style={{ textAlign: "center" }}>Statistics</h1>
+            {/* <GridTypeDashCmp> */}
+            <Grid columns={3} padded celled>
+              <GridColumn>
+                {/* <ChartACmp /> */}
+                <ChartBCmp />
+                <ChartCCmp />
+              </GridColumn>
+            </Grid>
+            {/* </GridTypeDashCmp> */}
           </DefaultDashCmp>
-          <GridTypeDashCmp>
-            <ChartACmp />
-            <ChartBCmp />
-            <ChartCCmp />
-          </GridTypeDashCmp>
         </div>
       </div>
     </>

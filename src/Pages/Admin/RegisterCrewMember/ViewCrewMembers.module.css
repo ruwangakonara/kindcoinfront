@@ -12,7 +12,7 @@ body {
 
   .content {
     padding: 20px;
-    overflow-y: hidden;
+    overflow-y: auto;
     width: calc(100% - 50px); /* Full width minus padding */
     padding-left: 50px;
     padding-right: 50px;

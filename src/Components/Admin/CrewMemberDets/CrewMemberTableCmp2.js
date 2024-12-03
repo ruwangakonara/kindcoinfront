@@ -30,7 +30,7 @@ const CrewMemberTableCmp = ({ members }) => {
 
   return (
       <div className={classes.admin_mainContainer}>
-        <InputExampleIconPosition />
+        {/* <InputExampleIconPosition /> */}
         <Table celled compact definition>
           <TableHeader fullWidth>
             <TableRow>
