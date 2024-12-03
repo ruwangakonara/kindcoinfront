@@ -8,6 +8,7 @@ import { UserContext } from '../../../Components/Home/UserConext/UserContext';
 import axios from "axios";
 import html2pdf from 'html2pdf.js';
 import { useReactToPrint } from 'react-to-print';
+import {Html} from "@mui/icons-material";
 
 
 
@@ -135,7 +136,7 @@ function CompletedDonationPage(){
     //         }
     //     }, [attestationModalOpen]);
 
-    const componentRef = useRef(null);
+    const componentRef = useRef(HTMLDivElement);
 
     const handlePrint = useReactToPrint({
         content: () => {
