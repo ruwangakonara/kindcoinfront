@@ -238,7 +238,7 @@ const VerifyRecipientsTable = () => {
                             </td>
                             <td>
                                 <select
-                                    value={(recipient.verified) ? "Approved" : "Pending"}
+                                    value={recipient.status}
                                     onChange={(e) => handleStatusChange(recipient._id, e.target.value)}
                                 >
                                     <option value="Pending">Pending</option>
