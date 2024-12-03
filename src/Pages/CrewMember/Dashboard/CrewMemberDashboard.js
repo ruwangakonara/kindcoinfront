@@ -4,6 +4,7 @@ import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import DashboardCard from "../../../Components/CrewMember/DashboardCard/DashboardCard";
 import './CrewMemberDashboard.css';
+import { useAuthCheck } from '../../../hooks/useAuthHook';
 
 import tokenTransferImage from "../../../assets/token_transfer.jpg";
 import proofsImage from "../../../assets/proofs.jpg";
@@ -14,6 +15,8 @@ import attestationFee from "../../../assets/attestation_fee.jpg";
 import batchTransfer from "../../../assets/batch_transfer.jpg";
 
 const CrewMemberDashboard = () => {
+
+  // useAuthCheck();
 
   const cardData = [
     {
