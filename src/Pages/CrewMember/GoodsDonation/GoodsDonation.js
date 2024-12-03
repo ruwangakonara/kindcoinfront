@@ -19,6 +19,7 @@ const GoodsMemberDonations = () => {
 
     const { user, userDetails } = useContext(UserContext);
     const member = userDetails;
+    console.log(member);
 
     const [donations, setDonations] = useState([]);
     
@@ -32,12 +33,15 @@ const GoodsMemberDonations = () => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await axios.post('http://localhost:9013/crew/goods_donations', {member_id: member._id});
+                const response = await axios.get('http://localhost:9013/crew/goods_donations', {
+                    withCredentials: true
+                });
 
                 // Validate response data
                 if (response.data && response.data.donations) {
                     setDonations(response.data.donations);
                     setFilterRequests(response.data.donations);
+                    console.log(response.data.donations);
                 } else {
                     throw new Error('Invalid response structure');
                 }
@@ -69,6 +73,7 @@ const GoodsMemberDonations = () => {
                 }
 
                 const response = await axios.put('http://localhost:9013/crew/update-donation-status', {
+                    withCredentials: true,
                     requestId,
                     status: newStatus
                 });
@@ -97,12 +102,13 @@ const GoodsMemberDonations = () => {
 
         const filteredData = donations.filter((request) => {
             const searchString = `
-                ${request.beneficiary_id?.name || ''} 
-                ${request.user_id?.username || ''} 
-                ${request._id || ''} 
+                ${request.beneficiaryDetails?._id || ''} 
+                ${request.donorDetails?.username || ''} 
+                ${request.donationDetails._id || ''} 
                 ${request.beneficiary_id?.email || ''} 
-                ${request.beneficiary_id?.phoneNo || ''}
-                ${request.description || ''} 
+                ${request.beneficiaryDetails?.phoneNo || ''}
+                ${request.beneficiaryDetails?.email || ''} 
+                ${request.donationDetails.description || ''}
                 ${request.status || ''}
             `.toLowerCase();
 
@@ -230,33 +236,36 @@ const GoodsMemberDonations = () => {
 
                 <tbody>
                     {filterRequests.map(request => (
-                        <tr key={request._id}>
-                            <td>{request.beneficiary_id?.name || 'N/A'}</td>
-                            <td>{request.user_id?.username || 'N/A'}</td>
-                            <td>{request._id}</td>
-                            <td>{request.beneficiary_id?.email || 'N/A'}</td>
-                            <td>{request.beneficiary_id?.phoneNo || 'N/A'}</td>
-                            <td>{request.description || 'No Description'}</td>
-                            <td>
-                            {request.documents.length > 0 ? (
-                                <button onClick={() => openModal(request.documents)} className="crew-link-button">
-                                    View Document
-                                </button>
-                            ) : (
-                                'No Documents'
-                            )}
-                            </td>
-                            <td>
-                                <select
-                                    value={request.status}
-                                    onChange={(e) => handleStatusChange(request._id, e.target.value)}
-                                >
-                                    <option value="Pending">Pending</option>
-                                    <option value="Published">Published</option>
-                                    <option value="Rejected">Rejected</option>
-                                </select>
-                            </td>
-                        </tr>
+                        <tr key={request.donationDetails._id}>  {/* Use donationDetails._id for the key */}
+                        {/* Access beneficiary details */}
+                        <td>{request.beneficiaryDetails?._id || 'N/A'}</td>
+                        <td>{request.donorDetails?.username || 'N/A'}</td> {/* Access donor username */}
+                        <td>{request.donationDetails._id}</td> {/* Access donationDetails._id */}
+                        <td>{request.beneficiaryDetails?.email || 'N/A'}</td> {/* Access beneficiary email */}
+                        <td>{request.beneficiaryDetails?.phoneNo || 'N/A'}</td> {/* Access beneficiary phone number */}
+                        <td>{request.donationDetails.description || 'No Description'}</td> {/* Access donation description */}
+                        
+                        <td>
+                          {request.documents?.length > 0 ? (
+                            <button onClick={() => openModal(request.documents)} className="crew-link-button">
+                              View Document
+                            </button>
+                          ) : (
+                            'No Documents'
+                          )}
+                        </td>
+                    
+                        <td>
+                          <select
+                            value={request.status}
+                            onChange={(e) => handleStatusChange(request.donationDetails._id, e.target.value)}
+                          >
+                            <option value="Pending">Pending</option>
+                            <option value="Published">Published</option>
+                            <option value="Rejected">Rejected</option>
+                          </select>
+                        </td>
+                      </tr>
                     ))}
                 </tbody>
             </table>

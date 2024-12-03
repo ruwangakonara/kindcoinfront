@@ -2,7 +2,7 @@ import { Icon, Dropdown, Menu } from "semantic-ui-react";
 import React, {useContext, useEffect, useRef, useState} from "react";
 import "./NavBar.css";
 import { useLocation } from 'react-router-dom';
-import axios from "axios";
+import axios from 'axios';
 import {UserContext} from "../../Home/UserConext/UserContext";
 import {useNavigate} from "react-router-dom";
 

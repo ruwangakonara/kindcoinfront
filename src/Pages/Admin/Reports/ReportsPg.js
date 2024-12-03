@@ -5,7 +5,7 @@ import CardCmp from "../../../Components/Admin/NavigationCard/CardCmp";
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import classes from "./ReportsPg.module.css";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from 'axios';
 import { jsPDF } from "jspdf";
 import "jspdf-autotable"; // For tables
 // import generateUserPDF from "./GenerativeFunctions";

@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import classes from "./AdminDonorDetailsPg.module.css";
 import HeaderCmp from "../../../Components/Admin/Header/HeaderCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";

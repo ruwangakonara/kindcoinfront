@@ -1,6 +1,36 @@
-.crew-dashboard-grid-container {
+/* .crew-dashboard-grid-container {
     flex-grow: 1;
     padding: 20px;
     margin-left: 20%;
     margin-top: 5%;
-  }
+  } */
+
+  /* CrewMemberDashboard.css */
+.crew-dashboard-grid-container {
+  margin-top: 7.5%; /* Remove top margin */
+  padding: 20px;
+  width: 100%;
+  margin-left: 20%;
+  transition: margin-left 0.3s ease; /* Add left margin to account for sidebar */
+}
+
+.crew-dashboard-grid-container.sidebar-collapsed {
+  margin-left: 5%; /* Reduced margin when sidebar is collapsed */
+}
+
+.grid {
+  margin-top: 0 !important; /* Override Semantic UI default margin */
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  margin-top: 0; /* Remove top margin */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin-top: 0; /* Remove top margin */
+}

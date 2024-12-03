@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { Container, Grid } from 'semantic-ui-react';
 import Navbar from "../../../Components/Home/NavBar/NavBar";
 import LeaderBoard from "../../../Components/Home/LeaderBoard/LeaderBoard";
-import axios from "axios";
+import axios from 'axios';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',

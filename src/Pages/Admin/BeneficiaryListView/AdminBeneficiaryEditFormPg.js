@@ -5,7 +5,7 @@ import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 // import SidebarAdminCmp from "../../../Components/Admin/Sidebar/SidebarAdminCmp";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import classes from "./AdminBeneficiaryEditFormPg.module.css";
 
 const AdminBeneficiaryEditFormPg = () => {

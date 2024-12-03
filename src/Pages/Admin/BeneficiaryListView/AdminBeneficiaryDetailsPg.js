@@ -5,7 +5,7 @@ import AdminBeneficiaryCmp from "../../../Components/Admin/BeneficiaryDetails/Ad
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios from 'axios';
 import classes from "./AdminBeneficiaryDetails.module.css";
 import {
   CardMeta,
