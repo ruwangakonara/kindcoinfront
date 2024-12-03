@@ -19,27 +19,11 @@ const AnnouncementsPg = () => {
             <h1 style={{ textAlign: "center" }}>Announcements</h1>
           </DefaultDashCmp>
           <GeneralDashCmp>
+            <AnnouncementForm />
             <AnnouncementTable />
-            Announcements Related Content Component is here.
-            {/* <AnnouncementContent />
-            <AnnouncementForm /> */}
           </GeneralDashCmp>
         </div>
       </div>
-      <HeaderCmp />
-      {/* <div className={classes.mainContainer}>
-      <AdminSideBarCmp />
-      <div className={classes.content}>
-        <DefaultDashCmp>
-          <h1 style={{ textAlign: "center" }}>Statistics</h1>
-        </DefaultDashCmp>
-        <GridTypeDashCmp>
-          <ChartACmp />
-          <ChartBCmp />
-          <ChartCCmp />
-        </GridTypeDashCmp>
-      </div>
-    </div> */}
     </>
   );
 };

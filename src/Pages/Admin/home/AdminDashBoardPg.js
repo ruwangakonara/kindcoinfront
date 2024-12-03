@@ -35,11 +35,7 @@ const AdminDashBoardPg = () => {
               link="/admin/overall_stats"
               iconName=""
             />
-            <CardCmp
-              title="Complaints"
-              link="/admin/view/complaints"
-              iconName=""
-            />
+            <CardCmp title="Tickets" link="/admin/view/tickets" iconName="" />
             <CardCmp
               title="Sign Up Crew Member"
               link="/admin/register/crew_member"

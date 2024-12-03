@@ -26,3 +26,17 @@ body {
 .noSidebar .content {
     width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
 }
+
+.buttonContainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 50px;
+  gap: 10px;
+}
+
+button{
+  height: 60px;
+  cursor: pointer;
+}

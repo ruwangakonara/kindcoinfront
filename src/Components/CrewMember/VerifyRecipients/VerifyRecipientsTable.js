@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Document, Page } from 'react-pdf';
-import Modal from 'react-modal';
+import {Modal} from 'semantic-ui-react';
 import { ToastContainer, toast } from 'react-toastify';
 import './VerifyRecipientsTable.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,7 +9,6 @@ import Swal from 'sweetalert2';
 import SearchBar from './Searchbar';
 import Filter from './Filter';
 
-Modal.setAppElement('#root'); // Set the app element for accessibility
 
 const VerifyRecipientsTable = () => {
     const [recipients, setRecipients] = useState([]);

@@ -122,7 +122,7 @@ const AdminBeneficiaryListCmp = () => {
 
   const handleDeleteClick = async (e, user_id) => {
     e.stopPropagation(); // Prevent the row click event
-    if (window.confirm("Are you sure you want to delete this donor?")) {
+    if (window.confirm("Are you sure you want to delete this beneficiary?")) {
       try {
         const response = await axios.delete(
           `http://localhost:9013/admin/Beneficiary_List/Beneficiaries/${user_id}`
@@ -207,7 +207,7 @@ const AdminBeneficiaryListCmp = () => {
                 <TableCell>{row.phoneNo}</TableCell>
                 <TableCell className={classes.admin_actionStylings}>
                   <div className={classes.admin_actionContainerDiv}>
-                    <Button
+                    {/* <Button
                       color={isActive ? "red" : "green"}
                       onClick={(e) => {
                         e.stopPropagation();
@@ -216,7 +216,7 @@ const AdminBeneficiaryListCmp = () => {
                       }}
                     >
                       {isActive ? "Deactivate" : "Activate"}
-                    </Button>
+                    </Button> */}
                     <IconGroup
                       size="large"
                       style={{

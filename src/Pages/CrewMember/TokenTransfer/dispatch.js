@@ -6,6 +6,7 @@ import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
 import { Container, Grid, Segment, Button, Modal, Header, Input } from "semantic-ui-react";
 import axios from "axios";
 import './tokenTransfer2.css';
+import { useAuthCheck } from '../../../hooks/useAuthHook';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -13,6 +14,7 @@ const axiosInstance = axios.create({
 });
 
 const Dispatcher = () => {
+    // useAuthCheck();
     const [balance, setBalance] = useState(null);
     const [key, setKey] = useState(null);
     const [amount, setAmount] = useState("");
