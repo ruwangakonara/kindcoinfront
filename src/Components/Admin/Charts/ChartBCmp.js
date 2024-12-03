@@ -29,7 +29,7 @@ const ChartBCmp = () => {
     datasets: [
       {
         label: "Monthly Registered Users",
-        data: [5, 3, 6, 2, 7, 9, 3],
+        data: [4, 3, 1, 2, 4, 5, 3],
         backgroundColor: "rgba(153, 102, 255, 0.6)",
         borderColor: "rgba(153, 102, 255, 1)",
         borderWidth: 1,

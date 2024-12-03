@@ -60,7 +60,7 @@ const ReportsPg = () => {
     { _id: "2", totalDonations: 7000, totalBeneficiaries: 4000 },
     { _id: "3", totalDonations: 3000, totalBeneficiaries: 2000 },
   ]);
-  const chartRef = useRef(null);
+  // const chartRef = useRef(null);
 
   useEffect(() => {
     // fetchDonations();

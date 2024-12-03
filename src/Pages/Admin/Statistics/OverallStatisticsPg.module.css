@@ -26,3 +26,12 @@ body {
 .noSidebar .content {
     width: calc(100% - 50px); /* Full width minus padding when sidebar is hidden */
 }
+
+.chartCnt{
+  width: 500px;
+  margin-left: 300px;
+}
+
+.chartGap{
+  margin-top: 50px;
+}
