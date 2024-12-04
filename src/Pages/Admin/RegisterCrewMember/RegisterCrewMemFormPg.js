@@ -15,7 +15,7 @@ import {
   Message,
 } from "semantic-ui-react";
 
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
   baseURL: "http://localhost:9013",
@@ -198,7 +198,7 @@ const RegisterCrewMemFormPg = () => {
                     control={Input}
                     placeholder="PassWord"
                     name="passWord"
-                    type="text"
+                    type="password"
                     value={formData.passWord}
                     onChange={handleChange}
                   />
