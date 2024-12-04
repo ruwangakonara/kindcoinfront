@@ -5,6 +5,7 @@
     overflow-y: auto;
     max-height: calc(100vh - 10%);
     padding-right: 15px;
+    width:100%
   }
   
   /*.ui.celled.table {*/

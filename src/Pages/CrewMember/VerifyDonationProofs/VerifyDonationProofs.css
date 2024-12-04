@@ -1,5 +1,5 @@
 .crew-donation-proofs-header {
-    margin-left: 16%;
+    margin-left: 10%;
     margin-top: 7.5%;
     padding-right: 15px;
     display: flex;
@@ -8,8 +8,8 @@
   }
 
   .crew-donation-proofs-table-container {
-    margin-left: 10%;
-    margin-top: 2%; 
+    /* margin-left: 10%; */
+    margin-top: 10%; 
     overflow-x: auto; 
     overflow-y: auto;
     max-height: calc(100vh - 10%);

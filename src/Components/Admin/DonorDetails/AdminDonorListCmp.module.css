@@ -47,6 +47,7 @@ use admin_ as a prefix for the custom class names
     display: flex;
     align-items: center;
     gap: 10px;
+    overflow: auto;
   }
 
   .admin_truncatedText {
