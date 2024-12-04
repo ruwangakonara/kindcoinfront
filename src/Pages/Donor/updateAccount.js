@@ -122,7 +122,7 @@ const UpdateAccount = () => {
                         />
                     </Form.Field>
                     <Form.Field>
-                        <label>Anonymous</label>
+                        <label>Leaderboard Anonymous</label>
                         <input
                             type="checkbox"
                             name="leaderboard_anonymous"
