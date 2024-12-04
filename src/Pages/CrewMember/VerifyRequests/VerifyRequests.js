@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
-import VerifyRequestsTable from "../../../Components/CrewMember/VerifyRequests/VerifyRequestsTable";
+import VerifyRequestsTable from "../../../Components/CrewMember/VerifyRequests/VerifyRequestsTable2";
 import "./VerifyRequests.css";
 import { useAuthCheck } from "../../../hooks/useAuthHook";
 

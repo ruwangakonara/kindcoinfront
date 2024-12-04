@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
-import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable";
+import VerifyRecipientsTable from "../../../Components/CrewMember/VerifyRecipients/VerifyRecipientsTable2";
 // import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import "./VerifyRecipients.css";
 import { useAuthCheck } from "../../../hooks/useAuthHook";
