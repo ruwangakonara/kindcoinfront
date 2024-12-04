@@ -66,27 +66,27 @@ function OpenRequestList3() {
             const filtered = requests.filter(request => {
                 // Initially attempt to match using entities
                 const entityMatchDescription = entities.length > 0
-                    ? entities.some(entity => request.requestDetails.description.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.requestDetails?.description?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchTitle = entities.length > 0
-                    ? entities.some(entity => request.requestDetails.title.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.requestDetails?.title?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchAddress = entities.length > 0
-                    ? entities.some(entity => request.requestDetails.address.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.requestDetails?.address?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchType = entities.length > 0
-                    ? entities.some(entity => request.requestDetails.type.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.requestDetails?.type?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchName = entities.length > 0
-                    ? entities.some(entity => request.name.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.name?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchBeneDes = entities.length > 0
-                    ? entities.some(entity => request.description.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => request?.description?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 // If entities are found, match based on entities, else fallback to token matching
@@ -95,12 +95,12 @@ function OpenRequestList3() {
                         entityMatchType || entityMatchName || entityMatchBeneDes;
                 } else {
                     // Token-based matching (if no entities found)
-                    const titleMatch = searchTokens.some(token => request.requestDetails.title.toLowerCase().includes(token));
-                    const descriptionMatch = searchTokens.some(token => request.requestDetails.description.toLowerCase().includes(token));
-                    const addressMatch = searchTokens.some(token => request.requestDetails.address.toLowerCase().includes(token));
-                    const beneficaryMatch = searchTokens.some(token => request.name.toLowerCase().includes(token));
-                    const typeMatch = searchTokens.some(token => request.requestDetails.type.toLowerCase().includes(token));
-                    const beneDesMatch = searchTokens.some(token => request.description.toLowerCase().includes(token));
+                    const titleMatch = searchTokens.some(token => request?.requestDetails?.title?.toLowerCase().includes(token));
+                    const descriptionMatch = searchTokens.some(token => request?.requestDetails?.description?.toLowerCase().includes(token));
+                    const addressMatch = searchTokens.some(token => request?.requestDetails?.address?.toLowerCase().includes(token));
+                    const beneficaryMatch = searchTokens.some(token => request?.name?.toLowerCase().includes(token));
+                    const typeMatch = searchTokens.some(token => request?.requestDetails?.type.toLowerCase().includes(token));
+                    const beneDesMatch = searchTokens.some(token => request?.description?.toLowerCase().includes(token));
 
                     return titleMatch || descriptionMatch || beneficaryMatch || typeMatch ||
                         beneDesMatch || addressMatch;
