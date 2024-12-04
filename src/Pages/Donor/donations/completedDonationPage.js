@@ -491,7 +491,12 @@ function CompletedDonationPage(){
                                 </Grid.Row>
                             </Grid>
                         </Segment>
-
+                        <Segment color="yellow" style={{ marginTop: "20px" }}>
+                            <Header as="h3" textAlign="center">
+                                The Stellar Address to direct attestation fees to: <strong>GADB2FRTTHLDJPMB7CNKPGARSKGAX7X3A2FCMNKBTHPIJ7VSAJ522GM5</strong>
+                                {/*They are identified by the ID: {donor.anonymous_id}.*/}
+                            </Header>
+                        </Segment>
                         <Segment>
                             <Grid>
                                 <Grid.Row>
