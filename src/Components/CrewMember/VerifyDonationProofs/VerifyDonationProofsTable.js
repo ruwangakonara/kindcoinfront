@@ -205,6 +205,7 @@ const VerifyRequestsTable = () => {
 
   const openModal = (documents) => {
     setSelectedDocuments(documents);
+    console.log(selectedDocuments)
     setModalOpen(true);
   };
 

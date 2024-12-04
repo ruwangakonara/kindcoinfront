@@ -1,7 +1,7 @@
 import React from "react";
 import HeaderCrew from "../../../Components/CrewMember/Header/HeaderCrew";
 import Sidebar from "../../../Components/CrewMember/Sidebar/Sidebar";
-import VerifyDonationProofsTable from "../../../Components/CrewMember/VerifyDonationProofs/VerifyDonationProofsTable";
+import VerifyDonationProofsTable from "../../../Components/CrewMember/VerifyDonationProofs/VerifyDonationProofsTable2";
 // import SearchBar from "../../../Components/CrewMember/SearchBar/Searchbar";
 import Filter from "../../../Components/CrewMember/VerifyDonationProofs/Filter";
 import "./VerifyDonationProofs.css";
