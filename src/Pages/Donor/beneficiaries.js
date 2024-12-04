@@ -97,7 +97,7 @@ const BeneficiaryList = () => {
             const filtered = beneficiaries.filter(beneficiary => {
                 // Initially attempt to match using entities
                 const entityMatchDescription = entities.length > 0
-                    ? entities.some(entity => beneficiary.description.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => beneficiary?.description?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 // const entityMatchTitle = entities.length > 0
@@ -105,15 +105,15 @@ const BeneficiaryList = () => {
                 //     : false;
 
                 const entityMatchAddress = entities.length > 0
-                    ? entities.some(entity => beneficiary.address.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => beneficiary?.address?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchType = entities.length > 0
-                    ? entities.some(entity => beneficiary.type.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => beneficiary?.type?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 const entityMatchName = entities.length > 0
-                    ? entities.some(entity => beneficiary.name.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
+                    ? entities.some(entity => beneficiary?.name?.toLowerCase().includes(entity.entityId.toLowerCase() || entity.matchedText.toLowerCase()))
                     : false;
 
                 // const entityMatchBeneDes = entities.length > 0
@@ -127,10 +127,10 @@ const BeneficiaryList = () => {
                 } else {
                     // Token-based matching (if no entities found)
                     // const titleMatch = searchTokens.some(token => beneficiary.requestDetails.title.toLowerCase().includes(token));
-                    const descriptionMatch = searchTokens.some(token => beneficiary.description.toLowerCase().includes(token));
-                    const addressMatch = searchTokens.some(token => beneficiary.address.toLowerCase().includes(token));
-                    const nameMatch = searchTokens.some(token => beneficiary.name.toLowerCase().includes(token));
-                    const typeMatch = searchTokens.some(token => beneficiary.type.toLowerCase().includes(token));
+                    const descriptionMatch = searchTokens.some(token => beneficiary?.description?.toLowerCase().includes(token));
+                    const addressMatch = searchTokens.some(token => beneficiary?.address?.toLowerCase().includes(token));
+                    const nameMatch = searchTokens.some(token => beneficiary?.name?.toLowerCase().includes(token));
+                    const typeMatch = searchTokens.some(token => beneficiary?.type?.toLowerCase().includes(token));
                     // const beneDesMatch = searchTokens.some(token => beneficiary.description.toLowerCase().includes(token));
 
                     return  descriptionMatch || nameMatch || typeMatch
