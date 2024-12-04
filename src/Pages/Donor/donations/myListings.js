@@ -67,7 +67,7 @@ function MyListingsList() {
             <div style={{flex: '1'}}>
                 <Navbar2/>
                 <Container style={{padding: '20px', top: "100px", position: 'relative'}}>
-                    <Header as="h2" style={{position: "fixed"}} className="page-header">Unaccepted Donations</Header>
+                    <Header as="h2" style={{}} className="page-header">Your Listings</Header>
 
                     <Grid>
                         {donations && donations.map((donation, index) => (

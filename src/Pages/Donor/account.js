@@ -145,7 +145,7 @@ const Account = () => {
                             </a>.
                         </p>
                         <p style={{textAlign: "center"}}>
-                     Issuer ID:{process.env.ISSUER_PUBLIC_KEY}
+                     Issuer ID: <strong>GD5GGDIKRNPRZPLMUVEC35MPADQZTZPMQZUKSCBQ5ECOS66ADGXLBQQZ</strong>
                         </p>
                     </Segment>
                 )}
