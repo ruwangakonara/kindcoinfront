@@ -27,6 +27,7 @@ import {
   Text,
   View,
   StyleSheet,
+  Image,
 } from "@react-pdf/renderer";
 import { Button } from "semantic-ui-react";
 
@@ -912,7 +913,12 @@ const FinancialReport = ({
   <Document>
     <Page style={stylesFR.page}>
       {/* Title */}
-      <Text style={stylesFR.title}>{title}</Text>
+      {/* <Text style={stylesFR.title}>{title}</Text> */}
+
+      <Image
+        src={"/charitylogo.png"}
+        // style={{ width: "100px", height: "100px" }}
+      />
 
       {/* Key Areas of Concern */}
       <Text style={stylesFR.sectionTitle}>Key Areas of Concern</Text>

@@ -1,7 +1,7 @@
 import classes from "./RaisedTicketsTableCmp.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -280,7 +280,7 @@ const RaisedTicketsTableCmp = () => {
                             handleTicketDiscussion(ticket._id);
                           }}
                         >
-                          {isActive ? "Open" : "Resolved"}
+                          {ticket.archive ? "Open" : "Resolved"}
                         </Button>
                       </TableCell>
                     </TableRow>
