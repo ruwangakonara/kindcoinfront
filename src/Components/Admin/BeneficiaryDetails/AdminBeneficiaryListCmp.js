@@ -1,7 +1,7 @@
 import classes from "./AdminBeneficiaryListCmp.module.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -90,13 +90,13 @@ const AdminBeneficiaryListCmp = () => {
     />
   );
 
-  const handleView = (id) => {
-    navigate(`/view/beneficiaries/${id}`);
-  };
+  // const handleView = (id) => {
+  //   navigate(`/view/beneficiaries/${id}`);
+  // };
 
-  const handleEdit = (id) => {
-    navigate(`/edit/beneficiaries/${id}`);
-  };
+  // const handleEdit = (id) => {
+  //   navigate(`/edit/beneficiaries/${id}`);
+  // };
 
   // const handleDelete = (id) => {
   //   axios
@@ -111,7 +111,8 @@ const AdminBeneficiaryListCmp = () => {
   //     });
   // };
 
-  const handleRowClick = (userId) => {
+  const handleRowClick = (e, userId) => {
+    e.stopPropagation();
     navigate(`/admin/Beneficiary_List/Beneficiaries/${userId}`);
   };
 
@@ -188,7 +189,7 @@ const AdminBeneficiaryListCmp = () => {
                 // onClick={() => handleRowClick(userId)}
               >
                 <TableCell
-                  onClick={() => handleRowClick(userId)}
+                  onClick={(e) => handleRowClick(e, userId)}
                   style={{ cursor: "pointer" }}
                 >
                   {userId}
@@ -248,7 +249,7 @@ const AdminBeneficiaryListCmp = () => {
                         style={{ cursor: "pointer" }}
                         name="pencil"
                         color="green"
-                        onClick={() => handleEdit(row._id)}
+                        onClick={(e) => handleEditClick(e, row._id)}
                       />
                       {/* </Button> */}
                       {/* <Button icon onClick={() => handleDelete(row._id)}>

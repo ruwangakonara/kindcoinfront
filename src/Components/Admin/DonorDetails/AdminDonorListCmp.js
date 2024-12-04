@@ -1,7 +1,7 @@
 import classes from "./AdminDonorListCmp.module.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import {
   TableRow,
   TableHeaderCell,
@@ -118,7 +118,7 @@ const AdminDonorListCmp = () => {
   return (
     <div className={classes.admin_mainContainer}>
       {/* <InputExampleIconPosition /> */}
-      <Table celled>
+      <Table celled style={{ width: "500px" }}>
         <TableHeader>
           <TableRow>
             <TableHeaderCell className={classes.admin_customFont}>

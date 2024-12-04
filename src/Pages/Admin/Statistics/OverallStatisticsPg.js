@@ -76,13 +76,13 @@ const OverallStatisticsPg = () => {
             <div className={classes.chartCnt}>
               <GridColumn>
                 <div className={classes.chartGap}>
+                  <ChartCCmp />
+                </div>
+                <div className={classes.chartGap}>
                   <ChartACmp />
                 </div>
                 <div className={classes.chartGap}>
                   <ChartBCmp />
-                </div>
-                <div className={classes.chartGap}>
-                  <ChartCCmp />
                 </div>
                 <div className={classes.chartGap}>
                   <ChartDCmp donationData={donationData} />

@@ -5,7 +5,7 @@ import AdminBeneficiaryCmp from "../../../Components/Admin/BeneficiaryDetails/Ad
 import AdminSideBarCmp from "../../../Components/Admin/Sidebar/AdminSideBarCmp";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "axios";
 import classes from "./AdminBeneficiaryDetails.module.css";
 import {
   CardMeta,
@@ -99,7 +99,7 @@ const AdminBeneficiaryDetailsPg = () => {
     const fetchBeneficiaryDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:9013/Beneficiary_List/Beneficiary/${userId}`
+          `http://localhost:9013/admin/Beneficiary_List/Beneficiary/${userId}`
         );
         setBeneficiary(response.data); // Assuming the response contains the beneficiary data
         console.log("Beneficiary : ", response.data);
