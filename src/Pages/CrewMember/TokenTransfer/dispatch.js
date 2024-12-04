@@ -7,6 +7,7 @@ import { Container, Grid, Segment, Button, Modal, Header, Input } from "semantic
 import axios from 'axios';
 import './tokenTransfer2.css';
 import { useAuthCheck } from '../../../hooks/useAuthHook';
+// import stellarImage from '../../../../../../public/images/stellar.webp';
 
 const axiosInstance = axios.create({
     baseURL: 'http://localhost:9013',
@@ -78,7 +79,7 @@ const Dispatcher = () => {
                         <Grid.Column width={4}>
                             {/* Sidebar Column */}
                         </Grid.Column>
-                        <Grid.Column width={12}>
+                        <Grid.Column width={8}>
                             <Segment>
                                 <h2>Dispatch KINDCOIN</h2>
                                 <div>
@@ -100,6 +101,10 @@ const Dispatcher = () => {
                                 </div>
                             </Segment>
                         </Grid.Column>
+                        <Grid.Column width={4}>
+                            {/* Right Side Column */}
+                            <img src="/stellar.webp" alt="Stellar" style={{ width: '100%' }} />
+                        </Grid.Column>
                     </Grid>
 
                     {/* Success or Failure Message Modal */}
@@ -119,7 +124,11 @@ const Dispatcher = () => {
                         </Modal.Actions>
                     </Modal>
                 </Container>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '7.5%' }}>
+                    <img src="/token.png" alt="Stellar" style={{ width: '15%' }} />
+                </div>
             </div>
+            
         </div>
     );
 };
