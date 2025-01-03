@@ -19,3 +19,5 @@ const Announcement = ({ announcement }) => {
 };
 
 export default Announcement;
+
+//test
